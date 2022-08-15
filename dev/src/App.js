@@ -1,7 +1,9 @@
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import Container from "react-bootstrap/Container";
 // import TestQueries from './components/TestQueries/TestQueries';
 import NavBar from './components/NavBar/NavBar';
+import Home from './components/HomeView/Home/Home';
 import { config } from './config';
 import './App.css';
 
@@ -13,9 +15,11 @@ function App() {
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <NavBar teams={config.teams} />
-        <div>
-          <h1>Hello World!</h1>
-        </div>
+        <Container className="mt-5 mb-5">
+          <Routes>
+            <Route path="/" element={<Home teams={config.teams} />} exact />
+          </Routes>
+        </Container>
       </QueryClientProvider>
     </HashRouter>
   );

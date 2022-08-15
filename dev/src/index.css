@@ -77,6 +77,8 @@ hr {
   background-color: #344051;
   min-width: 150px;
   max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 ::selection {
