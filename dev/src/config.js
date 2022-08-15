@@ -7,5 +7,13 @@ export const config = {
   objListItemEntityTypeFullName: 'rokrObjectivesListItem',
   krListItemEntityTypeFullName: 'rokrKeyResultsListItem',
   updateListItemEntityTypeFullName: 'rokrUpdatesListItem',
+  teams: [
+    { teamName: "HQ RAiD", slug: "hq-raid" },
+    { teamName: "PAB", slug: "pab" },
+    { teamName: "SWiFT", slug: "swift" },
+    { teamName: "RDO", slug: "rdo" },
+    { teamName: "CyDef", slug: "cydef" },
+    { teamName: "SES", slug: "ses" },
+  ],
   staleTime: 2 * 60 * 1000
 };
