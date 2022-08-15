@@ -1,5 +1,5 @@
 # ROKR
-RDO's solution for the AF's OKR management application.
+RDO's solution for OKR management in RAiD.
 
 <p>
   <img src="https://badges.aleen42.com/src/javascript.svg">
