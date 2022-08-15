@@ -14,44 +14,34 @@ OKRs are tough to manage without tools, especially on the internal IT environmen
 
 ```mermaid
 erDiagram
-  Dataset ||--|{ Table : contains
-  Table ||--|{ Column : contains
-  Business-Term ||--|{ Column : "tagged to"
-  Dataset {
+  Objectives ||--|{ KeyResults : has
+  KeyResults ||--|{ Updates : has
+  Objectives {
     int Id PK
     string Title
-    string useCases
+    string objectiveDescription
+    date objectiveStartDate
+    date objectiveEndDate
+    string team
     string owner
-    string pointOfContact
-    string dataDomain
+    enum frequency "annual/quarterly/monthly"
   }
-  Table {
+  KeyResults {
     int Id PK
     string Title
-    string tableDescription
-    string updateFrequency
-    int parentDataset FK "Dataset"
-    string site
-    string guid0
+    string krDescription
+    date krStartDate
+    date krEndDate
+    int minValue
+    int maxValue
+    int currentValue
+    int parentObjective FK "Objectives"
   }
-  Column {
+  Updates {
     int Id PK
-    string Title
-    string columnDescription
-    string dataType
-    string businessRules
-    int parentTable FK "Table"
-    bool isPrimaryKey
-    bool isForeignKey
-    string codeTable "SharePoint GUID of code table"
-    string relatedFactTable "SharePoint GUID of fact table"
-    string businessTerm FK "Multi-valued lookup to business terms"
-  }
-  Business-Term {
-    int Id PK
-    string Title
-    string definition
-    string businessRules
-    string Source
+    string Title "Unused"
+    string updateText
+    date updateDate
+    int parentKrId FK "Key Results"
   }
 ```
