@@ -3,10 +3,7 @@ import { offsetDate, getYear, getWorkYear, getQuarter, getMonth } from './dates'
 // Compute KR completion
 export function computeKrCompletion(data) {
   var krCompleted = data
-    .map(entry => {
-      var pct = entry.currentValue / entry.maxValue;
-      return pct === 1.0 ? 1 : 0;
-    })
+    .map(entry => entry.currentValue === entry.maxValue ? 1 : 0)
     .reduce((prev, next) => prev + next, 0);
 
   return {
@@ -17,13 +14,11 @@ export function computeKrCompletion(data) {
 
 // Compute KR percentages
 export function computeKrPercentage(data) {
-  var count = 0;
   var total = 0.0;
   for (var i = 0; i < data.length; i++) {
     total += data[i].currentValue / data[i].maxValue;
-    count += 1;
   }
-  return total / count;
+  return total / data.length;
 }
 
 // Compute Objective completion
@@ -36,10 +31,8 @@ export function computeObjCompletion(objectives, keyResults) {
   var pctCompletion;
   var avgCompletion = 0;
   for (var i = 0; i < objectives.length; i++) {
-    // Filter KRs for each objective
-    filteredKRs = keyResults.filter(kr => {
-      return kr.parentObjectiveId === objectives[i].objectiveId;
-    });
+    // Filter KRs for each objective and compute completion
+    filteredKRs = keyResults.filter(kr => kr.parentObjective.Id === objectives[i].Id);
     numKRs = filteredKRs.length;
 
     // Compute average completion
@@ -47,17 +40,11 @@ export function computeObjCompletion(objectives, keyResults) {
       return kr.currentValue / kr.maxValue;
     });
     avgCompletion +=
-      pctCompletion.reduce((a, b) => {
-        return a + b;
-      }, 0) / numKRs;
-    completedKRs = filteredKRs.filter(kr => {
-      return kr.currentValue === kr.maxValue;
-    });
+      pctCompletion.reduce((a, b) => a + b, 0) / numKRs;
+    completedKRs = filteredKRs.filter(kr => kr.currentValue === kr.maxValue);
 
-    if (numKRs === completedKRs.length) {
-      if (numKRs > 0) {
-        completed++;
-      }
+    if (numKRs === completedKRs.length && numKRs > 0) {
+      completed++;
     }
   }
 
@@ -68,14 +55,10 @@ export function computeObjCompletion(objectives, keyResults) {
 
 // Compute overall metrics for a given frequency
 export function computeMetrics(objectives, keyResults, frequency) {
-  const tempObjectives = objectives.filter(obj => {
-    return obj.frequency === frequency;
-  });
+  const tempObjectives = objectives.filter(obj => obj.frequency === frequency);
 
   const tempKRs = keyResults.filter(kr => {
-    const objs = tempObjectives.filter(obj => {
-      return obj.objectiveId === kr.parentObjectiveId;
-    });
+    const objs = tempObjectives.filter(obj => obj.Id === kr.parentObjective.Id);
     return objs.length > 0;
   });
 
@@ -100,14 +83,9 @@ export function computeTeamsMetrics(teams, objectives, keyResults, frequency) {
   var tempObj, tempKR;
   for (var i = 0; i < teams.length; i++) {
     // Filter objectives
-    tempObj = objectives.filter(entry => {
-      return entry.team === teams[i].teamName;
-    });
+    tempObj = objectives.filter(entry =>  entry.team === teams[i].teamName);
     // Filter KRs
-    tempKR = keyResults.filter(entry => {
-      return entry.parentObjectiveTeam === teams[i].teamName;
-    });
-
+    tempKR = keyResults.filter(entry => entry.parentObjective.team === teams[i].teamName);
     output[teams[i].teamName] = computeMetrics(tempObj, tempKR, frequency);
   }
   return output;
@@ -123,12 +101,10 @@ export function prepareTeamData(objectives, keyResults) {
   var tempObjCompletion;
   var staffList;
   for (var f = 0; f < freqs.length; f++) {
-    tempObj = objectives.filter(entry => {
-      return entry.frequency === freqs[f];
-    });
+    tempObj = objectives.filter(entry => entry.frequency === freqs[f]);
 
     tempKR = keyResults.filter(entry => {
-      parentObj = objectives.filter(obj => obj.objectiveId === entry.parentObjectiveId)[0];
+      parentObj = objectives.filter(obj => obj.Id === entry.parentObjective.Id)[0];
       return parentObj.frequency === freqs[f];
     });
 
@@ -158,12 +134,10 @@ export function prepareTeamData(objectives, keyResults) {
   var staff;
   for (var i = 0; i < staffList.length; i++) {
     staff = staffList[i];
-    tempObj = objectives.filter(entry => {
-      return entry.owner === staff;
-    });
+    tempObj = objectives.filter(entry => entry.owner === staff);
 
     tempKR = keyResults.filter(entry => {
-      parentObj = objectives.filter(obj => obj.objectiveId === entry.parentObjectiveId)[0];
+      parentObj = objectives.filter(obj => obj.Id === entry.parentObjective.Id)[0];
       return parentObj.owner === staff;
     });
 
@@ -209,9 +183,7 @@ export function prepareTeamPageData(objectives, keyResults, frequency, staff, su
   });
 
   const tempKR = keyResults.filter(kr => {
-    const objs = tempObj.filter(obj => {
-      return obj.objectiveId === kr.parentObjectiveId;
-    });
+    const objs = tempObj.filter(obj => obj.Id === kr.parentObjective.Id);
     return objs.length > 0;
   });
 
