@@ -7,6 +7,7 @@ import {
 } from "../../../utils/stats";
 import { Brand } from "../../NavBarBrand/NavBarBrand";
 import ProgressCard from "../../ProgressCard/ProgressCard";
+import HomeTeamCards from "../HomeTeamCards/HomeTeamCards";
 
 import './Home.css';
 
@@ -28,6 +29,7 @@ export default function Home(props) {
   // Render progress cards when metrics change
   useEffect(
     () => {
+      // Overall progress card
       if (overallProgressData) {
         updateCircleProgress(
           "overall_progress",
@@ -36,6 +38,20 @@ export default function Home(props) {
           "50px",
           "#000718"
         );
+      }
+      
+      // Teams progress cards
+      if (allTeamsProgressData) {
+        props.teams.map(team => {
+          updateCircleProgress(
+            team.slug,
+            allTeamsProgressData[team.teamName].avgCompletion,
+            160,
+            "35px",
+            "#010D1E"
+          );
+          return null;
+        })
       }
     },
     [overallProgressData, allTeamsProgressData]
@@ -58,9 +74,26 @@ export default function Home(props) {
           />
         </div>
       }
+      {!overallProgressData && 
+        <div className="overall-panel mt-4 text-center align-items-center">
+          <span className="no-data">No data to display.</span>
+        </div>
+      }
       <h2 className="mt-5">
         Teams
       </h2>
+      {allTeamsProgressData &&
+        <HomeTeamCards
+          teams={props.teams}
+          allTeamsProgressData={allTeamsProgressData}
+        />
+      }
+
+      {!allTeamsProgressData && 
+        <div className="overall-panel mt-4 text-center align-items-center">
+          <span className="no-data">No data to display.</span>
+        </div>
+      }
     </>
   );
 }
