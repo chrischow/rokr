@@ -1,0 +1,79 @@
+.progress-card--circle-text {
+  color: #8497B0;
+  font-size: 1.2rem;
+}
+
+.progress-circle {
+  position: relative;
+}
+
+.progress-circle-value {
+  position: absolute;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', sans-serif;
+  color: #27DDCB;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+}
+
+.progress-circle-font {
+  font-size: 45px;
+}
+
+.progress-circle-font-sm {
+  font-size: 35px;
+}
+
+.progress-card--header-text {
+  font-size: 1.1rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #51647D;
+}
+
+.progress-card--metric {
+  color: #27DDCB;
+  font-size: 2.3rem;
+}
+
+.progress-card--metric-title {
+  color: #8497B0;
+  font-size: 1.0rem;
+}
+
+.progress-card--metric-between {
+  color: #8497B0;
+  font-size: 1.0rem;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Progress card - small */
+.progress-card--circle-text-sm {
+  color: #8497B0;
+  font-size: 0.9rem;
+}
+
+.progress-card--header-text-sm {
+  font-size: 0.9rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #51647D;
+}
+
+.progress-card--metric-sm {
+  color: #27DDCB;
+  font-size: 1.6rem;
+}
+
+.progress-card--metric-title-sm {
+  color: #8497B0;
+  font-size: 0.8rem;
+}
+
+.progress-card--metric-between-sm {
+  color: #8497B0;
+  font-size: 0.8rem;
+}
