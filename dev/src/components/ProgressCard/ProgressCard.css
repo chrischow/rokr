@@ -76,4 +76,6 @@
 .progress-card--metric-between-sm {
   color: #8497B0;
   font-size: 0.8rem;
+  margin-left: 10px;
+  margin-right: 10px;
 }
