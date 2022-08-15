@@ -6,7 +6,7 @@ import { config } from "../config";
 export const useUpdates = () => {
   const url = constructUrl(
     config.updateListId,
-    `Id,Title,updateText,updateDate,parentKrId`
+    `Id,updateText,updateDate,parentKrId`
   );
   return useQuery(['updates'], constructReadQueryFn(url), {
     staleTime: config.staleTime
