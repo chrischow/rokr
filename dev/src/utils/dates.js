@@ -26,12 +26,12 @@ export function getYear(cleanDate) {
 
 export function getWorkYear(cleanDate) {
   const year = cleanDate.getFullYear();
-  return 'WY ' + (cleanDate.getMonth() + 1 <= 3 ? year - 1 : year);
+  return 'WY ' + (cleanDate.getMonth() <= 3 ? year - 1 : year);
 };
 
 // Get quarter
 export function getQuarter(cleanDate, year) {
-  return year + ' Q' + (Math.floor(cleanDate.getMonth() / 3));
+  return year + ' Q' + (Math.floor((cleanDate.getMonth() + 1) / 3));
 };
 
 export function getMonth(cleanDate, year) {
