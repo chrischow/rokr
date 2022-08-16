@@ -163,3 +163,64 @@ input[type="search"], input[type="search"]:focus {
   font-family: 'Bahnschrift', 'Segoe UI', sans-serif;
   font-weight: normal;
 }
+
+/* Forms */
+.form-dark, .form-dark:focus {
+  background-color: #000C1D8a;
+  font-size: 1.2rem;
+  color: #ddd;
+  border: 0;
+  box-shadow: none;
+  transition: 0.3s;
+  margin-bottom: 30px;
+}
+
+.form-dark:focus {
+  color: white;
+}
+
+.form-semi-dark, .form-semi-dark:focus {
+  background-color: #0D192A;
+  font-size: 1.2rem;
+  color: #ddd;
+  border: 0;
+  box-shadow: none;
+  transition: 0.3s;
+  margin-bottom: 30px;
+}
+
+.form-semi-dark:focus {
+  color: white;
+}
+
+.form--edit {
+  color: white;
+  padding: 10px 10px;
+  transition: 0.3s;
+}
+
+.form-dark:disabled {
+  background-color: #000C1D8a;
+  border: #2C3849;
+}
+
+.form--label {
+  font-size: 0.9rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #8497B0;
+  margin-bottom: 7px;
+}
+
+option.form-select-dropdown {
+  background-color: #000C1Dda!important;
+  color: #8497b0;
+  transition: 0.3s;
+}
+
+select:hover, select:focus, select:active {
+  background-color: #000C1Dca!important;
+  color: white;
+  transition: 0.3s;
+}
