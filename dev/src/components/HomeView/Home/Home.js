@@ -29,7 +29,7 @@ export default function Home(props) {
   // Render progress cards when metrics change
   useEffect(
     () => {
-      // Overall progress card
+      // Initialise overall progress card
       if (overallProgressData) {
         updateCircleProgress(
           "overall_progress",
@@ -40,7 +40,7 @@ export default function Home(props) {
         );
       }
       
-      // Teams progress cards
+      // Initialise team progress cards
       if (allTeamsProgressData) {
         props.teams.map(team => {
           updateCircleProgress(
@@ -54,7 +54,7 @@ export default function Home(props) {
         })
       }
     },
-    [overallProgressData, allTeamsProgressData]
+    [props.teams, overallProgressData, allTeamsProgressData]
   )
 
   return (
