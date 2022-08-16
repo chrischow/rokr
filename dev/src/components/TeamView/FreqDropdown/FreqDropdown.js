@@ -1,4 +1,4 @@
-import { useState } from "react";
+import slugify from 'slugify';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -13,7 +13,7 @@ export default function FreqDropdown(props) {
 
   // Populate options
   const options = props.options.map(option => {
-    return <option value={option}>{option}</option>
+    return <option key={`select-${props.freq}-${slugify(option)}`} value={option}>{option}</option>
   });
 
   return (
