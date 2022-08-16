@@ -1,7 +1,7 @@
 import { useQueryClient } from 'react-query';
 import { useTeamObjectivesCache, useTeamObjectives } from "../../../hooks/useObjectives";
 import { useTeamKeyResultsCache, useTeamKeyResults } from "../../../hooks/useKeyResults";
-import { computeMetrics, getStaffFromObjectives, getSubGroupsFromObjectives } from "../../../utils/stats";
+import { getStaffFromObjectives, getSubGroupsFromObjectives } from "../../../utils/stats";
 import slugify from "slugify";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
@@ -9,7 +9,6 @@ import TeamProgress from "../TeamProgress/TeamProgress";
 import TeamPane from "../TeamPane/TeamPane";
 
 import './Team.css';
-import FreqDropdown from '../FreqDropdown/FreqDropdown';
 
 export default function Team(props){
   // Get objectives and key results data - try cache first
