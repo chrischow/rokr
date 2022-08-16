@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useKeyResults } from '../../hooks/useKeyResults';
 import { useObjectives } from '../../hooks/useObjectives';
 import { useUpdates } from '../../hooks/useUpdates';
-import { editIconString } from '../Icons/Icons';
 import $ from 'jquery';
 
 import './Timeline.css';
