@@ -1,0 +1,23 @@
+.edit-icon {
+  font-size: 0.9rem;
+  color: #8497B0;
+  transition: 0.3s;
+  height: 14px;
+  width: 14px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 6px;
+  padding: 0px;
+}
+
+.edit-icon:hover {
+  color: #27DDCB;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.collapse-icon {
+  height: 22px;
+  width: 22px;
+}
