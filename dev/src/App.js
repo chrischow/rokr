@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/HomeView/Home/Home';
 import { config } from './config';
+import Timeline from './components/Timeline/Timeline';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Container className="mt-5 mb-5">
           <Routes>
             <Route path="/" element={<Home teams={config.teams} />} exact />
+            <Route path="/timeline" element={<Timeline />} />
           </Routes>
         </Container>
       </QueryClientProvider>

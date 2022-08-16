@@ -1,0 +1,84 @@
+/* Box surrounding table */
+.directory--container {
+  border-radius: 15px;
+  background-color: #0D192A8a;
+  padding: 25px;
+}
+
+/* Nothing? */
+.directory--text {
+  color: #D1E4FD;
+  font-size: 1.2rem;
+}
+
+/* Table background and text */
+.directory--table.table-dark {
+  background-color: #0D192A8a;
+  border-color: #8497B0;
+  color: #D1E4FD;
+  font-size: 0.9rem;
+}
+
+/* Nothing? */
+/* #directory-table_filter, #updates-table_filter {
+  background-color: none;
+} */
+
+div.dataTables_length > label > select[name="kr-modal-table_length"]:focus,
+div.dataTables_length > label > select[name="kr-modal-table_length"]:hover {
+  background-color: #ddd!important;
+  color: #172334;
+}
+
+/* Table search box */
+input[type="search"][aria-controls="directory-table"], input[type="search"][aria-controls="directory-table_length"]:focus,
+input[type="search"][aria-controls="updates-table"], input[type="search"][aria-controls="updates-table_length"]:focus {
+  background-color: #0D192A8a;
+  border: none;
+  color: #8497B0;
+}
+
+/* Selected option for dopdown for no. of entries */
+div.dataTables_length > label > select[name="directory-table_length"], select[name="directory-table_length"]:focus,
+div.dataTables_length > label > select[name="updates-table_length"], select[name="updates-table_length"]:focus {
+  background-color: #0D192A;
+  border: none;
+  color: #8497B0;
+}
+
+/* Options in dropdown for no. of entries */
+div.dataTables_length > label > select[name="directory-table_length"] option,
+div.dataTables_length > label > select[name="updates-table_length"] option {
+  background-color: #0D192A;
+  color: #8497B0;
+}
+
+/* Smaller font size for column with more text */
+th.directory--table-text-sm {
+  font-size: inherit;
+}
+
+.directory--table-text-sm {
+  font-size: 0.85rem;
+}
+
+/* Add spacing for rows */
+table.dataTable td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Add spacing for headers */
+table.dataTable th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #D1E4FD;
+}
+
+/* Add borders for rows */
+table.dataTable.table-striped>tbody>tr.odd>* {
+  box-shadow: inset 0 0 0 9999px rgb(0 0 0 / 5%);
+  color: #D1E4FD;
+  border-top: 1px solid #8497b0;
+  border-bottom: 1px solid #8497b0;
+}
