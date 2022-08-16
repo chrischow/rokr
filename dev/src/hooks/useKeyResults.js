@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { constructUrl, constructReadQueryFn } from "../utils/query";
+import slugify from "slugify";
 import { config } from "../config";
 
 // Get all key results
@@ -44,7 +45,7 @@ export const useTeamKeyResults = (team) => {
     'parentObjective',
     `parentObjective/team eq "${team}"`
   );
-  return useQuery([`keyResults-${team}`], constructReadQueryFn(url), {
+  return useQuery([`keyResults-${slugify(team)}`], constructReadQueryFn(url), {
     staleTime: config.staleTime
   });
 }
