@@ -90,3 +90,76 @@ hr {
   /* background-color: #000415!important; */
   background-color: #0007188a!important;
 }
+
+.no-data {
+  color: #8497B0;
+  font-size: 1.4rem;
+}
+
+/* Tables */
+.table-dark {
+  background-color: #2C3849;
+  border-color: #8497B0;
+}
+
+.table-dark thead, .table-dark th, .table-dark td {
+  border-color: #8497B0!important;
+}
+
+li.paginate_button.page-item.disabled > a.page-link, li.paginate_button.page-item.previous.disabled > a.page-link,
+li.paginate_button.page-item.next.disabled > a.page-link {
+  background-color: #172334;
+  color: #2C3849;
+}
+
+li.paginate_button.page-item > a, li.paginate_button.page-item.previous > a {
+  background-color: #172334;
+  color: #8497B0;
+  transition: 0.3s;
+}
+
+li.paginate_button.page-item > a:hover, li.paginate_button.page-item.previous > a:hover {
+  color: #D1E4FD;
+  transition: 0.3s;
+}
+
+li.paginate_button.page-item.active > a {
+  background-color: #8497B0;
+  color: white;
+  transition: 0.3s;
+}
+
+li.paginate_button.page-item.active > a:hover {
+  background-color: #9EB1CA;
+  transition: 0.3s;
+}
+
+li.paginate_button.page-item.active  > a:focus,
+li.paginate_button.page-item.previous > a:focus,
+li.paginate_button.page-item.next > a:focus {
+  box-shadow: none;
+}
+
+ul.pagination > li > a {
+  border: none;
+}
+
+div.dataTables_length > label > select {
+  background-color: #ddd;
+  color: #172334;
+}
+
+div.dataTables_length > label > select option {
+  background-color: #ddd;
+  color: #172334;
+}
+
+input[type="search"], input[type="search"]:focus {
+  background-color: #ddd;
+  color: #172334;
+}
+
+.table-dark thead tr th {
+  font-family: 'Bahnschrift', 'Segoe UI', sans-serif;
+  font-weight: normal;
+}
