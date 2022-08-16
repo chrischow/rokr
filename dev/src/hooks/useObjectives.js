@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { constructUrl, constructReadQueryFn } from "../utils/query";
+import slugify from "slugify";
 import { config } from "../config";
 
 // Get all objectives
@@ -25,8 +26,8 @@ export const useObjective = (Id) => {
   };
 }
 
-// Get objectives by team
-export const useTeamObjectives = (team) => {
+// Get objectives by team, using entries from full dataset
+export const useTeamObjectivesCache = (team) => {
   const allObjectives = useObjectives();
   return {
     data: allObjectives.isSuccess ? allObjectives.data.filter(objective => {
@@ -35,3 +36,17 @@ export const useTeamObjectives = (team) => {
     isSuccess: allObjectives.isSuccess
   };
 };
+
+// Get objectives for team
+export const useTeamObjectives = (team) => {
+  const url = constructUrl(
+    config.objListId,
+    `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`,
+    undefined,
+    `team eq ${team}`
+  );
+
+  return useQuery([`objectives-${slugify(team)}`], constructReadQueryFn(url), {
+    staleTime: config.staleTime
+  });
+}

@@ -25,8 +25,8 @@ export const useKeyResult = (Id) => {
   };
 }
 
-// Get key results by team
-export const useTeamKeyResults = (team) => {
+// Get key results by team, using entries from full dataset
+export const useTeamKeyResultsCache = (team) => {
   const allKeyResults = useKeyResults();
   return {
     data: allKeyResults.isSuccess ? allKeyResults.data.filter(keyResult => {
@@ -35,3 +35,16 @@ export const useTeamKeyResults = (team) => {
     isSuccess: allKeyResults.isSuccess
   };
 };
+
+// Get key results by team
+export const useTeamKeyResults = (team) => {
+  const url = constructUrl(
+    config.krListId,
+    `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team`,
+    'parentObjective',
+    `parentObjective/team eq "${team}"`
+  );
+  return useQuery([`keyResults-${team}`], constructReadQueryFn(url), {
+    staleTime: config.staleTime
+  });
+}
