@@ -1,0 +1,128 @@
+.objective-card {
+  background-color: #000C1D8a;
+  padding: 15px 60px;
+  position: relative;
+  border-radius: 5px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+/* .objective-card:hover {
+  background-color: #0D192A8a;
+  transition: 0.3s;
+} */
+
+.btn.focus, .btn:focus {
+  box-shadow: none;
+}
+
+.objective-card--description {
+  color: #8497B0;
+}
+
+.objective-card--tag {
+  font-size: 1.1rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #958DFF;
+}
+
+.objective-card--title {
+  color: #EAEAEA;
+  font-size: 1.2rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.objective-card--text {
+  color: #8497B0;
+  margin-top: 0px;
+  margin-top: 0px;
+}
+
+.arrow-div {
+  position: absolute;
+  display: block;
+  left: 0px;
+  transition: 0.3s;
+  top: 31px;
+  transform: translate(0, -45%);
+}
+
+.collapse-icon {
+  height: 22px;
+  width: 22px;
+}
+
+.btn-collapse {
+  transition: 0.3s!important;
+}
+
+button.btn-collapse, button.btn-collapse:hover {
+  border: none;
+}
+
+.fa-caret-right {
+  font-size: 1.3rem;
+  color: #27DDCB;
+}
+
+.rotated {
+  transition: 0.4s;
+  transform-box: fill-box;
+  transform: rotate(90deg) translate(-2px, -2px);
+  transform-origin: 50% 50%;
+}
+
+.objective-card--edit-button {
+  padding: 0px 5px;
+  background-color: #7B73F000;
+  color: #7B73F0;
+  border: 1px solid #7b73f0;
+  cursor: 'pointer';
+  transition: 0.3s;
+  margin-right: 10px;
+}
+
+.objective-card--edit-button:hover {
+  background-color: #7B73F033;
+  color: #7B73F0;
+  transition: 0.3s;
+}
+
+.objective-card--edit-text {
+  font-size: 0.70rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.objective-card--edit-icon {
+  font-size: 0.9rem;
+  height: 10px;
+  width: 10px;
+  padding: 0px;
+}
+
+.objective-card--add-kr-button {
+  padding: 0px 5px;
+  background-color: #0EC4B200;
+  color: #0EC4B2;
+  border: 1px solid #0EC4B2;
+  cursor: 'pointer';
+  transition: 0.3s;
+}
+
+.objective-card--add-kr-button:hover {
+  background-color: #0EC4B233;
+  color: #0EC4B2;
+  transition: 0.3s;
+}
+
+.objective-card--add-kr-text {
+  font-size: 0.70rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}

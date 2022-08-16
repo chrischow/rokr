@@ -1,0 +1,118 @@
+.keyresult-row {
+  background-color: #6c83a18a;
+  padding: 10px 60px;
+  border-radius: 4px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.keyresult-row--title {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+}
+
+.keyresult-row--info-link:hover {
+  color: #27DDCB;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.keyresult-row--info-link {
+  color: #D1E4FD;
+  font-family: 'Bahnschrift Light', 'Segoe UI', sans-serif;
+  transition: 0.3s;
+}
+
+.keyresult-row--text {
+  color: #D1E4FD;
+  font-size: 0.9rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  transition: 0.3s;
+}
+
+.keyresult-row--action-btn {
+  color: #AEA6FF;
+  /* display: inline-block; */
+  transition: 0.3s;
+}
+
+.keyresult-row--action-btn:hover {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.keyresult-row--action-btn-text {
+  transition: 0.3s;
+}
+
+.keyresult-row--action-btn:hover .keyresult-row--action-btn-text {
+  color: #958DFF;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.keyresult-row--new-updates {
+  transition: 0.3s;
+  color: #41F7E5;
+}
+
+.keyresult-row--action-btn:hover .keyresult-row--new-updates {
+  transition: 0.3s;
+  color: #27DDCB;
+}
+
+.keyresult-row--updates {
+  color: #D1E4FD;
+  font-size: 0.9rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.keyresult-row--updates:hover, .keyresult-row--updates:hover svg {
+  transition: 0.3s;
+  color: #27DDCB;
+}
+
+.keyresult-row--icon {
+  color: #D1E4FD;
+  height: 12px;
+  width: 12px;
+  margin-bottom: 3px;
+  transition: 0.3s;
+}
+
+.keyresult-row--edit-button {
+  padding: 0px 4px;
+  /* background-color: #7B73F0; */
+  background-color: #AEA6FF00;
+  color: #AEA6FF;
+  border: 1px solid #AEA6FF;
+  cursor: 'pointer';
+  transition: 0.3s;
+}
+
+.keyresult-row--edit-button:hover {
+  /* background-color: #6E66E3; */
+  background-color: #AEA6FF33;
+  color: #AEA6FF;
+  transition: 0.3s;
+}
+
+.keyresult-row--edit-text {
+  font-size: 0.60rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.keyresult-row--edit-icon {
+  font-size: 0.6rem;
+  height: 10px;
+  width: 10px;
+  padding: 0px;
+  margin-bottom: 2px;
+}
