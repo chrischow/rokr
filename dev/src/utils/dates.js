@@ -37,3 +37,18 @@ export function getQuarter(cleanDate, year) {
 export function getMonth(cleanDate, year) {
   return year + '-' + String(cleanDate.getMonth() + 1).padStart(2, '0');
 };
+
+// Test period equality
+export function testPeriodEquality(date, dateOption, period) {
+  const endDate = offsetDate(new Date(date));
+  const workyear = getWorkYear(endDate);
+  const year = getYear(endDate);
+
+  if (period === 'annual') {
+    return getWorkYear(endDate) === dateOption;
+  } else if (period === 'quarterly') {
+    return getQuarter(endDate, workyear) === dateOption;
+  } else if (period === 'monthly') {
+    return getMonth(endDate, year) === dateOption;
+  }
+}
