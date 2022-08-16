@@ -22,12 +22,13 @@ export default function Team(props){
       return getFromCacheFn;
     }
   }
+
   const objectives = getData(
     queryClient.getQueryState('objectives'),
     useTeamObjectives,
     useTeamObjectivesCache
   )(props.team.teamName);
-
+  
   const keyResults = getData(
     queryClient.getQueryState('keyResults'),
     useTeamKeyResults,
@@ -56,8 +57,6 @@ export default function Team(props){
       </Nav.Link>
     );
   });
-
-  objectives.isSuccess && console.log(subgroups);
 
   return (
     <>
