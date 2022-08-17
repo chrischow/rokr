@@ -23,22 +23,13 @@ export function constructReadQueryFn(url) {
   };
 };
 
-export function getXRequestDigestValue() {
-  const reqDigest = $.ajax({
-      url: config.apiUrl + 'contextinfo',
-      method: 'POST',
-      async: false,
+export function constructPostQueryFn(url) {
+  return async () => {
+    const { data } = await axios.post(url, {
       headers: {
-          'Accept': 'application/json; odata=verbose'
-      },
-      success: function(data) {
-          return data;
-      },
-      error: function(error) {
-          console.log(JSON.stringify(error));
+        'Accept': 'application/json; odata=verbose'
       }
-  });
-
-  return reqDigest.responseJSON.d.GetContextWebInformation.FormDigestValue;
-}
-
+    });
+    return data;
+  }
+};
