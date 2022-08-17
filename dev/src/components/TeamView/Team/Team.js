@@ -61,7 +61,8 @@ export default function Team(props){
             <Tab.Content>
               <Tab.Pane eventKey="monthly">
                 {objectives.isSuccess && keyResults.isSuccess &&
-                  <TeamPane 
+                  <TeamPane
+                    teamName={props.team.teamName}
                     freq="monthly"
                     subgroups={subgroups['monthly']}
                     objectives={objectives.data}
@@ -72,7 +73,8 @@ export default function Team(props){
               </Tab.Pane>
               <Tab.Pane eventKey="quarterly">
                 {objectives.isSuccess && keyResults.isSuccess &&
-                  <TeamPane 
+                  <TeamPane
+                    teamName={props.team.teamName}
                     freq="quarterly"
                     subgroups={subgroups['quarterly']}
                     objectives={objectives.data}
@@ -82,7 +84,8 @@ export default function Team(props){
               </Tab.Pane>
               <Tab.Pane eventKey="annual">
                 {objectives.isSuccess && keyResults.isSuccess && 
-                  <TeamPane 
+                  <TeamPane
+                    teamName={props.team.teamName}
                     freq="annual"
                     subgroups={subgroups['annual']}
                     objectives={objectives.data}

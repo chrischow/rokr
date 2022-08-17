@@ -98,6 +98,10 @@ export default function TeamPane(props) {
         )}
       />
       <OkrSection
+        teamName={props.teamName}
+        freq={props.freq}
+        staffOption={staffOption}
+        dateOption={dateOption}
         objectives={currentObjectives}
         keyResults={currentKeyResults}
       />

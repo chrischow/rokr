@@ -21,6 +21,10 @@ export default function OkrCollapse(props) {
     />
   })
 
+  // Initialise collapse
+  useEffect(() => {
+    setIsClicked(props.overallIsClicked);
+  }, [props.overallIsClicked]);
   // Collapse
   useEffect( () => {
     $(function() {
