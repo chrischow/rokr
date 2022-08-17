@@ -23,7 +23,8 @@
 }
 
 .modal-footer-custom {
-  padding: 1.0rem;
+  padding-left: 1.0rem;
+  padding-right: 1.0rem;
   border-top: none;
   background-color: #000C1D;
   border-bottom-right-radius: calc(0.3rem - 1px);

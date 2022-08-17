@@ -20,7 +20,7 @@ export default function SharedModal(props) {
       </Modal.Body>
 
       <Modal.Footer>
-        <div className="modal-footer mt-2">
+        <div className="modal-footer-custom">
           <button type="button" className="btn btn-secondary" onClick={() => props.handleCloseModal()}>Close</button>
         </div>
       </Modal.Footer>
