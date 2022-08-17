@@ -7,7 +7,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { config } from '../../config';
-import Button from 'react-bootstrap/esm/Button';
 
 export default function ObjectiveForm(props) {
 
@@ -232,7 +231,7 @@ export default function ObjectiveForm(props) {
         </button>
       </div>
       {formErrorsList.length > 0 &&
-        <div className="form-errors mt-4">
+        <div className="form-errors">
           <p>Please resolve the following errors:</p>
           <ul>{formErrorsList}</ul>
         </div>

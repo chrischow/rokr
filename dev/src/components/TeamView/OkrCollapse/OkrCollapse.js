@@ -11,7 +11,7 @@ export default function OkrCollapse(props) {
   // ID
   const objId = `obj-${props.objective.Id}`;
   const krRows = props.keyResults.map(kr => {
-    const nLatestUpdates = 100;
+    const nLatestUpdates = 10;
     return <KeyResultRow
       // key={`kr-row-${kr.Id}`}
       objId={objId}
