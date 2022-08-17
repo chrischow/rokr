@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { CaretIcon, EditIconText, AddIconText } from '../../Icons/Icons';
 
 import './ObjectiveCard.css';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 export default function ObjectiveCard(props) {
   const editObjective = () => {
@@ -64,7 +65,7 @@ export default function ObjectiveCard(props) {
           </span>
         </Col>
         <Col xs={3} className="objective-card--progress-bar">
-          ProgressBar here
+          <ProgressBar progress={props.progress} isKeyResult={false} />
         </Col>
       </Row>
     </div>

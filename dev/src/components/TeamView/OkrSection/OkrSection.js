@@ -7,7 +7,7 @@ export default function OkrSection(props) {
     const keyResults = props.keyResults.filter(kr => kr.parentObjective.Id === obj.Id);
     return (
       <OkrCollapse
-        key={`okrcollapse-${obj.Id}`}
+        // key={`okrcollapse-${obj.Id}`}
         objective={obj}
         keyResults={keyResults}
       />

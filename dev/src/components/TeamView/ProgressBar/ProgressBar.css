@@ -1,0 +1,27 @@
+.progress {
+  background-color: #010D1Eaa;
+  border-radius: 1.0rem;
+}
+
+div.progress.progress-keyresult {
+  height: 0.7rem!important;
+  background-color: #0B1728ba;
+}
+
+div.progress-bar {
+  background-color: #7B73F0;
+  border-radius: 1.0rem;
+}
+
+.progress-bar.progress-keyresult {
+  background-color: #27DDCB;
+}
+
+.progress-text {
+  color: #8497B0;
+}
+
+.progress-text-sm{
+  color: #D1E4FD;
+  font-size: 0.9rem;
+}

@@ -13,10 +13,11 @@ export default function OkrCollapse(props) {
   const krRows = props.keyResults.map(kr => {
     const nLatestUpdates = 100;
     return <KeyResultRow
-      key={`kr-row-${kr.Id}`}
+      // key={`kr-row-${kr.Id}`}
       objId={objId}
       nLatestUpdates={nLatestUpdates}
       {...kr}
+      progress={kr.currentValue / kr.maxValue}
     />
   })
 
@@ -28,13 +29,18 @@ export default function OkrCollapse(props) {
     });
   });
 
+  // Cojmpute stats
+  const objProgress = props.keyResults
+    .map(kr => kr.currentValue / kr.maxValue)
+    .reduce((a, b) => a + b) / props.keyResults.length;
+  
   return (
     <div className="mt-4">
       <ObjectiveCard
         isClicked={isClicked}
         setIsClicked={setIsClicked}
         objId={objId}
-        progress={0.5}
+        progress={objProgress}
         {...props.objective}
       />
       <Collapse in={isClicked}>

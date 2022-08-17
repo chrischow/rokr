@@ -1,5 +1,6 @@
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
+import ProgressBar from "../ProgressBar/ProgressBar";
 
 import './KeyResultRow.css';
 
@@ -41,7 +42,7 @@ export default function KeyResultRow(props) {
           <span className="keyresult-row--text">{props.krEndDate}</span>
         </Col>
         <Col xs={3} className="keyresult-row--progress-bar">
-          ProgressBar here
+          <ProgressBar progress={props.progress} isKeyResult={true} />
         </Col>
       </Row>
     </div>
