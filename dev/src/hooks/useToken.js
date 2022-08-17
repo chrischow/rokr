@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { constructUrl, constructPostQueryFn } from "../utils/query";
+import { constructPostQueryFn } from "../utils/query";
 import { config } from "../config";
 
 // Query token
