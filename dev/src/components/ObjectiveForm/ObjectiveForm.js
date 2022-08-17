@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import { getDate } from '../../utils/dates';
+import { createQuery } from '../../utils/query';
 import useToken from '../../hooks/useToken';
 import validator from 'validator';
 import Row from 'react-bootstrap/Row';
@@ -50,7 +51,7 @@ export default function ObjectiveForm(props) {
         });
       });
     });
-  }, []);
+  }, [props]);
 
   // Validate form
   const [formErrors, setFormErrors] = useState([]);
@@ -81,13 +82,19 @@ export default function ObjectiveForm(props) {
     ) {
       const { objectiveId, ...newData } = props.formValues;
       const reqDigest = token.isSuccess && token.data.d.GetContextWebInformation.FormDigestValue;
-      console.log(`Token: ${reqDigest}`);
+
       if (props.mode === "Edit") {
         console.log('Edit form')
         console.log(props.formValues);
       } else {
-        console.log('New data')
-        console.log(props.formValues);
+        console.log('New data:')
+        const data = {
+          __metadata: {
+            type: config.objListItemEntityTypeFullName
+          },
+          ...props.formValues
+        };
+        createQuery(config.objListId, data, reqDigest, () => props.setShowObjectiveModal(false));
       }
     } else {
       if (!inputTitle) {
@@ -136,7 +143,7 @@ export default function ObjectiveForm(props) {
 
   return (
     <>
-      <Form>
+      <Form onSubmit={(event) => event.preventDefault()}>
         <Form.Group id="objectiveForm">
           <Form.Label className="form--label">Title</Form.Label>
           <Form.Control

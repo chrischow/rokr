@@ -83,6 +83,7 @@ export default function OkrSection(props) {
     return <ObjectiveForm
       formValues={objectiveFormValues}
       setFormValues={setObjectiveFormValues}
+      setShowObjectiveModal={setShowObjectiveModal}
       mode='new'
     />;
   }

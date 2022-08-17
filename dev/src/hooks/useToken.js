@@ -1,12 +1,12 @@
 import { useQuery } from "react-query";
-import { constructPostQueryFn } from "../utils/query";
+import { constructCreateQueryFn } from "../utils/query";
 import { config } from "../config";
 
 // Query token
 export default function useToken() {
   const url = config.apiUrl + 'contextinfo';
 
-  return useQuery(['token'], constructPostQueryFn(url), {
+  return useQuery(['token'], constructCreateQueryFn(url), {
     staleTime: config.tokenRefreshTime
   });
 }
