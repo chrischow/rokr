@@ -5,7 +5,6 @@ import { getStaffFromObjectives, getSubGroupsFromObjectives } from "../../../uti
 import slugify from "slugify";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
-import TeamProgress from "../TeamProgress/TeamProgress";
 import TeamPane from "../TeamPane/TeamPane";
 
 import './Team.css';
@@ -48,15 +47,6 @@ export default function Team(props){
     )
   });
 
-  // Staff tabs
-  const staffTabs = objectives.isSuccess && staffList.map(staff => {
-    return (
-      <Nav.Link key={`tab-${slugify(staff)}`} eventKey={slugify(staff)} className="individual-tabs--link">
-        {staff}
-      </Nav.Link>
-    );
-  });
-
   return (
     <>
       <h1 className="teampage-title">{props.team.teamName}</h1>
@@ -70,21 +60,15 @@ export default function Team(props){
           <div className="mt-4">
             <Tab.Content>
               <Tab.Pane eventKey="monthly">
-                {/* Staff tabs */}
-                {staffList.length > 0 &&
-                  <>
-                    <Tab.Container id="individual-tabs" defaultActiveKey={slugify(staffList[0])}>
-                      <Nav className="justify-content-center">
-                        <Nav.Item>
-                          {staffTabs}
-                        </Nav.Item>
-                      </Nav>
-                    </Tab.Container>
-                  </>
+                {objectives.isSuccess && keyResults.isSuccess &&
+                  <TeamPane 
+                    freq="monthly"
+                    subgroups={subgroups['monthly']}
+                    objectives={objectives.data}
+                    keyResults={keyResults.data}
+                    staffList={staffList}
+                  />
                 }
-                <TeamProgress 
-                  freq="monthly"
-                />
               </Tab.Pane>
               <Tab.Pane eventKey="quarterly">
                 {objectives.isSuccess && keyResults.isSuccess &&
