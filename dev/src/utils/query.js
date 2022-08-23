@@ -46,7 +46,7 @@ export async function createQuery(listId, data, token, callback) {
     console.log(response);
     callback();
   } catch (error) {
-    console.log('Error:', error.response.data.message);
+    console.log('Error:', error);
   }
 }
 
@@ -65,6 +65,6 @@ export async function updateQuery(listId, itemId, data, token, callback) {
     console.log(response);
     callback();
   } catch (error) {
-    console.log('Error:', error.response.data.message);
+    console.log('Error:', error);
   }
 }
