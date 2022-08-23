@@ -13,7 +13,6 @@ export default function OkrSection(props) {
   // State
   const [overallIsClicked, setOverallIsClicked] = useState(true);
   const [showObjectiveModal, setShowObjectiveModal] = useState(false);
-  const [objectiveMode, setObjectiveMode] = useState('new');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -23,6 +22,7 @@ export default function OkrSection(props) {
     return (
       <OkrCollapse
         // key={`okrcollapse-${obj.Id}`}
+        team={props.teamName}
         objective={obj}
         keyResults={keyResults}
         overallIsClicked={overallIsClicked}
@@ -79,11 +79,15 @@ export default function OkrSection(props) {
     });
   }, [props.freq, props.teamName, props.staffOption, startDate, endDate])
 
+  // Render modal content
   const addObjective = () => {
     return <ObjectiveForm
       formValues={objectiveFormValues}
       setFormValues={setObjectiveFormValues}
       setShowObjectiveModal={setShowObjectiveModal}
+      startDate={startDate}
+      endDate={endDate}
+      staffOption={props.staffOption}
       mode='new'
     />;
   }
@@ -99,7 +103,6 @@ export default function OkrSection(props) {
       owner: props.staffOption ? props.staffOption : ''
     });
     setShowObjectiveModal(false);
-    setObjectiveMode('new');
   }
 
   return (
