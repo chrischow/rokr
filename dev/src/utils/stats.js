@@ -64,8 +64,8 @@ export function computeMetrics(objectives, keyResults, frequency) {
 
   const tempObjCompletion = computeObjCompletion(tempObjectives, tempKRs);
   const output = {
-    avgCompletion: tempObjCompletion.avgCompletion
-      ? tempObjCompletion.avgCompletion
+    avgCompletion: tempKRs.length > 0 
+      ? tempKRs.map(kr => kr.currentValue / kr.maxValue).reduce((a,b) => a + b) / tempKRs.length
       : 0,
     keyResultCompletion: computeKrCompletion(tempKRs),
     objectiveCompletion: {
@@ -92,117 +92,117 @@ export function computeTeamsMetrics(teams, objectives, keyResults, frequency) {
 }
 
 // Prepare team data in nested format
-export function prepareTeamData(objectives, keyResults) {
-  var output = {};
-  var freqs = ["annual", "quarterly", "monthly"];
-  var tempObj;
-  var parentObj;
-  var tempKR;
-  var tempObjCompletion;
-  var staffList;
-  for (var f = 0; f < freqs.length; f++) {
-    tempObj = objectives.filter(entry => entry.frequency === freqs[f]);
+// export function prepareTeamData(objectives, keyResults) {
+//   var output = {};
+//   var freqs = ["annual", "quarterly", "monthly"];
+//   var tempObj;
+//   var parentObj;
+//   var tempKR;
+//   var tempObjCompletion;
+//   var staffList;
+//   for (var f = 0; f < freqs.length; f++) {
+//     tempObj = objectives.filter(entry => entry.frequency === freqs[f]);
 
-    tempKR = keyResults.filter(entry => {
-      parentObj = objectives.filter(obj => obj.Id === entry.parentObjective.Id)[0];
-      return parentObj.frequency === freqs[f];
-    });
+//     tempKR = keyResults.filter(entry => {
+//       parentObj = objectives.filter(obj => obj.Id === entry.parentObjective.Id)[0];
+//       return parentObj.frequency === freqs[f];
+//     });
 
-    tempObjCompletion = computeObjCompletion(tempObj, tempKR);
+//     tempObjCompletion = computeObjCompletion(tempObj, tempKR);
 
-    output[freqs[f]] = {
-      avgCompletion: tempObjCompletion.avgCompletion
-        ? tempObjCompletion.avgCompletion
-        : 0,
-      keyResultCompletion: computeKrCompletion(tempKR),
-      objectiveCompletion: {
-        completed: tempObjCompletion.completed,
-        total: tempObjCompletion.total,
-      },
-      objectives: tempObj,
-      keyResults: tempKR,
-    };
+//     output[freqs[f]] = {
+//       avgCompletion: tempObjCompletion.avgCompletion
+//         ? tempObjCompletion.avgCompletion
+//         : 0,
+//       keyResultCompletion: computeKrCompletion(tempKR),
+//       objectiveCompletion: {
+//         completed: tempObjCompletion.completed,
+//         total: tempObjCompletion.total,
+//       },
+//       objectives: tempObj,
+//       keyResults: tempKR,
+//     };
 
-    if (freqs[f] === "monthly") {
-      staffList = tempObj.map(item => item.owner);
-      staffList = [...new Set(staffList)];
-      staffList = staffList.filter(item => item !== null);
-    }
-  }
+//     if (freqs[f] === "monthly") {
+//       staffList = tempObj.map(item => item.owner);
+//       staffList = [...new Set(staffList)];
+//       staffList = staffList.filter(item => item !== null);
+//     }
+//   }
 
-  // For each staff, also calculate obj completion and kr completion
-  var staff;
-  for (var i = 0; i < staffList.length; i++) {
-    staff = staffList[i];
-    tempObj = objectives.filter(entry => entry.owner === staff);
+//   // For each staff, also calculate obj completion and kr completion
+//   var staff;
+//   for (var i = 0; i < staffList.length; i++) {
+//     staff = staffList[i];
+//     tempObj = objectives.filter(entry => entry.owner === staff);
 
-    tempKR = keyResults.filter(entry => {
-      parentObj = objectives.filter(obj => obj.Id === entry.parentObjective.Id)[0];
-      return parentObj.owner === staff;
-    });
+//     tempKR = keyResults.filter(entry => {
+//       parentObj = objectives.filter(obj => obj.Id === entry.parentObjective.Id)[0];
+//       return parentObj.owner === staff;
+//     });
 
-    tempObjCompletion = computeObjCompletion(tempObj, tempKR);
+//     tempObjCompletion = computeObjCompletion(tempObj, tempKR);
 
-    output[staff] = {
-      avgCompletion: tempObjCompletion.avgCompletion
-        ? tempObjCompletion.avgCompletion
-        : 0,
-      keyResultCompletion: computeKrCompletion(tempKR),
-      objectiveCompletion: {
-        completed: tempObjCompletion.completed,
-        total: tempObjCompletion.total,
-      },
-      objectives: tempObj,
-      keyResults: tempKR,
-    };
-  }
+//     output[staff] = {
+//       avgCompletion: tempObjCompletion.avgCompletion
+//         ? tempObjCompletion.avgCompletion
+//         : 0,
+//       keyResultCompletion: computeKrCompletion(tempKR),
+//       objectiveCompletion: {
+//         completed: tempObjCompletion.completed,
+//         total: tempObjCompletion.total,
+//       },
+//       objectives: tempObj,
+//       keyResults: tempKR,
+//     };
+//   }
 
-  return output;
-}
+//   return output;
+// }
 
 // Prepare display data
-export function prepareTeamPageData(objectives, keyResults, frequency, staff, subGroup) {
-  const tempObj = objectives.filter(item => {
-    const date = offsetDate(item.objectiveEndDate);
-    const year = getYear(date);
-    const workyear = getWorkYear(date);
-    const currentSubGroup = frequency === 'annual'
-      ? workyear
-      : frequency === 'quarterly'
-        ? getQuarter(date, workyear)
-        : getMonth(date, year);
+// export function prepareTeamPageData(objectives, keyResults, frequency, staff, subGroup) {
+//   const tempObj = objectives.filter(item => {
+//     const date = offsetDate(item.objectiveEndDate);
+//     const year = getYear(date);
+//     const workyear = getWorkYear(date);
+//     const currentSubGroup = frequency === 'annual'
+//       ? workyear
+//       : frequency === 'quarterly'
+//         ? getQuarter(date, workyear)
+//         : getMonth(date, year);
 
-    var condition = true;
-    condition = condition && item.frequency === frequency;
-    if (frequency === 'monthly' && staff) {
-      condition = condition && item.owner === staff;
-    }
-    condition = condition && currentSubGroup === subGroup;
+//     var condition = true;
+//     condition = condition && item.frequency === frequency;
+//     if (frequency === 'monthly' && staff) {
+//       condition = condition && item.owner === staff;
+//     }
+//     condition = condition && currentSubGroup === subGroup;
 
-    return condition;
-  });
+//     return condition;
+//   });
 
-  const tempKR = keyResults.filter(kr => {
-    const objs = tempObj.filter(obj => obj.Id === kr.parentObjective.Id);
-    return objs.length > 0;
-  });
+//   const tempKR = keyResults.filter(kr => {
+//     const objs = tempObj.filter(obj => obj.Id === kr.parentObjective.Id);
+//     return objs.length > 0;
+//   });
 
-  const tempObjCompletion = computeObjCompletion(tempObj, tempKR);
-  const output = {
-    avgCompletion: tempObjCompletion.avgCompletion
-      ? tempObjCompletion.avgCompletion
-      : 0,
-    keyResultCompletion: computeKrCompletion(tempKR),
-    objectiveCompletion: {
-      completed: tempObjCompletion.completed,
-      total: tempObjCompletion.total,
-    },
-    objectives: tempObj,
-    keyResults: tempKR,
-  };
+//   const tempObjCompletion = computeObjCompletion(tempObj, tempKR);
+//   const output = {
+//     avgCompletion: tempObjCompletion.avgCompletion
+//       ? tempObjCompletion.avgCompletion
+//       : 0,
+//     keyResultCompletion: computeKrCompletion(tempKR),
+//     objectiveCompletion: {
+//       completed: tempObjCompletion.completed,
+//       total: tempObjCompletion.total,
+//     },
+//     objectives: tempObj,
+//     keyResults: tempKR,
+//   };
 
-  return output;
-}
+//   return output;
+// }
 
 // Sort strings in alphabetical order
 export function sortStringArray(a, b) {
