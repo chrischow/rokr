@@ -32,7 +32,7 @@ function App() {
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <NavBar teams={config.teams} />
-        <Container className="mt-5 mb-5">
+        <Container className="mt-5 app-container">
           <Routes>
             <Route path="/" element={<Home teams={config.teams} />} exact />
             <Route path="/timeline" element={<Timeline />} />
