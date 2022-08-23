@@ -3,11 +3,11 @@ import $ from 'jquery';
 import { getDate } from '../../utils/dates';
 import { createQuery } from '../../utils/query';
 import useToken from '../../hooks/useToken';
-import validator from 'validator';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { config } from '../../config';
+import { validateObjectiveForm } from '../../utils/validators';
 
 export default function ObjectiveForm(props) {
 
@@ -59,6 +59,23 @@ export default function ObjectiveForm(props) {
     return <li key={item}>{item}</li>;
   });
 
+  // Form cleanup
+  const formCleanup =  () => {
+    // Reset form
+    props.setFormValues({
+      Title: '',
+      objectiveDescription: '',
+      objectiveStartDate: props.startDate,
+      objectiveEndDate: props.endDate,
+      frequency: props.freq,
+      team: props.teamName,
+      owner: props.staffOption ? props.staffOption : ''
+    })
+
+    // Close modal
+    props.setShowObjectiveModal(false)
+  }
+
   // Submit form
   function submitForm() {
     // Clear previous errors
@@ -68,24 +85,18 @@ export default function ObjectiveForm(props) {
     const inputTitle = props.formValues.Title;
     const inputStartDate = props.formValues.objectiveStartDate;
     const inputEndDate = props.formValues.objectiveEndDate;
-    var validStartDate = validator.isDate(inputStartDate, 'YYYY-MM-DD');
-    var validEndDate = validator.isDate(inputEndDate, 'YYYY-MM-DD');
 
+    const formOkay = validateObjectiveForm(inputTitle, inputStartDate, inputEndDate, token.isSuccess, setFormErrors);
+    
     // Form ok
-    if (
-      inputTitle &&
-      inputStartDate &&
-      validStartDate &&
-      inputEndDate &&
-      validEndDate &&
-      token.isSuccess
-    ) {
+    if (formOkay) {
       const { objectiveId, ...newData } = props.formValues;
       const reqDigest = token.isSuccess && token.data.d.GetContextWebInformation.FormDigestValue;
 
-      if (props.mode === "Edit") {
+      if (props.mode === "edit") {
         console.log('Edit form')
-        console.log(props.formValues);
+        console.log(newData);
+        formCleanup();
       } else {
         console.log('New data:')
         const data = {
@@ -94,39 +105,7 @@ export default function ObjectiveForm(props) {
           },
           ...props.formValues
         };
-        createQuery(config.objListId, data, reqDigest, () => props.setShowObjectiveModal(false));
-      }
-    } else {
-      if (!inputTitle) {
-        setFormErrors(prevData => {
-          return [...prevData, "Input a title."];
-        });
-      }
-
-      if (!inputStartDate) {
-        setFormErrors(prevData => {
-          return [...prevData, "Set a start date."];
-        });
-      } else if (!validStartDate) {
-        setFormErrors(prevData => {
-          return [...prevData, "Set a valid start date."];
-        });
-      }
-
-      if (!inputEndDate) {
-        setFormErrors(prevData => {
-          return [...prevData, "Set an end date."];
-        });
-      } else if (!validEndDate) {
-        setFormErrors(prevData => {
-          return [...prevData, "Please set a valid end date."];
-        });
-      }
-
-      if (!token.isSuccess) {
-        setFormErrors(prevData => {
-          return [...prevData, "Invalid token. Check your permissions."];
-        });
+        createQuery(config.objListId, data, reqDigest, formCleanup);
       }
     }
   }
