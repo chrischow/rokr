@@ -33,10 +33,12 @@ export default function OkrCollapse(props) {
     });
   });
 
-  // Cojmpute stats
-  const objProgress = props.keyResults
-    .map(kr => kr.currentValue / kr.maxValue)
-    .reduce((a, b) => a + b) / props.keyResults.length;
+  // Compute stats
+  const objProgress = props.keyResults.length > 0  ? 
+    props.keyResults
+      .map(kr => kr.currentValue / kr.maxValue)
+      .reduce((a, b) => a + b) / props.keyResults.length
+    : 0;
   
   return (
     <div className="mt-4">
