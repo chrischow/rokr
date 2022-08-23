@@ -108,6 +108,9 @@ export default function OkrSection(props) {
 
   // Form cleanup
   const formCleanup =  () => {
+    // Invalidate and refetch data
+    invalidateAndRefetch();
+
     // Reset form
     setObjectiveFormValues({
       Title: '',
@@ -118,12 +121,10 @@ export default function OkrSection(props) {
       team: props.teamName,
       owner: props.staffOption ? props.staffOption : ''
     });
-
+    
     // Close modal
     setShowObjectiveModal(false);
 
-    // Invalidate and refetch data
-    invalidateAndRefetch();
   }
 
   // Render modal content

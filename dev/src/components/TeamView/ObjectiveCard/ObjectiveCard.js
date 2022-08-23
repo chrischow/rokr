@@ -49,11 +49,11 @@ export default function ObjectiveCard(props) {
 
   // Objective form cleanup
   const objectiveFormCleanup = (newData) => {
-    // Close modal
-    setShowObjectiveEditModal(false);
-
     // Invalidate and refetch data
     invalidateAndRefetch();
+
+    // Close modal
+    setShowObjectiveEditModal(false);
   };
 
   const addKR = () => {
