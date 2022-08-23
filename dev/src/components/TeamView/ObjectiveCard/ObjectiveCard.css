@@ -85,6 +85,11 @@ button.btn-collapse, button.btn-collapse:hover {
   margin-right: 10px;
 }
 
+.btn.objective-card--edit-button:active, .btn.objective-card--edit-button:focus {
+  color: #7B73F0;
+  border: 1px solid #7b73f0;
+}
+
 .objective-card--edit-button:hover {
   background-color: #7B73F033;
   color: #7B73F0;

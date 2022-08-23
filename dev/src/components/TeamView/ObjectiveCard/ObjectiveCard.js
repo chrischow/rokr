@@ -1,15 +1,58 @@
+import { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { CaretIcon, EditIconText, AddIconText } from '../../Icons/Icons';
+import SharedModal from '../../SharedModal/SharedModal';
+import ObjectiveForm from '../../ObjectiveForm/ObjectiveForm';
 
 import './ObjectiveCard.css';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 export default function ObjectiveCard(props) {
+  // State
+  const [showObjectiveEditModal, setShowObjectiveEditModal] = useState(false);
+  const [objectiveFormValues, setObjectiveFormValues] = useState({});
+
+  useEffect(() => {
+    setObjectiveFormValues({
+      Title: props.Title,
+      objectiveDescription: props.objectiveDescription,
+      objectiveStartDate: props.objectiveStartDate,
+      objectiveEndDate: props.objectiveEndDate,
+      frequency: props.freq,
+      team: props.teamName,
+      owner: props.owner ? props.owner : ''
+    });
+  }, [props])
+  
+  // Render modal content
   const editObjective = () => {
-    console.log('Edit objective');
+    return <ObjectiveForm
+      formValues={objectiveFormValues}
+      setFormValues={setObjectiveFormValues}
+      setShowObjectiveModal={setShowObjectiveEditModal}
+      startDate={props.objectiveStartDate}
+      endDate={props.objectiveEndDate}
+      staffOption={props.staffOption}
+      mode='edit'
+    />;
   }
+
+  // Close modal
+  const handleCloseModal = () => {
+    setObjectiveFormValues({
+      Title: props.Title,
+      objectiveDescription: props.objectiveDescription,
+      objectiveStartDate: props.objectiveStartDate,
+      objectiveEndDate: props.objectiveEndDate,
+      frequency: props.freq,
+      team: props.teamName,
+      owner: props.owner ? props.owner : ''
+    })
+    setShowObjectiveEditModal(false);
+  }
+
   const addKR = () => {
     console.log('Add KR');
   }
@@ -42,7 +85,7 @@ export default function ObjectiveCard(props) {
               </div>
               <button
                 className="btn objective-card--edit-button mr-3"
-                onClick={editObjective}
+                onClick={() => setShowObjectiveEditModal(true)}
               >
                 <span className="objective-card--edit-text mr-1">
                   Edit
@@ -68,6 +111,13 @@ export default function ObjectiveCard(props) {
           <ProgressBar progress={props.progress} isKeyResult={false} />
         </Col>
       </Row>
+      <SharedModal
+        modalTitle="Edit Objective"
+        show={showObjectiveEditModal}
+        onHide={() => setShowObjectiveEditModal(false)}
+        renderModalContent={() => editObjective()}
+        handleCloseModal={handleCloseModal}
+      />
     </div>
   );
 }
