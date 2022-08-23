@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
+import slugify from 'slugify';
 import $ from 'jquery';
 import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../utils/dates';
 import { AddIconText } from "../../Icons/Icons";
@@ -9,6 +11,17 @@ import OkrCollapse from "../OkrCollapse/OkrCollapse";
 import './OkrSection.css';
 
 export default function OkrSection(props) {
+  // Create query client
+  const queryClient = useQueryClient()
+
+  // Invalidate and refetch
+  const invalidateAndRefetch = () => {
+    queryClient.invalidateQueries('objectives', { refetchInactive: true });
+    queryClient.invalidateQueries('keyResults', { refetchInactive: true });
+    queryClient.invalidateQueries(`objectives-${slugify(props.teamName)}`, { refetchInactive: true });
+    queryClient.invalidateQueries(`keyResults-${slugify(props.teamName)}`, { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
 
   // State
   const [overallIsClicked, setOverallIsClicked] = useState(true);
@@ -79,19 +92,7 @@ export default function OkrSection(props) {
     });
   }, [props.freq, props.teamName, props.staffOption, startDate, endDate])
 
-  // Render modal content
-  const addObjective = () => {
-    return <ObjectiveForm
-      formValues={objectiveFormValues}
-      setFormValues={setObjectiveFormValues}
-      setShowObjectiveModal={setShowObjectiveModal}
-      startDate={startDate}
-      endDate={endDate}
-      staffOption={props.staffOption}
-      mode='new'
-    />;
-  }
-
+  // Handle closing of modal
   const handleCloseModal = () => {
     setObjectiveFormValues({
       Title: '',
@@ -103,6 +104,42 @@ export default function OkrSection(props) {
       owner: props.staffOption ? props.staffOption : ''
     });
     setShowObjectiveModal(false);
+  }
+
+  // Form cleanup
+  const formCleanup =  () => {
+    // Reset form
+    setObjectiveFormValues({
+      Title: '',
+      objectiveDescription: '',
+      objectiveStartDate: startDate,
+      objectiveEndDate: endDate,
+      frequency: props.freq,
+      team: props.teamName,
+      owner: props.staffOption ? props.staffOption : ''
+    });
+
+    // Close modal
+    setShowObjectiveModal(false);
+
+    // Invalidate and refetch data
+    invalidateAndRefetch();
+  }
+
+  // Render modal content
+  const addObjective = () => {
+    return <ObjectiveForm
+      formValues={objectiveFormValues}
+      setFormValues={setObjectiveFormValues}
+      setShowObjectiveModal={setShowObjectiveModal}
+      startDate={startDate}
+      endDate={endDate}
+      staffOption={props.staffOption}
+      freq={props.freq}
+      team={props.teamName}
+      formCleanup={formCleanup}
+      mode='new'
+    />;
   }
 
   return (

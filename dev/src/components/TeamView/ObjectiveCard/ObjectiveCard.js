@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
+import slugify from 'slugify';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -14,18 +16,50 @@ export default function ObjectiveCard(props) {
   const [showObjectiveEditModal, setShowObjectiveEditModal] = useState(false);
   const [objectiveFormValues, setObjectiveFormValues] = useState({});
 
+  // Create query client
+  const queryClient = useQueryClient()
+
+  // Invalidate and refetch
+  const invalidateAndRefetch = () => {
+    queryClient.invalidateQueries('objectives', { refetchInactive: true });
+    queryClient.invalidateQueries('keyResults', { refetchInactive: true });
+    queryClient.invalidateQueries(`objectives-${slugify(props.team)}`, { refetchInactive: true });
+    queryClient.invalidateQueries(`keyResults-${slugify(props.team)}`, { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
+
+  // Re-populate form
   useEffect(() => {
     setObjectiveFormValues({
+      Id: props.Id,
       Title: props.Title,
       objectiveDescription: props.objectiveDescription,
       objectiveStartDate: props.objectiveStartDate,
       objectiveEndDate: props.objectiveEndDate,
-      frequency: props.freq,
-      team: props.teamName,
+      frequency: props.frequency,
+      team: props.team,
       owner: props.owner ? props.owner : ''
     });
-  }, [props])
-  
+  }, [props]);
+
+  // Close modal
+  const handleCloseModal = () => {
+    setShowObjectiveEditModal(false);
+  };
+
+  // Objective form cleanup
+  const objectiveFormCleanup = (newData) => {
+    // Close modal
+    setShowObjectiveEditModal(false);
+
+    // Invalidate and refetch data
+    invalidateAndRefetch();
+  };
+
+  const addKR = () => {
+    console.log('Add KR');
+  }
+
   // Render modal content
   const editObjective = () => {
     return <ObjectiveForm
@@ -35,26 +69,11 @@ export default function ObjectiveCard(props) {
       startDate={props.objectiveStartDate}
       endDate={props.objectiveEndDate}
       staffOption={props.staffOption}
+      team={props.team}
+      freq={props.frequency}
+      formCleanup={objectiveFormCleanup}
       mode='edit'
     />;
-  }
-
-  // Close modal
-  const handleCloseModal = () => {
-    setObjectiveFormValues({
-      Title: props.Title,
-      objectiveDescription: props.objectiveDescription,
-      objectiveStartDate: props.objectiveStartDate,
-      objectiveEndDate: props.objectiveEndDate,
-      frequency: props.freq,
-      team: props.teamName,
-      owner: props.owner ? props.owner : ''
-    })
-    setShowObjectiveEditModal(false);
-  }
-
-  const addKR = () => {
-    console.log('Add KR');
   }
 
   return (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import { getDate } from '../../utils/dates';
-import { createQuery } from '../../utils/query';
+import { createQuery, updateQuery } from '../../utils/query';
 import useToken from '../../hooks/useToken';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -59,23 +59,6 @@ export default function ObjectiveForm(props) {
     return <li key={item}>{item}</li>;
   });
 
-  // Form cleanup
-  const formCleanup =  () => {
-    // Reset form
-    props.setFormValues({
-      Title: '',
-      objectiveDescription: '',
-      objectiveStartDate: props.startDate,
-      objectiveEndDate: props.endDate,
-      frequency: props.freq,
-      team: props.teamName,
-      owner: props.staffOption ? props.staffOption : ''
-    })
-
-    // Close modal
-    props.setShowObjectiveModal(false)
-  }
-
   // Submit form
   function submitForm() {
     // Clear previous errors
@@ -90,13 +73,18 @@ export default function ObjectiveForm(props) {
     
     // Form ok
     if (formOkay) {
-      const { objectiveId, ...newData } = props.formValues;
+      const { Id, ...newData } = props.formValues;
       const reqDigest = token.isSuccess && token.data.d.GetContextWebInformation.FormDigestValue;
 
       if (props.mode === "edit") {
         console.log('Edit form')
-        console.log(newData);
-        formCleanup();
+        const data = {
+          __metadata: {
+            type: config.objListItemEntityTypeFullName
+          },
+          ...newData
+        }
+        updateQuery(config.objListId, Id, data, reqDigest, props.formCleanup);
       } else {
         console.log('New data:')
         const data = {
@@ -105,7 +93,7 @@ export default function ObjectiveForm(props) {
           },
           ...props.formValues
         };
-        createQuery(config.objListId, data, reqDigest, formCleanup);
+        createQuery(config.objListId, data, reqDigest, props.formCleanup);
       }
     }
   }
@@ -206,6 +194,7 @@ export default function ObjectiveForm(props) {
                 className="form-dark form--edit"
                 value={props.formValues.owner}
                 onChange={handleChange}
+                disabled={props.formValues.frequency !== 'monthly'}
               />
             </Col>
           </Row>
