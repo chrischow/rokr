@@ -47,6 +47,7 @@ export default function OkrCollapse(props) {
         setIsClicked={setIsClicked}
         objId={objId}
         progress={objProgress}
+        team={props.team}
         {...props.objective}
       />
       <Collapse in={isClicked}>
