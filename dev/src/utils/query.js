@@ -43,7 +43,7 @@ export async function createQuery(listId, data, token, callback) {
         'X-RequestDigest': token
       }
     });
-    console.log(response);
+    // console.log(response);
     callback();
   } catch (error) {
     console.log('Error:', error);
@@ -62,7 +62,7 @@ export async function updateQuery(listId, itemId, data, token, callback) {
         'X-HTTP-METHOD': 'MERGE'
       }
     });
-    console.log(response);
+    // console.log(response);
     callback();
   } catch (error) {
     console.log('Error:', error);
