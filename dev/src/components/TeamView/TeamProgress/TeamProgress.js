@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { computeMetrics } from '../../../utils/stats';
 import ProgressCard from "../../ProgressCard/ProgressCard";
 import updateCircleProgress from "../../../utils/circleProgress";
 
