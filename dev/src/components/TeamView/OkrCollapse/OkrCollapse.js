@@ -23,6 +23,7 @@ export default function OkrCollapse(props) {
       startDate={props.startDate}
       endDate={props.endDate}
       updateData={krUpdates}
+      invalidateAndRefetch={props.invalidateAndRefetch}
       {...kr}
       progress={kr.currentValue / kr.maxValue}
     />
