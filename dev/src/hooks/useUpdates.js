@@ -6,7 +6,7 @@ import { config } from "../config";
 export const useUpdates = () => {
   const url = constructUrl(
     config.updateListId,
-    `Id,updateText,updateDate,parentKrId`
+    `Id,updateText,updateDate,parentKrId,team`
   );
   return useQuery(['updates'], constructReadQueryFn(url), {
     staleTime: config.staleTime
@@ -25,7 +25,7 @@ export const useUpdate = (Id) => {
 }
 
 // Get update by key result ID
-export const useKrUpdate = (krId) => {
+export const useKrUpdates = (krId) => {
   const allUpdates = useUpdates();
   return {
     data: allUpdates.isSuccess ? allUpdates.data.filter(update => {
@@ -33,4 +33,15 @@ export const useKrUpdate = (krId) => {
     }) : null,
     isSuccess: allUpdates.isSuccess
   };
+}
+
+// Get updates by team
+export const useTeamUpdates = (team) => {
+  const allUpdates = useUpdates();
+  return {
+    data: allUpdates.isSuccess ? allUpdates.data.filter(update => {
+      return update.team === team;
+    }) : null,
+    isSuccess: allUpdates.isSuccess
+  }
 }
