@@ -135,14 +135,6 @@ export default function KrForm(props) {
     }
   }
 
-  // Styles for select box
-  const selectStyles = {
-    option: (provided, state) => ({
-      color: 'white',
-      backgroundColor: '#8497b0'
-    })
-  }
-
   return (
     <>
       <Form onSubmit={(event) => event.preventDefault()}>
@@ -167,7 +159,7 @@ export default function KrForm(props) {
             onChange={handleChange}
           />
 
-          <Form.Label className="form--label">Objective</Form.Label>
+          <Form.Label className="form--label">Objective - Type to Search</Form.Label>
           <div className="mb-3">
             <Select
               width='100%'
@@ -256,7 +248,10 @@ export default function KrForm(props) {
         </Form.Group>
       </Form> 
       <div className="text-end mt-2">
-        <button className="btn btn-green" onClick={submitForm}>
+        <button
+          className="btn btn-green"
+          onClick={submitForm}
+          disabled={!submitEnabled}>
           Submit
         </button>
       </div>
