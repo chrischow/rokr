@@ -165,6 +165,14 @@ input[type="search"], input[type="search"]:focus {
   font-weight: normal;
 }
 
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: transparent;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) > * {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 /* Forms */
 .form-dark, .form-dark:focus {
   background-color: #000C1D8a;
