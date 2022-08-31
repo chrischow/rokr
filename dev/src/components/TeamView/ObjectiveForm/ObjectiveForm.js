@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import $ from 'jquery';
-import { getDate } from '../../utils/dates';
-import { createQuery, updateQuery } from '../../utils/query';
-import useToken from '../../hooks/useToken';
+import { getDate } from '../../../utils/dates';
+import { createQuery, updateQuery } from '../../../utils/query';
+import useToken from '../../../hooks/useToken';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import { config } from '../../config';
-import { validateObjectiveForm } from '../../utils/validators';
+import { config } from '../../../config';
+import { validateObjectiveForm } from '../../../utils/validators';
 
 export default function ObjectiveForm(props) {
 

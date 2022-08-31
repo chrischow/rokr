@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { CaretIcon, EditIconText, AddIconText } from '../../Icons/Icons';
 import SharedModal from '../../SharedModal/SharedModal';
-import ObjectiveForm from '../../ObjectiveForm/ObjectiveForm';
+import ObjectiveForm from '../ObjectiveForm/ObjectiveForm';
 
 import './ObjectiveCard.css';
 import ProgressBar from '../ProgressBar/ProgressBar';

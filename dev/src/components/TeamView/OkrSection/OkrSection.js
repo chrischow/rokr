@@ -4,7 +4,7 @@ import slugify from 'slugify';
 import $ from 'jquery';
 import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../utils/dates';
 import { AddIconText } from "../../Icons/Icons";
-import ObjectiveForm from '../../ObjectiveForm/ObjectiveForm';
+import ObjectiveForm from '../ObjectiveForm/ObjectiveForm';
 import SharedModal from '../../SharedModal/SharedModal';
 import OkrCollapse from "../OkrCollapse/OkrCollapse";
 
