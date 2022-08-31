@@ -125,6 +125,11 @@ button.btn-collapse, button.btn-collapse:hover {
   transition: 0.3s;
 }
 
+.btn.objective-card--add-kr-button:active, .btn.objective-card--add-kr-button:focus {
+  color: #0EC4B2;
+  border: 1px solid #0EC4B2;
+}
+
 .objective-card--add-kr-text {
   font-size: 0.70rem;
   font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
