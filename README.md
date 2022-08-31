@@ -45,3 +45,9 @@ erDiagram
     int parentKrId FK "Key Results"
   }
 ```
+
+## Upcoming Features
+- [ ] Delete Objective
+- [ ] Delete KR
+- [ ] Searchable select boxes
+- [ ] Graph view
