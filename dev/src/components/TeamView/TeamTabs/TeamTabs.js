@@ -9,9 +9,9 @@ import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import TeamPane from "../TeamPane/TeamPane";
 
-import './Team.css';
+import './TeamTabs.css';
 
-export default function Team(props){
+export default function TeamTabs(props){
   // Get objectives and key results data - try cache first
   const queryClient = useQueryClient()
   const objectives = getData(

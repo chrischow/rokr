@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 // import TestQueries from './components/TestQueries/TestQueries';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/HomeView/Home/Home';
-import Team from './components/TeamView/Team/Team';
+import Team from './components/TeamView/TeamTabs/TeamTabs';
 import Timeline from './components/Timeline/Timeline';
 import { config } from './config';
 import './App.css';
