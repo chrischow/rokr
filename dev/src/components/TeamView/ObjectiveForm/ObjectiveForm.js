@@ -83,7 +83,7 @@ export default function ObjectiveForm(props) {
       const reqDigest = token.isSuccess && token.data.d.GetContextWebInformation.FormDigestValue;
 
       if (props.mode === "edit") {
-        console.log('Edit form')
+        console.log('Edit form');
         const data = {
           __metadata: {
             type: config.objListItemEntityTypeFullName
@@ -92,7 +92,7 @@ export default function ObjectiveForm(props) {
         }
         updateQuery(config.objListId, Id, data, reqDigest, props.formCleanup);
       } else {
-        console.log('New data:')
+        console.log('New data:');
         const data = {
           __metadata: {
             type: config.objListItemEntityTypeFullName
