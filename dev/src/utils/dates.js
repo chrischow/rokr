@@ -81,7 +81,7 @@ export function quarterToIsoDate(dateStr, isStart) {
 }
 
 export function monthToIsoDate(dateStr, isStart) {
-  const [year, mth] = dateStr.split(' ');
+  const [year, mth] = dateStr.split('-');
   if (isStart) return `${dateStr}-01`;
   if ([1, 3, 5, 7, 8, 10, 12].includes(Number(mth))) {
     return `${dateStr}-31`;
