@@ -34,6 +34,7 @@ export function computeObjCompletion(objectives, keyResults) {
     // Filter KRs for each objective and compute completion
     filteredKRs = keyResults.filter(kr => kr.parentObjective.Id === objectives[i].Id);
     numKRs = filteredKRs.length;
+    if (numKRs === 0) { continue; }
 
     // Compute average completion
     pctCompletion = filteredKRs.map(kr => {
@@ -58,14 +59,15 @@ export function computeMetrics(objectives, keyResults, frequency) {
   const tempObjectives = objectives.filter(obj => obj.frequency === frequency);
 
   const tempKRs = keyResults.filter(kr => {
-    const objs = tempObjectives.filter(obj => obj.Id === kr.parentObjective.Id);
-    return objs.length > 0;
+    // const objs = tempObjectives.filter(obj => obj.Id === kr.parentObjective.Id);
+    // return objs.length > 0;
+    return tempObjectives.map(obj => obj.Id).includes(kr.parentObjective.Id);
   });
 
   const tempObjCompletion = computeObjCompletion(tempObjectives, tempKRs);
   const output = {
-    avgCompletion: tempKRs.length > 0 
-      ? tempKRs.map(kr => kr.currentValue / kr.maxValue).reduce((a,b) => a + b) / tempKRs.length
+    avgCompletion: tempObjCompletion.avgCompletion
+      ? tempObjCompletion.avgCompletion
       : 0,
     keyResultCompletion: computeKrCompletion(tempKRs),
     objectiveCompletion: {
