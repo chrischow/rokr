@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
-import $ from 'jquery';
-import { getDate, monthToIsoDate, quarterToIsoDate, yearToIsoDate } from '../../../utils/dates';
 import slugify from 'slugify';
+import { getData } from '../../../utils/query';
+import { useTeamObjectivesCache, useTeamObjectives } from "../../../hooks/useObjectives";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -19,8 +19,6 @@ export default function ObjectiveCard(props) {
   const [showObjectiveEditModal, setShowObjectiveEditModal] = useState(false);
   const [objectiveFormValues, setObjectiveFormValues] = useState({});
   const [showKrAddModal, setShowKrAddModal] = useState(false);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
 
   // Create query client
   const queryClient = useQueryClient()
@@ -76,6 +74,20 @@ export default function ObjectiveCard(props) {
   }
 
   // KEY RESULT FORM
+  // Get objectives
+  const objectives = getData(
+    queryClient.getQueryState('objectives'),
+    useTeamObjectives,
+    useTeamObjectivesCache
+  )(props.team);
+  
+  const objectiveOptions = objectives.isSuccess && objectives.data.map(obj => {
+    return {
+      value: obj.Id,
+      label: `[${obj.team} ${obj.frequency}] ${obj.Title}`
+    };
+  })
+  
   // Form values
   const [krFormValues, setKrFormValues] = useState({
     Title: '',
@@ -130,6 +142,8 @@ export default function ObjectiveCard(props) {
     return <KrForm
       formValues={krFormValues}
       setFormValues={setKrFormValues}
+      objectiveOptions={objectiveOptions}
+      selectDisabled={true}
       formCleanup={formCleanup}
       invalidateAndRefetch={props.invalidateAndRefetch}
       mode="new"

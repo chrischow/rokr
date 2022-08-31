@@ -70,3 +70,28 @@ input[type="range"]::-webkit-slider-runnable-track:focus {
   background: #27DDCB;
   box-shadow: none;
 }
+
+/* Select box */
+.krform-select__control,
+.krform-select__control:focus
+.krform-select__menu-portal,
+.krform-select__menu-portal:focus
+{
+  background-color: #000C1D8a!important;
+  color: #ddd!important;
+  border: none!important;
+  box-shadow: none!important;
+}
+
+.krform-select__menu-list {
+  background-color: #000C1Ddd!important;
+  color: #8497b0!important;
+}
+
+.krform-select__placeholder {
+  color: #ddd!important;
+}
+
+.krform-select__single-value, .krform-select__input-container {
+  color: #ddd!important;
+}

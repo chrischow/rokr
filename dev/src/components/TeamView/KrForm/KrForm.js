@@ -6,6 +6,7 @@ import useToken from '../../../hooks/useToken';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Select from 'react-select';
 import { config } from '../../../config';
 
 import './KrForm.css';
@@ -76,6 +77,7 @@ export default function KrForm(props) {
     // Re-enable submit button
     setSubmitEnabled(true);
   }
+  
   // Handle change
   const handleChange = (event) => {
     props.setFormValues(prevData => {
@@ -83,6 +85,26 @@ export default function KrForm(props) {
         ...prevData,
         [event.target.name]: event.target.value
       };
+    })
+  }
+
+  // Handle change for select box
+  const handleSelectChange = (event) => {
+    if (event) {
+      props.setFormValues(prevData => {
+        return {
+          ...prevData,
+          'parentObjective': Number(event.value)
+        }
+      })
+    }
+  }
+
+  // Styles for select box
+  const selectStyles = {
+    option: (provided, state) => ({
+      color: 'white',
+      backgroundColor: '#8497b0'
     })
   }
 
@@ -109,6 +131,23 @@ export default function KrForm(props) {
             value={props.formValues.krDescription}
             onChange={handleChange}
           />
+
+          <Form.Label className="form--label">Objective</Form.Label>
+          <div className="mb-3">
+            <Select
+              width='100%'
+              id="objective-selector"
+              defaultValue={props.objectiveOptions.find(obj => {
+                return obj.value === props.formValues.parentObjective;
+              })}
+              options={props.objectiveOptions}
+              isDisabled={props.selectDisabled}
+              menuPosition="fixed"
+              className="krform-select"
+              classNamePrefix="krform-select"
+              onChange={handleSelectChange}
+            />
+          </div>
 
           <Row className="align-items-center">
             <Col xs={6}>
