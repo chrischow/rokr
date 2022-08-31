@@ -134,6 +134,17 @@ export default function ObjectiveCard(props) {
 
   // Close modal
   const handleCloseKrAddModal = () => {
+    // Reset form
+    setKrFormValues({
+      Title: '',
+      krDescription: '',
+      krStartDate: props.objectiveStartDate,
+      krEndDate: props.objectiveEndDate,
+      minValue: 0,
+      maxValue: 1,
+      currentValue: 0,
+      parentObjective: props.Id
+    });
     setShowKrAddModal(false);
   };
 

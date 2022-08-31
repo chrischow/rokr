@@ -3,6 +3,7 @@ import $ from 'jquery';
 import { getDate } from '../../../utils/dates';
 import { createQuery, updateQuery } from '../../../utils/query';
 import useToken from '../../../hooks/useToken';
+import { validateKrForm } from '../../../utils/validators';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -69,10 +70,44 @@ export default function KrForm(props) {
     // Disable submit button while checking
     setSubmitEnabled(false);
 
+    // Extract mandatory form inputs
+    const inputTitle = props.formValues.Title;
+    const inputStartDate = props.formValues.krStartDate;
+    const inputEndDate = props.formValues.krEndDate;
+    const inputMinValue = props.formValues.minValue
+    const inputMaxValue = props.formValues.maxValue
+
+    // Form validation
+    const formOkay = validateKrForm(
+      inputTitle, inputStartDate, inputEndDate, inputMinValue,
+      inputMaxValue, token.isSuccess, setFormErrors
+    );
+
     // Form ok
-    console.log('Form submitted');
-    console.log(props.formValues);
-    props.formCleanup();
+    if (formOkay) {
+      const { Id, ...newData } = props.formValues;
+      const reqDigest = token.isSuccess && token.data.d.GetContextWebInformation.FormDigestValue;
+
+      if (props.mode === 'edit') {
+        console.log('Edit form');
+        const data = {
+          __metadata: {
+            type: config.krListItemEntityTypeFullName
+          },
+          ...newData
+        }
+        updateQuery(config.krListId, Id, data, reqDigest, props.formCleanup);
+      } else {
+        console.log('New data');
+        const data = {
+          __metadata: {
+            type: config.krListItemEntityTypeFullName
+          },
+          ...props.formValues
+        };
+        createQuery(config.krListId, data, reqDigest, props.formCleanup);
+      }
+    }
 
     // Re-enable submit button
     setSubmitEnabled(true);
@@ -180,6 +215,7 @@ export default function KrForm(props) {
                 type="number"
                 id="minValue"
                 name="minValue"
+                min="0"
                 className="form-dark form--edit"
                 value={props.formValues.minValue}
                 onChange={handleChange}
@@ -210,6 +246,7 @@ export default function KrForm(props) {
                 type="number"
                 id="maxValue"
                 name="maxValue"
+                min="1"
                 className="form-dark form--edit"
                 value={props.formValues.maxValue}
                 onChange={handleChange}
