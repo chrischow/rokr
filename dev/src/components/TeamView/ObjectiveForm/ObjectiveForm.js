@@ -210,7 +210,7 @@ export default function ObjectiveForm(props) {
         </Form.Group>
       </Form>
       <div className="text-end mt-2">
-        <button className="btn btn-green" onClick={submitForm}>
+        <button className="btn btn-green" onClick={submitForm} enabled={submitEnabled}>
           Submit
         </button>
       </div>
