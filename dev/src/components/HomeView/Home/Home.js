@@ -30,10 +30,10 @@ export default function Home(props) {
   useEffect(
     () => {
       // Initialise overall progress card
-      if (overallProgressData) {
+      if (allTeamsProgressData) {
         updateCircleProgress(
           "overall_progress",
-          overallProgressData.avgCompletion,
+          allTeamsProgressData['RAiD'].avgCompletion,
           200,
           "50px",
           "#000718"
@@ -43,13 +43,15 @@ export default function Home(props) {
       // Initialise team progress cards
       if (allTeamsProgressData) {
         props.teams.map(team => {
-          updateCircleProgress(
-            team.slug,
-            allTeamsProgressData[team.teamName].avgCompletion,
-            160,
-            "35px",
-            "#010D1E"
-          );
+          if (team.teamName !== 'RAiD') {
+            updateCircleProgress(
+              team.slug,
+              allTeamsProgressData[team.teamName].avgCompletion,
+              160,
+              "35px",
+              "#010D1E"
+            );
+          }
           return null;
         })
       }
@@ -63,18 +65,18 @@ export default function Home(props) {
         <Brand />
       </h1>
       <h2 className="mt-4">
-        Overall Progress
+        RAiD
       </h2>
-      {overallProgressData &&
+      {allTeamsProgressData &&
         <div className="overall-panel mt-4">
           <ProgressCard
             progressId="overall_progress"
-            data={overallProgressData}
+            data={allTeamsProgressData['RAiD']}
             isTeam={false}
           />
         </div>
       }
-      {!overallProgressData && 
+      {!allTeamsProgressData && 
         <div className="overall-panel mt-4 text-center align-items-center">
           <span className="no-data">No data to display.</span>
         </div>

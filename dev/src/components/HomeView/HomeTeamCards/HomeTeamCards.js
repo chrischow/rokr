@@ -22,14 +22,16 @@ function Card(props) {
 // HomeCards
 export default function HomeTeamCards(props) {
   var cards = props.teams.map(team => {
-    return (
-      <Card
-        teamName={team.teamName}
-        key={`card-${team.slug}`}
-        slug={team.slug}
-        data={props.allTeamsProgressData[team.teamName]}
-      />
-    );
+    if (team.teamName !== 'RAiD') {
+      return (
+        <Card
+          teamName={team.teamName}
+          key={`card-${team.slug}`}
+          slug={team.slug}
+          data={props.allTeamsProgressData[team.teamName]}
+        />
+      );
+    }
   });
 
   return (

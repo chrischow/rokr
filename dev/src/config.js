@@ -8,7 +8,7 @@ export const config = {
   krListItemEntityTypeFullName: 'SP.Data.RokrKeyResultsListItem',
   updateListItemEntityTypeFullName: 'SP.Data.RokrUpdatesListItem',
   teams: [
-    { teamName: "HQ RAiD", slug: "hq-raid" },
+    { teamName: "RAiD", slug: "raid" },
     { teamName: "PAB", slug: "pab" },
     { teamName: "SWiFT", slug: "swift" },
     { teamName: "RDO", slug: "rdo" },
