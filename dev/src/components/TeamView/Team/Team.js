@@ -2,6 +2,7 @@ import { useQueryClient } from 'react-query';
 import { useTeamObjectivesCache, useTeamObjectives } from "../../../hooks/useObjectives";
 import { useTeamKeyResultsCache, useTeamKeyResults } from "../../../hooks/useKeyResults";
 import { getStaffFromObjectives, getSubGroupsFromObjectives } from "../../../utils/stats";
+import { getData } from '../../../utils/query';
 import slugify from "slugify";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
@@ -12,15 +13,6 @@ import './Team.css';
 export default function Team(props){
   // Get objectives and key results data - try cache first
   const queryClient = useQueryClient()
-  
-  const getData = (queryState, getFn, getFromCacheFn) => {
-    if (queryState) {
-      return getFn;
-    } else {
-      return getFromCacheFn;
-    }
-  }
-
   const objectives = getData(
     queryClient.getQueryState('objectives'),
     useTeamObjectives,

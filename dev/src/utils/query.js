@@ -48,7 +48,7 @@ export async function createQuery(listId, data, token, callback) {
   } catch (error) {
     console.log('Error:', error);
   }
-}
+};
 
 export async function updateQuery(listId, itemId, data, token, callback) {
   const url = `${config.apiUrl}web/Lists(guid'${listId}')/items(${itemId})`
@@ -67,4 +67,12 @@ export async function updateQuery(listId, itemId, data, token, callback) {
   } catch (error) {
     console.log('Error:', error);
   }
-}
+};
+
+export function getData(queryState, getFn, getFromCacheFn) {
+  if (queryState) {
+    return getFn;
+  } else {
+    return getFromCacheFn;
+  }
+};
