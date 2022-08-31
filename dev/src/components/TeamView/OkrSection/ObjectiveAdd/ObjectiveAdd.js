@@ -7,15 +7,7 @@ export default function ObjectiveAdd(props) {
     props.invalidateAndRefetch();
 
     // Reset form
-    props.setObjectiveFormValues({
-      Title: '',
-      objectiveDescription: '',
-      objectiveStartDate: props.startDate,
-      objectiveEndDate: props.endDate,
-      frequency: props.freq,
-      team: props.teamName,
-      owner: props.staffOption ? props.staffOption : ''
-    });
+    props.setObjectiveFormValues({...props.defaultValues});
     
     // Close modal
     props.setShowObjectiveModal(false);
