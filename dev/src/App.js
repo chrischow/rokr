@@ -6,6 +6,7 @@ import NavBar from './components/NavBar/NavBar';
 import Home from './components/HomeView/Home/Home';
 import Team from './components/TeamView/TeamTabs/TeamTabs';
 import Timeline from './components/Timeline/Timeline';
+import Directory from './components/Directory/Directory';
 import { config } from './config';
 import './App.css';
 
@@ -36,6 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home teams={config.teams} />} exact />
             <Route path="/timeline" element={<Timeline />} />
+            <Route path="/directory" element={<Directory />} />
             {teamRoutes}
           </Routes>
         </Container>

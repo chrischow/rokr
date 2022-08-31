@@ -23,6 +23,7 @@
     "react-select": "^5.4.0",
     "slugify": "^1.6.5",
     "validator": "^13.7.0",
+    "vis-network": "^9.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
