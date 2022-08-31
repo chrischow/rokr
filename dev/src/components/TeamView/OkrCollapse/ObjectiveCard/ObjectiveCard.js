@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button';
 import { CaretIcon, EditIconText, AddIconText } from '../../../Icons/Icons';
 import SharedModal from '../../../SharedModal/SharedModal';
 import ProgressBar from '../../ProgressBar/ProgressBar';
-import KeyResultForm from '../../KeyResultForm/KeyResultForm';
 import ObjectiveEdit from './ObjectiveEdit/ObjectiveEdit';
 
 import './ObjectiveCard.css';
