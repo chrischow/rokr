@@ -11,11 +11,18 @@ export default function OkrCollapse(props) {
   // ID
   const objId = `obj-${props.objective.Id}`;
   const krRows = props.keyResults.map(kr => {
-    const nLatestUpdates = 10;
+    const krUpdates = props.updateData.filter(update => {
+      return update.parentKrId === kr.Id;
+    });
+    const nLatestUpdates = krUpdates.length;
     return <KeyResultRow
       // key={`kr-row-${kr.Id}`}
       objId={objId}
+      team={props.team}
       nLatestUpdates={nLatestUpdates}
+      startDate={props.startDate}
+      endDate={props.endDate}
+      updateData={krUpdates}
       {...kr}
       progress={kr.currentValue / kr.maxValue}
     />

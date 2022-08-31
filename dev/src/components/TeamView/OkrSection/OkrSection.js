@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import slugify from 'slugify';
 import $ from 'jquery';
+import { useTeamUpdates } from '../../../hooks/useUpdates';
 import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../utils/dates';
 import { AddIconText } from "../../Icons/Icons";
 import ObjectiveForm from '../ObjectiveForm/ObjectiveForm';
@@ -28,6 +29,15 @@ export default function OkrSection(props) {
   const [showObjectiveModal, setShowObjectiveModal] = useState(false);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [updateData, setUpdateData] = useState([]);
+
+  // Get updates data
+  const updates = useTeamUpdates(props.teamName);
+  useEffect( () => {
+    if (updates.isSuccess) {
+      setUpdateData(updates.data);
+    }
+  }, [props])
 
   // Event handlers
   const toggleOKRCards = () => {
@@ -137,6 +147,7 @@ export default function OkrSection(props) {
         startDate={startDate}
         endDate={endDate}
         dateOption={props.dateOption}
+        updateData={updateData}
       />
     );
   });

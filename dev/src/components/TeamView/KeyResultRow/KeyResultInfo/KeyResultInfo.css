@@ -1,0 +1,104 @@
+/* KR Info */
+.kr-info--panel {
+  border-radius: 8px;
+  padding: 30px 40px;
+  background-color: #172334;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.text-green {
+  color: #27DDCB;
+}
+
+.no-data {
+  color: #8497B0;
+  font-size: 1.4rem;
+}
+
+.kr-info--subheader {
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  color: #7B73F0;
+  margin-bottom: 15px;
+}
+
+.kr-info--description {
+  color: #8497B0;
+}
+
+.kr-info--update-panel {
+  font-size: 0.9rem;
+  color: #D1E4FD;
+  border-radius: 8px;
+  padding: 30px 40px;
+  background-color: #2C3849;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.kr-info--main-col {
+  border-right: 1px solid #344051;
+}
+
+.kr-info--update-header {
+  font-family: 'Bahnschrift Light', 'Segoe UI', sans-serif;
+  margin-bottom: 10px;
+}
+
+.kr-info--tag-text {
+  font-size: 1.3rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #8497B0;
+}
+
+.kr-info--edit-text {
+  font-size: 0.75rem;
+  color: #7B73F0!important;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+button.btn.kr-info--edit-button {
+  padding: 3px 7px;
+  background-color: #7B73F000!important;
+  border: 1px solid #7B73F0!important;
+  color: #7B73F0!important;
+  cursor: 'pointer';
+  transition: "0.3s";
+}
+
+button.btn.kr-info--edit-button:hover {
+  background-color: #7B73F033!important;
+  color: #7B73F0!important;
+  transition: 0.3s;
+}
+
+.kr-info--edit-icon {
+  font-size: 0.9rem;
+  transition: 0.3s;
+  height: 10px;
+  width: 10px;
+  margin-bottom: 2px;
+  padding: 0px;
+}
+
+
+.kr-info--table-border {
+  margin-top: 10px;
+  border-bottom: 1px solid #8497B0;
+}
+
+.kr-info--table {
+  color: #D1E4FD;
+  font-size: 0.9rem;
+}
+
+div.dataTables_length > label > select[name="kr-info-table_length"]:focus,
+div.dataTables_length > label > select[name="kr-info-table_length"]:hover {
+  background-color: #ddd!important;
+  color: #172334;
+}

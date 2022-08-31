@@ -1,17 +1,21 @@
+import { useState } from "react";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import SharedModal from "../../SharedModal/SharedModal";
 
 import './KeyResultRow.css';
+import KeyResultInfo from "./KeyResultInfo/KeyResultInfo";
 
 export default function KeyResultRow(props) {
-  const toggleModal = () => {
-    console.log('Toggle kr-modal');
-  }
+  // State
+  const [showKrInfoModal, setShowKrInfoModal] = useState(false);
+  const [showKrEditModal, setShowKrEditModal] = useState(false);
 
-  const editKeyResult = () => {
-    console.log('Toggle kr-edit-modal');
-  }
+  // Render KR info
+  const viewKrInfo = () => <KeyResultInfo {...props} />;
+
+  const editKr = () => <KeyResultInfo {...props} />;
 
   return (
     <div className="keyresult-row">
@@ -24,7 +28,7 @@ export default function KeyResultRow(props) {
         <Col xs={2} className="text-center">
           <div
             className="keyresult-row--action-btn keyresult-row--edit-text mb-1"
-            onClick={toggleModal}
+            onClick={() => setShowKrInfoModal(true)}
           >
             <span className="keyresult-row--action-btn-text">View</span>
             {props.nLatestUpdates > 0 && 
@@ -33,7 +37,7 @@ export default function KeyResultRow(props) {
           </div>
           <div
             className="keyresult-row--action-btn keyresult-row--edit-text"
-            onClick={editKeyResult}
+            onClick={() => setShowKrEditModal(true)}
           >
             <span className="keyresult-row--action-btn-text">Edit</span>
           </div>
@@ -45,6 +49,20 @@ export default function KeyResultRow(props) {
           <ProgressBar progress={props.progress} isKeyResult={true} />
         </Col>
       </Row>
+      <SharedModal
+        modalTitle="Key Result Details"
+        show={showKrInfoModal}
+        onHide={() => setShowKrInfoModal(false)}
+        renderModalContent={() => viewKrInfo()}
+        handleCloseModal={() => setShowKrInfoModal(false)}
+      />
+      <SharedModal
+        modalTitle="Edit Key Result"
+        show={showKrEditModal}
+        onHide={() => setShowKrEditModal(false)}
+        renderModalContent={() => editKr()}
+        handleCloseModal={() => setShowKrEditModal(false)}
+      />
     </div>
   );
 }
