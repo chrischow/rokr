@@ -1,6 +1,7 @@
 import { useQueryClient } from 'react-query';
 import { useTeamObjectivesCache, useTeamObjectives } from "../../../hooks/useObjectives";
 import { useTeamKeyResultsCache, useTeamKeyResults } from "../../../hooks/useKeyResults";
+import { useTeamUpdates } from '../../../hooks/useUpdates';
 import { getStaffFromObjectives, getSubGroupsFromObjectives } from "../../../utils/stats";
 import { getData } from '../../../utils/query';
 import slugify from "slugify";
@@ -24,6 +25,8 @@ export default function Team(props){
     useTeamKeyResults,
     useTeamKeyResultsCache
   )(props.team.teamName);
+
+  const updates = useTeamUpdates(props.team.teamName);
 
   // Extract options
   const staffList = objectives.isSuccess && getStaffFromObjectives(objectives.data);
