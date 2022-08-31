@@ -29,20 +29,6 @@ export default function OkrSection(props) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  // Create OKR Collapse objects
-  const okrCollapses = props.objectives.map(obj => {
-    const keyResults = props.keyResults.filter(kr => kr.parentObjective.Id === obj.Id);
-    return (
-      <OkrCollapse
-        // key={`okrcollapse-${obj.Id}`}
-        team={props.teamName}
-        objective={obj}
-        keyResults={keyResults}
-        overallIsClicked={overallIsClicked}
-      />
-    );
-  })
-
   // Event handlers
   const toggleOKRCards = () => {
     setOverallIsClicked(prevState => !prevState);
@@ -107,7 +93,7 @@ export default function OkrSection(props) {
   }
 
   // Form cleanup
-  const formCleanup =  () => {
+  const formCleanup = () => {
     // Invalidate and refetch data
     invalidateAndRefetch();
 
@@ -132,16 +118,28 @@ export default function OkrSection(props) {
     return <ObjectiveForm
       formValues={objectiveFormValues}
       setFormValues={setObjectiveFormValues}
-      setShowObjectiveModal={setShowObjectiveModal}
-      startDate={startDate}
-      endDate={endDate}
-      staffOption={props.staffOption}
-      freq={props.freq}
-      team={props.teamName}
       formCleanup={formCleanup}
       mode='new'
     />;
   }
+
+  // Create OKR Collapse objects
+  const okrCollapses = props.objectives.map(obj => {
+    const keyResults = props.keyResults.filter(kr => kr.parentObjective.Id === obj.Id);
+    return (
+      <OkrCollapse
+        // key={`okrcollapse-${obj.Id}`}
+        team={props.teamName}
+        objective={obj}
+        keyResults={keyResults}
+        overallIsClicked={overallIsClicked}
+        invalidateAndRefetch={invalidateAndRefetch}
+        startDate={startDate}
+        endDate={endDate}
+        dateOption={props.dateOption}
+      />
+    );
+  });
 
   return (
     <>
@@ -151,7 +149,7 @@ export default function OkrSection(props) {
           Expand/Collapse
         </button>
         <div className="float-end">
-          <button className="btn btn-green" onClick={() => setShowObjectiveModal(prevState => !prevState)}>
+          <button className="btn btn-green" onClick={() => setShowObjectiveModal(true)}>
             <span className="me-1">Add Objective</span>
             <AddIconText className="btn-okr-toggle-icon" />
           </button>
@@ -159,7 +157,7 @@ export default function OkrSection(props) {
       </div>
       {okrCollapses}
       <SharedModal
-        modalTitle={`${objectiveFormValues.Id ? 'Edit' : 'New'} Objective`}
+        modalTitle="New Objective"
         show={showObjectiveModal}
         onHide={() => setShowObjectiveModal(false)}
         renderModalContent={() => addObjective()}

@@ -48,6 +48,10 @@ export default function OkrCollapse(props) {
         objId={objId}
         progress={objProgress}
         team={props.team}
+        dateOption={props.dateOption}
+        startDate={props.startDate}
+        endDate={props.endDate}
+        invalidateAndRefetch={props.invalidateAndRefetch}
         {...props.objective}
       />
       <Collapse in={isClicked}>
