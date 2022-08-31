@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import $ from 'jquery';
 import { getDate } from '../../utils/dates';
 import { createQuery, updateQuery } from '../../utils/query';
@@ -59,11 +59,17 @@ export default function ObjectiveForm(props) {
     return <li key={item}>{item}</li>;
   });
 
+  // Get submit button reference
+  const [submitEnabled, setSubmitEnabled] = useState(true);
+  
   // Submit form
   function submitForm() {
     // Clear previous errors
     setFormErrors([]);
 
+    // Disable submit button while checking
+    setSubmitEnabled(false);
+    
     // Extract mandatory form inputs
     const inputTitle = props.formValues.Title;
     const inputStartDate = props.formValues.objectiveStartDate;
@@ -95,6 +101,9 @@ export default function ObjectiveForm(props) {
         };
         createQuery(config.objListId, data, reqDigest, props.formCleanup);
       }
+
+      // Re-enable submit button
+      setSubmitEnabled(true);
     }
   }
 
