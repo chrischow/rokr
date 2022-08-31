@@ -61,7 +61,7 @@ export default function ObjectiveForm(props) {
 
   // Submit button state
   const [submitEnabled, setSubmitEnabled] = useState(true);
-  
+
   // Submit form
   function submitForm() {
     // Clear previous errors
@@ -69,7 +69,7 @@ export default function ObjectiveForm(props) {
 
     // Disable submit button while checking
     setSubmitEnabled(false);
-    
+
     // Extract mandatory form inputs
     const inputTitle = props.formValues.Title;
     const inputStartDate = props.formValues.objectiveStartDate;
@@ -210,7 +210,11 @@ export default function ObjectiveForm(props) {
         </Form.Group>
       </Form>
       <div className="text-end mt-2">
-        <button className="btn btn-green" onClick={submitForm} enabled={submitEnabled}>
+        <button
+          className={`btn ${submitEnabled ? "btn-green" : "btn-secondary"}`}
+          onClick={submitForm}
+          disabled={!submitEnabled}
+        >
           Submit
         </button>
       </div>
