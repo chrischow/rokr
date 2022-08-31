@@ -4,6 +4,7 @@
   padding: 40px 20px;
   background-color: #0D192A8a;
   width: 100%;
+  transition: 0.3s;
 }
 
 .card--header {

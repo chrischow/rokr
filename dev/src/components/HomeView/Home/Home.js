@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useObjectives } from "../../../hooks/useObjectives";
 import { useKeyResults } from "../../../hooks/useKeyResults";
 import updateCircleProgress from "../../../utils/circleProgress";
@@ -59,6 +60,12 @@ export default function Home(props) {
     [props.teams, overallProgressData, allTeamsProgressData]
   )
 
+  // Link to RAiD page
+  const navigate = useNavigate();
+  const goToTeamPage = () => {
+    return navigate('/raid');
+  }
+  
   return (
     <>
       <h1>
@@ -68,7 +75,7 @@ export default function Home(props) {
         RAiD
       </h2>
       {allTeamsProgressData &&
-        <div className="overall-panel mt-4">
+        <div className="overall-panel card--inner mt-4" onClick={goToTeamPage}>
           <ProgressCard
             progressId="overall_progress"
             data={allTeamsProgressData['RAiD']}
