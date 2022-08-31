@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import { getDate } from '../../../utils/dates';
 import { createQuery, updateQuery } from '../../../utils/query';
@@ -59,7 +59,7 @@ export default function ObjectiveForm(props) {
     return <li key={item}>{item}</li>;
   });
 
-  // Get submit button reference
+  // Submit button state
   const [submitEnabled, setSubmitEnabled] = useState(true);
   
   // Submit form
