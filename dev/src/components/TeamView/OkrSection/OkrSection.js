@@ -10,6 +10,7 @@ import SharedModal from '../../SharedModal/SharedModal';
 import OkrCollapse from "../OkrCollapse/OkrCollapse";
 
 import './OkrSection.css';
+import ObjectiveAdd from './ObjectiveAdd/ObjectiveAdd';
 
 export default function OkrSection(props) {
   // Create query client
@@ -120,18 +121,20 @@ export default function OkrSection(props) {
     
     // Close modal
     setShowObjectiveModal(false);
-
   }
 
   // Render modal content
-  const addObjective = () => {
-    return <ObjectiveForm
-      formValues={objectiveFormValues}
-      setFormValues={setObjectiveFormValues}
-      formCleanup={formCleanup}
-      mode='new'
-    />;
-  }
+  const addObjective = () => <ObjectiveAdd
+    objectiveFormValues={objectiveFormValues}
+    setObjectiveFormValues={setObjectiveFormValues}
+    setShowObjectiveModal={setShowObjectiveModal}
+    invalidateAndRefetch={invalidateAndRefetch}
+    startDate={startDate}
+    endDate={endDate}
+    freq={props.freq}
+    teamName={props.teamName}
+    staffOption={props.staffOption}
+  />
 
   // Create OKR Collapse objects
   const okrCollapses = props.objectives.map(obj => {
