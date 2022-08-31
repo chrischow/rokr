@@ -40,7 +40,7 @@ export default function TeamPane(props) {
     if (props.staffList) {
       setStaffOption(props.staffList[0]);
     }
-  }, [props.freq, props.staffList])
+  }, [])
 
   useEffect(() => {
     let objectives = props.objectives.filter(obj => {
