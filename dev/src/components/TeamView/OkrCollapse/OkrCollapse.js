@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Collapse from 'react-bootstrap/Collapse';
-import ObjectiveCard from "../ObjectiveCard/ObjectiveCard";
-import KeyResultRow from "../KeyResultRow/KeyResultRow";
+import ObjectiveCard from "./ObjectiveCard/ObjectiveCard";
+import KeyResultRow from "./KeyResultRow/KeyResultRow";
 import $ from 'jquery';
 
 export default function OkrCollapse(props) {

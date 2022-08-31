@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
-import { EditIcon, EditIconText, AddIconText } from '../../../Icons/Icons';
-import { formatDate } from '../../../../utils/dates';
-import { useTeamUpdates } from '../../../../hooks/useUpdates';
+import { EditIcon, EditIconText, AddIconText } from '../../../../Icons/Icons';
+import { formatDate } from '../../../../../utils/dates';
+import { useTeamUpdates } from '../../../../../hooks/useUpdates';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 

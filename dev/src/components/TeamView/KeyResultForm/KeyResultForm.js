@@ -10,9 +10,9 @@ import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
 import { config } from '../../../config';
 
-import './KrForm.css';
+import './KeyResultForm.css';
 
-export default function KrForm(props) {
+export default function KeyResultForm(props) {
   // Get token
   const token = useToken();
 

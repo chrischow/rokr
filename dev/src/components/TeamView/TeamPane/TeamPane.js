@@ -4,7 +4,7 @@ import { getMonth, getQuarter, getWorkYear, getYear, offsetDate, testPeriodEqual
 import slugify from 'slugify';
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
-import FreqDropdown from "../FreqDropdown/FreqDropdown";
+import FreqDropdown from "./FreqDropdown/FreqDropdown";
 import TeamProgress from "../TeamProgress/TeamProgress";
 import OkrSection from "../OkrSection/OkrSection";
 

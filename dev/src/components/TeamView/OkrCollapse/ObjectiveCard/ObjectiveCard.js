@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import slugify from 'slugify';
-import { getData } from '../../../utils/query';
-import { useTeamObjectivesCache, useTeamObjectives } from "../../../hooks/useObjectives";
+import { getData } from '../../../../utils/query';
+import { useTeamObjectivesCache, useTeamObjectives } from "../../../../hooks/useObjectives";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { CaretIcon, EditIconText, AddIconText } from '../../Icons/Icons';
-import SharedModal from '../../SharedModal/SharedModal';
-import ObjectiveForm from '../ObjectiveForm/ObjectiveForm';
-import ProgressBar from '../ProgressBar/ProgressBar';
-import KrForm from '../KrForm/KrForm';
+import { CaretIcon, EditIconText, AddIconText } from '../../../Icons/Icons';
+import SharedModal from '../../../SharedModal/SharedModal';
+import ProgressBar from '../../ProgressBar/ProgressBar';
+import KeyResultForm from '../../KeyResultForm/KeyResultForm';
+import ObjectiveEdit from './ObjectiveEdit/ObjectiveEdit';
 
 import './ObjectiveCard.css';
+import KeyResultAdd from './KeyResultAdd/KeyResultAdd';
 
 export default function ObjectiveCard(props) {
   // State
@@ -34,42 +35,37 @@ export default function ObjectiveCard(props) {
 
   // OBJECTIVE FORM
   // Re-populate form
+  const currentObjective = {
+    Id: props.Id,
+    Title: props.Title,
+    objectiveDescription: props.objectiveDescription ? props.objectiveDescription : '',
+    objectiveStartDate: props.objectiveStartDate,
+    objectiveEndDate: props.objectiveEndDate,
+    frequency: props.frequency,
+    team: props.team,
+    owner: props.owner ? props.owner : ''
+  };
+
   useEffect(() => {
-    setObjectiveFormValues({
-      Id: props.Id,
-      Title: props.Title,
-      objectiveDescription: props.objectiveDescription ? props.objectiveDescription : '',
-      objectiveStartDate: props.objectiveStartDate,
-      objectiveEndDate: props.objectiveEndDate,
-      frequency: props.frequency,
-      team: props.team,
-      owner: props.owner ? props.owner : ''
-    });
+    setObjectiveFormValues({...currentObjective});
   }, [props]);
 
   // Close Objective modal
   const handleCloseObjectiveModal = () => {
-    setShowObjectiveEditModal(false);
-  };
-
-  // Objective form cleanup
-  const objectiveFormCleanup = (newData) => {
-    // Invalidate and refetch data
-    invalidateAndRefetch();
-
-    // Close modal
+    setObjectiveFormValues({...currentObjective});
     setShowObjectiveEditModal(false);
   };
 
   // Render modal content
   const editObjective = () => {
-    return <ObjectiveForm
-      formValues={objectiveFormValues}
-      setFormValues={setObjectiveFormValues}
+    return <ObjectiveEdit
+      objectiveFormValues={objectiveFormValues}
+      setObjectiveFormValues={setObjectiveFormValues}
+      invalidateAndRefetch={invalidateAndRefetch}
+      setShowObjectiveEditModal={setShowObjectiveEditModal}
       team={props.team}
       freq={props.frequency}
-      formCleanup={objectiveFormCleanup}
-      mode='edit'
+      {...props}
     />;
   }
 
@@ -89,7 +85,7 @@ export default function ObjectiveCard(props) {
   })
   
   // Form values
-  const [krFormValues, setKrFormValues] = useState({
+  const defaultKrValues = {
     Title: '',
     krDescription: '',
     krStartDate: props.objectiveStartDate,
@@ -98,7 +94,9 @@ export default function ObjectiveCard(props) {
     maxValue: 1,
     currentValue: 0,
     parentObjective: props.Id
-  });
+  };
+
+  const [krFormValues, setKrFormValues] = useState({...defaultKrValues});
 
   // Update form values based on the things that can change
   useEffect(() => {
@@ -111,53 +109,22 @@ export default function ObjectiveCard(props) {
     });
   }, [props.objectiveStartDate, props.objectiveEndDate])
 
-  // Form cleanup
-  const formCleanup = () => {
-    // Invalidate and refetch data
-    props.invalidateAndRefetch();
-
-    // Reset form
-    setKrFormValues({
-      Title: '',
-      krDescription: '',
-      krStartDate: props.objectiveStartDate,
-      krEndDate: props.objectiveEndDate,
-      minValue: 0,
-      maxValue: 1,
-      currentValue: 0,
-      parentObjective: props.Id
-    });
-
-    // Close modal
-    setShowKrAddModal(false);
-  }
-
   // Close modal
   const handleCloseKrAddModal = () => {
     // Reset form
-    setKrFormValues({
-      Title: '',
-      krDescription: '',
-      krStartDate: props.objectiveStartDate,
-      krEndDate: props.objectiveEndDate,
-      minValue: 0,
-      maxValue: 1,
-      currentValue: 0,
-      parentObjective: props.Id
-    });
+    setKrFormValues({...defaultKrValues});
     setShowKrAddModal(false);
   };
 
   // KR Form
   const addKr = () => {
-    return <KrForm
-      formValues={krFormValues}
-      setFormValues={setKrFormValues}
+    return <KeyResultAdd
+      krFormValues={krFormValues}
+      setKrFormValues={setKrFormValues}
       objectiveOptions={objectiveOptions}
-      selectDisabled={true}
-      formCleanup={formCleanup}
-      invalidateAndRefetch={props.invalidateAndRefetch}
-      mode="new"
+      invalidateAndRefetch={invalidateAndRefetch}
+      setShowKrAddModal={setShowKrAddModal}
+      defaultKrValues={defaultKrValues}
     />
   };
 

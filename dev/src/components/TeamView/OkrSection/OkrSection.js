@@ -65,7 +65,7 @@ export default function OkrSection(props) {
   }, [props.freq, props.dateOption]);
 
   // Form values
-  const defaultValues = {
+  const defaultObjectiveValues = {
     Title: '',
     objectiveDescription: '',
     objectiveStartDate: startDate,
@@ -75,7 +75,7 @@ export default function OkrSection(props) {
     owner: props.staffOption ? props.staffOption : ''
   };
 
-  const [objectiveFormValues, setObjectiveFormValues] = useState({...defaultValues});
+  const [objectiveFormValues, setObjectiveFormValues] = useState({...defaultObjectiveValues});
 
   // Update form values based on the things that can change
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function OkrSection(props) {
 
   // Handle closing of modal
   const handleCloseModal = () => {
-    setObjectiveFormValues({...defaultValues});
+    setObjectiveFormValues({...defaultObjectiveValues});
     setShowObjectiveModal(false);
   }
 
@@ -103,7 +103,7 @@ export default function OkrSection(props) {
     setObjectiveFormValues={setObjectiveFormValues}
     setShowObjectiveModal={setShowObjectiveModal}
     invalidateAndRefetch={invalidateAndRefetch}
-    defaultValues={defaultValues}
+    defaultValues={defaultObjectiveValues}
     startDate={startDate}
     endDate={endDate}
     freq={props.freq}

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useObjectives, useTeamObjectives, useTeamObjectivesCache } from "../../../hooks/useObjectives";
+import { useObjectives, useTeamObjectives, useTeamObjectivesCache } from "../../../../hooks/useObjectives";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
-import ProgressBar from "../ProgressBar/ProgressBar";
-import SharedModal from "../../SharedModal/SharedModal";
-import KrForm from "../KrForm/KrForm";
+import ProgressBar from "../../ProgressBar/ProgressBar";
+import SharedModal from "../../../SharedModal/SharedModal";
 import KeyResultInfo from "./KeyResultInfo/KeyResultInfo";
 
 import './KeyResultRow.css';

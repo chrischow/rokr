@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import KrForm from '../../KrForm/KrForm';
+import KeyResultForm from '../../../KeyResultForm/KeyResultForm';
 
 export default function KeyResultEdit(props) {
 
@@ -13,7 +13,7 @@ export default function KeyResultEdit(props) {
   }
 
   // KR Form
-  return <KrForm
+  return <KeyResultForm
     formValues={props.krFormValues}
     setFormValues={props.setKrFormValues}
     objectiveOptions={props.objectiveOptions}
