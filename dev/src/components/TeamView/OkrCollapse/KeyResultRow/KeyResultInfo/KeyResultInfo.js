@@ -82,13 +82,10 @@ export default function KeyResultInfo(props) {
       <div className="kr-info--panel">
         <Row className="align-items-center">
           <Col xs={9} className="kr-info--main-col">
-            <h3>
+            <h3 className="kr-info--header">
               <span className="me-3 text-green">
                 {props.Title}
               </span>
-              {/* <div style={{ display: 'inline-block', cursor: 'pointer', transition: '0.3s' }}>
-                <EditIcon />
-              </div> */}
             </h3>
             <div className="kr-info--subheader">
               <span>{`${startDate} - ${endDate}`}</span>

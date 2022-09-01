@@ -1,19 +1,19 @@
 /* KR Info */
 .kr-info--panel {
   border-radius: 8px;
-  padding: 30px 40px;
+  padding: 20px 40px;
   background-color: #172334;
   width: 100%;
   margin-bottom: 10px;
 }
 
-.text-green {
-  color: #27DDCB;
-}
-
 .no-data {
   color: #8497B0;
   font-size: 1.4rem;
+}
+
+.kr-info--header {
+  font-size: calc(1.2rem + .6vw);
 }
 
 .kr-info--subheader {
