@@ -1,6 +1,31 @@
 .map-container {
-  height: 600px;
+  height: 490px;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: rgba(255,255,255, 0.03);
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.directory--info-panel {
+  border-radius: 8px;
+  padding: 30px 40px;
+  background-color: #1723348a;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.noborder {
+  border: none;
+}
+
+.vis-tooltip {
+  background-color: #172334ea!important;
+  border: none!important;
+  color: white!important;
+}
+
+.directory--info-header {
+  font-size: calc(1.2rem + .6vw);
 }
