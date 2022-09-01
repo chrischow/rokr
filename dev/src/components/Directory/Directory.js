@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { formatDate } from '../../utils/dates';
 import { SearchBar } from './SearchBar/SearchBar';
+import { getColours, useGraphSettings } from './useGraphSettings';
 
 export default function Directory(props) {
 
@@ -23,44 +24,19 @@ export default function Directory(props) {
   const objectives = useObjectives();
   const keyResults = useKeyResults();
 
+  // Get graph settings
+  const { teamLookup, defaultNodes, defaultEdges, options } = useGraphSettings();
+
   useEffect(() => {
     if (objectives.isSuccess && keyResults.isSuccess) {
       let annualObjectives = objectives.data.filter(obj => {
         return obj.frequency === 'annual';
       });
-      const teamLookup = {
-        RAiD: 'org-0',
-        PAB: 'org-1',
-        SWiFT: 'org-2',
-        RDO: 'org-3',
-        CyDef: 'org-4',
-        SES: 'org-5',
-      }
-      // Tooltip functions
-      function htmlTitle(html) {
-        const div = document.createElement("div");
-        div.classList.add("directory-tooltip");
-        div.innerHTML = html;
-        return div;
-      }
 
       // Initialise with org nodes
       const newGraphData = {
-        nodes: [
-          { id: 'org-0', label: 'RAiD', title: htmlTitle('RSAF Agility, Innovation, and Digital'), group: 'king', level: 0, margin: 20, mass: 6, chosen: false },
-          { id: 'org-1', label: 'PAB', title: 'Plans & Architecting Branch', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-          { id: 'org-2', label: 'SWiFT', title: 'SWiFT', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-          { id: 'org-3', label: 'RDO', title: 'RSAF Data Office', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-          { id: 'org-4', label: 'CyDef', title: 'Cyber Defence Branch', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-          { id: 'org-5', label: 'SES', title: 'Software Engineering Squadron', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-        ],
-        edges: [
-          { from: 'org-0', to: 'org-1' },
-          { from: 'org-0', to: 'org-2' },
-          { from: 'org-0', to: 'org-3' },
-          { from: 'org-0', to: 'org-4' },
-          { from: 'org-0', to: 'org-5' },
-        ]
+        nodes: defaultNodes,
+        edges: defaultEdges
       };
 
       annualObjectives.forEach(obj => {
@@ -81,14 +57,15 @@ export default function Directory(props) {
           return kr.parentObjective.Id === obj.Id;
         });
 
-        relatedKRs.forEach((kr, idx) => {
+        relatedKRs.forEach((kr) => {
           // Add to nodes
           newGraphData.nodes.push({
             id: `kr-${kr.Id}`,
-            label: `KR ${idx + 1}`,
             title: kr.krDescription,
             group: 'keyResults',
-            level: 3
+            level: 3,
+            color: getColours(kr.currentValue, kr.maxValue),
+            borderWidth: 5
           });
 
           // Add edges from objective to KR
@@ -182,51 +159,15 @@ export default function Directory(props) {
     }
   }, [activeNode])
 
-  // Styles
-  const orgStyle = {
-    color: { background: '#000C1D', border: '#8497B0' },
-    chosen: {
-      node: (values, id, selected, hovering) => {
-        values.color = '#FF5364';
-        values.borderColor = '#ff2c41';
-      }
-    },
-    font: { color: 'white', face: 'Bahnschrift Light', size: 40 },
-    shape: 'box'
-  };
-
-  const options = {
-    height: '450px',
-    width: '100%',
-    interaction: {
-      tooltipDelay: 10
-    },
-    // layout: {hierarchical: true},
-    groups: {
-      king: { ...orgStyle, font: { ...orgStyle.font, size: 60 } },
-      org: { ...orgStyle },
-      objectives: {
-        ...orgStyle,
-        color: { ...orgStyle.color, background: '#7B73F0', border: '#5a50ec' },
-        font: { ...orgStyle.font, size: 25 }
-      },
-      keyResults: {
-        ...orgStyle,
-        color: { ...orgStyle.color, background: '#27DDCB', border: '#1ebfaf' },
-        font: { ...orgStyle.font, size: 25 }
-      }
-    },
-    nodes: { shape: 'box', opacity: 0.75 },
-    edges: { color: '#8497B0' },
-  };
-
   // Update search
   useEffect(() => {
     if (graphData && graphData.nodes.length > 0) {
       if (queryString && queryString.trim() !== '') {
         const filteredNodes = graphData.nodes
           .filter(node => {
-            return node.title.toLowerCase().includes(queryString) || node.label.toLowerCase().includes(queryString);
+            if (node.group === 'objectives' || node.group === 'keyResults') {
+              return node.title.toLowerCase().includes(queryString) || node.label.toLowerCase().includes(queryString);
+            }
           })
           .map(node => node.id);
         
