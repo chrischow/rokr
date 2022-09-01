@@ -26,9 +26,9 @@ export default function NavBar(props) {
         <Navbar.Collapse className="justify-content-end" id="navbar-main">
           <Nav>
             {linkElements}
-            {/* <li className="nav-item">
+            <li className="nav-item">
               <NavLink className="nav-link" to="/directory">Directory</NavLink>
-            </li> */}
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/timeline">Timeline</NavLink>
             </li>
