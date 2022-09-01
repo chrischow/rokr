@@ -97,6 +97,14 @@ hr {
   font-size: 1.4rem;
 }
 
+.text-green {
+  color: #27DDCB;
+}
+
+.text-blue {
+  color: #7B73F0;
+}
+
 /* Tables */
 .table-dark {
   background-color: #2C3849;
