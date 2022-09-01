@@ -1,3 +1,6 @@
+.map-container-wrapper {
+  position: relative;
+}
 .map-container {
   height: 490px;
   width: 100%;
@@ -6,6 +9,45 @@
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.map-container--overlay {
+  position: absolute;
+  margin-top: 10px;
+  margin-right: 10px;
+  top: 0;
+  right: 0;
+  font-size: 0.8rem;
+}
+
+.legend {
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+
+.legend--org-entity {
+  background-color: #000C1D7a;
+  color: white;
+}
+
+.legend--obj {
+  background-color: #7B73F07a;
+  color: white;
+}
+
+.legend--kr-red {
+  background-color: #ff53647a;
+  color: white;
+}
+
+.legend--kr-yellow {
+  background-color: #ddcb277a;
+  color: white;
+}
+
+.legend--kr-green {
+  background-color: #27ddcb7a;
+  color: white;
 }
 
 .directory--info-panel {

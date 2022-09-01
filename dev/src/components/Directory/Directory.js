@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useKeyResults } from '../../hooks/useKeyResults';
 import { useObjectives } from '../../hooks/useObjectives';
-import { Network, Dataset } from 'vis-network';
-
-import './Directory.css';
-import 'vis-network/dist/dist/vis-network.min.css';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { formatDate } from '../../utils/dates';
 import { SearchBar } from './SearchBar/SearchBar';
 import { getColours, useGraphSettings } from './useGraphSettings';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import './Directory.css';
+import 'vis-network/dist/dist/vis-network.min.css';
+import Graph from './Graph/Graph';
 
 export default function Directory(props) {
 
@@ -17,8 +17,11 @@ export default function Directory(props) {
   const [activeNode, setActiveNode] = useState(null);
   const [activeNodeData, setActiveNodeData] = useState({});
   const [graphData, setGraphData] = useState(null);
-  const [currNetwork, setCurrNetwork] = useState(null);
   const [queryString, setQueryString] = useState('');
+  const [filteredNodes, setFilteredNodes] = useState([]);
+
+  // Experimental
+  const [graph, setGraph] = useState({ network: null, exists: false });
 
   // Get data
   const objectives = useObjectives();
@@ -28,6 +31,7 @@ export default function Directory(props) {
   const { teamLookup, defaultNodes, defaultEdges, options } = useGraphSettings();
 
   useEffect(() => {
+
     if (objectives.isSuccess && keyResults.isSuccess) {
       let annualObjectives = objectives.data.filter(obj => {
         return obj.frequency === 'annual';
@@ -43,10 +47,9 @@ export default function Directory(props) {
         // Add to nodes
         newGraphData.nodes.push({
           id: `obj-${obj.Id}`,
-          label: obj.Title,
-          title: obj.objectiveDescription,
+          title: `${obj.Title} - ${obj.objectiveDescription}`,
           group: 'objectives',
-          level: 2
+          size: 30
         });
 
         // Add edge from org to objective
@@ -63,7 +66,6 @@ export default function Directory(props) {
             id: `kr-${kr.Id}`,
             title: kr.krDescription,
             group: 'keyResults',
-            level: 3,
             color: getColours(kr.currentValue, kr.maxValue),
             borderWidth: 5
           });
@@ -72,55 +74,13 @@ export default function Directory(props) {
           newGraphData.edges.push({ from: `obj-${obj.Id}`, to: `kr-${kr.Id}` });
         });
       });
+
+      // Reverse all nodes
       newGraphData.nodes = newGraphData.nodes.reverse()
       newGraphData.edges = newGraphData.edges.reverse()
       setGraphData(newGraphData);
     }
-  }, [objectives.status, keyResults.status]);
-
-  // Create references
-  const mapContainer = useRef(null);
-  const infoPanel = useRef(null);
-
-  // Create network
-  useEffect(() => {
-    if (mapContainer.current && graphData) {
-      // Initialise network
-      let network = new Network(mapContainer.current, graphData, options);
-
-      // Set active node (if any) upon click; remove search query if clicking away
-      network.on('click', params => {
-        setActiveNode(params.nodes[0]);
-        network.selectNodes(params.nodes);
-        if (params.nodes.length === 0) {
-          setQueryString('');
-        }
-      });
-      
-      // On double-click, zoom to node or edge if present, or reset zoom otherwise
-      network.on('doubleClick', params => {
-        if (params.nodes.length !== 0 || params.edges.length !== 0) {
-          network.moveTo({
-            position: {
-              x: params.pointer.canvas.x,
-              y: params.pointer.canvas.y
-            },
-            scale: 1.5
-          })
-        } else {
-          network.fit();
-        }
-      });
-      
-      // Scroll to bottom
-      network.on('selectNode', params => {
-        // const offset = infoPanel.current.offsetTop + infoPanel.current.offsetHeight;
-        setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 100);
-      })
-      // Save network
-      setCurrNetwork(network);
-    }
-  }, [graphData])
+  }, [objectives.isSuccess, keyResults.isSuccess]);
 
   // Update active node for displaying info, standardising the info fields
   useEffect(() => {
@@ -163,15 +123,16 @@ export default function Directory(props) {
   useEffect(() => {
     if (graphData && graphData.nodes.length > 0) {
       if (queryString && queryString.trim() !== '') {
-        const filteredNodes = graphData.nodes
+        const newFilteredNodes = graphData.nodes
           .filter(node => {
             if (node.group === 'objectives' || node.group === 'keyResults') {
-              return node.title.toLowerCase().includes(queryString) || node.label.toLowerCase().includes(queryString);
+              return node.title.toLowerCase().includes(queryString);
+            } else {
+              return false;
             }
           })
           .map(node => node.id);
-        
-          currNetwork.selectNodes(filteredNodes);
+        setFilteredNodes(newFilteredNodes);
       }
     }
   }, [queryString, graphData])
@@ -180,15 +141,42 @@ export default function Directory(props) {
     <>
       <h1>Directory</h1>
       <div className="mt-4">
-        <SearchBar 
+        <SearchBar
           queryString={queryString}
           setQueryString={setQueryString}
-          placeholder="Search for OKRs..." 
+          placeholder="Search for OKRs..."
         />
       </div>
-      <Row ref={infoPanel}>
+      <Row>
         {objectives.isSuccess && keyResults.isSuccess && <Col xs={12} className="mt-4">
-          <div ref={mapContainer} className="map-container" />
+          <div className="map-container-wrapper">
+            {/* <div ref={mapContainer} className="map-container mb-5" /> */}
+            {objectives.isSuccess && keyResults.isSuccess && graphData != null &&
+              <Graph
+                graphData={graphData}
+                setActiveNode={setActiveNode}
+                setQueryString={setQueryString}
+                queryString={queryString}
+                graph={graph}
+                setGraph={setGraph}
+                filteredNodes={filteredNodes}
+              />
+            }
+            <div className="map-container--overlay">
+              <table>
+                <thead className="text-center">
+                  <tr><th>Legend</th></tr>
+                </thead>
+                <tbody className="text-center">
+                  <tr><td><div className="legend legend--org-entity">Org. Entity</div></td></tr>
+                  <tr><td><div className="legend legend--obj">Objective</div></td></tr>
+                  <tr><td><div className="legend legend--kr-red">{`KR (< 0.4)`}</div></td></tr>
+                  <tr><td><div className="legend legend--kr-yellow">{`KR (0.4 to 0.7)`}</div></td></tr>
+                  <tr><td><div className="legend legend--kr-green">{`KR (> 0.7)`}</div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </Col>}
         <Col xs={12} className="mt-5">
           <h2>Details</h2>

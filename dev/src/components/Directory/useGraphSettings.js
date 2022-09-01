@@ -7,6 +7,21 @@ export const useGraphSettings = () => {
     CyDef: 'org-4',
     SES: 'org-5',
   };
+  
+  // Create legend nodes
+  const createLegendNode = (id, title, background, border, shape, x, y) => {
+    return { 
+      id, 
+      title, 
+      color: background, 
+      shape,
+      fixed: true,
+      physics: false,
+      value: 1,
+      x,
+      y
+    };
+  }
 
   const defaultNodes = [
     { id: 'org-0', label: 'RAiD', title: 'RSAF Agility, Innovation, and Digital', group: 'king', level: 0, margin: 20, mass: 6, chosen: false },
@@ -28,13 +43,6 @@ export const useGraphSettings = () => {
   // Styles
   const orgStyle = {
     color: { background: '#000C1D', border: '#8497B0' },
-    chosen: {
-      node: (values, id, selected, hovering) => {
-        // values.color = '#FF5364';
-        // values.borderColor = '#ff2C41';
-        values.size = 25;
-      }
-    },
     font: { color: 'white', face: 'Bahnschrift Light', size: 40 },
     shape: 'box'
   };
@@ -50,21 +58,40 @@ export const useGraphSettings = () => {
       king: { ...orgStyle, font: { ...orgStyle.font, size: 60 } },
       org: { ...orgStyle },
       objectives: {
-        ...orgStyle,
+        font: orgStyle.font,
         color: { ...orgStyle.color, background: '#7B73F0', border: '#5a50ec' },
-        font: { ...orgStyle.font, size: 25 }
+        borderWidth: 5,
+        shape: 'dot',
+        chosen: {
+          node: (values, id, selected, hovering) => {
+            values.size = 50;
+            values.shadowColor = 'white';
+            values.shadowSize = 5;
+            values.shadowX = 0;
+            values.shadowY = 0;
+          }
+        },
       },
       keyResults: {
-        ...orgStyle,
+        font: orgStyle.font,
         size: 10,
-        shape: 'circle'
+        shape: 'circle',
+        chosen: {
+          node: (values, id, selected, hovering) => {
+            values.size = 25;
+            values.shadowColor = 'white';
+            values.shadowSize = 5;
+            values.shadowX = 0;
+            values.shadowY = 0;
+          }
+        },
       }
     },
-    nodes: { shape: 'box', opacity: 0.75 },
+    nodes: { opacity: 0.75 },
     edges: { color: '#8497B0' },
   };
 
-  return { teamLookup, defaultNodes, defaultEdges, options };
+  return { teamLookup, createLegendNode, defaultNodes, defaultEdges, options };
 }
 
 export const getColours = (currentValue, maxValue) => {

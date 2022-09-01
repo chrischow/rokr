@@ -8,7 +8,7 @@ export const SearchBar = (props) => {
   }
 
   return (
-    <Form>
+    <Form onSubmit={(event) => event.preventDefault()}>
       <Form.Control 
         type="text"
         value={props.queryString}
