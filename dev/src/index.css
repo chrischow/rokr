@@ -31,12 +31,14 @@ div::-webkit-scrollbar {
   background-color: #7B73F0!important;
   color: white!important;
   transition: 0.3s;
+  border: none!important;
 }
 
 .btn-blue:hover {
   background-color: #625AD7!important;
   color: #fafafa!important;
   transition: 0.3s;
+  border: none!important;
 }
 
 .btn-green {
