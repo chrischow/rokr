@@ -67,7 +67,6 @@ export default function Directory(props) {
             title: kr.krDescription,
             group: 'keyResults',
             color: getColours(kr.currentValue, kr.maxValue),
-            borderWidth: 5
           });
 
           // Add edges from objective to KR

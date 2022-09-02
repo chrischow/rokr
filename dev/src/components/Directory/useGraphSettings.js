@@ -76,6 +76,7 @@ export const useGraphSettings = () => {
         font: orgStyle.font,
         size: 10,
         shape: 'circle',
+        borderWidth: 5,
         chosen: {
           node: (values, id, selected, hovering) => {
             values.size = 25;
