@@ -116,6 +116,7 @@ export default function UpdateForm(props) {
           />
           <Form.Label className="form--label">Update</Form.Label>
           <Form.Control
+            as="textarea"
             type="input"
             id="updateText"
             name="updateText"
