@@ -159,7 +159,9 @@ export default function KeyResultForm(props) {
             onChange={handleChange}
           />
 
-          <Form.Label className="form--label">Objective - Type to Search</Form.Label>
+          <Form.Label className="form--label">
+            Objective - <span style={{color: "#4a5b74"}}>Type to Search</span>
+          </Form.Label>
           <div className="mb-3">
             <Select
               width='100%'

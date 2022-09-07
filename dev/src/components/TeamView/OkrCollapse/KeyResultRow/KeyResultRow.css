@@ -49,7 +49,8 @@
 }
 
 .keyresult-row--action-btn:hover .keyresult-row--action-btn-text {
-  color: #958DFF;
+  /* color: #958DFF; */
+  color: #8c85f2;
   transition: 0.3s;
   cursor: pointer;
 }
@@ -61,7 +62,7 @@
 
 .keyresult-row--action-btn:hover .keyresult-row--new-updates {
   transition: 0.3s;
-  color: #27DDCB;
+  color: #21d0be;
 }
 
 .keyresult-row--updates {
