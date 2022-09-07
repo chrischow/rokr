@@ -96,9 +96,3 @@ button.btn.kr-info--edit-button:hover {
   color: #D1E4FD;
   font-size: 0.9rem;
 }
-
-div.dataTables_length > label > select[name="kr-info-table_length"]:focus,
-div.dataTables_length > label > select[name="kr-info-table_length"]:hover {
-  background-color: #ddd!important;
-  color: #172334;
-}
