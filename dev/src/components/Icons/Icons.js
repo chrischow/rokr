@@ -77,7 +77,7 @@ export function EditIcon() {
 }
 
 export const editIconString = `<svg
-className="edit-icon"
+class="edit-icon"
 style="height:14px; width: 14px;"
 aria-hidden="false"
 focusable="false"
