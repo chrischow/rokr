@@ -116,3 +116,38 @@ export const validateKrForm = (
   
   return formOkay;
 }
+
+export const validateUpdateForm = (inputDate, inputUpdateText, tokenStatus, errorSetter) => {
+  let formOkay = true;
+
+  if (!inputUpdateText) {
+    errorSetter(prevData => {
+      return [...prevData, "Input an update."];
+    });
+    formOkay = formOkay && false;
+  }
+
+  if (!inputDate) {
+    errorSetter(prevData => {
+      return [...prevData, "Set a start date."];
+    });
+    formOkay = formOkay && false;
+  } else {
+    const validDate = validator.isDate(inputDate, 'YYYY-MM-DD');
+    if (!validDate) {
+      errorSetter(prevData => {
+        return [...prevData, "Set a valid start date."];
+      });
+      formOkay = formOkay && false;
+    }
+  }
+
+  if (!tokenStatus) {
+    errorSetter(prevData => {
+      return [...prevData, "Invalid token. Check your permissions."];
+    });
+    formOkay = formOkay && false;
+  }
+  
+  return formOkay;
+}
