@@ -121,6 +121,10 @@ hr {
   border-color: #8497B0 !important;
 }
 
+td {
+  white-space: pre-line;
+}
+
 li.paginate_button.page-item.disabled>a.page-link,
 li.paginate_button.page-item.previous.disabled>a.page-link,
 li.paginate_button.page-item.next.disabled>a.page-link {
