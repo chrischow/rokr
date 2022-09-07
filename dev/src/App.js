@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Container from "react-bootstrap/Container";
-// import TestQueries from './components/TestQueries/TestQueries';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/HomeView/Home/Home';
 import Team from './components/TeamView/TeamTabs/TeamTabs';
