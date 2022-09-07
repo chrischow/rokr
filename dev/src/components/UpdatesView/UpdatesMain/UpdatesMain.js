@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useKeyResult } from "../../../hooks/useKeyResults";
 import { useKrUpdates } from "../../../hooks/useUpdates";
 import { getDate } from "../../../utils/dates";
@@ -14,20 +14,21 @@ export default function UpdatesMain(props) {
 
   // State
   const [updateAddFormValues, setUpdateAddFormValues] = useState({});
+  const [defaultAddUpdateValues, setDefaultAddUpdateValues] = useState({});
   const [updateEditFormValues, setUpdateEditFormValues] = useState({});
   const [showUpdateAddModal, setShowUpdateAddModal] = useState(false);
   const [showUpdateEditModal, setShowUpdateEditModal] = useState(false);
+  const [team, setTeam] = useState('');
   
   // Get data
   const { krId } = useParams();
   const keyResult = useKeyResult(krId);
   const updates = useKrUpdates(krId);
 
-  // ADD FORM
-  // Default add form values - populate once data is loaded
-  const [defaultAddUpdateValues, setDefaultAddUpdateValues] = useState({});
+  // Initialise variables once data is loaded
   useEffect(() => {
     if (keyResult.isSuccess) {
+      // Default add form values
       const data = {
         updateText: '',
         updateDate: getDate(new Date()),
@@ -36,9 +37,19 @@ export default function UpdatesMain(props) {
       };
       setUpdateAddFormValues(data);
       setDefaultAddUpdateValues(data);
+      setTeam(keyResult.data.parentObjective.team);
     }
   }, [keyResult.isSuccess])
 
+  // Navigation
+  const navigate = useNavigate();
+  const backToTeamPage = () => {
+    if (team) {
+      navigate(`/${team}`);
+    }
+  }
+  
+  // ADD FORM
   // Add Update Form
   const addUpdate = () => {
     return <UpdateAdd
@@ -90,7 +101,9 @@ export default function UpdatesMain(props) {
       }
       <div className="mt-4">
         <button className="btn btn-blue mr-3" onClick={() => setShowUpdateAddModal(true)}>Add Update</button>
-        <button className="btn btn-secondary float-end">Back to Team Page</button>
+        <button className="btn btn-secondary float-end" onClick={backToTeamPage}>
+          Back to Team Page
+        </button>
       </div>
       <div className="directory--container mt-4">
         {updates.isSuccess && <UpdatesTable
