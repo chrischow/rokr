@@ -71,3 +71,10 @@
 .directory--info-header {
   font-size: calc(1.2rem + .6vw);
 }
+
+.directory--tag {
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  font-size: 1.0rem;
+  color: #4a5b74;
+}

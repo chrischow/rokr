@@ -187,7 +187,10 @@ export default function Directory(props) {
                     xs={(activeNodeData.minValue === null) ? 12 : 9}
                     className={`kr-info--main-col ${activeNodeData.minValue === null ? "noborder" : ""}`}
                   >
-                    <h3 className="directory--info-header">
+                    <h5 className="directory--tag">
+                      {activeNodeData.minValue !== null ? "Key Result" : "Objective"}
+                    </h5>
+                    <h3 className="directory--info-header mt-3">
                       <span className="me-3 text-green">
                         {activeNodeData.Title}
                       </span>
