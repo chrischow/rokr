@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { useTeamObjectivesCache, useTeamObjectives } from "../../../hooks/useObjectives";
 import { useTeamKeyResultsCache, useTeamKeyResults } from "../../../hooks/useKeyResults";
