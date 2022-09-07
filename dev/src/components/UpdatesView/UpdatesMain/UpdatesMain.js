@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useKeyResult } from "../../../hooks/useKeyResults";
-import { useKrUpdates } from "../../../hooks/useUpdates";
+import { useKrUpdatesDirect } from "../../../hooks/useUpdates";
 import { getDate } from "../../../utils/dates";
 import SharedModal from "../../SharedModal/SharedModal";
 import UpdatesTable from "../UpdatesTable/UpdatesTable";
@@ -23,7 +22,7 @@ export default function UpdatesMain(props) {
   // Get data
   const { krId } = useParams();
   const keyResult = useKeyResult(krId);
-  const updates = useKrUpdates(krId);
+  const updates = useKrUpdatesDirect(krId);
 
   // Initialise variables once data is loaded
   useEffect(() => {
@@ -57,6 +56,7 @@ export default function UpdatesMain(props) {
       setUpdateAddFormValues={setUpdateAddFormValues}
       setShowUpdateAddModal={setShowUpdateAddModal}
       defaultFormValues={defaultAddUpdateValues}
+      krId={krId}
     />;
   }
 
@@ -80,6 +80,7 @@ export default function UpdatesMain(props) {
       updateEditFormValues={updateEditFormValues}
       setUpdateEditFormValues={setUpdateEditFormValues}
       setShowUpdateEditModal={setShowUpdateEditModal}
+      krId={krId}
     />
   };
 

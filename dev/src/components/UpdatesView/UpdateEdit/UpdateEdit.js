@@ -8,7 +8,7 @@ export default function UpdateEdit(props) {
 
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries('updates', { refetchInactive: true });
+    queryClient.invalidateQueries(['updates', props.krId], { refetchInactive: true });
     queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
