@@ -6,9 +6,15 @@ import { NavBarBrand } from '../NavBarBrand/NavBarBrand';
 import './NavBar.css';
 
 export default function NavBar(props) {
+
+  // Clear graph
+  const clearGraph = () => {
+    props.setGraph({ network: null, exists: false });
+  };
+
   const linkElements = props.teams.map(item => {
     return (
-      <li key={'nav-' + item.slug} className="nav-item">
+      <li key={'nav-' + item.slug} className="nav-item" onClick={clearGraph}>
         <NavLink className="nav-link" to={"/" + item.slug}>
           {item.teamName}
         </NavLink>
@@ -27,10 +33,10 @@ export default function NavBar(props) {
           <Nav>
             {linkElements}
             <li className="nav-item">
-              <NavLink className="nav-link" to="/directory">Directory</NavLink>
+              <NavLink className="nav-link" to="/directory" onClick={clearGraph}>Directory</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/timeline">Timeline</NavLink>
+              <NavLink className="nav-link" to="/timeline" onClick={clearGraph}>Timeline</NavLink>
             </li>
           </Nav>
         </Navbar.Collapse>

@@ -38,13 +38,13 @@ function App() {
   return (
     <HashRouter>
       <QueryClientProvider client={queryClient}>
-        <NavBar teams={config.teams} />
+        <NavBar teams={config.teams} {...graphManager} />
         <Container className="mt-5 app-container">
           <Routes>
-            <Route path="/" element={<Home teams={config.teams} {...graphManager} />} exact />
-            <Route path="/timeline" element={<Timeline {...graphManager} />} />
+            <Route path="/" element={<Home teams={config.teams} />} exact />
+            <Route path="/timeline" element={<Timeline />} />
             <Route path="/directory" element={<Directory key="directory" {...graphManager} />} />
-            <Route path="/updates/:krId" element={<UpdatesMain {...graphManager} />} />
+            <Route path="/updates/:krId" element={<UpdatesMain />} />
             {teamRoutes}
           </Routes>
         </Container>
