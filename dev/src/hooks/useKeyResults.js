@@ -26,6 +26,19 @@ export const useKeyResult = (Id) => {
   };
 }
 
+// Get key results by objective frequency
+export const useKeyResultsByFreq = (freq) => {
+  const url = constructUrl(
+    config.krListId,
+    `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team,parentObjective/frequency`,
+    'parentObjective',
+    `parentObjective/frequency eq '${freq}'`
+  );
+  return useQuery(['keyResults', freq], constructReadQueryFn(url), {
+    staleTime: config.staleTime
+  });
+};
+
 // Get key results by team, using entries from full dataset
 export const useTeamKeyResultsCache = (team) => {
   const allKeyResults = useKeyResults();

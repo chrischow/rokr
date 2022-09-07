@@ -26,6 +26,20 @@ export const useObjective = (Id) => {
   };
 }
 
+// Get objective by frequency
+export const useObjectivesByFreq = (freq) => {
+  const url = constructUrl(
+    config.objListId,
+    `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`,
+    undefined,
+    `frequency eq '${freq}'`
+  );
+
+  return useQuery(['objectives', freq], constructReadQueryFn(url), {
+    staleTime: config.staleTime
+  });
+}
+
 // Get objectives by team, using entries from full dataset
 export const useTeamObjectivesCache = (team) => {
   const allObjectives = useObjectives();

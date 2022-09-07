@@ -35,6 +35,19 @@ export const useKrUpdates = (krId) => {
   };
 }
 
+// Get update by key result ID
+export const useKrUpdatesDirect = (krId) => {
+  const url = constructUrl(
+    config.updateListId,
+    `Id,updateText,updateDate,parentKrId,team`,
+    undefined,
+    `parentKrId eq ${krId}`
+  );
+  return useQuery(['updates', krId], constructReadQueryFn(url), {
+    staleTime: config.staleTime
+  });
+}
+
 // Get updates by team
 // export const useTeamUpdates = (team) => {
 //   const allUpdates = useUpdates();
@@ -46,7 +59,7 @@ export const useKrUpdates = (krId) => {
 //   }
 // }
 
-// Get all updates
+// Get all updates for only a given team
 export const useTeamUpdates = (team) => {
   const url = constructUrl(
     config.updateListId,
