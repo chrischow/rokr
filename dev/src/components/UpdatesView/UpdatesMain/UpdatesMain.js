@@ -5,7 +5,9 @@ import { useKeyResult } from "../../../hooks/useKeyResults";
 import { useKrUpdates } from "../../../hooks/useUpdates";
 import { getDate } from "../../../utils/dates";
 import SharedModal from "../../SharedModal/SharedModal";
+import UpdatesTable from "../UpdatesTable/UpdatesTable";
 import UpdateAdd from "../UpdateAdd/UpdateAdd";
+import UpdateEdit from "../UpdateEdit/UpdateEdit";
 
 
 export default function UpdatesMain(props) {
@@ -55,7 +57,27 @@ export default function UpdatesMain(props) {
   };
 
   // EDIT FORM
+  const launchEditModal = (update) => {
+    // Show modal
+    setShowUpdateEditModal(true);
+    // Populate edit modal form
+    setUpdateEditFormValues(update);
+  };
 
+  const editUpdate = () => {
+    return <UpdateEdit
+      updateEditFormValues={updateEditFormValues}
+      setUpdateEditFormValues={setUpdateEditFormValues}
+      setShowUpdateEditModal={setShowUpdateEditModal}
+    />
+  };
+
+  // Close edit update modal
+  const handleCloseUpdateEditModal = () => {
+    // Reset form
+    setUpdateEditFormValues({});
+    setShowUpdateEditModal(false);
+  };
 
   return (
     <>
@@ -71,7 +93,10 @@ export default function UpdatesMain(props) {
         <button className="btn btn-secondary float-end">Back to Team Page</button>
       </div>
       <div className="directory--container mt-4">
-        Table here
+        {updates.isSuccess && <UpdatesTable
+          updateData={updates.data}
+          launchEditModal={launchEditModal}
+        />}
       </div>
       <SharedModal
         modalTitle="New Update"
@@ -79,6 +104,13 @@ export default function UpdatesMain(props) {
         onHide={() => setShowUpdateAddModal(false)}
         renderModalContent={() => addUpdate()}
         handleCloseModal={handleCloseUpdateAddModal}
+      />
+      <SharedModal
+        modalTitle="Edit Update"
+        show={showUpdateEditModal}
+        onHide={() => setShowUpdateEditModal(false)}
+        renderModalContent={() => editUpdate()}
+        handleCloseModal={handleCloseUpdateEditModal}
       />
     </>
   );
