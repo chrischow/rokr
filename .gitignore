@@ -21,3 +21,5 @@ dev/.env.production.local
 dev/npm-debug.log*
 dev/yarn-debug.log*
 dev/yarn-error.log*
+
+*/.env
