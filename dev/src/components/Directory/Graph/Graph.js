@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useContext } from 'react';
 import { Network } from 'vis-network';
-import { getColours, useGraphSettings } from '../useGraphSettings';
+import { useGraphSettings } from '../useGraphSettings';
 import { DirectoryContext } from '../../../context/DirectoryContext';
 
 import 'vis-network/dist/dist/vis-network.min.css';
@@ -15,7 +15,7 @@ export default function Graph(props) {
   const mapContainer = useRef(null);
 
   // Get graph settings
-  const { teamLookup, defaultNodes, defaultEdges, options } = useGraphSettings();
+  const { options } = useGraphSettings();
 
   // Launch and teardown
   useEffect(() => {

@@ -28,7 +28,7 @@ export default function Directory(props) {
   const keyResults = useKeyResults();
 
   // Get graph settings
-  const { teamLookup, defaultNodes, defaultEdges, options } = useGraphSettings();
+  const { teamLookup, defaultNodes, defaultEdges } = useGraphSettings();
 
   useEffect(() => {
 
