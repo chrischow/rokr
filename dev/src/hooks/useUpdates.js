@@ -36,12 +36,25 @@ export const useKrUpdates = (krId) => {
 }
 
 // Get updates by team
+// export const useTeamUpdates = (team) => {
+//   const allUpdates = useUpdates();
+//   return {
+//     data: allUpdates.isSuccess ? allUpdates.data.filter(update => {
+//       return update.team === team;
+//     }) : null,
+//     isSuccess: allUpdates.isSuccess
+//   }
+// }
+
+// Get all updates
 export const useTeamUpdates = (team) => {
-  const allUpdates = useUpdates();
-  return {
-    data: allUpdates.isSuccess ? allUpdates.data.filter(update => {
-      return update.team === team;
-    }) : null,
-    isSuccess: allUpdates.isSuccess
-  }
-}
+  const url = constructUrl(
+    config.updateListId,
+    `Id,updateText,updateDate,parentKrId,team`,
+    undefined,
+    `team eq "${team}"`
+  );
+  return useQuery(['updates', team], constructReadQueryFn(url), {
+    staleTime: config.staleTime
+  });
+};
