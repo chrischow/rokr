@@ -23,7 +23,6 @@ export default function OkrCollapse(props) {
       startDate={props.startDate}
       endDate={props.endDate}
       updateData={krUpdates}
-      invalidateAndRefetch={props.invalidateAndRefetch}
       {...kr}
       progress={kr.currentValue / kr.maxValue}
     />
@@ -34,6 +33,7 @@ export default function OkrCollapse(props) {
     setIsClicked(props.overallIsClicked);
   }, [props.overallIsClicked]);
   // Collapse
+  
   useEffect( () => {
     $(function() {
       $(`#${objId}`).on('show.bs.collapse', () => setIsClicked(true));
@@ -59,7 +59,6 @@ export default function OkrCollapse(props) {
         dateOption={props.dateOption}
         startDate={props.startDate}
         endDate={props.endDate}
-        invalidateAndRefetch={props.invalidateAndRefetch}
         {...props.objective}
       />
       <Collapse in={isClicked}>

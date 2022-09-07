@@ -58,9 +58,9 @@ export default function KeyResultRow(props) {
     return <KeyResultEdit
       krFormValues={krFormValues}
       setKrFormValues={setKrFormValues}
-      invalidateAndRefetch={props.invalidateAndRefetch}
       setShowKrEditModal={setShowKrEditModal}
       objectiveOptions={objectiveOptions}
+      team={props.parentObjective.team}
       {...props}
     />
   }

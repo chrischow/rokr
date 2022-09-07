@@ -9,9 +9,9 @@ import { CaretIcon, EditIconText, AddIconText } from '../../../Icons/Icons';
 import SharedModal from '../../../SharedModal/SharedModal';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import ObjectiveEdit from './ObjectiveEdit/ObjectiveEdit';
+import KeyResultAdd from './KeyResultAdd/KeyResultAdd';
 
 import './ObjectiveCard.css';
-import KeyResultAdd from './KeyResultAdd/KeyResultAdd';
 
 export default function ObjectiveCard(props) {
   // State
@@ -112,6 +112,7 @@ export default function ObjectiveCard(props) {
       objectiveOptions={objectiveOptions}
       setShowKrAddModal={setShowKrAddModal}
       defaultKrValues={defaultKrValues}
+      team={props.team}
     />
   };
 

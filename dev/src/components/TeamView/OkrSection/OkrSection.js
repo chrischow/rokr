@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useQueryClient } from 'react-query';
-import slugify from 'slugify';
 import $ from 'jquery';
 import { useTeamUpdates } from '../../../hooks/useUpdates';
 import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../utils/dates';
@@ -13,17 +11,6 @@ import './OkrSection.css';
 import ObjectiveAdd from './ObjectiveAdd/ObjectiveAdd';
 
 export default function OkrSection(props) {
-  // Create query client
-  const queryClient = useQueryClient()
-
-  // Invalidate and refetch
-  const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries('objectives', { refetchInactive: true });
-    queryClient.invalidateQueries('keyResults', { refetchInactive: true });
-    queryClient.invalidateQueries(`objectives-${slugify(props.teamName)}`, { refetchInactive: true });
-    queryClient.invalidateQueries(`keyResults-${slugify(props.teamName)}`, { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
-  };
 
   // State
   const [overallIsClicked, setOverallIsClicked] = useState(true);
@@ -102,12 +89,11 @@ export default function OkrSection(props) {
     objectiveFormValues={objectiveFormValues}
     setObjectiveFormValues={setObjectiveFormValues}
     setShowObjectiveModal={setShowObjectiveModal}
-    invalidateAndRefetch={invalidateAndRefetch}
     defaultValues={defaultObjectiveValues}
     startDate={startDate}
     endDate={endDate}
     freq={props.freq}
-    teamName={props.teamName}
+    team={props.teamName}
     staffOption={props.staffOption}
   />
 
@@ -121,7 +107,6 @@ export default function OkrSection(props) {
         objective={obj}
         keyResults={keyResults}
         overallIsClicked={overallIsClicked}
-        invalidateAndRefetch={invalidateAndRefetch}
         startDate={startDate}
         endDate={endDate}
         dateOption={props.dateOption}
