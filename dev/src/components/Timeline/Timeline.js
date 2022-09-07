@@ -6,11 +6,16 @@ import $ from 'jquery';
 
 import './Timeline.css';
 
-export default function Timeline() {
+export default function Timeline(props) {
   // Get data
   const objectives = useObjectives();
   const keyResults = useKeyResults();
   const updates = useUpdates();
+
+  // Delete graph
+  useEffect(()=> {
+    props.setGraph({ network: null, exists: false });
+  }, [])
 
   // Prepare table data
   const tableData = (objectives.isSuccess && keyResults.isSuccess && updates.isSuccess) ?

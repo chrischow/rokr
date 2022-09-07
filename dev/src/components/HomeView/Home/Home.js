@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useObjectives } from "../../../hooks/useObjectives";
 import { useKeyResults } from "../../../hooks/useKeyResults";
@@ -13,8 +13,10 @@ import HomeTeamCards from "../HomeTeamCards/HomeTeamCards";
 import './Home.css';
 
 export default function Home(props) {
-  // Set state
-  // const [metrics, setMetrics] = useState({});
+  // Delete graph
+  useEffect(()=> {
+    props.setGraph({ network: null, exists: false });
+  }, [])
 
   // Get data
   const objectives = useObjectives();

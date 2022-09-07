@@ -6,10 +6,10 @@ import { SearchBar } from './SearchBar/SearchBar';
 import { getColours, useGraphSettings } from './useGraphSettings';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Graph from './Graph/Graph';
 
 import './Directory.css';
 import 'vis-network/dist/dist/vis-network.min.css';
-import Graph from './Graph/Graph';
 
 export default function Directory(props) {
 
@@ -20,8 +20,10 @@ export default function Directory(props) {
   const [queryString, setQueryString] = useState('');
   const [filteredNodes, setFilteredNodes] = useState([]);
 
-  // Experimental
-  const [graph, setGraph] = useState({ network: null, exists: false });
+  // Delete graph
+  useEffect(() => {
+    props.setGraph({ network: null, exists: false});
+  }, [])
 
   // Get data
   const objectives = useObjectives();
@@ -156,8 +158,8 @@ export default function Directory(props) {
                 setActiveNode={setActiveNode}
                 setQueryString={setQueryString}
                 queryString={queryString}
-                graph={graph}
-                setGraph={setGraph}
+                graph={props.graph}
+                setGraph={props.setGraph}
                 filteredNodes={filteredNodes}
               />
             }

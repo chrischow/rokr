@@ -1,14 +1,12 @@
-import { useEffect, useRef, useState, useContext } from 'react';
+import { useEffect, useRef, useState, useContext, Component, createRef } from 'react';
 import { Network } from 'vis-network';
-import { useGraphSettings } from '../useGraphSettings';
-import { DirectoryContext } from '../../../context/DirectoryContext';
+import { useGraphSettings, options } from '../useGraphSettings';
 
 import 'vis-network/dist/dist/vis-network.min.css';
 
 export default function Graph(props) {
 
   // State
-  const [graph, setGraph] = useContext(DirectoryContext);
   const [localGraph, setLocalGraph] = useState(null);
 
   // Create references
@@ -19,13 +17,11 @@ export default function Graph(props) {
 
   // Launch and teardown
   useEffect(() => {
-    if (graph.exists) {
-      graph.network.destroy();
-    } 
+    props.setGraph({ network: null, exists: false });
     
     if (mapContainer.current) {
       // Initialise network
-      let network
+      let network;
       network = new Network(mapContainer.current, props.graphData, options);
       network.fit();
 
@@ -59,7 +55,7 @@ export default function Graph(props) {
       });
 
       // Save network
-      setGraph({network, exists: true});
+      props.setGraph({network, exists: true});
       setLocalGraph(network);
     }
   }, []);

@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { useTeamObjectivesCache, useTeamObjectives } from "../../../hooks/useObjectives";
 import { useTeamKeyResultsCache, useTeamKeyResults } from "../../../hooks/useKeyResults";
 import { useTeamUpdates } from '../../../hooks/useUpdates';
+import slugify from "slugify";
 import { getStaffFromObjectives, getSubGroupsFromObjectives } from "../../../utils/stats";
 import { getData } from '../../../utils/query';
-import slugify from "slugify";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import TeamPane from "../TeamPane/TeamPane";

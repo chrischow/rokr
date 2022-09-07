@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { DirectoryContext } from './context/DirectoryContext';
 import Container from "react-bootstrap/Container";
 // import TestQueries from './components/TestQueries/TestQueries';
 import NavBar from './components/NavBar/NavBar';
@@ -25,31 +24,30 @@ function App() {
 
   // States
   const [graph, setGraph] = useState({ network: null, exists: false });
+  const graphManager = {graph, setGraph};
 
   // Team routes
   const teamRoutes = config.teams.map(team => {
     return <Route
       key={`route-${team.slug}`}
       path={`/${team.slug}`}
-      element={<Team team={team} queryClient={queryClient} />}
+      element={<Team team={team} queryClient={queryClient} {...graphManager} />}
     />
   });
 
   return (
     <HashRouter>
       <QueryClientProvider client={queryClient}>
-        <DirectoryContext.Provider value={[graph, setGraph]}>
-          <NavBar teams={config.teams} />
-          <Container className="mt-5 app-container">
-            <Routes>
-              <Route path="/" element={<Home teams={config.teams} />} exact />
-              <Route path="/timeline" element={<Timeline />} />
-              <Route path="/directory" element={<Directory />} />
-              <Route path="/updates/:krId" element={<UpdatesMain />} />
-              {teamRoutes}
-            </Routes>
-          </Container>
-        </DirectoryContext.Provider>
+        <NavBar teams={config.teams} />
+        <Container className="mt-5 app-container">
+          <Routes>
+            <Route path="/" element={<Home teams={config.teams} {...graphManager} />} exact />
+            <Route path="/timeline" element={<Timeline {...graphManager} />} />
+            <Route path="/directory" element={<Directory key="directory" {...graphManager} />} />
+            <Route path="/updates/:krId" element={<UpdatesMain {...graphManager} />} />
+            {teamRoutes}
+          </Routes>
+        </Container>
       </QueryClientProvider>
     </HashRouter>
   );
