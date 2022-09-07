@@ -1,10 +1,22 @@
+import { useQueryClient } from "react-query";
+import slugify from 'slugify';
 import KeyResultForm from "../../../KeyResultForm/KeyResultForm";
 
 export default function KeyResultAdd(props) {
+  // Create query client
+  const queryClient = useQueryClient();
+
+  // Invalidate and refetch
+  const invalidateAndRefetch = () => {
+    queryClient.invalidateQueries('keyResults', { refetchInactive: true });
+    queryClient.invalidateQueries(`keyResults-${slugify(props.team)}`, { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
+
   // Form cleanup
   const formCleanup = () => {
     // Invalidate and refetch data
-    props.invalidateAndRefetch();
+    invalidateAndRefetch();
 
     // Reset form
     props.setKrFormValues({...props.defaultKrValues});
@@ -19,7 +31,7 @@ export default function KeyResultAdd(props) {
       objectiveOptions={props.objectiveOptions}
       selectDisabled={true}
       formCleanup={formCleanup}
-      invalidateAndRefetch={props.invalidateAndRefetch}
+      invalidateAndRefetch={invalidateAndRefetch}
       mode="new"
     />
 

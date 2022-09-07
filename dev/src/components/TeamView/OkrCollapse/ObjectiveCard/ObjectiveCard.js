@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
-import slugify from 'slugify';
 import { getData } from '../../../../utils/query';
 import { useTeamObjectivesCache, useTeamObjectives } from "../../../../hooks/useObjectives";
 import Row from 'react-bootstrap/Row';
@@ -21,16 +20,7 @@ export default function ObjectiveCard(props) {
   const [showKrAddModal, setShowKrAddModal] = useState(false);
 
   // Create query client
-  const queryClient = useQueryClient()
-
-  // Invalidate and refetch
-  const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries('objectives', { refetchInactive: true });
-    queryClient.invalidateQueries('keyResults', { refetchInactive: true });
-    queryClient.invalidateQueries(`objectives-${slugify(props.team)}`, { refetchInactive: true });
-    queryClient.invalidateQueries(`keyResults-${slugify(props.team)}`, { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
-  };
+  const queryClient = useQueryClient();
 
   // OBJECTIVE FORM
   // Re-populate form
@@ -60,7 +50,6 @@ export default function ObjectiveCard(props) {
     return <ObjectiveEdit
       objectiveFormValues={objectiveFormValues}
       setObjectiveFormValues={setObjectiveFormValues}
-      invalidateAndRefetch={invalidateAndRefetch}
       setShowObjectiveEditModal={setShowObjectiveEditModal}
       team={props.team}
       freq={props.frequency}
@@ -121,7 +110,6 @@ export default function ObjectiveCard(props) {
       krFormValues={krFormValues}
       setKrFormValues={setKrFormValues}
       objectiveOptions={objectiveOptions}
-      invalidateAndRefetch={invalidateAndRefetch}
       setShowKrAddModal={setShowKrAddModal}
       defaultKrValues={defaultKrValues}
     />
