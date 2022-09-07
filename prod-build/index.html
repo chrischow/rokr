@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="./favicon.png" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="ROKR - RAiD OKR Management Platform - Built by RDO" />
+  <title>ROKR - RAiD OKR Management Platform</title>
+  <link href="./static/css/main.css" rel="stylesheet">
+  <script type="text/javascript">
+    const fullUrl = window.location.origin + window.location.pathname;
+    const txtUrl = `${fullUrl.slice(0, fullUrl.lastIndexOf('/'))}/static/js/` ;
+
+    function loadWords(filename, asynch) {
+      // Retrieve text
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          var sTag = document.createElement("script");
+          sTag.type = "text/javascript";
+          sTag.innerHTML = this.responseText;
+          var head = document.getElementsByTagName("head")[0];
+          head.appendChild(sTag);
+        }
+      };
+      var url = txtUrl + filename + ".txt";
+      xhr.open("GET", url, asynch);
+      xhr.send();
+    }
+    
+    loadWords('main', true)
+  </script>
+</head>
+
+<body><noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</body>
+
+</html>
