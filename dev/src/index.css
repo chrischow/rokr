@@ -15,6 +15,7 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
 div::-webkit-scrollbar {
   display: none;
 }
@@ -28,40 +29,40 @@ div::-webkit-scrollbar {
 }
 
 .btn-blue {
-  background-color: #7B73F0!important;
-  color: white!important;
+  background-color: #7B73F0 !important;
+  color: white !important;
   transition: 0.3s;
-  border: none!important;
+  border: none !important;
 }
 
 .btn-blue:hover {
-  background-color: #625AD7!important;
-  color: #fafafa!important;
+  background-color: #625AD7 !important;
+  color: #fafafa !important;
   transition: 0.3s;
-  border: none!important;
+  border: none !important;
 }
 
 .btn-green {
-  background-color: #0EC4B2!important;
-  color: white!important;
+  background-color: #0EC4B2 !important;
+  color: white !important;
   transition: 0.3s;
   border: none;
 }
 
 .btn-green:hover {
-  background-color: #00AA98!important;
-  color: #fafafa!important;
+  background-color: #00AA98 !important;
+  color: #fafafa !important;
   transition: 0.3s;
 }
 
 .btn-secondary {
-  background-color: #8497B0!important;
-  color: white!important;
+  background-color: #8497B0 !important;
+  color: white !important;
 }
 
 .btn-secondary:hover {
-  background-color: #6B7E97!important;
-  color: #ddd!important;
+  background-color: #6B7E97 !important;
+  color: #ddd !important;
 }
 
 h1 {
@@ -89,9 +90,10 @@ hr {
   color: white;
 }
 
-.bg-dark, .table > thead.thead-dark th {
+.bg-dark,
+.table>thead.thead-dark th {
   /* background-color: #000415!important; */
-  background-color: #0007188a!important;
+  background-color: #0007188a !important;
 }
 
 .no-data {
@@ -113,61 +115,70 @@ hr {
   border-color: #8497B0;
 }
 
-.table-dark thead, .table-dark th, .table-dark td {
-  border-color: #8497B0!important;
+.table-dark thead,
+.table-dark th,
+.table-dark td {
+  border-color: #8497B0 !important;
 }
 
-li.paginate_button.page-item.disabled > a.page-link, li.paginate_button.page-item.previous.disabled > a.page-link,
-li.paginate_button.page-item.next.disabled > a.page-link {
+li.paginate_button.page-item.disabled>a.page-link,
+li.paginate_button.page-item.previous.disabled>a.page-link,
+li.paginate_button.page-item.next.disabled>a.page-link {
   background-color: #172334;
   color: #2C3849;
 }
 
-li.paginate_button.page-item > a, li.paginate_button.page-item.previous > a {
+li.paginate_button.page-item>a,
+li.paginate_button.page-item.previous>a {
   background-color: #172334;
   color: #8497B0;
   transition: 0.3s;
 }
 
-li.paginate_button.page-item > a:hover, li.paginate_button.page-item.previous > a:hover {
+li.paginate_button.page-item>a:hover,
+li.paginate_button.page-item.previous>a:hover {
   color: #D1E4FD;
   transition: 0.3s;
 }
 
-li.paginate_button.page-item.active > a {
+li.paginate_button.page-item.active>a {
   background-color: #8497B0;
   color: white;
   transition: 0.3s;
 }
 
-li.paginate_button.page-item.active > a:hover {
+li.paginate_button.page-item.active>a:hover {
   background-color: #9EB1CA;
   transition: 0.3s;
 }
 
-li.paginate_button.page-item.active  > a:focus,
-li.paginate_button.page-item.previous > a:focus,
-li.paginate_button.page-item.next > a:focus {
+li.paginate_button.page-item.active>a:focus,
+li.paginate_button.page-item.previous>a:focus,
+li.paginate_button.page-item.next>a:focus {
   box-shadow: none;
 }
 
-ul.pagination > li > a {
+ul.pagination>li>a {
   border: none;
 }
 
-div.dataTables_length > label > select {
+div.dataTables_length>label>select {
   background-color: #ddd;
   color: #172334;
 }
 
-div.dataTables_length > label > select option {
+div.dataTables_length>label>select option {
   background-color: #ddd;
   color: #172334;
 }
 
-input[type="search"], input[type="search"]:focus {
-  background-color: #ddd;
-  color: #172334;
+input[type="search"],
+input[type="search"]:focus {
+  /* background-color: #ddd; */
+  /* color: #172334; */
+  background-color: #0D192A;
+  border: none;
+  color: #8497B0;
 }
 
 .table-dark thead tr th {
@@ -175,16 +186,17 @@ input[type="search"], input[type="search"]:focus {
   font-weight: normal;
 }
 
-.table-striped > tbody > tr:nth-of-type(odd) > * {
+.table-striped>tbody>tr:nth-of-type(odd)>* {
   background-color: transparent;
 }
 
-.table-striped > tbody > tr:nth-of-type(even) > * {
+.table-striped>tbody>tr:nth-of-type(even)>* {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Forms */
-.form-dark, .form-dark:focus {
+.form-dark,
+.form-dark:focus {
   background-color: #000C1D8a;
   font-size: 1.2rem;
   color: #ddd;
@@ -198,7 +210,8 @@ input[type="search"], input[type="search"]:focus {
   color: white;
 }
 
-.form-semi-dark, .form-semi-dark:focus {
+.form-semi-dark,
+.form-semi-dark:focus {
   background-color: #0D192A;
   font-size: 1.2rem;
   color: #ddd;
@@ -233,15 +246,31 @@ input[type="search"], input[type="search"]:focus {
 }
 
 option.form-select-dropdown {
-  background-color: #000C1Dda!important;
+  background-color: #000C1Dda !important;
   color: #8497b0;
   transition: 0.3s;
 }
 
-select:hover, select:focus, select:active {
-  background-color: #000C1Dca!important;
+select:hover,
+select:focus,
+select:active {
+  background-color: #000C1Dca !important;
   color: white;
   transition: 0.3s;
+}
+
+div.dataTables_length>label>select,
+div.dataTables_length>label>select:focus,
+div.dataTables_length>label>select:hover,
+div.dataTables_length>label>select + div.dataTables_length>label>select option:hover{
+  background-color: #0D192A!important;
+  border: none!important;
+  color: #8497B0!important;
+}
+
+div.dataTables_length>label>select option {
+  background-color: #0D192A;
+  color: #8497B0;
 }
 
 .form-errors {
@@ -259,7 +288,11 @@ select:hover, select:focus, select:active {
 }
 
 /* Datepicker */
-.datepicker-days, .datepicker-months, .datepicker-years, .datepicker-decades, .datepicker-centuries {
+.datepicker-days,
+.datepicker-months,
+.datepicker-years,
+.datepicker-decades,
+.datepicker-centuries {
   background-color: #0D192A;
   color: #eee;
 }
@@ -268,26 +301,54 @@ select:hover, select:focus, select:active {
   background-color: #0D192A;
 }
 
-.datepicker .datepicker-switch:hover, .datepicker .next:hover, .datepicker .prev:hover, .datepicker tfoot tr th:hover {
+.datepicker .datepicker-switch:hover,
+.datepicker .next:hover,
+.datepicker .prev:hover,
+.datepicker tfoot tr th:hover {
   background: #172334;
 }
 
-.datepicker table tr td.day.focused, .datepicker table tr td.day:hover {
+.datepicker table tr td.day.focused,
+.datepicker table tr td.day:hover {
   background: #3D495A;
 }
 
-.datepicker table tr td.active, .datepicker table tr td.active.disabled, 
-.datepicker table tr td.active.disabled:hover, .datepicker table tr td.active:hover,
-.datepicker table tr td span.active, .datepicker table tr td span.active.disabled, 
-.datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active:hover {
+.datepicker table tr td.active,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active:hover,
+.datepicker table tr td span.active,
+.datepicker table tr td span.active.disabled,
+.datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active:hover {
   background-color: #8497B0;
-  background-image: linear-gradient(to bottom, #9EB1CA,#8497B0);
+  background-image: linear-gradient(to bottom, #9EB1CA, #8497B0);
 }
 
-.datepicker table tr td span.active.active, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled.active, .datepicker table tr td span.active.disabled.disabled, .datepicker table tr td span.active.disabled:active, .datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active.disabled:hover.active, .datepicker table tr td span.active.disabled:hover.disabled, .datepicker table tr td span.active.disabled:hover:active, .datepicker table tr td span.active.disabled:hover:hover, .datepicker table tr td span.active.disabled:hover[disabled], .datepicker table tr td span.active.disabled[disabled], .datepicker table tr td span.active:active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active:hover.active, .datepicker table tr td span.active:hover.disabled, .datepicker table tr td span.active:hover:active, .datepicker table tr td span.active:hover:hover, .datepicker table tr td span.active:hover[disabled], .datepicker table tr td span.active[disabled] {
+.datepicker table tr td span.active.active,
+.datepicker table tr td span.active.disabled,
+.datepicker table tr td span.active.disabled.active,
+.datepicker table tr td span.active.disabled.disabled,
+.datepicker table tr td span.active.disabled:active,
+.datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active.disabled:hover.active,
+.datepicker table tr td span.active.disabled:hover.disabled,
+.datepicker table tr td span.active.disabled:hover:active,
+.datepicker table tr td span.active.disabled:hover:hover,
+.datepicker table tr td span.active.disabled:hover[disabled],
+.datepicker table tr td span.active.disabled[disabled],
+.datepicker table tr td span.active:active,
+.datepicker table tr td span.active:hover,
+.datepicker table tr td span.active:hover.active,
+.datepicker table tr td span.active:hover.disabled,
+.datepicker table tr td span.active:hover:active,
+.datepicker table tr td span.active:hover:hover,
+.datepicker table tr td span.active:hover[disabled],
+.datepicker table tr td span.active[disabled] {
   background-color: #8497B0;
 }
 
-.datepicker table tr td span.focused, .datepicker table tr td span:hover {
+.datepicker table tr td span.focused,
+.datepicker table tr td span:hover {
   background: #3D495A;
 }
