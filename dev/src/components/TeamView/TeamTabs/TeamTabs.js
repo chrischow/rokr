@@ -14,18 +14,19 @@ import './TeamTabs.css';
 export default function TeamTabs(props){
   // Get objectives and key results data - try cache first
   const queryClient = useQueryClient()
-  const objectives = getData(
-    queryClient.getQueryState('objectives'),
-    useTeamObjectives,
-    useTeamObjectivesCache
-  )(props.team.teamName);
+  // const objectives = getData(
+  //   queryClient.getQueryState('objectives'),
+  //   useTeamObjectives,
+  //   useTeamObjectivesCache
+  // )(props.team.teamName);
   
-  const keyResults = getData(
-    queryClient.getQueryState('keyResults'),
-    useTeamKeyResults,
-    useTeamKeyResultsCache
-  )(props.team.teamName);
-
+  // const keyResults = getData(
+  //   queryClient.getQueryState('keyResults'),
+  //   useTeamKeyResults,
+  //   useTeamKeyResultsCache
+  // )(props.team.teamName);
+  const objectives = useTeamObjectives(props.team.teamName);
+  const keyResults = useTeamKeyResults(props.team.teamName);
   const updates = useTeamUpdates(props.team.teamName);
 
   // Extract options
