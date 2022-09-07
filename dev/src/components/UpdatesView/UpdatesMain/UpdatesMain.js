@@ -16,15 +16,6 @@ export default function UpdatesMain(props) {
   const [showUpdateAddModal, setShowUpdateAddModal] = useState(false);
   const [showUpdateEditModal, setShowUpdateEditModal] = useState(false);
   
-  // Create query client
-  const queryClient = useQueryClient();
-
-  // Invalidate and refetch
-  const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries('keyResults', { refetchInactive: true });
-    queryClient.invalidateQueries('updates', { refetchInactive: true });
-  }
-  
   // Get data
   const { krId } = useParams();
   const keyResult = useKeyResult(krId);
@@ -35,20 +26,24 @@ export default function UpdatesMain(props) {
   const [defaultAddUpdateValues, setDefaultAddUpdateValues] = useState({});
   useEffect(() => {
     if (keyResult.isSuccess) {
-      setDefaultAddUpdateValues({
+      const data = {
         updateText: '',
         updateDate: getDate(new Date()),
         parentKrId: krId,
         team: keyResult.data.parentObjective.team
-      });
+      };
+      setUpdateAddFormValues(data);
+      setDefaultAddUpdateValues(data);
     }
   }, [keyResult.isSuccess])
 
   // Add Update Form
   const addUpdate = () => {
     return <UpdateAdd
-      defaultFormValues={defaultAddUpdateValues}
+      updateAddFormValues={updateAddFormValues}
+      setUpdateAddFormValues={setUpdateAddFormValues}
       setShowUpdateAddModal={setShowUpdateAddModal}
+      defaultFormValues={defaultAddUpdateValues}
     />;
   }
 
@@ -60,7 +55,7 @@ export default function UpdatesMain(props) {
   };
 
   // EDIT FORM
-  
+
 
   return (
     <>

@@ -4,11 +4,6 @@ import { getDate } from "../../../utils/dates";
 import UpdateForm from "../UpdateForm/UpdateForm";
 
 export default function UpdateAdd(props) {
-  // State
-  const [updateAddFormValues, setUpdateAddFormValues] = useState({
-    ...props.defaultFormValues
-  });
-  const [showUpdateAddModal, setShowUpdateAddModal] = useState(false);
 
   // Create query client
   const queryClient = useQueryClient();
@@ -25,15 +20,15 @@ export default function UpdateAdd(props) {
     invalidateAndRefetch();
 
     // Reset form
-    setUpdateAddFormValues({...props.defaultKrValues});
+    props.setUpdateAddFormValues({...props.defaultFormValues});
 
     // Close modal
     props.setShowUpdateAddModal(false);
   }
 
   return <UpdateForm
-    setFormValues={setUpdateAddFormValues}
-    formValues={updateAddFormValues}
+    setFormValues={props.setUpdateAddFormValues}
+    formValues={props.updateAddFormValues}
     invalidateAndRefetch={invalidateAndRefetch}
     formCleanup={formCleanup}
     mode="new"
