@@ -3,12 +3,11 @@ import $ from 'jquery';
 import { useTeamUpdates } from '../../../hooks/useUpdates';
 import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../utils/dates';
 import { AddIconText } from "../../Icons/Icons";
-import ObjectiveForm from '../ObjectiveForm/ObjectiveForm';
 import SharedModal from '../../SharedModal/SharedModal';
 import OkrCollapse from "../OkrCollapse/OkrCollapse";
+import ObjectiveAdd from './ObjectiveAdd/ObjectiveAdd';
 
 import './OkrSection.css';
-import ObjectiveAdd from './ObjectiveAdd/ObjectiveAdd';
 
 export default function OkrSection(props) {
 
