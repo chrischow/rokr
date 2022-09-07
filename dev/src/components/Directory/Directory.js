@@ -7,6 +7,7 @@ import { getColours, useGraphSettings } from './useGraphSettings';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Graph from './Graph/Graph';
+// import Graph2 from './Graph/Graph2';
 
 import './Directory.css';
 import 'vis-network/dist/dist/vis-network.min.css';
@@ -19,11 +20,6 @@ export default function Directory(props) {
   const [graphData, setGraphData] = useState(null);
   const [queryString, setQueryString] = useState('');
   const [filteredNodes, setFilteredNodes] = useState([]);
-
-  // Delete graph
-  useEffect(() => {
-    props.setGraph({ network: null, exists: false});
-  }, [])
 
   // Get data
   const objectives = useObjectives();
@@ -151,7 +147,6 @@ export default function Directory(props) {
       <Row>
         {objectives.isSuccess && keyResults.isSuccess && <Col xs={12} className="mt-4">
           <div className="map-container-wrapper">
-            {/* <div ref={mapContainer} className="map-container mb-5" /> */}
             {objectives.isSuccess && keyResults.isSuccess && graphData != null &&
               <Graph
                 graphData={graphData}
@@ -190,7 +185,7 @@ export default function Directory(props) {
                     className={`kr-info--main-col ${activeNodeData.minValue === null ? "noborder" : ""}`}
                   >
                     <h5 className="directory--tag">
-                      {activeNodeData.minValue !== null ? "Key Result" : "Objective"}
+                      {activeNodeData.team} {activeNodeData.minValue !== null ? "Key Result" : "Objective"}
                     </h5>
                     <h3 className="directory--info-header mt-3">
                       <span className="me-3 text-green">

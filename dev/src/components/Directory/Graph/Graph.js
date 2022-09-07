@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, useContext, Component, createRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Network } from 'vis-network';
-import { useGraphSettings, options } from '../useGraphSettings';
+import { useGraphSettings } from '../useGraphSettings';
 
 import 'vis-network/dist/dist/vis-network.min.css';
 

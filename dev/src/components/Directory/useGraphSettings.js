@@ -112,3 +112,58 @@ export const getColours = (currentValue, maxValue) => {
 
   return { background, border };
 }
+
+
+
+
+// Styles
+const orgStyle = {
+  color: { background: '#000C1D', border: '#8497B0' },
+  font: { color: 'white', face: 'Bahnschrift Light', size: 40 },
+  shape: 'box'
+};
+
+export const options = {
+  height: '450px',
+  width: '100%',
+  interaction: {
+    tooltipDelay: 10
+  },
+  // layout: {hierarchical: true},
+  groups: {
+    king: { ...orgStyle, font: { ...orgStyle.font, size: 60 } },
+    org: { ...orgStyle },
+    objectives: {
+      font: orgStyle.font,
+      color: { ...orgStyle.color, background: '#7B73F0', border: '#5a50ec' },
+      borderWidth: 5,
+      shape: 'dot',
+      chosen: {
+        node: (values, id, selected, hovering) => {
+          values.size = 50;
+          values.shadowColor = 'white';
+          values.shadowSize = 5;
+          values.shadowX = 0;
+          values.shadowY = 0;
+        }
+      },
+    },
+    keyResults: {
+      font: orgStyle.font,
+      size: 10,
+      shape: 'circle',
+      borderWidth: 5,
+      chosen: {
+        node: (values, id, selected, hovering) => {
+          values.size = 25;
+          values.shadowColor = 'white';
+          values.shadowSize = 5;
+          values.shadowX = 0;
+          values.shadowY = 0;
+        }
+      },
+    }
+  },
+  nodes: { opacity: 0.75 },
+  edges: { color: '#8497B0' },
+};
