@@ -5,7 +5,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
   overflow-y: scroll;
-  background-image: url('https://raw.githubusercontent.com/chrischow/project-ace/main/images/bg.png');
+  background-image: url(./assets/images/bg.png);
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center;
