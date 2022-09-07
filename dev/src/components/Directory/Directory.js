@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useKeyResults } from '../../hooks/useKeyResults';
-import { useObjectives } from '../../hooks/useObjectives';
+import { useKeyResultsByFreq } from '../../hooks/useKeyResults';
+import { useObjectivesByFreq } from '../../hooks/useObjectives';
 import { formatDate } from '../../utils/dates';
 import { SearchBar } from './SearchBar/SearchBar';
 import { getColours, useGraphSettings } from './useGraphSettings';
@@ -22,8 +22,8 @@ export default function Directory(props) {
   const [filteredNodes, setFilteredNodes] = useState([]);
 
   // Get data
-  const objectives = useObjectives();
-  const keyResults = useKeyResults();
+  const objectives = useObjectivesByFreq('annual');
+  const keyResults = useKeyResultsByFreq('annual');
 
   // Get graph settings
   const { teamLookup, defaultNodes, defaultEdges } = useGraphSettings();
@@ -31,17 +31,29 @@ export default function Directory(props) {
   useEffect(() => {
 
     if (objectives.isSuccess && keyResults.isSuccess) {
-      let annualObjectives = objectives.data.filter(obj => {
-        return obj.frequency === 'annual';
-      });
 
       // Initialise with org nodes
       const newGraphData = {
-        nodes: defaultNodes,
-        edges: defaultEdges
+        nodes: [],
+        edges: []
       };
 
-      annualObjectives.forEach(obj => {
+      // Add all KRs
+      keyResults.data.forEach(kr => {
+        // Add to nodes
+        newGraphData.nodes.push({
+          id: `kr-${kr.Id}`,
+          title: kr.krDescription,
+          group: 'keyResults',
+          color: getColours(kr.currentValue, kr.maxValue),
+        });
+
+        // Add edges from objective to KR
+        newGraphData.edges.push({ from: `obj-${kr.parentObjective.Id}`, to: `kr-${kr.Id}` });
+      })
+      
+      // Add all objectives
+      objectives.data.forEach(obj => {
         // Add to nodes
         newGraphData.nodes.push({
           id: `obj-${obj.Id}`,
@@ -52,29 +64,11 @@ export default function Directory(props) {
 
         // Add edge from org to objective
         newGraphData.edges.push({ from: teamLookup[obj.team], to: `obj-${obj.Id}` });
-
-        // Get KRs
-        let relatedKRs = keyResults.data.filter(kr => {
-          return kr.parentObjective.Id === obj.Id;
-        });
-
-        relatedKRs.forEach((kr) => {
-          // Add to nodes
-          newGraphData.nodes.push({
-            id: `kr-${kr.Id}`,
-            title: kr.krDescription,
-            group: 'keyResults',
-            color: getColours(kr.currentValue, kr.maxValue),
-          });
-
-          // Add edges from objective to KR
-          newGraphData.edges.push({ from: `obj-${obj.Id}`, to: `kr-${kr.Id}` });
-        });
       });
 
       // Reverse all nodes
-      newGraphData.nodes = newGraphData.nodes.reverse()
-      newGraphData.edges = newGraphData.edges.reverse()
+      newGraphData.nodes.push(...defaultNodes);
+      newGraphData.edges.push(...defaultEdges);
       setGraphData(newGraphData);
     }
   }, [objectives.isSuccess, keyResults.isSuccess]);
