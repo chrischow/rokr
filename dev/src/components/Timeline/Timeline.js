@@ -12,11 +12,6 @@ export default function Timeline(props) {
   const keyResults = useKeyResults();
   const updates = useUpdates();
 
-  // Delete graph
-  useEffect(()=> {
-    props.setGraph({ network: null, exists: false });
-  }, [])
-
   // Prepare table data
   const tableData = (objectives.isSuccess && keyResults.isSuccess && updates.isSuccess) ?
     updates.data.map(update => {

@@ -13,11 +13,6 @@ import HomeTeamCards from "../HomeTeamCards/HomeTeamCards";
 import './Home.css';
 
 export default function Home(props) {
-  // Delete graph
-  useEffect(()=> {
-    props.setGraph({ network: null, exists: false });
-  }, [])
-
   // Get data
   const objectives = useObjectives();
   const keyResults = useKeyResults();
