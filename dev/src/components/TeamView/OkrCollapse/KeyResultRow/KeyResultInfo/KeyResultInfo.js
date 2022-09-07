@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import './KeyResultInfo.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function KeyResultInfo(props) {
 
@@ -76,6 +77,10 @@ export default function KeyResultInfo(props) {
     table.DataTable().page.len(5).draw(true);
     table.DataTable().page(0);
   };
+  
+  // Link to updates page
+  const navigate = useNavigate();
+  const editUpdates = () => navigate(`/updates/${props.Id}`);
 
   return (
     <>
@@ -118,7 +123,7 @@ export default function KeyResultInfo(props) {
       <div className="kr-info--update-panel">
         <h3 className="kr-info--tag-text mb-4 align-items-center">
           <span className="me-4">Updates</span>
-          <button className="btn kr-info--edit-button">
+          <button className="btn kr-info--edit-button" onClick={editUpdates}>
             <span className="kr-info--edit-text me-1">Edit</span>
             <EditIconText className="kr-info--edit-icon" />
           </button>
