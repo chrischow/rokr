@@ -1,31 +1,33 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
-import { EditIcon, EditIconText, AddIconText } from '../../../../Icons/Icons';
-import { formatDate } from '../../../../../utils/dates';
-import { useTeamUpdates } from '../../../../../hooks/useUpdates';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { formatDate } from '../../../../../utils/dates';
+import { EditIconText } from '../../../../Icons/Icons';
+import { useTeamUpdates } from '../../../../../hooks/useUpdates';
+import QuickAddUpdate from '../QuickAddUpdate/QuickAddUpdate';
 
 import './KeyResultInfo.css';
-import { useNavigate } from 'react-router-dom';
 
 export default function KeyResultInfo(props) {
 
-  // State data
-  const [updateData, setUpdateData] = useState([]);
-
+  
   // Get data
   const updates = useTeamUpdates(props.team);
-
+  
+  // QUICK FIX: Somehow, the data table only renders when the updates data is held in
+  // state. So, we process the data after querying it and feed this into the
+  // table for its initial load.
+  const [initialData, setInitialData] = useState([]);
   useEffect( () => {
     if (updates.isSuccess) {
       let newUpdates = updates.data.filter(update => {
         return update.parentKrId === props.Id;
       });
-      
-      setUpdateData(newUpdates);
+      setInitialData(newUpdates);
     };
-  }, [])
+  }, [updates.isSuccess]);
 
   // Get dates
   const startDate = formatDate(props.startDate);
@@ -36,40 +38,46 @@ export default function KeyResultInfo(props) {
 
   useEffect(
     () => {
-      $(function () {
-        if (!$.fn.dataTable.isDataTable("#kr-info-table")) {
-          table.DataTable().destroy();
-          table.DataTable({
-            autoWidth: false,
-            pageLength: 5,
-            displayStart: 0,
-            lengthMenu: [5, 10, 25, 50],
-            order: [[0, "desc"]],
-            fixedColumns: true,
-            columnDefs: [
-              {
-                width: "18%",
-                name: "updateDate",
-                targets: 0,
-                data: "updateDate",
-                className: "text-center",
-              },
-              {
-                width: "82%",
-                name: "updateText",
-                targets: 1,
-                data: "updateText",
-              },
-            ],
-          });
+      if (updates.isSuccess && updates.data.length > 0) {
+        const updateData = updates.data.filter(update => {
+          return update.parentKrId === props.Id;
+        });
 
-          table.DataTable().rows.add(updateData).draw();
-        } else {
-          table.DataTable().clear();
-          table.DataTable().rows.add(updateData).draw();
-        }
-      });
-    }, [updateData]
+        $(function () {
+          if (!$.fn.dataTable.isDataTable("#kr-info-table")) {
+            table.DataTable().destroy();
+            table.DataTable({
+              autoWidth: false,
+              pageLength: 5,
+              displayStart: 0,
+              lengthMenu: [5, 10, 25, 50],
+              order: [[0, "desc"]],
+              fixedColumns: true,
+              columnDefs: [
+                {
+                  width: "18%",
+                  name: "updateDate",
+                  targets: 0,
+                  data: "updateDate",
+                  className: "text-center",
+                },
+                {
+                  width: "82%",
+                  name: "updateText",
+                  targets: 1,
+                  data: "updateText",
+                },
+              ],
+            });
+            table.DataTable().clear().draw();
+            table.DataTable().rows.add(initialData).draw();
+          } else {
+            table.DataTable().clear().draw();
+            table.DataTable().rows.add(updateData).draw();
+          }
+        });
+      }
+    }, [updates, initialData]
   );
 
   // Revert to table page
@@ -142,6 +150,10 @@ export default function KeyResultInfo(props) {
             <tbody></tbody>
           </table>}
         {!updates.isSuccess && "No data available."}
+        <QuickAddUpdate 
+          krId={props.Id}
+          team={props.parentObjective.team}
+        />
       </div>
     </>
   );
