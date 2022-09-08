@@ -28,6 +28,8 @@ export default function ObjectiveEdit(props) {
     team={props.team}
     freq={props.frequency}
     formCleanup={formCleanup}
+    closeModal={props.closeModal}
+    openDeleteModal={props.openDeleteModal}
     mode='edit'
   />;
 

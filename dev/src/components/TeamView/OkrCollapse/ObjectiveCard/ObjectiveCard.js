@@ -11,12 +11,14 @@ import SharedModal from '../../../SharedModal/SharedModal';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import ObjectiveEdit from './ObjectiveEdit/ObjectiveEdit';
 import KeyResultAdd from './KeyResultAdd/KeyResultAdd';
+import DeleteForm from '../../DeleteForm/DeleteForm';
 
 import './ObjectiveCard.css';
 
 export default function ObjectiveCard(props) {
   // State
   const [showObjectiveEditModal, setShowObjectiveEditModal] = useState(false);
+  const [showObjectiveDeleteModal, setShowObjectiveDeleteModal] = useState(false);
   const [objectiveFormValues, setObjectiveFormValues] = useState({});
   const [showKrAddModal, setShowKrAddModal] = useState(false);
 
@@ -52,11 +54,26 @@ export default function ObjectiveCard(props) {
       objectiveFormValues={objectiveFormValues}
       setObjectiveFormValues={setObjectiveFormValues}
       setShowObjectiveEditModal={setShowObjectiveEditModal}
+      closeModal={handleCloseObjectiveModal}
+      openDeleteModal={() => setShowObjectiveDeleteModal(true)}
       team={props.team}
       freq={props.frequency}
       {...props}
     />;
   }
+  
+  // DELETE OBJECTIVE FORM
+  // Close delete modal
+  const handleCloseObjectiveDeleteModal = () => {
+    setShowObjectiveDeleteModal(false);
+  }
+  const deleteObjective = () => {
+    return <DeleteForm 
+      Id={props.Id}
+      Title={props.Title}
+      closeModal={handleCloseObjectiveDeleteModal}
+    />
+  };
 
   // KEY RESULT FORM
   // Get objectives
@@ -173,6 +190,13 @@ export default function ObjectiveCard(props) {
         onHide={() => setShowObjectiveEditModal(false)}
         renderModalContent={() => editObjective()}
         handleCloseModal={handleCloseObjectiveModal}
+      />
+      <SharedModal
+        modalTitle="Delete Objective"
+        show={showObjectiveDeleteModal}
+        onHide={() => setShowObjectiveDeleteModal(false)}
+        renderModalContent={() => deleteObjective()}
+        handleCloseModal={() => setShowObjectiveDeleteModal(false)}
       />
       <SharedModal
         modalTitle="New Key Result"

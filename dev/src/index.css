@@ -55,6 +55,20 @@ div::-webkit-scrollbar {
   transition: 0.3s;
 }
 
+.btn-red {
+  background-color: #FF5364 !important;
+  color: white !important;
+  transition: 0.3s;
+  border: none !important;
+}
+
+.btn-red:hover {
+  background-color: #ff2c41 !important;
+  color: #fafafa !important;
+  transition: 0.3s;
+  border: none !important;
+}
+
 .btn-secondary {
   background-color: #8497B0 !important;
   color: white !important;
@@ -107,6 +121,15 @@ hr {
 
 .text-blue {
   color: #7B73F0;
+}
+
+.text-red {
+  color: #FF5364;
+}
+
+.text-bubble {
+  background-color: red;
+  padding: 5px;
 }
 
 /* Tables */

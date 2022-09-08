@@ -209,14 +209,27 @@ export default function ObjectiveForm(props) {
           </Row>
         </Form.Group>
       </Form>
-      <div className="text-end mt-2">
-        <button
-          className={`btn ${submitEnabled ? "btn-green" : "btn-secondary"}`}
-          onClick={submitForm}
-          disabled={!submitEnabled}
-        >
-          Submit
-        </button>
+      <div className="mt-2 d-flex justify-content-between">
+        <div className="text-start">
+          <button
+            className="btn btn-red"
+            onClick={() => {
+              props.closeModal();
+              props.openDeleteModal();
+            }}
+          >
+            Delete this Objective
+          </button>
+        </div>
+        <div className="text-end">
+          <button
+            className={`btn ${submitEnabled ? "btn-green" : "btn-secondary"}`}
+            onClick={submitForm}
+            disabled={!submitEnabled}
+          >
+            Submit
+          </button>
+        </div>
       </div>
       {formErrorsList.length > 0 &&
         <div className="form-errors">
