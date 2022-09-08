@@ -60,6 +60,7 @@ export default function OkrCollapse(props) {
         dateOption={props.dateOption}
         startDate={props.startDate}
         endDate={props.endDate}
+        nKeyResults={props.keyResults.length}
         {...props.objective}
       />
       <Collapse in={isClicked}>

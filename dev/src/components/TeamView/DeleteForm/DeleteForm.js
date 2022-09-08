@@ -12,15 +12,16 @@ export default function DeleteForm(props) {
   // Handle change
   const handleChange = (event) => {
     setConfirmText(event.target.value);
-  }
+  };
+
   return (
-    <div className="text-center mt-5 mb-5">
-      <h5>You are about to delete the following objective:</h5>
+    <div className="text-center mt-3 mb-3">
+      <h5>You are about to delete the following {props.itemType}:</h5>
       <div className="mt-4 mb-4">
         <h4 className="text-red">{props.Title}</h4>
       </div>
       <div className="mb-4">
-        To confirm, type <Badge bg="danger" style={{fontSize: "1.0rem"}}>Yes, delete this objective.</Badge> in the box below.
+        To confirm, type <Badge bg="danger" style={{fontSize: "1.0rem"}}>Delete this {props.itemType}.</Badge> in the box below.
       </div>
       <Row className="justify-content-center">
         <Col xs={6} xl={4}>
@@ -44,7 +45,7 @@ export default function DeleteForm(props) {
           <button
             className="btn btn-red"
             onClick={() => {
-              if (confirmText === 'Yes, delete this objective.') {
+              if (confirmText === `Delete this ${props.itemType}.`) {
                 props.closeModal();
                 console.log(`Delete Id=${props.Id}, ${props.Title}`);
               } else {
@@ -52,7 +53,7 @@ export default function DeleteForm(props) {
               }
             }}
           >
-            Submit
+            Delete {props.itemType}
           </button>
         </Col>
       </Row>
