@@ -46,7 +46,7 @@ export default function Directory(props) {
         // Add to nodes
         newGraphData.nodes.push({
           id: `kr-${kr.Id}`,
-          title: kr.krDescription,
+          title: `${kr.Title}${kr.krDescription ? ` - ${kr.krDescription}`: ""}`,
           group: 'keyResults',
           color: getColours(kr.currentValue, kr.maxValue),
         });
@@ -60,7 +60,7 @@ export default function Directory(props) {
         // Add to nodes
         newGraphData.nodes.push({
           id: `obj-${obj.Id}`,
-          title: `${obj.Title} - ${obj.objectiveDescription}`,
+          title: `${obj.Title}${obj.objectiveDescription ? `- ${obj.objectiveDescription}` : ""}`,
           group: 'objectives',
           size: 30
         });
