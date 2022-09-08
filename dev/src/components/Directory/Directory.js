@@ -11,9 +11,12 @@ import Graph from './Graph/Graph';
 
 import './Directory.css';
 import 'vis-network/dist/dist/vis-network.min.css';
+import { useLocation } from 'react-router-dom';
 
 export default function Directory(props) {
-
+  // Force re-render
+  useLocation();
+  
   // State
   const [activeNode, setActiveNode] = useState(null);
   const [activeNodeData, setActiveNodeData] = useState({});

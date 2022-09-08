@@ -55,7 +55,7 @@ export default function Graph(props) {
       });
 
       // Save network
-      props.setGraph({network, exists: true});
+      // props.setGraph({network, exists: true});
       setLocalGraph(network);
     }
   }, []);
