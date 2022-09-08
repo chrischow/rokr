@@ -17,8 +17,6 @@ export default function Graph(props) {
 
   // Launch and teardown
   useEffect(() => {
-    props.setGraph({ network: null, exists: false });
-    
     if (mapContainer.current) {
       // Initialise network
       let network;
