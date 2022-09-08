@@ -69,10 +69,21 @@ export async function updateQuery(listId, itemId, data, token, callback) {
   }
 };
 
-export function getData(queryState, getFn, getFromCacheFn) {
-  if (queryState) {
-    return getFn;
-  } else {
-    return getFromCacheFn;
+export async function deleteQuery(listId, itemId, token, callback) {
+  const url = `${config.apiUrl}web/Lists(guid'${listId}')/items(${itemId})`
+  try {
+    const response = await axios.post(url, undefined, {
+      headers: {
+        'Accept': 'application/json; odata=verbose',
+        'content-type': 'application/json; odata=verbose',
+        'X-RequestDigest': token,
+        'IF-MATCH': '*',
+        'X-HTTP-METHOD': 'DELETE'
+      }
+    });
+    // console.log(response);
+    callback();
+  } catch (error) {
+    console.log('Error:', error);
   }
 };
