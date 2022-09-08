@@ -48,7 +48,8 @@ h1.teampage-title {
 }
 
 /* Individual tabs */
-.individual-tabs--link {
+.individual-tabs--link,
+.individual-tabs--link:focus {
   color: #6B7E97;
   font-size: 0.9rem;
   transition: 0.3s;
