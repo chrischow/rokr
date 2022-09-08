@@ -85,7 +85,7 @@ export default function KeyResultForm(props) {
 
     // Form ok
     if (formOkay) {
-      const { Id, ...newData } = props.formValues;
+      const { Id, parentObjective, ...newData } = props.formValues;
       const reqDigest = token.isSuccess && token.data.FormDigestValue;
 
       if (props.mode === 'edit') {
@@ -94,8 +94,10 @@ export default function KeyResultForm(props) {
           __metadata: {
             type: config.krListItemEntityTypeFullName
           },
-          ...newData
-        }
+          ...newData,
+          parentObjectiveId: parentObjective
+        };
+        console.log(data);
         updateQuery(config.krListId, Id, data, reqDigest, props.formCleanup);
       } else {
         console.log('New data');
@@ -103,8 +105,10 @@ export default function KeyResultForm(props) {
           __metadata: {
             type: config.krListItemEntityTypeFullName
           },
-          ...props.formValues
+          ...newData,
+          parentObjectiveId: parentObjective
         };
+        console.log(data);
         createQuery(config.krListId, data, reqDigest, props.formCleanup);
       }
     }
