@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useObjectives, useTeamObjectives, useTeamObjectivesCache } from "../../../../hooks/useObjectives";
+import { useObjectives } from "../../../../hooks/useObjectives";
+import { getDate } from "../../../../utils/dates";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import ProgressBar from "../../ProgressBar/ProgressBar";
 import SharedModal from "../../../SharedModal/SharedModal";
 import KeyResultInfo from "./KeyResultInfo/KeyResultInfo";
+import KeyResultEdit from "./KeyResultEdit/KeyResultEdit";
 
 import './KeyResultRow.css';
-import KeyResultEdit from "./KeyResultEdit/KeyResultEdit";
 
 export default function KeyResultRow(props) {
 
@@ -18,8 +19,8 @@ export default function KeyResultRow(props) {
     Id: props.Id,
     Title: props.Title,
     krDescription: props.krDescription ? props.krDescription : '',
-    krStartDate: props.krStartDate,
-    krEndDate: props.krEndDate,
+    krStartDate: getDate(props.krStartDate),
+    krEndDate: getDate(props.krEndDate),
     minValue: props.minValue,
     maxValue: props.maxValue,
     currentValue: props.currentValue,
@@ -41,8 +42,8 @@ export default function KeyResultRow(props) {
       Id: props.Id,
       Title: props.Title,
       krDescription: props.krDescription ? props.krDescription : '',
-      krStartDate: props.krStartDate,
-      krEndDate: props.krEndDate,
+      krStartDate: getDate(props.krStartDate),
+      krEndDate: getDate(props.krEndDate),
       minValue: props.minValue,
       maxValue: props.maxValue,
       currentValue: props.currentValue,
@@ -91,7 +92,7 @@ export default function KeyResultRow(props) {
           </div>
         </Col>
         <Col xs={2} className="text-center">
-          <span className="keyresult-row--text">{props.krEndDate}</span>
+          <span className="keyresult-row--text">{getDate(props.krEndDate)}</span>
         </Col>
         <Col xs={3} className="keyresult-row--progress-bar">
           <ProgressBar progress={props.progress} isKeyResult={true} />

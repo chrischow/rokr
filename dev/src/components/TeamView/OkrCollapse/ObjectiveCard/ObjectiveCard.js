@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
+import { useTeamObjectives } from "../../../../hooks/useObjectives";
 import { getData } from '../../../../utils/query';
-import { useTeamObjectivesCache, useTeamObjectives } from "../../../../hooks/useObjectives";
+import { getDate } from '../../../../utils/dates';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -28,8 +29,8 @@ export default function ObjectiveCard(props) {
     Id: props.Id,
     Title: props.Title,
     objectiveDescription: props.objectiveDescription ? props.objectiveDescription : '',
-    objectiveStartDate: props.objectiveStartDate,
-    objectiveEndDate: props.objectiveEndDate,
+    objectiveStartDate: getDate(props.objectiveStartDate),
+    objectiveEndDate: getDate(props.objectiveEndDate),
     frequency: props.frequency,
     team: props.team,
     owner: props.owner ? props.owner : ''
@@ -59,11 +60,7 @@ export default function ObjectiveCard(props) {
 
   // KEY RESULT FORM
   // Get objectives
-  const objectives = getData(
-    queryClient.getQueryState('objectives'),
-    useTeamObjectives,
-    useTeamObjectivesCache
-  )(props.team);
+  const objectives = useTeamObjectives(props.team);
   
   const objectiveOptions = objectives.isSuccess && objectives.data.map(obj => {
     return {
@@ -76,8 +73,8 @@ export default function ObjectiveCard(props) {
   const defaultKrValues = {
     Title: '',
     krDescription: '',
-    krStartDate: props.objectiveStartDate,
-    krEndDate: props.objectiveEndDate,
+    krStartDate: getDate(props.objectiveStartDate),
+    krEndDate: getDate(props.objectiveEndDate),
     minValue: 0,
     maxValue: 1,
     currentValue: 0,
@@ -163,7 +160,7 @@ export default function ObjectiveCard(props) {
         </Col>
         <Col xs={2} className="text-center">
           <span className="objective-card--text">
-            {props.objectiveEndDate}
+            {getDate(props.objectiveEndDate)}
           </span>
         </Col>
         <Col xs={3} className="objective-card--progress-bar">

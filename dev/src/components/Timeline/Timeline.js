@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useKeyResults } from '../../hooks/useKeyResults';
 import { useObjectives } from '../../hooks/useObjectives';
 import { useUpdates } from '../../hooks/useUpdates';
+import { getDate } from '../../utils/dates';
 import $ from 'jquery';
 
 import './Timeline.css';
@@ -24,7 +25,8 @@ export default function Timeline(props) {
       return {
         ...update,
         krTitle: kr.Title,
-        objectiveTitle: obj.Title
+        objectiveTitle: obj.Title,
+        updateDate: getDate(update.updateDate)
       };
     }) : null;
 

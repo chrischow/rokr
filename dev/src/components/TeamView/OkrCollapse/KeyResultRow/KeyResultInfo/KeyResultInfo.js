@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { formatDate } from '../../../../../utils/dates';
+import { formatDate, getDate } from '../../../../../utils/dates';
 import { EditIconText } from '../../../../Icons/Icons';
 import { useTeamUpdates } from '../../../../../hooks/useUpdates';
 import QuickAddUpdate from '../QuickAddUpdate/QuickAddUpdate';
@@ -41,6 +41,8 @@ export default function KeyResultInfo(props) {
       if (updates.isSuccess && updates.data.length > 0) {
         const updateData = updates.data.filter(update => {
           return update.parentKrId === props.Id;
+        }).map(update => {
+          return {...update, updateDate: getDate(update.updateDate)};
         });
 
         $(function () {
