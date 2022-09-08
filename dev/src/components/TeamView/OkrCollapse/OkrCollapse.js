@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import $ from 'jquery';
 import Collapse from 'react-bootstrap/Collapse';
 import ObjectiveCard from "./ObjectiveCard/ObjectiveCard";
 import KeyResultRow from "./KeyResultRow/KeyResultRow";
-import $ from 'jquery';
+import { sortByTitle } from "../../../utils/dataProcessing";
 
 export default function OkrCollapse(props) {
   // Expand state
@@ -10,10 +11,10 @@ export default function OkrCollapse(props) {
 
   // ID
   const objId = `obj-${props.objective.Id}`;
-  const krRows = props.keyResults.map(kr => {
+  const krRows = props.keyResults.sort(sortByTitle).map(kr => {
     const krUpdates = props.updateData.filter(update => {
       return update.parentKrId === kr.Id;
-    });
+    }).sort();
     const nLatestUpdates = krUpdates.length;
     return <KeyResultRow
       // key={`kr-row-${kr.Id}`}

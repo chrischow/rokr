@@ -8,6 +8,7 @@ import OkrCollapse from "../OkrCollapse/OkrCollapse";
 import ObjectiveAdd from './ObjectiveAdd/ObjectiveAdd';
 
 import './OkrSection.css';
+import { sortByTitle } from '../../../utils/dataProcessing';
 
 export default function OkrSection(props) {
 
@@ -97,7 +98,7 @@ export default function OkrSection(props) {
   />
 
   // Create OKR Collapse objects
-  const okrCollapses = props.objectives.map(obj => {
+  const okrCollapses = props.objectives.sort(sortByTitle).map(obj => {
     const keyResults = props.keyResults.filter(kr => kr.parentObjective.Id === obj.Id);
     return (
       <OkrCollapse
