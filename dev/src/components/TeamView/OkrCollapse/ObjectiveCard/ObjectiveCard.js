@@ -11,7 +11,7 @@ import SharedModal from '../../../SharedModal/SharedModal';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import ObjectiveEdit from './ObjectiveEdit/ObjectiveEdit';
 import KeyResultAdd from './KeyResultAdd/KeyResultAdd';
-import DeleteForm from '../../DeleteForm/DeleteForm';
+import ObjectiveDelete from './ObjectiveDelete/ObjectiveDelete';
 
 import './ObjectiveCard.css';
 
@@ -67,30 +67,19 @@ export default function ObjectiveCard(props) {
   const handleCloseObjectiveDeleteModal = () => {
     setShowObjectiveDeleteModal(false);
   }
+
   const deleteObjective = () => {
-    if (props.nKeyResults > 0) {
-      return (
-        <div className="mt-5 mb-5 text-center">
-          <div style={{ fontSize: '1.2rem', fontWeight: 'light' }}>
-            This objective has <span className="text-red">{props.nKeyResults}</span> {`Key Result${props.nKeyResults > 1 ? "s" : ""}`} attached.<br />
-            Please review and delete {props.nKeyResults > 1 ? "them" : "it"} first.
-          </div>
-        </div>
-      );
-    } else {
-      return <DeleteForm 
-        Id={props.Id}
-        Title={props.Title}
-        itemType="Objective"
-        closeModal={handleCloseObjectiveDeleteModal}
-      />
-    }
+    return <ObjectiveDelete
+      nKeyResults={props.nKeyResults}
+      Id={props.Id}
+      Title={props.Title}
+      closeModal={handleCloseObjectiveDeleteModal}
+    />
   };
 
   // KEY RESULT FORM
   // Get objectives
   const objectives = useTeamObjectives(props.team);
-  
   const objectiveOptions = objectives.isSuccess && objectives.data.map(obj => {
     return {
       value: obj.Id,

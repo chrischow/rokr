@@ -1,10 +1,17 @@
 import { useState } from 'react';
+import useToken from '../../../hooks/useToken';
+import { deleteQuery } from '../../../utils/query';
 import Badge from 'react-bootstrap/Badge';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { config } from '../../../config';
+
 
 export default function DeleteForm(props) {
+  // Get token
+  const token = useToken();
+
   // Form state
   const [confirmText, setConfirmText] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -14,6 +21,16 @@ export default function DeleteForm(props) {
     setConfirmText(event.target.value);
   };
 
+  // Delete
+  const confirmDelete = () => {
+    // Get token
+    const reqDigest = token.isSuccess && token.data.FormDigestValue;
+    
+    // Set list Id
+    const listId = props.itemType === 'Objective' ? config.objListId : config.krListId;
+    deleteQuery(listId, props.Id, reqDigest, props.closeModal);
+  };
+
   return (
     <div className="text-center mt-3 mb-3">
       <h5>You are about to delete the following {props.itemType}:</h5>
@@ -21,7 +38,7 @@ export default function DeleteForm(props) {
         <h4 className="text-red">{props.Title}</h4>
       </div>
       <div className="mb-4">
-        To confirm, type <Badge bg="danger" style={{fontSize: "1.0rem"}}>Delete this {props.itemType}.</Badge> in the box below.
+        To confirm, type <Badge bg="danger" style={{fontSize: "1.0rem"}}>Delete</Badge> in the box below.
       </div>
       <Row className="justify-content-center">
         <Col xs={6} xl={4}>
@@ -33,6 +50,7 @@ export default function DeleteForm(props) {
                 className="form-dark form--edit text-center text-red mb-3"
                 value={confirmText}
                 onChange={handleChange}
+                autoComplete="off"
               />
             </Form.Group>
           </Form>
@@ -45,9 +63,9 @@ export default function DeleteForm(props) {
           <button
             className="btn btn-red"
             onClick={() => {
-              if (confirmText === `Delete this ${props.itemType}.`) {
-                props.closeModal();
+              if (confirmText.toLowerCase() === "delete") {
                 console.log(`Delete Id=${props.Id}, ${props.Title}`);
+                confirmDelete();
               } else {
                 setShowErrorMessage(true);
               }
