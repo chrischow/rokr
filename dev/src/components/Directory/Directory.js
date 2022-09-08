@@ -60,7 +60,7 @@ export default function Directory(props) {
         // Add to nodes
         newGraphData.nodes.push({
           id: `obj-${obj.Id}`,
-          title: `${obj.Title}${obj.objectiveDescription ? `- ${obj.objectiveDescription}` : ""}`,
+          title: `${obj.Title}${obj.objectiveDescription ? ` - ${obj.objectiveDescription}` : ""}`,
           group: 'objectives',
           size: 30
         });
