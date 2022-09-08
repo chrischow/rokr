@@ -56,7 +56,7 @@ export const useTeamKeyResults = (team) => {
     config.krListId,
     `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team`,
     'parentObjective',
-    `parentObjective/team eq "${team}"`
+    `parentObjective/team eq '${team}'`
   );
   return useQuery([`keyResults-${slugify(team)}`], constructReadQueryFn(url), {
     staleTime: config.staleTime

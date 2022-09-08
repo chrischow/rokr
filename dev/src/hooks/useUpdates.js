@@ -65,7 +65,7 @@ export const useTeamUpdates = (team) => {
     config.updateListId,
     `Id,updateText,updateDate,parentKrId,team`,
     undefined,
-    `team eq "${team}"`
+    `team eq '${team}'`
   );
   return useQuery(['updates', team], constructReadQueryFn(url), {
     staleTime: config.staleTime

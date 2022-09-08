@@ -57,7 +57,7 @@ export const useTeamObjectives = (team) => {
     config.objListId,
     `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`,
     undefined,
-    `team eq "${team}"`
+    `team eq '${team}'`
   );
 
   return useQuery([`objectives-${slugify(team)}`], constructReadQueryFn(url), {
