@@ -97,7 +97,7 @@ export default function KeyResultForm(props) {
           ...newData,
           parentObjectiveId: parentObjective
         };
-        console.log(data);
+        
         updateQuery(config.krListId, Id, data, reqDigest, props.formCleanup);
       } else {
         console.log('New data');
@@ -253,13 +253,25 @@ export default function KeyResultForm(props) {
             </Col>
           </Row>
         </Form.Group>
-      </Form> 
-      <div className="text-end mt-2">
+      </Form>
+      <div className={`mt-2 d-flex ${props.mode === 'edit' ? "justify-content-between" : "justify-content-end"}`}>
+        {props.mode === 'edit' &&
+          <button
+            className="btn btn-red"
+            onClick={() => {
+              props.closeModal();
+              props.openDeleteModal();
+            }}
+          >
+            Delete Key Result
+          </button>
+        }
         <button
           className="btn btn-green"
           onClick={submitForm}
-          disabled={!submitEnabled}>
-          Submit
+          disabled={!submitEnabled}
+        >
+          {props.mode === 'edit' ? 'Save' : 'Add'} Key Result
         </button>
       </div>
       {formErrorsList.length > 0 &&
