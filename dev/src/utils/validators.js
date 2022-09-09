@@ -115,7 +115,7 @@ export const validateKrForm = (
       return [...prevData, "Input a maximum value."];
     });
     formOkay = formOkay && false;
-  } else if (inputMaxValue <= 1) {
+  } else if (inputMaxValue < 1) {
     errorSetter(prevData => {
       return [...prevData, "Input a maximum value of 1 or greater."]
     });

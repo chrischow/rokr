@@ -75,11 +75,12 @@ export default function KeyResultForm(props) {
     const inputStartDate = props.formValues.krStartDate;
     const inputEndDate = props.formValues.krEndDate;
     const inputMinValue = props.formValues.minValue
+    const inputCurrentValue = props.formValues.currentValue
     const inputMaxValue = props.formValues.maxValue
 
     // Form validation
     const formOkay = validateKrForm(
-      inputTitle, inputStartDate, inputEndDate, inputMinValue,
+      inputTitle, inputStartDate, inputEndDate, inputMinValue, inputCurrentValue,
       inputMaxValue, token.isSuccess, setFormErrors
     );
 
@@ -118,7 +119,7 @@ export default function KeyResultForm(props) {
   
   // Handle change
   const handleChange = (event) => {
-    props.setFormValues(prevData => {
+    props.setFormValues(prevData => {    
       return {
         ...prevData,
         [event.target.name]: event.target.value
@@ -134,9 +135,9 @@ export default function KeyResultForm(props) {
           ...prevData,
           'parentObjective': Number(event.value)
         }
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -213,7 +214,6 @@ export default function KeyResultForm(props) {
                 id="minValue"
                 name="minValue"
                 min="0"
-                max={props.formValues.maxValue}
                 className="form-dark form--edit"
                 value={props.formValues.minValue}
                 onChange={handleChange}
@@ -244,7 +244,6 @@ export default function KeyResultForm(props) {
                 type="number"
                 id="maxValue"
                 name="maxValue"
-                min={props.formValues.currentValue}
                 className="form-dark form--edit"
                 value={props.formValues.maxValue}
                 onChange={handleChange}
