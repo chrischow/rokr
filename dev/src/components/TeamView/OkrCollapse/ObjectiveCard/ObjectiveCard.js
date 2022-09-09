@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
+import slugify from 'slugify';
 import { useTeamObjectives } from "../../../../hooks/useObjectives";
-import { getData } from '../../../../utils/query';
 import { getDate } from '../../../../utils/dates';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -11,7 +11,7 @@ import SharedModal from '../../../SharedModal/SharedModal';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import ObjectiveEdit from './ObjectiveEdit/ObjectiveEdit';
 import KeyResultAdd from './KeyResultAdd/KeyResultAdd';
-import ObjectiveDelete from './ObjectiveDelete/ObjectiveDelete';
+import DeleteForm from '../../DeleteForm/DeleteForm';
 
 import './ObjectiveCard.css';
 
@@ -21,9 +21,18 @@ export default function ObjectiveCard(props) {
   const [showObjectiveDeleteModal, setShowObjectiveDeleteModal] = useState(false);
   const [objectiveFormValues, setObjectiveFormValues] = useState({});
   const [showKrAddModal, setShowKrAddModal] = useState(false);
-
-  // Create query client
+  
+  // Invalidate data
   const queryClient = useQueryClient();
+  const invalidateObjectives = () => {
+    queryClient.invalidateQueries([`objectives-${slugify(props.team)}`], { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
+
+  const invalidateKeyResults = () => {
+    queryClient.invalidateQueries([`keyResults-${slugify(props.team)}`], { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
 
   // OBJECTIVE FORM
   // Re-populate form
@@ -69,10 +78,14 @@ export default function ObjectiveCard(props) {
   }
 
   const deleteObjective = () => {
-    return <ObjectiveDelete
-      nKeyResults={props.nKeyResults}
+    return <DeleteForm
       Id={props.Id}
       Title={props.Title}
+      itemType="Objective"
+      keyResultIds={props.keyResultIds}
+      updateIds={props.updateIds}
+      invalidateObjectives={invalidateObjectives}
+      invalidateKeyResults={invalidateKeyResults}
       closeModal={handleCloseObjectiveDeleteModal}
     />
   };

@@ -100,6 +100,7 @@ export default function OkrSection(props) {
   // Create OKR Collapse objects
   const okrCollapses = props.objectives.sort(sortByTitle).map(obj => {
     const keyResults = props.keyResults.filter(kr => kr.parentObjective.Id === obj.Id);
+
     return (
       <OkrCollapse
         // key={`okrcollapse-${obj.Id}`}

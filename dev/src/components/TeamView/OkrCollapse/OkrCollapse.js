@@ -14,7 +14,7 @@ export default function OkrCollapse(props) {
   const krRows = props.keyResults.sort(sortByTitle).map(kr => {
     const krUpdates = props.updateData.filter(update => {
       return update.parentKrId === kr.Id;
-    }).sort();
+    });
     const nLatestUpdates = krUpdates.length;
     return <KeyResultRow
       // key={`kr-row-${kr.Id}`}
@@ -48,7 +48,13 @@ export default function OkrCollapse(props) {
       .map(kr => kr.currentValue / kr.maxValue)
       .reduce((a, b) => a + b) / props.keyResults.length
     : 0;
-  
+
+  // Prepare key results and update data
+  const keyResultIds = props.keyResults.map(kr => kr.Id);
+  const updateIds = props.updateData.filter(update => {
+    return keyResultIds.includes(update.Id);
+  }).map(update => update.Id);
+
   return (
     <div className="mt-4">
       <ObjectiveCard
@@ -60,7 +66,8 @@ export default function OkrCollapse(props) {
         dateOption={props.dateOption}
         startDate={props.startDate}
         endDate={props.endDate}
-        nKeyResults={props.keyResults.length}
+        keyResultIds={keyResultIds}
+        updateIds={updateIds}
         {...props.objective}
       />
       <Collapse in={isClicked}>
