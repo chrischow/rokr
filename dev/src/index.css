@@ -127,9 +127,8 @@ hr {
   color: #FF5364;
 }
 
-.text-bubble {
-  background-color: red;
-  padding: 5px;
+.text-grey {
+  color: #9baabf;
 }
 
 /* Tables */
