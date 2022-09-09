@@ -5,6 +5,68 @@ The folder structure reflects this dependency tree. Top-level components are in 
 
 In the diagrams below, each folder contains `index.js`, and sometimes, also `styles.css`. We omit these files from the diagram for simplicity.
 
+```mermaid
+graph LR
+    Root --> Home
+    Root --> Team
+    Root --> Updates
+    Root --> Timeline
+    Root --> Directory
+    
+    Home --> HomeTeamCards
+    Home --> PC([ProgressCard])
+    HomeTeamCards --> PC
+
+    Team --> TeamPane
+    TeamPane --> TeamProgress
+    TeamPane --> OkrSection
+    TeamPane --> FreqDropdown
+
+    TeamProgress --> PC
+
+    OkrSection --> ObjectiveAdd
+    OkrSection --> OkrCollapse
+    OkrSection --> SM([SharedModal])
+    ObjectiveAdd --> ObjectiveForm
+
+    OkrCollapse --> KeyResultRow
+    OkrCollapse --> ObjectiveCard
+
+    
+    ObjectiveCard --> SM
+    ObjectiveCard --> ProgressBar
+    ObjectiveCard --> ObjectiveEdit
+    ObjectiveCard --> KeyResultAdd
+    ObjectiveCard --> DF([DeleteForm])
+
+    ObjectiveEdit --> ObjectiveForm
+    KeyResultAdd --> KeyResultForm
+
+    KeyResultRow --> ProgressBar
+    KeyResultRow --> SM
+    KeyResultRow --> KeyResultInfo
+    KeyResultRow --> KeyResultEdit
+    KeyResultRow --> DF
+
+    KeyResultEdit --> KeyResultForm
+    KeyResultInfo --> QuickAddUpdate
+    QuickAddUpdate --> UpdateForm
+
+    
+
+    Updates --> SM
+    Updates --> UpdatesTable
+    Updates --> UpdatesAdd
+    Updates --> UpdatesEdit
+    Updates --> DF
+
+    UpdatesAdd --> UpdateForm
+    UpdatesEdit --> UpdateForm
+
+    classDef shared fill:#7b73f0
+    class PC,SM,DF shared
+```
+
 ## A. Top-Level Components
 
 ### 1. `Home`
