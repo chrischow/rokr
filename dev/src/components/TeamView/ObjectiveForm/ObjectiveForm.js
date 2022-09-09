@@ -76,7 +76,7 @@ export default function ObjectiveForm(props) {
     const inputEndDate = props.formValues.objectiveEndDate;
 
     const formOkay = validateObjectiveForm(inputTitle, inputStartDate, inputEndDate, token.isSuccess, setFormErrors);
-    
+
     // Form ok
     if (formOkay) {
       const { Id, ...newData } = props.formValues;
@@ -209,8 +209,8 @@ export default function ObjectiveForm(props) {
           </Row>
         </Form.Group>
       </Form>
-      <div className="mt-2 d-flex justify-content-between">
-        <div className="text-start">
+      <div className={`mt-2 d-flex ${props.mode === 'edit' ? "justify-content-between" : "justify-content-end"}`}>
+        {props.mode === 'edit' &&
           <button
             className="btn btn-red"
             onClick={() => {
@@ -219,17 +219,14 @@ export default function ObjectiveForm(props) {
             }}
           >
             Delete Objective
-          </button>
-        </div>
-        <div className="text-end">
-          <button
-            className={`btn ${submitEnabled ? "btn-green" : "btn-secondary"}`}
-            onClick={submitForm}
-            disabled={!submitEnabled}
-          >
-            {props.mode === 'edit' ? 'Save' : 'Add'} Objective
-          </button>
-        </div>
+          </button>}
+        <button
+          className={`btn ${submitEnabled ? "btn-green" : "btn-secondary"}`}
+          onClick={submitForm}
+          disabled={!submitEnabled}
+        >
+          {props.mode === 'edit' ? 'Save' : 'Add'} Objective
+        </button>
       </div>
       {formErrorsList.length > 0 &&
         <div className="form-errors">
