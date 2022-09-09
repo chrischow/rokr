@@ -214,6 +214,7 @@ export default function KeyResultForm(props) {
                 id="minValue"
                 name="minValue"
                 min="0"
+                max={props.formValues.maxValue}
                 className="form-dark form--edit"
                 value={props.formValues.minValue}
                 onChange={handleChange}
@@ -244,7 +245,7 @@ export default function KeyResultForm(props) {
                 type="number"
                 id="maxValue"
                 name="maxValue"
-                min="1"
+                min={props.formValues.currentValue}
                 className="form-dark form--edit"
                 value={props.formValues.maxValue}
                 onChange={handleChange}
