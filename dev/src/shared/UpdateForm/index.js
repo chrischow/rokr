@@ -126,12 +126,24 @@ export default function UpdateForm(props) {
           />
         </Form.Group>
       </Form>
-      <div className="text-end mt-2">
+      <div className={`mt-2 d-flex ${props.mode === 'edit' ? "justify-content-between" : "justify-content-end"}`}>
+        {props.mode === 'edit' &&
+          <button
+            className="btn btn-red"
+            onClick={() => {
+              props.closeModal();
+              props.openDeleteModal();
+            }}
+          >
+            Delete Update
+          </button>
+        }
         <button
           className="btn btn-green"
           onClick={submitForm}
-          disabled={!submitEnabled}>
-          Submit
+          disabled={!submitEnabled}
+        >
+          {props.mode === 'edit' ? 'Save' : 'Add'} Objective
         </button>
       </div>
       {formErrorsList.length > 0 &&

@@ -43,7 +43,7 @@ export default function DeleteForm(props) {
         props.invalidateObjectives();
         props.closeModal();
       });
-    } else {
+    } else if (props.itemType === 'Key Result') {
       // Delete updates first
       if (props.updateIds.length > 0) {
         props.updateIds.map(updateId => {
@@ -56,6 +56,9 @@ export default function DeleteForm(props) {
         props.invalidateKeyResults();
         props.closeModal();
       });
+    } else {
+      deleteQuery(updateListId, props.Id, reqDigest, props.invalidateUpdates);
+      props.closeModal();
     }
   };
 
@@ -64,7 +67,7 @@ export default function DeleteForm(props) {
   const textKeyResults = props.keyResultIds && `Key Result${nKeyResults > 1 ? "s " : " "}`
   const nUpdates = props.updateIds && props.updateIds.length;
   const textUpdates = props.updateIds && `Update${nUpdates > 1 ? "s " : " "}`
-
+  
   return (
     <div className="text-center mt-3 mb-3">
       <h5>You are about to delete the following {props.itemType}:</h5>

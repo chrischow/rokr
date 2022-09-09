@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useQueryClient } from "react-query";
 import { useKeyResult } from "../shared/hooks/useKeyResults";
 import { useKrUpdatesDirect } from "../shared/hooks/useUpdates";
 import { getDate } from "../utils/dates";
@@ -7,9 +8,19 @@ import SharedModal from "../shared/SharedModal";
 import UpdatesTable from "./UpdatesTable";
 import UpdateAdd from "./UpdateAdd";
 import UpdateEdit from "./UpdateEdit";
+import DeleteForm from "../Team/TeamPane/OkrSection/OkrCollapse/DeleteForm";
 
 
 export default function Updates(props) {
+
+  // Create query client
+  const queryClient = useQueryClient();
+
+  // Invalidate and refetch
+  const invalidateAndRefetch = () => {
+    queryClient.invalidateQueries(['updates', krId], { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
 
   // State
   const [updateAddFormValues, setUpdateAddFormValues] = useState({});
@@ -17,6 +28,7 @@ export default function Updates(props) {
   const [updateEditFormValues, setUpdateEditFormValues] = useState({});
   const [showUpdateAddModal, setShowUpdateAddModal] = useState(false);
   const [showUpdateEditModal, setShowUpdateEditModal] = useState(false);
+  const [showUpdateDeleteModal, setShowUpdateDeleteModal] = useState(false);
   const [team, setTeam] = useState('');
   
   // Get data
@@ -56,6 +68,7 @@ export default function Updates(props) {
       setUpdateAddFormValues={setUpdateAddFormValues}
       setShowUpdateAddModal={setShowUpdateAddModal}
       defaultFormValues={defaultAddUpdateValues}
+      invalidateAndRefetch={invalidateAndRefetch}
       krId={krId}
     />;
   }
@@ -75,20 +88,41 @@ export default function Updates(props) {
     setUpdateEditFormValues(update);
   };
 
+  // Close edit update modal
+  const handleCloseUpdateEditModal = () => {
+    // Reset form
+    if (showUpdateDeleteModal) {
+      setUpdateEditFormValues({});
+    }
+    setShowUpdateEditModal(false);
+  };
+
   const editUpdate = () => {
     return <UpdateEdit
       updateEditFormValues={updateEditFormValues}
       setUpdateEditFormValues={setUpdateEditFormValues}
       setShowUpdateEditModal={setShowUpdateEditModal}
+      invalidateAndRefetch={invalidateAndRefetch}
+      closeModal={handleCloseUpdateEditModal}
+      openDeleteModal={() => setShowUpdateDeleteModal(true)}
       krId={krId}
     />
   };
 
-  // Close edit update modal
-  const handleCloseUpdateEditModal = () => {
-    // Reset form
-    setUpdateEditFormValues({});
-    setShowUpdateEditModal(false);
+  // DELETE UPDATE FORM
+  // Close delete modal
+  const handleCloseUpdateDeleteModal =() => {
+    setShowUpdateDeleteModal(false);
+  };
+
+  const deleteUpdate = () => {
+    return <DeleteForm
+      Id={updateEditFormValues.Id}
+      Title={updateEditFormValues.updateText}
+      itemType='Update'
+      invalidateUpdates={invalidateAndRefetch}
+      closeModal={handleCloseUpdateDeleteModal}
+    />;
   };
 
   return (
@@ -125,6 +159,13 @@ export default function Updates(props) {
         onHide={() => setShowUpdateEditModal(false)}
         renderModalContent={() => editUpdate()}
         handleCloseModal={handleCloseUpdateEditModal}
+      />
+      <SharedModal
+        modalTitle="Delete Update"
+        show={showUpdateDeleteModal}
+        onHide={() => setShowUpdateDeleteModal(false)}
+        renderModalContent={() => deleteUpdate()}
+        handleCloseModal={handleCloseUpdateDeleteModal}
       />
     </>
   );

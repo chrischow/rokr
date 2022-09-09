@@ -1,21 +1,11 @@
-import { useQueryClient } from "react-query";
 import UpdateForm from "../../shared/UpdateForm";
 
 export default function UpdateAdd(props) {
 
-  // Create query client
-  const queryClient = useQueryClient();
-
-  // Invalidate and refetch
-  const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries(['updates', props.krId], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
-  };
-
   // Form cleanup
   const formCleanup = () => {
     // Invalidate and refetch data
-    invalidateAndRefetch();
+    props.invalidateAndRefetch();
 
     // Reset form
     props.setUpdateAddFormValues({...props.defaultFormValues});
@@ -27,7 +17,7 @@ export default function UpdateAdd(props) {
   return <UpdateForm
     setFormValues={props.setUpdateAddFormValues}
     formValues={props.updateAddFormValues}
-    invalidateAndRefetch={invalidateAndRefetch}
+    invalidateAndRefetch={props.invalidateAndRefetch}
     formCleanup={formCleanup}
     mode="new"
   />

@@ -1,21 +1,11 @@
-import { useQueryClient } from "react-query";
 import UpdateForm from "../../shared/UpdateForm";
 
 export default function UpdateEdit(props) {
 
-  // Create query client
-  const queryClient = useQueryClient();
-
-  // Invalidate and refetch
-  const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries(['updates', props.krId], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
-  };
-
   // Form cleanup
   const formCleanup = () => {
     // Invalidate and refetch data
-    invalidateAndRefetch();
+    props.invalidateAndRefetch();
 
     // Reset form
     // props.setUpdateEditFormValues({});
@@ -27,8 +17,10 @@ export default function UpdateEdit(props) {
   return <UpdateForm
     setFormValues={props.setUpdateEditFormValues}
     formValues={props.updateEditFormValues}
-    invalidateAndRefetch={invalidateAndRefetch}
+    invalidateAndRefetch={props.invalidateAndRefetch}
     formCleanup={formCleanup}
+    closeModal={props.closeModal}
+    openDeleteModal={props.openDeleteModal}
     mode="edit"
   />
 }
