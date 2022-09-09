@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import slugify from "slugify";
 import { useObjectives } from "../../../../hooks/useObjectives";
@@ -45,6 +45,24 @@ export default function KeyResultRow(props) {
     currentValue: props.currentValue,
     parentObjective: props.parentObjective.Id
   });
+
+  // Update form in response to Id
+  useEffect(() => {
+    setKrFormValues(prevData => {
+      return {
+        ...prevData,
+        Id: props.Id,
+        Title: props.Title,
+        krDescription: props.krDescription ? props.krDescription : '',
+        krStartDate: getDate(props.krStartDate),
+        krEndDate: getDate(props.krEndDate),
+        minValue: props.minValue,
+        maxValue: props.maxValue,
+        currentValue: props.currentValue,
+        parentObjective: props.parentObjective.Id
+      }
+    });
+  }, [props]);
 
   // Get objectives
   const objectives = useObjectives()

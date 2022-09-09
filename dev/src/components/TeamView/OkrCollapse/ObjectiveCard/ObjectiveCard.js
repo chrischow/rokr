@@ -120,6 +120,16 @@ export default function ObjectiveCard(props) {
 
   const [krFormValues, setKrFormValues] = useState({...defaultKrValues});
 
+  // Update default KR values
+  useEffect(() => {
+    setKrFormValues(prevData => {
+      return {
+        ...prevData,
+        parentObjective: props.Id
+      }
+    })
+  }, [props.Id]);
+
   // Update form values based on the things that can change
   useEffect(() => {
     setKrFormValues(prevData => {
