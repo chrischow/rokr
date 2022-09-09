@@ -50,7 +50,7 @@ graph LR
 
     KeyResultEdit --> KeyResultForm
     KeyResultInfo --> QuickAddUpdate
-    QuickAddUpdate --> UpdateForm
+    QuickAddUpdate --> UF([UpdateForm])
 
     
 
@@ -60,11 +60,11 @@ graph LR
     Updates --> UpdatesEdit
     Updates --> DF
 
-    UpdatesAdd --> UpdateForm
-    UpdatesEdit --> UpdateForm
+    UpdatesAdd --> UF
+    UpdatesEdit --> UF
 
     classDef shared fill:#7b73f0,color:white
-    class PC,SM,DF shared
+    class PC,SM,DF,UF shared
 ```
 
 ## A. Top-Level Components
