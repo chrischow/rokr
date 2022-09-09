@@ -51,7 +51,7 @@ export const validateObjectiveForm = (inputTitle, inputStartDate, inputEndDate, 
 }
 
 export const validateKrForm = (
-    inputTitle, inputStartDate, inputEndDate, inputMinValue,
+    inputTitle, inputStartDate, inputEndDate, inputMinValue, inputCurrentValue,
     inputMaxValue, tokenStatus, errorSetter
   ) => {
   let formOkay = true;
@@ -98,11 +98,31 @@ export const validateKrForm = (
       return [...prevData, "Input a minimum value."];
     });
     formOkay = formOkay && false;
+  } else if (inputMinValue < 0) {
+    errorSetter(prevData => {
+      return [...prevData, "Input a minimum value of zero or greater."]
+    });
+    formOkay = formOkay && false;
+  } else if(inputMinValue > inputCurrentValue) {
+    errorSetter(prevData => {
+      return [...prevData, "Minimum value cannot be greater than current value."]
+    });
+    formOkay = formOkay && false;
   }
 
   if (inputMaxValue === "") {
     errorSetter(prevData => {
       return [...prevData, "Input a maximum value."];
+    });
+    formOkay = formOkay && false;
+  } else if (inputMaxValue <= 1) {
+    errorSetter(prevData => {
+      return [...prevData, "Input a maximum value of 1 or greater."]
+    });
+    formOkay = formOkay && false;
+  } else if(inputMaxValue < inputCurrentValue) {
+    errorSetter(prevData => {
+      return [...prevData, "Maximum value cannot be smaller than current value."]
     });
     formOkay = formOkay && false;
   }
