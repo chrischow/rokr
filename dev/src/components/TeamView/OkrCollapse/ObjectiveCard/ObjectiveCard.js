@@ -34,6 +34,11 @@ export default function ObjectiveCard(props) {
     queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
+  const invalidateUpdates = () => {
+    queryClient.invalidateQueries(['updates', props.team], { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
+
   // OBJECTIVE FORM
   // Re-populate form
   const currentObjective = {
@@ -86,6 +91,7 @@ export default function ObjectiveCard(props) {
       updateIds={props.updateIds}
       invalidateObjectives={invalidateObjectives}
       invalidateKeyResults={invalidateKeyResults}
+      invalidateUpdates={invalidateUpdates}
       closeModal={handleCloseObjectiveDeleteModal}
     />
   };
@@ -119,11 +125,12 @@ export default function ObjectiveCard(props) {
     setKrFormValues(prevData => {
       return {
         ...prevData,
+        parentObjective: props.Id,
         krStartDate: props.objectiveStartDate,
         krEndDate: props.objectiveEndDate,
       };
     });
-  }, [props.objectiveStartDate, props.objectiveEndDate])
+  }, [props.objectiveStartDate, props.objectiveEndDate, props.Id])
 
   // Close modal
   const handleCloseKrAddModal = () => {
