@@ -218,7 +218,7 @@ export default function ObjectiveForm(props) {
               props.openDeleteModal();
             }}
           >
-            Delete this Objective
+            Delete Objective
           </button>
         </div>
         <div className="text-end">
@@ -227,7 +227,7 @@ export default function ObjectiveForm(props) {
             onClick={submitForm}
             disabled={!submitEnabled}
           >
-            Submit
+            {props.mode === 'edit' ? 'Save' : 'Add'} Objective
           </button>
         </div>
       </div>
