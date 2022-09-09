@@ -27,7 +27,7 @@ export default function KeyResultInfo(props) {
       });
       setInitialData(newUpdates);
     };
-  }, [updates, props.Id]);
+  }, [updates.isSuccess]);
 
   // Get dates
   const startDate = formatDate(props.startDate);
@@ -79,7 +79,7 @@ export default function KeyResultInfo(props) {
           }
         });
       }
-    }, [updates, initialData, props.Id, table]
+    }, [updates, initialData]
   );
 
   // Revert to table page
