@@ -21,6 +21,7 @@ export default function OkrCollapse(props) {
       objId={objId}
       team={props.team}
       nLatestUpdates={nLatestUpdates}
+      updateIds={krUpdates.map(update => update.Id)}
       startDate={props.startDate}
       endDate={props.endDate}
       updateData={krUpdates}
@@ -52,7 +53,7 @@ export default function OkrCollapse(props) {
   // Prepare key results and update data
   const keyResultIds = props.keyResults.map(kr => kr.Id);
   const updateIds = props.updateData.filter(update => {
-    return keyResultIds.includes(update.Id);
+    return keyResultIds.includes(update.parentKrId);
   }).map(update => update.Id);
 
   return (

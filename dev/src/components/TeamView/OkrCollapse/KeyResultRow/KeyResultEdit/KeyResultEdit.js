@@ -31,6 +31,8 @@ export default function KeyResultEdit(props) {
     objectiveOptions={props.objectiveOptions}
     selectDisabled={false}
     formCleanup={formCleanup}
+    closeModal={props.closeModal}
+    openDeleteModal={props.openDeleteModal}
     mode="edit"
   />
 }

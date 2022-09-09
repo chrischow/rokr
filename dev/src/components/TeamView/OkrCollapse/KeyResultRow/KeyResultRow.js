@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useQueryClient } from "react-query";
+import slugify from "slugify";
 import { useObjectives } from "../../../../hooks/useObjectives";
 import { getDate } from "../../../../utils/dates";
 import Col from "react-bootstrap/esm/Col";
@@ -7,6 +9,7 @@ import ProgressBar from "../../ProgressBar/ProgressBar";
 import SharedModal from "../../../SharedModal/SharedModal";
 import KeyResultInfo from "./KeyResultInfo/KeyResultInfo";
 import KeyResultEdit from "./KeyResultEdit/KeyResultEdit";
+import DeleteForm from "../../DeleteForm/DeleteForm";
 
 import './KeyResultRow.css';
 
@@ -15,6 +18,22 @@ export default function KeyResultRow(props) {
   // State
   const [showKrInfoModal, setShowKrInfoModal] = useState(false);
   const [showKrEditModal, setShowKrEditModal] = useState(false);
+  const [showKrDeleteModal, setShowKrDeleteModal] = useState(false);
+  
+  // Invalidate data
+  const queryClient = useQueryClient();
+  const invalidateKeyResults = () => {
+    queryClient.invalidateQueries([`keyResults-${slugify(props.team)}`], { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
+
+  const invalidateUpdates = () => {
+    queryClient.invalidateQueries(['updates', props.team], { refetchInactive: true });
+    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+  };
+
+  // KR EDIT FORM
+  // Form values
   const [krFormValues, setKrFormValues] = useState({
     Id: props.Id,
     Title: props.Title,
@@ -61,8 +80,28 @@ export default function KeyResultRow(props) {
       setKrFormValues={setKrFormValues}
       setShowKrEditModal={setShowKrEditModal}
       objectiveOptions={objectiveOptions}
+      closeModal={handleCloseKrEditModal}
+      openDeleteModal={() => setShowKrDeleteModal(true)}
       team={props.parentObjective.team}
       {...props}
+    />
+  }
+
+  // DELETE KR FORM
+  // Close delete modal
+  const handleCloseKrDeleteModal = () => {
+    setShowKrDeleteModal(false);
+  };
+
+  const deleteKr = () => {
+    return <DeleteForm
+      Id={props.Id}
+      Title={props.Title}
+      itemType="Key Result"
+      updateIds={props.updateIds}
+      invalidateKeyResults={invalidateKeyResults}
+      invalidateUpdates={invalidateUpdates}
+      closeModal={handleCloseKrDeleteModal}
     />
   }
 
@@ -111,6 +150,13 @@ export default function KeyResultRow(props) {
         onHide={() => setShowKrEditModal(false)}
         renderModalContent={() => editKr()}
         handleCloseModal={handleCloseKrEditModal}
+      />
+      <SharedModal
+        modalTitle="Delete Key Result"
+        show={showKrDeleteModal}
+        onHide={handleCloseKrDeleteModal}
+        renderModalContent={() => deleteKr()}
+        handleCloseModal={() => setShowKrDeleteModal(false)}
       />
     </div>
   );
