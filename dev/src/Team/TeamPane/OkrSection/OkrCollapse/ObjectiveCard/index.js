@@ -11,7 +11,7 @@ import SharedModal from '../../../../../shared/SharedModal';
 import ProgressBar from '../ProgressBar';
 import ObjectiveEdit from './ObjectiveEdit';
 import KeyResultAdd from './KeyResultAdd';
-import DeleteForm from '../DeleteForm';
+import DeleteForm from '../../../../../shared/DeleteForm';
 
 import './styles.css';
 

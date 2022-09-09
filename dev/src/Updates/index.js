@@ -8,7 +8,7 @@ import SharedModal from "../shared/SharedModal";
 import UpdatesTable from "./UpdatesTable";
 import UpdateAdd from "./UpdateAdd";
 import UpdateEdit from "./UpdateEdit";
-import DeleteForm from "../Team/TeamPane/OkrSection/OkrCollapse/DeleteForm";
+import DeleteForm from "../shared/DeleteForm";
 
 
 export default function Updates(props) {

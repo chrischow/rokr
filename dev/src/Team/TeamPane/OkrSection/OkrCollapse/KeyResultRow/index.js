@@ -9,7 +9,7 @@ import ProgressBar from "../ProgressBar";
 import SharedModal from "../../../../../shared/SharedModal";
 import KeyResultInfo from "./KeyResultInfo";
 import KeyResultEdit from "./KeyResultEdit";
-import DeleteForm from "../DeleteForm";
+import DeleteForm from "../../../../../shared/DeleteForm";
 
 import './styles.css';
 

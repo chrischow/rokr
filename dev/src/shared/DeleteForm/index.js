@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import useToken from '../../../../../shared/hooks/useToken';
-import { deleteQuery } from '../../../../../utils/query';
-import { config } from '../../../../../config';
+import useToken from '../hooks/useToken';
+import { deleteQuery } from '../../utils/query';
+import { config } from '../../config';
 
 
 export default function DeleteForm(props) {
