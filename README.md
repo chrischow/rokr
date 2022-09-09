@@ -8,7 +8,7 @@ RDO's solution for OKR management in RAiD.
 </p>
 
 ## Value Proposition
-OKRs are tough to manage without tools, especially on the internal IT environment. We designed an approach (Stack 2.0) to fully leverage internal tools and designed **ROKR** to enable RAiD to implement OKRs.
+OKRs are tough to manage without tools, especially on the internal IT environment. We designed an approach (Stack 2.0) to fully leverage internal tools and designed **ROKR** as the first app built on Stack 2.0 to enable RAiD to implement OKRs.
 
 ## Entity-Relationship Diagram
 
