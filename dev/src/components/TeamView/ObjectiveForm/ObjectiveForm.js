@@ -219,9 +219,10 @@ export default function ObjectiveForm(props) {
             }}
           >
             Delete Objective
-          </button>}
+          </button>
+        }
         <button
-          className={`btn ${submitEnabled ? "btn-green" : "btn-secondary"}`}
+          className="btn btn-green"
           onClick={submitForm}
           disabled={!submitEnabled}
         >
