@@ -3,6 +3,7 @@ Read this doc for details on the app structure.
 
 The folder structure reflects this dependency tree. Top-level components are in TitleCase. All other supporting elements are in lowercase.
 
+In the diagrams below, each folder contains `index.js`, and sometimes, also `styles.css`. We omit these files from the diagram for simplicity.
 
 ## Top-Level Components
 
@@ -10,24 +11,57 @@ The folder structure reflects this dependency tree. Top-level components are in 
 This component contains the progress cards for the main organisational entity and its sub-entities. The component tree:
 
 ```
-.
-├── HomeTeamCards
-│   └── index.js
-└── index.js
+Home
+└── HomeTeamCards
 ```
 
-### 2. `Team`
+The `HomeTeamCards` component creates a list of card elements. Each card wraps a [`ProgressCard` shared component](#components), which has a progress ring for average Objective progress, and the counts of completed/total Objectives and KRs.
 
+### 2. `Team`
+This is the main component containing the bulk of components in ROKR.
+
+```
+Team
+└── TeamPane
+    ├── FreqDropdown
+    ├── OkrSection
+    │   ├── ObjectiveAdd
+    │   ├── ObjectiveForm
+    │   └── OkrCollapse
+    │       ├── KeyResultForm
+    │       ├── KeyResultRow
+    │       │   ├── KeyResultEdit
+    │       │   ├── KeyResultInfo
+    │       │   └── QuickAddUpdate
+    │       ├── ObjectiveCard
+    │       │   ├── KeyResultAdd
+    │       │   └── ObjectiveEdit
+    │       └── ProgressBar
+    └── TeamProgress
+```
 
 ### 3. `Updates`
 
+```
+Updates
+├── UpdateAdd
+├── UpdateEdit
+└── UpdatesTable
+```
 
 ### 4. `Timeline`
-
+This
 
 ### 5. `Directory`
 
-## `shared` Folder
+```
+Directory
+├── Graph
+├── SearchBar
+└── useGraphSettings
+```
+
+## `shared`
 This folder comprises components that are shared across 2 or more top-level components.
 
 ### Components
@@ -74,3 +108,11 @@ For retrieving Updates. There are multiple hooks:
 
 #### 4. `useToken`
 For getting X-RequestDigest for SharePoint POST requests. Has a single `useToken` hook.
+
+
+## Supporting Elements
+
+### `assets`
+
+
+### `utils`
