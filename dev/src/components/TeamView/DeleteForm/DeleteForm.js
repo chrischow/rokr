@@ -83,8 +83,8 @@ export default function DeleteForm(props) {
             }
             {props.updateIds && nUpdates > 0 &&
               <>
-                {` and `}
-                <span className="text-red">{nUpdates}</span> {textUpdates}
+                {props.keyResultIds && props.updateIds && `and`}
+                <span className="text-red"> {nUpdates}</span> {textUpdates}
               </>
             }
             that will be deleted as well.
