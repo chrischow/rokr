@@ -28,7 +28,7 @@ This is the main component containing the bulk of components in ROKR. For ease o
 | `TeamProgress` | Basically a `ProgressCard` shared component, the same one on the top of the `Home` page. |
 | `OkrSection` | Joins the data to create `OkrCollapse` components. Handles the creation of Objectives through a `SharedModal` shared component. Auto-populates new Objective forms with the currently selected team, frequency, time period, and staff (if applicable). |
 | `ObjectiveAdd` | Wrapper for ObjectiveForm to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `ObjectiveForm` | Controlled form for adding, editing, and deleting Objectives. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `ObjectiveAdd` and (2) `ObjectiveEdit`. |
+| `ObjectiveForm` | Controlled form for adding and editing Objectives. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `ObjectiveAdd` and (2) `ObjectiveEdit`. |
 
 ```
 Team
@@ -38,7 +38,7 @@ Team
     └── OkrSection
         ├── ObjectiveAdd
         ├── ObjectiveForm
-        └── OkrCollapse
+        └── OkrCollapse               # See table below
             ├── ProgressBar
             ├── ObjectiveCard
             │   ├── ObjectiveEdit
@@ -53,11 +53,11 @@ Team
 
 | Component | Purpose |
 | :-------- | :------ |
-| `OkrCollapse` | Wraps `ObjectiveCard`s and `KeyResultRow`s. |
+| `OkrCollapse` | Wraps one `ObjectiveCard` and several `KeyResultRow`s. |
 | `ProgressBar` | Has two variants: one for Objectives and one for KRs. |
 | `ObjectiveCard` | Displays Objective info through text and a `ProgressBar`. Handles the editing & deleting of Objectives and adding of KRs through `SharedModal`s. Auto-populates new KR forms with current Objective and selected time period. |
 | `KeyResultRow` | Displays KR info through text and a `ProgressBar`. Handles the viewing, editing, and deleting of KRs through `SharedModal`s. |
-| `KeyResultForm` | Controlled form for adding, editing, and deleting Key Results. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `KeyResultAdd` and (2) `KeyResultEdit`. |
+| `KeyResultForm` | Controlled form for adding and editing Key Results. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `KeyResultAdd` and (2) `KeyResultEdit`. |
 | `ObjectiveEdit` | Wrapper for ObjectiveForm to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `KeyResultAdd` | Wrapper for KeyResultForm to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `KeyResultInfo` | Displays detailed KR info and lists Updates in a DataTable. Also links to the associated `Updates` view (top-level component), and contains a form to quickly add updates. |
@@ -97,11 +97,18 @@ This folder comprises components that are shared across 2 or more top-level comp
 | `NavBar` | Doesn't fit under any top-level component, but displays on top of every page. |
 | `ProgressCard` | Progress ring with average Objective progress, and counts of completed vs. total Objectives and KRs. Used in `Home` and `Team` components. |
 | `SharedModal` | Modal with configurable title, content, and closing behaviour. Controlled by state in parent component. Used in `Home` and `Updates` components. |
-| `UpdateForm` | Controlled form for adding, editing, and deleting Updates. Includes validation, submission, and a link to `DeleteForm`. Used in `Home` and `Updates` components. |
+| `UpdateForm` | Controlled form for adding and editing Updates. Includes validation, submission, and a link to `DeleteForm`. Used in `Home` and `Updates` components. |
 | `DeleteForm` | Form for delete entities using an `ON DELETE CASCADE` rule. Presents warning if cascading is required. Used in `Home` and `Updates` components. |
 
 ### Hooks
-Data is retrieved and managed using [React Query](https://react-query-v3.tanstack.com/overview). For custom hooks are provided:
+Data is retrieved and managed using [React Query](https://react-query-v3.tanstack.com/overview).
+
+| Hook(s) | Usage |
+| :------ | :---- |
+| `useObjectives`, `useKeyResults`, `useUpdates` | Retrieve all data for `Timeline`. |
+| `useObjectivesByFreq('annual')`, `useObjectivesByFreq('annual')` | Retrieve annual data for `Home` and `Directory`. |
+| `useTeamObjectives(<team>)`, `useTeamKeyResults(<team>)`, `useTeamUpdates(<team>)` | Retrieve team data for `Team`. |
+| `useKeyResult(<krId>)`, `useKrUpdatesDirect(<krId>)` | Retrieve info on a KR and its associated Updates for `Updates`. |
 
 #### 1. `useObjectives`
 For retrieving Objectives. There are multiple hooks:
