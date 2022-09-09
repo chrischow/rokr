@@ -74,7 +74,7 @@ export default function UpdateForm(props) {
     // Form ok
     if (formOkay) {
       const { Id, ...newData } = props.formValues;
-      const reqDigest = token.isSuccess && token.data.d.GetContextWebInformation.FormDigestValue;
+      const reqDigest = token.isSuccess && token.data.FormDigestValue;
 
       if (props.mode === 'edit') {
         console.log('Edit form');
