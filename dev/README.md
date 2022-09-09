@@ -63,7 +63,7 @@ graph LR
     UpdatesAdd --> UpdateForm
     UpdatesEdit --> UpdateForm
 
-    classDef shared fill:#7b73f0
+    classDef shared fill:#7b73f0,color:white
     class PC,SM,DF shared
 ```
 
