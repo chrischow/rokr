@@ -5,7 +5,7 @@ The folder structure reflects this dependency tree. Top-level components are in 
 
 In the diagrams below, each folder contains `index.js`, and sometimes, also `styles.css`. We omit these files from the diagram for simplicity.
 
-## Top-Level Components
+## A. Top-Level Components
 
 ### 1. `Home`
 This component contains the progress cards for the main organisational entity and its sub-entities. The component tree:
@@ -18,27 +18,51 @@ Home
 The `HomeTeamCards` component creates a list of card elements. Each card wraps a [`ProgressCard` shared component](#components), which has a progress ring for average Objective progress, and the counts of completed/total Objectives and KRs.
 
 ### 2. `Team`
-This is the main component containing the bulk of components in ROKR.
+This is the main component containing the bulk of components in ROKR. For ease of viewing, the explanations for the components are split into two tables, and described in a breadth-first manner.
+
+| Component | Purpose |
+| :-------- | :------ |
+| `Team` | Contains three Tab panels, one for each frequency (monthly, quarterly, annual). Queries the team's Objectives, KRs, and Updates and passes it into each Tab panel. |
+| `TeamPane` | Contains the Tabs for staff (monthly frequency only), and a time period selector (`FreqDropdown`). Filters the data provided in props using the chosen staff and period, and passes the data down to the child components. |
+| `FreqDropdown` | Dynamic dropdown menu for monthly, quarterly, or annual time periods in the dataset. |
+| `TeamProgress` | Basically a `ProgressCard` shared component, the same one on the top of the `Home` page. |
+| `OkrSection` | Joins the data to create `OkrCollapse` components. Handles the creation of Objectives through a `SharedModal` shared component. Auto-populates new Objective forms with the currently selected team, frequency, time period, and staff (if applicable). |
+| `ObjectiveAdd` | Wrapper for ObjectiveForm to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `ObjectiveForm` | Controlled form for adding, editing, and deleting Objectives. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `ObjectiveAdd` and (2) `ObjectiveEdit`. |
 
 ```
 Team
 └── TeamPane
     ├── FreqDropdown
-    ├── OkrSection
-    │   ├── ObjectiveAdd
-    │   ├── ObjectiveForm
-    │   └── OkrCollapse
-    │       ├── KeyResultForm
-    │       ├── KeyResultRow
-    │       │   ├── KeyResultEdit
-    │       │   ├── KeyResultInfo
-    │       │   └── QuickAddUpdate
-    │       ├── ObjectiveCard
-    │       │   ├── KeyResultAdd
-    │       │   └── ObjectiveEdit
-    │       └── ProgressBar
-    └── TeamProgress
+    ├── TeamProgress
+    └── OkrSection
+        ├── ObjectiveAdd
+        ├── ObjectiveForm
+        └── OkrCollapse
+            ├── ProgressBar
+            ├── ObjectiveCard
+            │   ├── ObjectiveEdit
+            │   └── KeyResultAdd
+            ├── KeyResultRow
+            │   ├── KeyResultEdit
+            │   ├── KeyResultInfo
+            │   └── QuickAddUpdate
+            └── KeyResultForm
+ 
 ```
+
+| Component | Purpose |
+| :-------- | :------ |
+| `OkrCollapse` | Wraps `ObjectiveCard`s and `KeyResultRow`s. |
+| `ProgressBar` | Has two variants: one for Objectives and one for KRs. |
+| `ObjectiveCard` | Displays Objective info through text and a `ProgressBar`. Handles the editing & deleting of Objectives and adding of KRs through `SharedModal`s. Auto-populates new KR forms with current Objective and selected time period. |
+| `KeyResultRow` | Displays KR info through text and a `ProgressBar`. Handles the viewing, editing, and deleting of KRs through `SharedModal`s. |
+| `KeyResultForm` | Controlled form for adding, editing, and deleting Key Results. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `KeyResultAdd` and (2) `KeyResultEdit`. |
+| `ObjectiveEdit` | Wrapper for ObjectiveForm to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `KeyResultAdd` | Wrapper for KeyResultForm to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `KeyResultInfo` | Displays detailed KR info and lists Updates in a DataTable. Also links to the associated `Updates` view (top-level component), and contains a form to quickly add updates. |
+| `KeyResultEdit` | Wrapper for KeyResultForm to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `QuickAddUpdate` | Wrapper for UpdateForm to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
 ### 3. `Updates`
 
@@ -61,7 +85,7 @@ Directory
 └── useGraphSettings
 ```
 
-## `shared`
+## B. `shared`
 This folder comprises components that are shared across 2 or more top-level components.
 
 ### Components
@@ -73,7 +97,7 @@ This folder comprises components that are shared across 2 or more top-level comp
 | `NavBar` | Doesn't fit under any top-level component, but displays on top of every page. |
 | `ProgressCard` | Progress ring with average Objective progress, and counts of completed vs. total Objectives and KRs. Used in `Home` and `Team` components. |
 | `SharedModal` | Modal with configurable title, content, and closing behaviour. Controlled by state in parent component. Used in `Home` and `Updates` components. |
-| `UpdateForm` | Controlled form for updates. Includes validation, submission, and a link to `DeleteForm`. Used in `Home` and `Updates` components. |
+| `UpdateForm` | Controlled form for adding, editing, and deleting Updates. Includes validation, submission, and a link to `DeleteForm`. Used in `Home` and `Updates` components. |
 | `DeleteForm` | Form for delete entities using an `ON DELETE CASCADE` rule. Presents warning if cascading is required. Used in `Home` and `Updates` components. |
 
 ### Hooks
@@ -110,7 +134,7 @@ For retrieving Updates. There are multiple hooks:
 For getting X-RequestDigest for SharePoint POST requests. Has a single `useToken` hook.
 
 
-## Supporting Elements
+## C. Supporting Elements
 
 ### `assets`
 
