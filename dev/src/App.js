@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Container from "react-bootstrap/Container";
+import Splash from './shared/Splash';
 import NavBar from './shared/NavBar';
 import Home from './Home';
 import Team from './Team';
@@ -11,6 +13,13 @@ import { config } from './config';
 import './App.css';
 
 function App() {
+  // State for displaying splash
+  const [loading, setLoading] = useState(true);
+
+  useEffect(function () {
+    setTimeout(() => setLoading(false), 6000);
+  }, []);
+
   // Load query client
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -32,6 +41,7 @@ function App() {
   return (
     <HashRouter>
       <QueryClientProvider client={queryClient}>
+        {loading && <Splash loading={loading} />}
         <NavBar teams={config.teams} />
         <Container className="mt-5 app-container">
           <Routes>

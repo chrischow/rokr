@@ -143,7 +143,7 @@ export default function UpdateForm(props) {
           onClick={submitForm}
           disabled={!submitEnabled}
         >
-          {props.mode === 'edit' ? 'Save' : 'Add'} Objective
+          {props.mode === 'edit' ? 'Save' : 'Add'} Update
         </button>
       </div>
       {formErrorsList.length > 0 &&

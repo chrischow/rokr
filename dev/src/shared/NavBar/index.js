@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import { NavBarBrand } from '../NavBarBrand';
+import { NavBarBrand } from '../Brand';
 
 import './styles.css';
 
