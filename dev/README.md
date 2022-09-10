@@ -7,64 +7,64 @@ In the diagrams below, each folder contains `index.js`, and sometimes, also `sty
 
 ```mermaid
 graph LR
-    Root --> Home
-    Root --> Team
-    Root --> Updates
-    Root --> Timeline
-    Root --> Directory
-    
-    Home --> HomeTeamCards
-    Home --> PC([ProgressCard])
-    HomeTeamCards --> PC
+  %% Top-level components
+  Root --> Home
+  Root --> Team
+  Root --> Updates
+  Root --> Timeline
+  Root --> Directory
+  
+  %% Home
+  Home --> HomeTeamCards
+  Home --> PC([ProgressCard])
+  HomeTeamCards --> PC
 
-    Team --> TeamPane
-    TeamPane --> TeamProgress
-    TeamPane --> OkrSection
-    TeamPane --> FreqDropdown
+  %% Team
+  Team --> TeamPane
+  TeamPane --> TeamProgress
+  TeamPane --> OkrSection
+  TeamPane --> FreqDropdown
 
-    TeamProgress --> PC
+  TeamProgress --> PC
 
-    OkrSection --> ObjectiveAdd
-    OkrSection --> OkrCollapse
-    OkrSection --> SM([SharedModal])
-    ObjectiveAdd --> ObjectiveForm
+  OkrSection --> ObjectiveAdd
+  OkrSection --> OkrCollapse
+  OkrSection --> SM([SharedModal])
+  ObjectiveAdd --> OF([ObjectiveForm])
 
-    OkrCollapse --> KeyResultRow
-    OkrCollapse --> ObjectiveCard
+  OkrCollapse --> KeyResultRow
+  OkrCollapse --> ObjectiveCard
 
-    
-    ObjectiveCard --> SM
-    ObjectiveCard --> ProgressBar
-    ObjectiveCard --> ObjectiveEdit
-    ObjectiveCard --> KeyResultAdd
-    ObjectiveCard --> DF([DeleteForm])
+  ObjectiveCard --> SM
+  ObjectiveCard --> PB([ProgressBar])
+  ObjectiveCard --> ObjectiveEdit
+  ObjectiveCard --> KeyResultAdd
+  ObjectiveCard --> DF([DeleteForm])
 
-    ObjectiveEdit --> ObjectiveForm
-    KeyResultAdd --> KeyResultForm
+  ObjectiveEdit --> OF
+  KeyResultAdd --> KRF([KeyResultForm])
 
-    KeyResultRow --> ProgressBar
-    KeyResultRow --> SM
-    KeyResultRow --> KeyResultInfo
-    KeyResultRow --> KeyResultEdit
-    KeyResultRow --> DF
+  KeyResultRow --> PB
+  KeyResultRow --> SM
+  KeyResultRow --> KeyResultInfo
+  KeyResultRow --> KeyResultEdit
+  KeyResultRow --> DF
 
-    KeyResultEdit --> KeyResultForm
-    KeyResultInfo --> QuickAddUpdate
-    QuickAddUpdate --> UF([UpdateForm])
+  KeyResultEdit --> KRF
+  KeyResultInfo --> QuickAddUpdate
+  QuickAddUpdate --> UF([UpdateForm])
 
-    
+  Updates --> SM
+  Updates --> UpdatesTable
+  Updates --> UpdatesAdd
+  Updates --> UpdatesEdit
+  Updates --> DF
 
-    Updates --> SM
-    Updates --> UpdatesTable
-    Updates --> UpdatesAdd
-    Updates --> UpdatesEdit
-    Updates --> DF
+  UpdatesAdd --> UF
+  UpdatesEdit --> UF
 
-    UpdatesAdd --> UF
-    UpdatesEdit --> UF
-
-    classDef shared fill:#7b73f0,color:white
-    class PC,SM,DF,UF shared
+  classDef shared fill:#7b73f0,color:white
+  class PC,SM,DF,UF,OF,KRF,PB shared
 ```
 
 ## A. Top-Level Components
@@ -89,8 +89,7 @@ This is the main component containing the bulk of components in ROKR. For ease o
 | `FreqDropdown` | Dynamic dropdown menu for monthly, quarterly, or annual time periods in the dataset. |
 | `TeamProgress` | Basically a `ProgressCard` shared component, the same one on the top of the `Home` page. |
 | `OkrSection` | Joins the data to create `OkrCollapse` components. Handles the creation of Objectives through a `SharedModal` shared component. Auto-populates new Objective forms with the currently selected team, frequency, time period, and staff (if applicable). |
-| `ObjectiveAdd` | Wrapper for ObjectiveForm to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `ObjectiveForm` | Controlled form for adding and editing Objectives. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `ObjectiveAdd` and (2) `ObjectiveEdit`. |
+| `ObjectiveAdd` | Wrapper for `ObjectiveForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
 ```
 Team
@@ -100,7 +99,7 @@ Team
     └── OkrSection
         ├── ObjectiveAdd
         ├── ObjectiveForm
-        └── OkrCollapse               # See table below
+        └── OkrCollapse (See table below)
             ├── ProgressBar
             ├── ObjectiveCard
             │   ├── ObjectiveEdit
@@ -116,17 +115,16 @@ Team
 | Component | Purpose |
 | :-------- | :------ |
 | `OkrCollapse` | Wraps one `ObjectiveCard` and several `KeyResultRow`s. |
-| `ProgressBar` | Has two variants: one for Objectives and one for KRs. |
 | `ObjectiveCard` | Displays Objective info through text and a `ProgressBar`. Handles the editing & deleting of Objectives and adding of KRs through `SharedModal`s. Auto-populates new KR forms with current Objective and selected time period. |
 | `KeyResultRow` | Displays KR info through text and a `ProgressBar`. Handles the viewing, editing, and deleting of KRs through `SharedModal`s. |
-| `KeyResultForm` | Controlled form for adding and editing Key Results. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `KeyResultAdd` and (2) `KeyResultEdit`. |
-| `ObjectiveEdit` | Wrapper for ObjectiveForm to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `KeyResultAdd` | Wrapper for KeyResultForm to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `ObjectiveEdit` | Wrapper for `ObjectiveForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `KeyResultAdd` | Wrapper for `KeyResultForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `KeyResultInfo` | Displays detailed KR info and lists Updates in a DataTable. Also links to the associated `Updates` view (top-level component), and contains a form to quickly add updates. |
-| `KeyResultEdit` | Wrapper for KeyResultForm to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `QuickAddUpdate` | Wrapper for UpdateForm to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `KeyResultEdit` | Wrapper for `KeyResultForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `QuickAddUpdate` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
 ### 3. `Updates`
+The main `Updates` component manages the data and holds the states for the add and edit form for Updates of a given KR. It
 
 ```
 Updates
@@ -135,17 +133,30 @@ Updates
 └── UpdatesTable
 ```
 
+| Component | Purpose |
+| :-------- | :------ |
+| `KeyResultAdd` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `ObjectiveEdit` | Wrapper for `UpdateForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `UpdatesTable` | DataTable for displaying Updates. Contains buttons to edit each Update. |
+
 ### 4. `Timeline`
-This
+Contains a single DataTable comprising all Updates. It pulls all Objectives, Key Results, and Updates - this can be improved.
 
 ### 5. `Directory`
+In addition to the components below, the main `Directory` component has a panel to display OKR information.
 
 ```
 Directory
-├── Graph
 ├── SearchBar
-└── useGraphSettings
+├── Graph
+└── useGraphSettings (hook)
 ```
+
+| Component | Purpose |
+| :-------- | :------ |
+| `SearchBar` | Search bar for user to search for OKRs, which will be highlighted in the `Graph`. |
+| `Graph` | An interactive network graph for displaying OKRs. |
+| `useGraphSettings` | Hook to generate graph settings. |
 
 ## B. `shared`
 This folder comprises components that are shared across 2 or more top-level components.
@@ -159,6 +170,9 @@ This folder comprises components that are shared across 2 or more top-level comp
 | `NavBar` | Doesn't fit under any top-level component, but displays on top of every page. |
 | `ProgressCard` | Progress ring with average Objective progress, and counts of completed vs. total Objectives and KRs. Used in `Home` and `Team` components. |
 | `SharedModal` | Modal with configurable title, content, and closing behaviour. Controlled by state in parent component. Used in `Home` and `Updates` components. |
+| `ProgressBar` | Has two variants: one for Objectives and one for KRs. |
+| `ObjectiveForm` | Controlled form for adding and editing Objectives. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `ObjectiveAdd` and (2) `ObjectiveEdit`. |
+| `KeyResultForm` | Controlled form for adding and editing Key Results. Includes validation, submission, and a link to `DeleteForm`. Component is held at this level because it is used in multiple components within `Team`: (1) `KeyResultAdd` and (2) `KeyResultEdit`. |
 | `UpdateForm` | Controlled form for adding and editing Updates. Includes validation, submission, and a link to `DeleteForm`. Used in `Home` and `Updates` components. |
 | `DeleteForm` | Form for delete entities using an `ON DELETE CASCADE` rule. Presents warning if cascading is required. Used in `Home` and `Updates` components. |
 
