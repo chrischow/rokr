@@ -5,7 +5,7 @@ import { useObjectives } from "../../../../../shared/hooks/useObjectives";
 import { getDate } from "../../../../../utils/dates";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "../../../../../shared/ProgressBar";
 import SharedModal from "../../../../../shared/SharedModal";
 import KeyResultInfo from "./KeyResultInfo";
 import KeyResultEdit from "./KeyResultEdit";

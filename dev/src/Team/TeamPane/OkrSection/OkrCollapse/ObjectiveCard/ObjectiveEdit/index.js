@@ -1,6 +1,6 @@
 import { useQueryClient } from "react-query";
 import slugify from "slugify";
-import ObjectiveForm from "../../../ObjectiveForm";
+import ObjectiveForm from "../../../../../../shared/ObjectiveForm";
 
 export default function ObjectiveEdit(props) {
   // Create query client

@@ -1,6 +1,6 @@
 import { useQueryClient } from "react-query";
 import slugify from 'slugify';
-import KeyResultForm from "../../../OkrCollapse/KeyResultForm";
+import KeyResultForm from "../../../../../../shared/KeyResultForm";
 
 export default function KeyResultAdd(props) {
   // Create query client

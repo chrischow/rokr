@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
-import useToken from '../../../../../shared/hooks/useToken';
-import { getDate } from '../../../../../utils/dates';
-import { createQuery, updateQuery } from '../../../../../utils/query';
-import { validateKrForm } from '../../../../../utils/validators';
+import useToken from '../hooks/useToken';
+import { getDate } from '../../utils/dates';
+import { createQuery, updateQuery } from '../../utils/query';
+import { validateKrForm } from '../../utils/validators';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
-import { config } from '../../../../../config';
+import { config } from '../../config';
 
 import './styles.css';
 

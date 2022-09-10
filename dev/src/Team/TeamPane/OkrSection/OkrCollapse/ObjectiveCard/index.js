@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { CaretIcon, EditIconText, AddIconText } from '../../../../../shared/Icons';
 import SharedModal from '../../../../../shared/SharedModal';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '../../../../../shared/ProgressBar';
 import ObjectiveEdit from './ObjectiveEdit';
 import KeyResultAdd from './KeyResultAdd';
 import DeleteForm from '../../../../../shared/DeleteForm';
