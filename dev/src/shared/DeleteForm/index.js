@@ -27,37 +27,37 @@ export default function DeleteForm(props) {
       // Delete updates first
       if (props.updateIds.length > 0) {
         props.updateIds.map(updateId => {
-          deleteQuery(updateListId, updateId, reqDigest, props.invalidateUpdates);
+          console.log(`Deleted Update Id=${updateId}`);
         });
       }
 
       // Delete key results first
       if (props.keyResultIds.length > 0) {
         props.keyResultIds.map(krId => {
-          deleteQuery(krListId, krId, reqDigest, props.invalidateKeyResults);
+          console.log(`Deleted KR Id=${krId}`);
         });
       }
 
       // Delete objective and close modal
-      deleteQuery(objListId, props.Id, reqDigest, () => {
-        props.invalidateObjectives();
-        props.closeModal();
-      });
+      console.log(`Deleted Objective Id=${props.Id}`);
+      alert('Fake-deleted items. Check the console.')
+      props.closeModal();
     } else if (props.itemType === 'Key Result') {
       // Delete updates first
       if (props.updateIds.length > 0) {
         props.updateIds.map(updateId => {
-          deleteQuery(updateListId, updateId, reqDigest, props.invalidateUpdates);
+          console.log(`Deleted Update Id=${updateId}`);
         });
       }
 
-      // Delete key result
-      deleteQuery(krListId, props.Id, reqDigest, () => {
-        props.invalidateKeyResults();
-        props.closeModal();
-      });
+      // Delete key result and close modal
+      console.log(`Deleted KR Id=${props.Id}`);
+      alert('Fake-deleted items. Check the console.')
+      props.closeModal();
     } else {
-      deleteQuery(updateListId, props.Id, reqDigest, props.invalidateUpdates);
+      // Delete update and close modal
+      console.log(`Deleted Update Id=${props.Id}`);
+      alert('Fake-deleted items. Check the console.')
       props.closeModal();
     }
   };
@@ -98,7 +98,6 @@ export default function DeleteForm(props) {
         <button
           className="btn btn-red"
           onClick={() => {
-            console.log(`Delete Id=${props.Id}, ${props.Title}`);
             confirmDelete();
           }}
           disabled={!submitEnabled}

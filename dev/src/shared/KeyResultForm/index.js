@@ -90,26 +90,11 @@ export default function KeyResultForm(props) {
       const reqDigest = token.isSuccess && token.data.FormDigestValue;
 
       if (props.mode === 'edit') {
-        console.log('Edit form');
-        const data = {
-          __metadata: {
-            type: config.krListItemEntityTypeFullName
-          },
-          ...newData,
-          parentObjectiveId: parentObjective
-        };
-        
-        updateQuery(config.krListId, Id, data, reqDigest, props.formCleanup);
+        props.formCleanup();
+        alert(`Fake-updated KR:\n${JSON.stringify(props.formValues, null, 4)}`);
       } else {
-        console.log('New data');
-        const data = {
-          __metadata: {
-            type: config.krListItemEntityTypeFullName
-          },
-          ...newData,
-          parentObjectiveId: parentObjective
-        };
-        createQuery(config.krListId, data, reqDigest, props.formCleanup);
+        props.formCleanup();
+        alert(`Fake-created new KR:\n${JSON.stringify(props.formValues, null, 4)}`);
       }
     }
 

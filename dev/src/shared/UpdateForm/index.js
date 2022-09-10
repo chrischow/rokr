@@ -77,23 +77,11 @@ export default function UpdateForm(props) {
       const reqDigest = token.isSuccess && token.data.FormDigestValue;
 
       if (props.mode === 'edit') {
-        console.log('Edit form');
-        const data = {
-          __metadata: {
-            type: config.updateListItemEntityTypeFullName
-          },
-          ...newData
-        }
-        updateQuery(config.updateListId, Id, data, reqDigest, props.formCleanup);
+        props.formCleanup();
+        alert(`Fake-updated Update:\n${JSON.stringify(props.formValues, null, 4)}`);
       } else {
-        console.log('New data');
-        const data = {
-          __metadata: {
-            type: config.updateListItemEntityTypeFullName
-          },
-          ...props.formValues
-        };
-        createQuery(config.updateListId, data, reqDigest, props.formCleanup);
+        props.formCleanup();
+        alert(`Fake-added Update:\n${JSON.stringify(props.formValues, null, 4)}`);
       }
     }
 
@@ -143,7 +131,7 @@ export default function UpdateForm(props) {
           onClick={submitForm}
           disabled={!submitEnabled}
         >
-          {props.mode === 'edit' ? 'Save' : 'Add'} Objective
+          {props.mode === 'edit' ? 'Save' : 'Add'} Update
         </button>
       </div>
       {formErrorsList.length > 0 &&

@@ -83,23 +83,11 @@ export default function ObjectiveForm(props) {
       const reqDigest = token.isSuccess && token.data.FormDigestValue;
 
       if (props.mode === "edit") {
-        console.log('Edit form');
-        const data = {
-          __metadata: {
-            type: config.objListItemEntityTypeFullName
-          },
-          ...newData
-        }
-        updateQuery(config.objListId, Id, data, reqDigest, props.formCleanup);
+        props.formCleanup();
+        alert(`Fake-updated Objective:\n${JSON.stringify(props.formValues, null, 4)}`);
       } else {
-        console.log('New data:');
-        const data = {
-          __metadata: {
-            type: config.objListItemEntityTypeFullName
-          },
-          ...props.formValues
-        };
-        createQuery(config.objListId, data, reqDigest, props.formCleanup);
+        props.formCleanup();
+        alert(`Fake-added Objective:\n${JSON.stringify(props.formValues, null, 4)}`);
       }
 
       // Re-enable submit button
