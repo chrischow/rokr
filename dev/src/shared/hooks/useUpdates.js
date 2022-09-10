@@ -1,16 +1,16 @@
 import { useQuery } from "react-query";
-import { constructUrl, constructReadQueryFn } from "../../utils/query";
+import { updates } from '../data/updates';
 import { config } from "../../config";
 
 // Get all updates
 export const useUpdates = () => {
-  const url = constructUrl(
-    config.updateListId,
-    `Id,updateText,updateDate,parentKrId,team`
+  return useQuery(
+    ['updates'],
+    async () => updates.data,
+    {
+      staleTime: config.staleTime
+    }
   );
-  return useQuery(['updates'], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
 };
 
 // Get single update by ID
@@ -37,37 +37,20 @@ export const useKrUpdates = (krId) => {
 
 // Get update by key result ID
 export const useKrUpdatesDirect = (krId) => {
-  const url = constructUrl(
-    config.updateListId,
-    `Id,updateText,updateDate,parentKrId,team`,
-    undefined,
-    `parentKrId eq ${krId}`
-  );
-  return useQuery(['updates', krId], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
+  return useQuery(
+    ['updates', krId],
+    async () => updates.data.filter(update => update.parentKrId === krId),
+    {
+      staleTime: config.staleTime
+    });
 }
-
-// Get updates by team
-// export const useTeamUpdates = (team) => {
-//   const allUpdates = useUpdates();
-//   return {
-//     data: allUpdates.isSuccess ? allUpdates.data.filter(update => {
-//       return update.team === team;
-//     }) : null,
-//     isSuccess: allUpdates.isSuccess
-//   }
-// }
 
 // Get all updates for only a given team
 export const useTeamUpdates = (team) => {
-  const url = constructUrl(
-    config.updateListId,
-    `Id,updateText,updateDate,parentKrId,team`,
-    undefined,
-    `team eq '${team}'`
-  );
-  return useQuery(['updates', team], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
+  return useQuery(
+    ['updates', team],
+    async () => updates.data.filter(update => update.team === team),
+    {
+      staleTime: config.staleTime
+    });
 };

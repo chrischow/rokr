@@ -1,18 +1,32 @@
 import { useQuery } from "react-query";
-import { constructUrl, constructReadQueryFn } from "../../utils/query";
 import slugify from "slugify";
+import { objectives } from '../data/objectives';
+import { keyResults } from '../data/keyResults';
 import { config } from "../../config";
+
+// Combine data
+const allKrs = keyResults.data.map(kr => {
+  // Get associated objective
+  const parentObjective = objectives.data.find(obj => obj.Id === kr.parentObjective);
+  return {
+    ...kr,
+    parentObjective: {
+      Id: parentObjective.Id,
+      team: parentObjective.team,
+      frequency: parentObjective.frequency
+    }
+  }
+});
 
 // Get all key results
 export const useKeyResults = () => {
-  const url = constructUrl(
-    config.krListId,
-    `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team`,
-    'parentObjective'
+  return useQuery(
+    ['keyResults'],
+    async () => allKrs,
+    {
+      staleTime: config.staleTime
+    }
   );
-  return useQuery(['keyResults'], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
 };
 
 // Get single key result by ID
@@ -28,15 +42,13 @@ export const useKeyResult = (Id) => {
 
 // Get key results by objective frequency
 export const useKeyResultsByFreq = (freq) => {
-  const url = constructUrl(
-    config.krListId,
-    `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team,parentObjective/frequency`,
-    'parentObjective',
-    `parentObjective/frequency eq '${freq}'`
+  return useQuery(
+    ['keyResults', freq],
+    async () => allKrs.filter(kr => kr.parentObjective.frequency === freq),
+    {
+      staleTime: config.staleTime
+    }
   );
-  return useQuery(['keyResults', freq], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
 };
 
 // Get key results by team, using entries from full dataset
@@ -52,13 +64,14 @@ export const useTeamKeyResultsCache = (team) => {
 
 // Get key results by team
 export const useTeamKeyResults = (team) => {
-  const url = constructUrl(
-    config.krListId,
-    `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team`,
-    'parentObjective',
-    `parentObjective/team eq '${team}'`
+  return useQuery(
+    [`keyResults-${slugify(team)}`],
+    async () => {
+      console.log(allKrs.filter(kr => kr.parentObjective.team === team));
+      return allKrs.filter(kr => kr.parentObjective.team === team)
+    },
+    {
+      staleTime: config.staleTime
+    }
   );
-  return useQuery([`keyResults-${slugify(team)}`], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
 }

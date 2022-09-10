@@ -1,18 +1,16 @@
 import { useQuery } from "react-query";
-import { constructUrl, constructReadQueryFn } from "../../utils/query";
 import slugify from "slugify";
+import { objectives } from '../data/objectives';
 import { config } from "../../config";
 
 // Get all objectives
 export const useObjectives = () => {
-  const url = constructUrl(
-    config.objListId,
-    `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`
-  );
-
-  return useQuery(['objectives'], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
+  return useQuery(
+    ['objectives'],
+    async () => objectives.data,
+    {
+      staleTime: config.staleTime
+    });
 };
 
 // Get single objective by ID
@@ -28,16 +26,13 @@ export const useObjective = (Id) => {
 
 // Get objective by frequency
 export const useObjectivesByFreq = (freq) => {
-  const url = constructUrl(
-    config.objListId,
-    `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`,
-    undefined,
-    `frequency eq '${freq}'`
+  return useQuery(
+    ['objectives', freq],
+    async () => (objectives.data.filter(obj => obj.frequency === freq)),
+    {
+      staleTime: config.staleTime
+    }
   );
-
-  return useQuery(['objectives', freq], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
 }
 
 // Get objectives by team, using entries from full dataset
@@ -53,14 +48,11 @@ export const useTeamObjectivesCache = (team) => {
 
 // Get objectives for team
 export const useTeamObjectives = (team) => {
-  const url = constructUrl(
-    config.objListId,
-    `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`,
-    undefined,
-    `team eq '${team}'`
+  return useQuery(
+    [`objectives-${slugify(team)}`],
+    async () => (objectives.data.filter(obj => obj.team === team)),
+    {
+      staleTime: config.staleTime
+    }
   );
-
-  return useQuery([`objectives-${slugify(team)}`], constructReadQueryFn(url), {
-    staleTime: config.staleTime
-  });
 }
