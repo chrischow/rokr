@@ -1,9 +1,11 @@
 # ROKR Developer Guide
 Read this doc for details on the app structure.
 
-The folder structure reflects this dependency tree. Top-level components are in TitleCase. All other supporting elements are in lowercase.
+The folder structure reflects this dependency tree. Top-level component folders are in TitleCase. Folders for all other supporting elements are in lowercase.
 
 In the diagrams below, each folder contains `index.js`, and sometimes, also `styles.css`. We omit these files from the diagram for simplicity.
+
+In the diagram below, cells in purple are shared components.
 
 ```mermaid
 graph LR
@@ -220,6 +222,15 @@ For getting X-RequestDigest for SharePoint POST requests. Has a single `useToken
 ## C. Supporting Elements
 
 ### `assets`
-
+For images, video, audio, and anything other non-code element used in the app.
 
 ### `utils`
+
+| Utility | Usage |
+| :------ | :---- |
+| `circleProgress` | For drawing progress rings. |
+| `dataProcessing` | Currently only one data processing function: `sortByTitle` for sorting Objectives and Key Results. |
+| `dates` | For formatting dates, and converting dates between time periods (WY, quarter, month). |
+| `query` | Query constructors that are used in React Query hooks. |
+| `stats` | For generating aggregate metrics. |
+| `validators` | Validators for `ObjectiveForm`, `KeyResultForm`, and `UpdateForm`. |
