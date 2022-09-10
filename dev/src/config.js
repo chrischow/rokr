@@ -8,12 +8,12 @@ export const config = {
   krListItemEntityTypeFullName: 'SP.Data.RokrKeyResultsListItem',
   updateListItemEntityTypeFullName: 'SP.Data.RokrUpdatesListItem',
   teams: [
-    { teamName: "RAiD", slug: "raid" },
-    { teamName: "PAB", slug: "pab" },
-    { teamName: "SWiFT", slug: "swift" },
-    { teamName: "RDO", slug: "rdo" },
-    { teamName: "CyDef", slug: "cydef" },
-    { teamName: "SES", slug: "ses" },
+    { teamName: "HQ", slug: "hq" },
+    { teamName: "Marketing", slug: "marketing" },
+    { teamName: "HR", slug: "hr" },
+    { teamName: "Finance", slug: "finance" },
+    { teamName: "R&D", slug: "research-devt" },
+    { teamName: "IT", slug: "it" },
   ],
   staleTime: 2 * 60 * 1000,
   tokenRefreshTime: 10 * 60 * 1000
