@@ -66,10 +66,7 @@ export const useTeamKeyResultsCache = (team) => {
 export const useTeamKeyResults = (team) => {
   return useQuery(
     [`keyResults-${slugify(team)}`],
-    async () => {
-      console.log(allKrs.filter(kr => kr.parentObjective.team === team));
-      return allKrs.filter(kr => kr.parentObjective.team === team)
-    },
+    async () => allKrs.filter(kr => kr.parentObjective.team === team),
     {
       staleTime: config.staleTime
     }

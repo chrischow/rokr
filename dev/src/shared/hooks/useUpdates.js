@@ -39,7 +39,7 @@ export const useKrUpdates = (krId) => {
 export const useKrUpdatesDirect = (krId) => {
   return useQuery(
     ['updates', krId],
-    async () => updates.data.filter(update => update.parentKrId === krId),
+    async () => updates.data.filter(update => update.parentKrId === Number(krId)),
     {
       staleTime: config.staleTime
     });
