@@ -33,3 +33,5 @@ graph TD
   TQK --> SMO([Staff Monthly Objectives])
   SMO --> SMK([Staff Monthly KRs])
 ```
+
+This way, each entity is created in some context (except the root: annual Objectives).
