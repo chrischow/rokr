@@ -61,7 +61,7 @@ export default function Home(props) {
   // Link to RAiD page
   const navigate = useNavigate();
   const goToTeamPage = () => {
-    return navigate(`${config.teams[0].slug}`);
+    return navigate(`/${config.teams[0].slug}`);
   }
   
   return (
@@ -70,13 +70,13 @@ export default function Home(props) {
         <Brand />
       </h1>
       <h2 className="mt-4">
-        RAiD
+        {config.teams[0].teamName}
       </h2>
       {allTeamsProgressData &&
         <div className="overall-panel card--inner mt-4" onClick={goToTeamPage}>
           <ProgressCard
             progressId="overall_progress"
-            data={allTeamsProgressData['RAiD']}
+            data={allTeamsProgressData[config.teams[0].teamName]}
             isTeam={false}
           />
         </div>
