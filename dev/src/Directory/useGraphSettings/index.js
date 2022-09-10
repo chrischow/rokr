@@ -1,11 +1,11 @@
 export const useGraphSettings = () => {
   const teamLookup = {
-    RAiD: 'org-0',
-    PAB: 'org-1',
-    SWiFT: 'org-2',
-    RDO: 'org-3',
-    CyDef: 'org-4',
-    SES: 'org-5',
+    'HQ': 'org-0',
+    'Marketing': 'org-1',
+    'HR': 'org-2',
+    'Finance': 'org-3',
+    'R&D': 'org-4',
+    'IT': 'org-5',
   };
   
   // Create legend nodes
@@ -24,12 +24,12 @@ export const useGraphSettings = () => {
   }
 
   const defaultNodes = [
-    { id: 'org-0', label: 'RAiD', title: 'RSAF Agility, Innovation, and Digital', group: 'king', level: 0, margin: 20, mass: 6, chosen: false },
-    { id: 'org-1', label: 'PAB', title: 'Plans & Architecting Branch', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-    { id: 'org-2', label: 'SWiFT', title: 'SWiFT', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-    { id: 'org-3', label: 'RDO', title: 'RSAF Data Office', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-    { id: 'org-4', label: 'CyDef', title: 'Cyber Defence Branch', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
-    { id: 'org-5', label: 'SES', title: 'Software Engineering Squadron', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
+    { id: 'org-0', label: 'HQ', title: 'Headquarters', group: 'king', level: 0, margin: 20, mass: 6, chosen: false },
+    { id: 'org-1', label: 'Marketing', title: 'Marketing Department', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
+    { id: 'org-2', label: 'HR', title: 'HR Department', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
+    { id: 'org-3', label: 'Finance', title: 'Finance Department', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
+    { id: 'org-4', label: 'R&D', title: 'R&D Department', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
+    { id: 'org-5', label: 'IT', title: 'IT Department', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
   ];
 
   const defaultEdges = [

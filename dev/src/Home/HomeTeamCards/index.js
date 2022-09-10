@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import ProgressCard from '../../shared/ProgressCard';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { config } from '../../config';
 
 function Card(props) {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function Card(props) {
 // HomeCards
 export default function HomeTeamCards(props) {
   var cards = props.teams.map(team => {
-    if (team.teamName !== 'RAiD') {
+    if (team.teamName !== config.teams[0].teamName) {
       return (
         <Card
           teamName={team.teamName}
