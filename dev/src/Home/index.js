@@ -9,6 +9,7 @@ import {
 import { Brand } from "../shared/Brand";
 import ProgressCard from "../shared/ProgressCard";
 import HomeTeamCards from "./HomeTeamCards";
+import { config } from "../config";
 
 import './styles.css';
 
@@ -31,7 +32,7 @@ export default function Home(props) {
       if (allTeamsProgressData) {
         updateCircleProgress(
           "overall_progress",
-          allTeamsProgressData['RAiD'].avgCompletion,
+          allTeamsProgressData[config.teams[0].teamName].avgCompletion,
           200,
           "50px",
           "#000718"
@@ -41,7 +42,7 @@ export default function Home(props) {
       // Initialise team progress cards
       if (allTeamsProgressData) {
         props.teams.map(team => {
-          if (team.teamName !== 'RAiD') {
+          if (team.teamName !== config.teams[0].teamName) {
             updateCircleProgress(
               team.slug,
               allTeamsProgressData[team.teamName].avgCompletion,
@@ -60,7 +61,7 @@ export default function Home(props) {
   // Link to RAiD page
   const navigate = useNavigate();
   const goToTeamPage = () => {
-    return navigate('/raid');
+    return navigate(`${config.teams[0].slug}`);
   }
   
   return (
