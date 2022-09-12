@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Container from "react-bootstrap/Container";
-import Splash from './shared/Splash';
 import NavBar from './shared/NavBar';
 import Home from './Home';
 import Team from './Team';
@@ -41,11 +40,10 @@ function App() {
   return (
     <HashRouter>
       <QueryClientProvider client={queryClient}>
-        {loading && <Splash loading={loading} />}
         <NavBar teams={config.teams} />
         <Container className="mt-5 app-container">
           <Routes>
-            <Route path="/" element={<Home teams={config.teams} />} exact />
+            <Route path="/" element={<Home teams={config.teams} loading={loading} />} exact />
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/directory" element={<Directory key="directory" />} />
             <Route path="/updates/:krId" element={<Updates />} />

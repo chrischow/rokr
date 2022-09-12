@@ -6,6 +6,7 @@ import updateCircleProgress from "../utils/circleProgress";
 import {
   computeMetrics, computeTeamsMetrics
 } from "../utils/stats";
+import Splash from '../shared/Splash';
 import { Brand } from "../shared/Brand";
 import ProgressCard from "../shared/ProgressCard";
 import HomeTeamCards from "./HomeTeamCards";
@@ -66,6 +67,7 @@ export default function Home(props) {
   
   return (
     <>
+      {props.loading && <Splash loading={props.loading} />}
       <h1>
         <Brand />
       </h1>
