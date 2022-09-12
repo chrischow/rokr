@@ -35,7 +35,7 @@ export const useObjectivesByFreq = (freq) => {
     `frequency eq '${freq}'`
   );
 
-  return useQuery(['objectives', freq], constructReadQueryFn(url), {
+  return useQuery(['objectives', 'freq', freq], constructReadQueryFn(url), {
     staleTime: config.staleTime
   });
 }

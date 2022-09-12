@@ -43,7 +43,7 @@ export const useKrUpdatesDirect = (krId) => {
     undefined,
     `parentKrId eq ${krId}`
   );
-  return useQuery(['updates', Number(krId)], constructReadQueryFn(url), {
+  return useQuery(['updates', 'kr', Number(krId)], constructReadQueryFn(url), {
     staleTime: config.staleTime
   });
 }
@@ -67,7 +67,7 @@ export const useTeamUpdates = (team) => {
     undefined,
     `team eq '${team}'`
   );
-  return useQuery(['updates', team], constructReadQueryFn(url), {
+  return useQuery(['updates', 'team', team], constructReadQueryFn(url), {
     staleTime: config.staleTime
   });
 };

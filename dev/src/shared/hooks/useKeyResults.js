@@ -34,7 +34,7 @@ export const useKeyResultsByFreq = (freq) => {
     'parentObjective',
     `parentObjective/frequency eq '${freq}'`
   );
-  return useQuery(['keyResults', freq], constructReadQueryFn(url), {
+  return useQuery(['keyResults', 'freq', freq], constructReadQueryFn(url), {
     staleTime: config.staleTime
   });
 };
@@ -58,7 +58,7 @@ export const useTeamKeyResults = (team) => {
     'parentObjective',
     `parentObjective/team eq '${team}'`
   );
-  return useQuery([`keyResults-${slugify(team)}`], constructReadQueryFn(url), {
+  return useQuery(['keyResults', 'team', team], constructReadQueryFn(url), {
     staleTime: config.staleTime
   });
 }
