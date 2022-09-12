@@ -29,7 +29,7 @@ export default class ErrorBoundary extends Component {
           <p>Please let your friendly ROKR dev team know about the error:</p>
           <div className="mt-3">
             <code>
-              {this.state.error}
+              {JSON.stringify(this.state.error)}
             </code>
           </div>
           <div className="mt-3">
