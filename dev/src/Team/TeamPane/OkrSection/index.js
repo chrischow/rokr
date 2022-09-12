@@ -51,49 +51,19 @@ export default function OkrSection(props) {
     }
   }, [props.freq, props.dateOption]);
 
-  // Form values
-  const defaultObjectiveValues = {
-    Title: '',
-    objectiveDescription: '',
-    objectiveStartDate: startDate,
-    objectiveEndDate: endDate,
-    frequency: props.freq,
-    team: props.teamName,
-    owner: props.staffOption ? props.staffOption : ''
-  };
-
-  const [objectiveFormValues, setObjectiveFormValues] = useState({...defaultObjectiveValues});
-
-  // Update form values based on the things that can change
-  useEffect(() => {
-    setObjectiveFormValues(prevData => {
-      return {
-        ...prevData,
-        objectiveStartDate: startDate,
-        objectiveEndDate: endDate,
-        frequency: props.freq,
-        team: props.teamName,
-        owner: props.staffOption ? props.staffOption : ''
-      };
-    });
-  }, [props.freq, props.teamName, props.staffOption, startDate, endDate])
-
   // Handle closing of modal
   const handleCloseModal = () => {
-    setObjectiveFormValues({...defaultObjectiveValues});
+    // setObjectiveFormValues({...defaultObjectiveValues});
     setShowObjectiveModal(false);
   }
-
+  
   // Render modal content
   const addObjective = () => <ObjectiveAdd
-    objectiveFormValues={objectiveFormValues}
-    setObjectiveFormValues={setObjectiveFormValues}
     setShowObjectiveModal={setShowObjectiveModal}
-    defaultValues={defaultObjectiveValues}
-    startDate={startDate}
-    endDate={endDate}
     freq={props.freq}
     team={props.teamName}
+    startDate={startDate}
+    endDate={endDate}
     staffOption={props.staffOption}
   />
 
