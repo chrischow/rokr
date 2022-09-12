@@ -60,7 +60,7 @@ export const useTeamObjectives = (team) => {
     `team eq '${team}'`
   );
 
-  return useQuery([`objectives-${slugify(team)}`], constructReadQueryFn(url), {
+  return useQuery(['objectives', 'team', team], constructReadQueryFn(url), {
     staleTime: config.staleTime
   });
 }

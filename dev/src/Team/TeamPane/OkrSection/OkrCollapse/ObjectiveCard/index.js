@@ -25,7 +25,7 @@ export default function ObjectiveCard(props) {
   // Invalidate data
   const queryClient = useQueryClient();
   const invalidateObjectives = () => {
-    queryClient.invalidateQueries([`objectives-${slugify(props.team)}`], { refetchInactive: true });
+    queryClient.invalidateQueries(['objectives', 'team', props.team], { refetchInactive: true });
     queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 

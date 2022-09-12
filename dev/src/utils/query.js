@@ -43,7 +43,7 @@ export async function createQuery(listId, data, token, callback) {
         'X-RequestDigest': token
       }
     });
-    // console.log(response);
+    // const newId = response.data.value[0].ItemId;
     callback();
   } catch (error) {
     console.log('Error:', error);

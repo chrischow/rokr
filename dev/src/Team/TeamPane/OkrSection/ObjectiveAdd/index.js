@@ -14,7 +14,7 @@ export default function ObjectiveAdd(props) {
     objectiveStartDate: props.startDate,
     objectiveEndDate: props.endDate,
     frequency: props.freq,
-    team: props.teamName,
+    team: props.team,
     owner: props.staffOption ? props.staffOption : ''
   };
 
@@ -24,7 +24,7 @@ export default function ObjectiveAdd(props) {
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
     // queryClient.invalidateQueries('objectives', { refetchInactive: true });
-    queryClient.invalidateQueries([`objectives-${slugify(props.team)}`], { refetchInactive: true });
+    queryClient.invalidateQueries(['objectives', 'team', props.team], { refetchInactive: true });
     queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
@@ -33,17 +33,27 @@ export default function ObjectiveAdd(props) {
     // Invalidate and refetch data
     invalidateAndRefetch();
 
-    // Reset form
-    // props.setObjectiveFormValues({...props.defaultValues});
+    // Update new data
+    // console.log(props.team);
+    // queryClient.setQueryData(['objectives', 'team', props.team], prevData => {
+    //   console.log(prevData);
+    //   return [
+    //     ...prevData,
+    //     {
+    //       ...objectiveFormValues,
+    //       Id: newId
+    //     }
+    //   ];
+    // });
     
     // Close modal
     props.setShowObjectiveModal(false);
   }
   
   return <ObjectiveForm
-      formValues={objectiveFormValues}
-      setFormValues={setObjectiveFormValues}
-      formCleanup={formCleanup}
-      mode='new'
-    />;
+    formValues={objectiveFormValues}
+    setFormValues={setObjectiveFormValues}
+    formCleanup={formCleanup}
+    mode='new'
+  />;
 }
