@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+// import { ReactQueryDevtools } from 'react-query/devtools'
 import Container from "react-bootstrap/Container";
 import NavBar from './shared/NavBar';
 import Home from './Home';
@@ -13,13 +14,6 @@ import './App.css';
 import ErrorBoundary from './shared/ErrorBoundary';
 
 function App() {
-  // State for displaying splash
-  const [loading, setLoading] = useState(true);
-
-  useEffect(function () {
-    setTimeout(() => setLoading(false), 6000);
-  }, []);
-
   // Load query client
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -45,7 +39,7 @@ function App() {
         <ErrorBoundary>
           <Container className="mt-5 app-container">
             <Routes>
-              <Route path="/" element={<Home teams={config.teams} loading={loading} />} exact />
+              <Route path="/" element={<Home teams={config.teams} />} exact />
               <Route path="/timeline" element={<Timeline />} />
               <Route path="/directory" element={<Directory key="directory" />} />
               <Route path="/updates/:krId" element={<Updates />} />
@@ -53,6 +47,7 @@ function App() {
             </Routes>
           </Container>
         </ErrorBoundary>
+        {/* <ReactQueryDevtools initialIsOpen={false}/> */}
       </QueryClientProvider>
     </HashRouter>
   );

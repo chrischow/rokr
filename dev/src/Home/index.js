@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useObjectives } from "../shared/hooks/useObjectives";
 import { useKeyResults } from "../shared/hooks/useKeyResults";
@@ -15,6 +15,13 @@ import { config } from "../config";
 import './styles.css';
 
 export default function Home(props) {
+  // State for displaying splash
+  const [loading, setLoading] = useState(true);
+
+  useEffect(function () {
+    setTimeout(() => setLoading(false), 6000);
+  }, []);
+
   // Get data
   const objectives = useObjectives();
   const keyResults = useKeyResults();
@@ -67,7 +74,7 @@ export default function Home(props) {
   
   return (
     <>
-      {props.loading && <Splash loading={props.loading} />}
+      {loading && <Splash loading={loading} />}
       <h1>
         <Brand />
       </h1>
