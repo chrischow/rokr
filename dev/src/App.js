@@ -10,6 +10,7 @@ import Directory from './Directory';
 import Updates from './Updates';
 import { config } from './config';
 import './App.css';
+import ErrorBoundary from './shared/ErrorBoundary';
 
 function App() {
   // State for displaying splash
@@ -41,15 +42,17 @@ function App() {
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <NavBar teams={config.teams} />
-        <Container className="mt-5 app-container">
-          <Routes>
-            <Route path="/" element={<Home teams={config.teams} loading={loading} />} exact />
-            <Route path="/timeline" element={<Timeline />} />
-            <Route path="/directory" element={<Directory key="directory" />} />
-            <Route path="/updates/:krId" element={<Updates />} />
-            {teamRoutes}
-          </Routes>
-        </Container>
+        <ErrorBoundary>
+          <Container className="mt-5 app-container">
+            <Routes>
+              <Route path="/" element={<Home teams={config.teams} loading={loading} />} exact />
+              <Route path="/timeline" element={<Timeline />} />
+              <Route path="/directory" element={<Directory key="directory" />} />
+              <Route path="/updates/:krId" element={<Updates />} />
+              {teamRoutes}
+            </Routes>
+          </Container>
+        </ErrorBoundary>
       </QueryClientProvider>
     </HashRouter>
   );
