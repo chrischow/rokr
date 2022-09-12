@@ -9,7 +9,7 @@ import UpdatesTable from "./UpdatesTable";
 import UpdateAdd from "./UpdateAdd";
 import UpdateEdit from "./UpdateEdit";
 import DeleteForm from "../shared/DeleteForm";
-
+import { config } from "../config";
 
 export default function Updates(props) {
 
@@ -56,7 +56,8 @@ export default function Updates(props) {
   const navigate = useNavigate();
   const backToTeamPage = () => {
     if (team) {
-      navigate(`/${team}`);
+      const teamSlug = config.teams.find(elem => elem.teamName == team);
+      navigate(`/${teamSlug.slug}`);
     }
   }
   
