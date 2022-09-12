@@ -27,9 +27,7 @@ export default function QuickAddUpdate(props) {
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
     queryClient.invalidateQueries(['updates', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
     queryClient.invalidateQueries(['updates', props.krId], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   // Toggle accordion

@@ -43,7 +43,7 @@ export const useKrUpdatesDirect = (krId) => {
     undefined,
     `parentKrId eq ${krId}`
   );
-  return useQuery(['updates', krId], constructReadQueryFn(url), {
+  return useQuery(['updates', Number(krId)], constructReadQueryFn(url), {
     staleTime: config.staleTime
   });
 }

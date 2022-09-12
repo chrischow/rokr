@@ -23,9 +23,7 @@ export default function ObjectiveAdd(props) {
   
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
-    // queryClient.invalidateQueries('objectives', { refetchInactive: true });
     queryClient.invalidateQueries(['objectives', 'team', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   // Form cleanup

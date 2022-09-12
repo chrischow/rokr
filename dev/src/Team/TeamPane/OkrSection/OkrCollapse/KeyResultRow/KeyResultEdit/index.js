@@ -11,7 +11,6 @@ export default function KeyResultEdit(props) {
   const invalidateAndRefetch = () => {
     // queryClient.invalidateQueries('keyResults', { refetchInactive: true });
     queryClient.invalidateQueries([`keyResults-${slugify(props.team)}`], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   // Form cleanup

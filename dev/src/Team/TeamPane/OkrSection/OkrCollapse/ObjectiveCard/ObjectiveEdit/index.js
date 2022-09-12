@@ -10,7 +10,6 @@ export default function ObjectiveEdit(props) {
   const invalidateAndRefetch = () => {
     // queryClient.invalidateQueries('objectives', { refetchInactive: true });
     queryClient.invalidateQueries(['objectives', 'team', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   // Objective form cleanup

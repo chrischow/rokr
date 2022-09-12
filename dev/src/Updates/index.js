@@ -18,9 +18,8 @@ export default function Updates(props) {
 
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries(['updates', krId], { refetchInactive: true });
+    queryClient.invalidateQueries(['updates', Number(krId)], { refetchInactive: true });
     team && queryClient.invalidateQueries(['updates', team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   // State
