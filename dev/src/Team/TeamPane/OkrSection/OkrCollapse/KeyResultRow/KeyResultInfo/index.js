@@ -24,10 +24,12 @@ export default function KeyResultInfo(props) {
     if (updates.isSuccess) {
       let newUpdates = updates.data.filter(update => {
         return update.parentKrId === props.Id;
-      });
+      }).map(update => {
+        return {...update, updateDate: getDate(update.updateDate)};
+      });;
       setInitialData(newUpdates);
     };
-  }, [updates.isSuccess]);
+  }, [updates.data]);
 
   // Get dates
   const startDate = formatDate(props.startDate);
@@ -75,7 +77,7 @@ export default function KeyResultInfo(props) {
             table.DataTable().rows.add(initialData).draw();
           } else {
             table.DataTable().clear().draw();
-            table.DataTable().rows.add(updateData).draw();
+            table.DataTable().rows.add(initialData).draw();
           }
         });
       }

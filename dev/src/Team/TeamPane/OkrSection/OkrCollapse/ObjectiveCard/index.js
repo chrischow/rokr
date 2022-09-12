@@ -102,7 +102,7 @@ export default function ObjectiveCard(props) {
   const objectiveOptions = objectives.isSuccess && objectives.data.map(obj => {
     return {
       value: obj.Id,
-      label: `[${obj.team} ${obj.frequency}] ${obj.Title}`
+      label: `[${obj.team} ${obj.frequency} - ${getDate(obj.objectiveEndDate)}] ${obj.Title}`
     };
   })
   
@@ -136,8 +136,8 @@ export default function ObjectiveCard(props) {
       return {
         ...prevData,
         parentObjective: props.Id,
-        krStartDate: props.objectiveStartDate,
-        krEndDate: props.objectiveEndDate,
+        krStartDate: getDate(props.objectiveStartDate),
+        krEndDate: getDate(props.objectiveEndDate),
       };
     });
   }, [props.objectiveStartDate, props.objectiveEndDate, props.Id])

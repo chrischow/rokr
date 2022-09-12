@@ -69,7 +69,7 @@ export default function KeyResultRow(props) {
   const objectiveOptions = objectives.isSuccess && objectives.data.map(obj => {
     return {
       value: obj.Id,
-      label: `[${obj.team} ${obj.frequency} - ${obj.objectiveEndDate}] ${obj.Title}`
+      label: `[${obj.team} ${obj.frequency} - ${getDate(obj.objectiveEndDate)}] ${obj.Title}`
     };
   })
 
