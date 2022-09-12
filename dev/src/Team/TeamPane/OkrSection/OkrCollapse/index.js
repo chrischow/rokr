@@ -15,7 +15,17 @@ export default function OkrCollapse(props) {
     const krUpdates = props.updateData.filter(update => {
       return update.parentKrId === kr.Id;
     });
-    const nLatestUpdates = krUpdates.length;
+    const nLatestUpdates = krUpdates.filter(update => {
+      // Get update's date
+      let updateDate = new Date(update.updateDate);
+      // Get today's date
+      let maxDate = new Date();
+      // Get today's date minus 7 days
+      let minDate = new Date();
+      minDate.setDate(minDate.getDate() - 7);
+      // Check condition
+      return updateDate >= minDate && updateDate <= maxDate;
+    }).length;
     return <KeyResultRow
       // key={`kr-row-${kr.Id}`}
       objId={objId}
