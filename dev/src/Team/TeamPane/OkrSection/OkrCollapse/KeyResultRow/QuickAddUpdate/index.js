@@ -65,6 +65,7 @@ export default function QuickAddUpdate(props) {
               formValues={updateFormValues}
               setFormValues={setUpdateFormValues}
               formCleanup={formCleanup}
+              size="sm"
               mode='new'
             />
           </Accordion.Body>

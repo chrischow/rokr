@@ -112,6 +112,7 @@ export default function UpdateForm(props) {
             name="updateDate"
             className="form-dark form--edit datepicker"
             value={props.formValues.updateDate}
+            style={props.size === "sm" ? { fontSize: "1.0rem" }: {}}
             onChange={handleChange}
           />
           <Form.Label className="form--label">Update</Form.Label>
@@ -122,6 +123,7 @@ export default function UpdateForm(props) {
             name="updateText"
             className="form-dark form--edit"
             value={props.formValues.updateText}
+            style={props.size === "sm" ? { fontSize: "1.0rem" }: {}}
             onChange={handleChange}
           />
         </Form.Group>
