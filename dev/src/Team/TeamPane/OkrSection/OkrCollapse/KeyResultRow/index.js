@@ -23,12 +23,12 @@ export default function KeyResultRow(props) {
   // Invalidate data
   const queryClient = useQueryClient();
   const invalidateKeyResults = () => {
-    queryClient.invalidateQueries([`keyResults-${slugify(props.team)}`], { refetchInactive: true });
+    queryClient.invalidateQueries(['keyResults', 'team', props.team], { refetchInactive: true });
     queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   const invalidateUpdates = () => {
-    queryClient.invalidateQueries(['updates', props.team], { refetchInactive: true });
+    queryClient.invalidateQueries(['updates', 'team', props.team], { refetchInactive: true });
     queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
