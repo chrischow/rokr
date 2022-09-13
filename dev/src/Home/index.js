@@ -15,13 +15,6 @@ import { config } from "../config";
 import './styles.css';
 
 export default function Home(props) {
-  // State for displaying splash
-  const [loading, setLoading] = useState(true);
-
-  useEffect(function () {
-    setTimeout(() => setLoading(false), 6000);
-  }, []);
-
   // Get data
   const objectives = useObjectives();
   const keyResults = useKeyResults();
@@ -74,7 +67,6 @@ export default function Home(props) {
   
   return (
     <>
-      {loading && <Splash loading={loading} />}
       <h1>
         <Brand />
       </h1>
