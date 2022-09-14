@@ -155,7 +155,7 @@ export default function KeyResultForm(props) {
 
           <Form.Label className="form--label">Description</Form.Label>
           <Form.Control
-            type="input"
+            as="textarea"
             id="krDescription"
             name="krDescription"
             className="form-dark form--edit"
