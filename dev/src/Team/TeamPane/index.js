@@ -36,22 +36,13 @@ export default function TeamPane(props) {
         ? getQuarter(today, workyear)
         : getMonth(today, year);
     setDateOption(initialFreq);
-
-    if (props.staffList) {
-      setStaffOption(props.staffList[0]);
-    }
-  }, [props.freq, props.staffList])
+  }, [props.freq])
 
   useEffect(() => {
     let objectives = props.objectives.filter(obj => {
       return (obj.frequency === props.freq) && 
         testPeriodEquality(obj.objectiveEndDate, dateOption, props.freq)
     });
-    
-    // Monthly only
-    if (props.staffList) {
-      objectives = objectives.filter(obj => obj.owner === staffOption);
-    }
 
     const keyResults = props.keyResults.filter(kr => {
       return objectives.map(obj => obj.Id).includes(kr.parentObjective.Id);
@@ -59,36 +50,13 @@ export default function TeamPane(props) {
 
     setCurrentObjectives(objectives);
     setCurrentKeyResults(keyResults);
-  }, [dateOption, props.freq, props.objectives, props.keyResults, props.staffList, staffOption])
-
-  // Create staff tabs for monthly
-  const staffTabs = props.staffList && props.staffList.map(staff => {
-    return (
-      <Nav.Link 
-        key={`tab-${slugify(staff)}`}
-        eventKey={slugify(staff)}
-        className="individual-tabs--link"
-        onClick={() => setStaffOption(staff)}
-      >
-        {staff}
-      </Nav.Link>
-    );
-  });
+  }, [dateOption, props.freq, props.objectives, props.keyResults, staffOption])
   
   return (
     <>
-      {props.freq === 'monthly' && props.staffList.length > 0 &&
-        <>
-          <Tab.Container id="individual-tabs" defaultActiveKey={slugify(props.staffList[0])}>
-            <Nav className="justify-content-center">
-              <Nav.Item>
-                {staffTabs}
-              </Nav.Item>
-            </Nav>
-          </Tab.Container>
-        </>
+      {props.teamName === 'RAiD' && props.freq === 'quarterly' && 
+        <FreqDropdown freq={props.freq} options={props.subgroups} dateOption={dateOption} setDateOption={setDateOption} />
       }
-      <FreqDropdown freq={props.freq} options={props.subgroups} dateOption={dateOption} setDateOption={setDateOption} />
       <TeamProgress
         freq={props.freq}
         data={computeMetrics(
@@ -100,7 +68,6 @@ export default function TeamPane(props) {
       <OkrSection
         teamName={props.teamName}
         freq={props.freq}
-        staffOption={staffOption}
         dateOption={dateOption}
         objectives={currentObjectives}
         keyResults={currentKeyResults}

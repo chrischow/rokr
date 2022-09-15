@@ -64,7 +64,6 @@ export default function OkrSection(props) {
     team={props.teamName}
     startDate={startDate}
     endDate={endDate}
-    staffOption={props.staffOption}
   />
 
   // Create OKR Collapse objects
