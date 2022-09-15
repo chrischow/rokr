@@ -1,7 +1,46 @@
 # ROKR Developer Guide
-This README contains details on ROKR's architecture. The `src` directory is set up to mimic the component dependency tree as closely as possible.
+This README contains details on how ROKR was built.
 
-Top-level components are in folders in TitleCase. Folders for all other supporting elements are in lowercase.
+## Data
+ROKR has three main entities: (1) Objectives, (2) Key Results, and (3) Updates (on Key Results). They are stored in three separate Lists on SharePoint. See the Entity-relationship Diagram below for an overview.
+
+```mermaid
+erDiagram
+  Objectives ||--|{ KeyResults : has
+  KeyResults ||--|{ Updates : has
+  Objectives {
+    int Id PK
+    string Title
+    string objectiveDescription
+    date objectiveStartDate
+    date objectiveEndDate
+    string team
+    string owner
+    enum frequency "annual/quarterly/monthly"
+  }
+  KeyResults {
+    int Id PK
+    string Title
+    string krDescription
+    date krStartDate
+    date krEndDate
+    int minValue
+    int maxValue
+    int currentValue
+    int parentObjective FK "Objectives"
+  }
+  Updates {
+    int Id PK
+    string Title "Unused"
+    string updateText
+    date updateDate
+    int parentKrId
+    string team
+  }
+```
+
+## Architecture
+The `src` directory is set up to mimic the component dependency tree as closely as possible. Top-level components are in folders in TitleCase, while folders for all other supporting elements are in lowercase.
 
 In the diagrams below, each folder contains `index.js`, and sometimes, also `styles.css`. We omit these files from the diagram for simplicity. Cells in purple are shared components.
 
@@ -72,9 +111,9 @@ graph LR
   class PC,SM,DF,UF,OF,KRF,PB shared
 ```
 
-## A. Top-Level Components
+### Top-Level Components
 
-### 1. `Home`
+#### 1. `Home`
 This component contains the progress cards for the main organisational entity and its sub-entities. The component tree:
 
 ```mermaid
@@ -94,7 +133,7 @@ graph LR
 | `HomeTeamCards` | Contains a list of card elements. Each card wraps has a team name and a `ProgressCard`. |
 
 
-### 2. `Team`
+#### 2. `Team`
 This is the main component containing the bulk of components in ROKR. For ease of viewing, the explanations for the components are split into two tables. Refer to the [`shared`](#components) section for more info on shared components (purple).
 
 | Component | Purpose |
@@ -158,7 +197,7 @@ graph LR
 | `KeyResultInfo` | Displays detailed KR info and lists Updates in a DataTable. Also links to the associated `Updates` view (top-level component), and contains a form to quickly add updates. |
 | `QuickAddUpdate` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
-### 3. `Updates`
+#### 3. `Updates`
 
 ```mermaid
 graph TD
@@ -182,10 +221,10 @@ graph TD
 | `UpdateEdit` | Wrapper for `UpdateForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `UpdatesTable` | DataTable for displaying Updates. Contains buttons to edit each Update. |
 
-### 4. `Timeline`
+#### 4. `Timeline`
 Contains a single DataTable comprising all Updates. It pulls all Objectives, Key Results, and Updates - this can be improved.
 
-### 5. `Directory`
+#### 5. `Directory`
 In addition to the components below, the main `Directory` component has a panel to display OKR information.
 
 ```mermaid
@@ -202,10 +241,10 @@ graph TD
 | `Graph` | An interactive network graph for displaying OKRs. |
 | `useGraphSettings` | Hook to generate graph settings. |
 
-## B. `shared`
+### `shared` Entities
 This folder comprises components that are shared across 2 or more components. Any reference to another component will always go to the `shared` folder.
 
-### Components
+#### Components
 
 | Component | Purpose |
 | :-------- | :------ |
@@ -220,7 +259,7 @@ This folder comprises components that are shared across 2 or more components. An
 | `UpdateForm` | Controlled form for adding and editing Updates. Includes validation, submission, and a link to `DeleteForm`. Used in `Home` and `Updates` components. |
 | `DeleteForm` | Form for delete entities using an `ON DELETE CASCADE` rule. Presents warning if cascading is required. Used in `Home` and `Updates` components. |
 
-### Hooks
+#### Hooks
 Data is retrieved and managed using [React Query](https://react-query-v3.tanstack.com/overview).
 
 | Hook(s) | Usage |
@@ -230,7 +269,7 @@ Data is retrieved and managed using [React Query](https://react-query-v3.tanstac
 | `useTeamObjectives(<team>)`, `useTeamKeyResults(<team>)`, `useTeamUpdates(<team>)` | Retrieve team data for `Team`. |
 | `useKeyResult(<krId>)`, `useKrUpdatesDirect(<krId>)` | Retrieve info on a KR and its associated Updates for `Updates`. |
 
-#### 1. `useObjectives`
+##### 1. `useObjectives`
 For retrieving Objectives. There are multiple hooks:
 
 - `useObjectives()`: Retrieves **all** Objectives in the database. It has several dependant hooks:
@@ -239,7 +278,7 @@ For retrieving Objectives. There are multiple hooks:
 - `useObjectivesByFreq(freq)`: Retrieves Objectives with a given frequency only.
 - `useTeamObjectives(team)`: Retrieves Objectives under a given team only.
 
-#### 2. `useKeyResults`
+##### 2. `useKeyResults`
 For retrieving KRs. There are multiple hooks:
 
 - `useKeyResults()`: Retrieves **all** KRs in the database. It has several dependant hooks:
@@ -248,7 +287,7 @@ For retrieving KRs. There are multiple hooks:
 - `useKeyResultsByFreq(freq)`: Retrieves KRs with a given frequency only.
 - `useTeamKeyResults(team)`: Retrieves KRs under a given team only.
 
-#### 3. `useUpdates`
+##### 3. `useUpdates`
 For retrieving Updates. There are multiple hooks:
 
 - `useUpdates()`: Retrieves **all** Updates in the database. It has several dependant hooks:
@@ -257,10 +296,10 @@ For retrieving Updates. There are multiple hooks:
 - `useKrUpdatesDirect(KrId)`: Retrieves Updates under a given KR only.
 - `useTeamUpdates(team)`: Retrieves Updates under a given team only.
 
-#### 4. `useToken`
+##### 4. `useToken`
 For getting X-RequestDigest for SharePoint POST requests. Has a single `useToken` hook.
 
-#### Other Information
+##### Other Information
 React Query is configured with the following settings in `config.js`:
 
 - `staleTime = Infinity`: Under this scheme, the data is always fresh, and *automatic* refetching is completely disabled. The data will only be refreshed when the user hits the refresh buttons or refreshes the page entirely. This is to prevent automatic refetching from disrupting edits in progress.
@@ -271,12 +310,12 @@ React Query is configured with the following settings in `config.js`:
     - The window is refocused
     - The network is reconnected
 
-## C. Supporting Elements
+### Supporting Elements
 
-### `assets`
+#### `assets`
 For images, video, audio, and anything other non-code element used in the app.
 
-### `utils`
+#### `utils`
 
 | Utility | Usage |
 | :------ | :---- |
