@@ -29,17 +29,14 @@ export default function ObjectiveCard(props) {
   const queryClient = useQueryClient();
   const invalidateObjectives = () => {
     queryClient.invalidateQueries(['objectives', 'team', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   const invalidateKeyResults = () => {
     queryClient.invalidateQueries([`keyResults-${slugify(props.team)}`], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   const invalidateUpdates = () => {
     queryClient.invalidateQueries(['updates', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   // OBJECTIVE FORM

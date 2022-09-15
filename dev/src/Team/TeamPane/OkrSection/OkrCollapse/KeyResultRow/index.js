@@ -23,12 +23,10 @@ export default function KeyResultRow(props) {
   const queryClient = useQueryClient();
   const invalidateKeyResults = () => {
     queryClient.invalidateQueries(['keyResults', 'team', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   const invalidateUpdates = () => {
     queryClient.invalidateQueries(['updates', 'team', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
   };
 
   // KR EDIT FORM
