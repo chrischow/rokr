@@ -4,7 +4,8 @@ import $ from 'jquery';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { formatDate, getDate } from '../../../../../../utils/dates';
-import { EditIconText } from '../../../../../../shared/Icons';
+import { IconContext } from 'react-icons';
+import { FaEdit } from 'react-icons/fa';
 import { useTeamUpdates } from '../../../../../../shared/hooks/useUpdates';
 import QuickAddUpdate from '../QuickAddUpdate';
 
@@ -24,10 +25,12 @@ export default function KeyResultInfo(props) {
     if (updates.isSuccess) {
       let newUpdates = updates.data.filter(update => {
         return update.parentKrId === props.Id;
-      });
+      }).map(update => {
+        return {...update, updateDate: getDate(update.updateDate)};
+      });;
       setInitialData(newUpdates);
     };
-  }, [updates.isSuccess]);
+  }, [updates.data]);
 
   // Get dates
   const startDate = formatDate(props.startDate);
@@ -75,7 +78,7 @@ export default function KeyResultInfo(props) {
             table.DataTable().rows.add(initialData).draw();
           } else {
             table.DataTable().clear().draw();
-            table.DataTable().rows.add(updateData).draw();
+            table.DataTable().rows.add(initialData).draw();
           }
         });
       }
@@ -135,7 +138,9 @@ export default function KeyResultInfo(props) {
           <span className="me-4">Updates</span>
           <button className="btn kr-info--edit-button" onClick={editUpdates}>
             <span className="kr-info--edit-text me-1">Edit</span>
-            <EditIconText className="kr-info--edit-icon" />
+            <IconContext.Provider value={{ className: "kr-info--edit-icon" }}>
+              <FaEdit />
+            </IconContext.Provider>
           </button>
         </h3>
         {updates.isSuccess &&

@@ -3,7 +3,8 @@ import $ from 'jquery';
 import { useTeamUpdates } from '../../../shared/hooks/useUpdates';
 import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../utils/dates';
 import { sortByTitle } from '../../../utils/dataProcessing';
-import { AddIconText } from "../../../shared/Icons";
+import { IconContext } from 'react-icons';
+import { RiAddFill } from 'react-icons/ri';
 import SharedModal from '../../../shared/SharedModal';
 import OkrCollapse from "./OkrCollapse";
 import ObjectiveAdd from './ObjectiveAdd';
@@ -51,49 +52,19 @@ export default function OkrSection(props) {
     }
   }, [props.freq, props.dateOption]);
 
-  // Form values
-  const defaultObjectiveValues = {
-    Title: '',
-    objectiveDescription: '',
-    objectiveStartDate: startDate,
-    objectiveEndDate: endDate,
-    frequency: props.freq,
-    team: props.teamName,
-    owner: props.staffOption ? props.staffOption : ''
-  };
-
-  const [objectiveFormValues, setObjectiveFormValues] = useState({...defaultObjectiveValues});
-
-  // Update form values based on the things that can change
-  useEffect(() => {
-    setObjectiveFormValues(prevData => {
-      return {
-        ...prevData,
-        objectiveStartDate: startDate,
-        objectiveEndDate: endDate,
-        frequency: props.freq,
-        team: props.teamName,
-        owner: props.staffOption ? props.staffOption : ''
-      };
-    });
-  }, [props.freq, props.teamName, props.staffOption, startDate, endDate])
-
   // Handle closing of modal
   const handleCloseModal = () => {
-    setObjectiveFormValues({...defaultObjectiveValues});
+    // setObjectiveFormValues({...defaultObjectiveValues});
     setShowObjectiveModal(false);
   }
-
+  
   // Render modal content
   const addObjective = () => <ObjectiveAdd
-    objectiveFormValues={objectiveFormValues}
-    setObjectiveFormValues={setObjectiveFormValues}
     setShowObjectiveModal={setShowObjectiveModal}
-    defaultValues={defaultObjectiveValues}
-    startDate={startDate}
-    endDate={endDate}
     freq={props.freq}
     team={props.teamName}
+    startDate={startDate}
+    endDate={endDate}
     staffOption={props.staffOption}
   />
 
@@ -125,8 +96,12 @@ export default function OkrSection(props) {
         </button>
         <div className="float-end">
           <button className="btn btn-green" onClick={() => setShowObjectiveModal(true)}>
-            <span className="me-1">Add Objective</span>
-            <AddIconText className="btn-okr-toggle-icon" />
+            <div className="d-flex align-items-center">
+              <span className="me-1">Add Objective</span>
+              <IconContext.Provider value={{ className: "btn-okr-toggle-icon" }}>
+                <RiAddFill />
+              </IconContext.Provider>
+            </div>
           </button>
         </div>
       </div>

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import { useQueryClient } from 'react-query';
 import { getDate } from '../../../../../../utils/dates';
-import { AddIconText } from '../../../../../../shared/Icons';
+import { IconContext } from 'react-icons';
+import { RiAddFill } from 'react-icons/ri';
 import UpdateForm from '../../../../../../shared/UpdateForm';
 
 import './styles.css';
@@ -26,8 +27,8 @@ export default function QuickAddUpdate(props) {
 
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries(['updates', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+    queryClient.invalidateQueries(['updates', 'team', props.team], { refetchInactive: true });
+    queryClient.invalidateQueries(['updates', 'kr', props.krId], { refetchInactive: true });
   };
 
   // Toggle accordion
@@ -56,7 +57,9 @@ export default function QuickAddUpdate(props) {
             className="quick-add-update--header"
           >
             <div className="d-flex align-items-end">
-              <AddIconText className="btn-okr-toggle-icon" />
+              <IconContext.Provider value={{ className: "btn-okr-toggle-icon" }}>
+                <RiAddFill />
+              </IconContext.Provider>
               <span className="ms-1">Add Update</span>
             </div>
           </Accordion.Header>
@@ -65,6 +68,7 @@ export default function QuickAddUpdate(props) {
               formValues={updateFormValues}
               setFormValues={setUpdateFormValues}
               formCleanup={formCleanup}
+              size="sm"
               mode='new'
             />
           </Accordion.Body>

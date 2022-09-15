@@ -38,7 +38,7 @@ export const useKrUpdates = (krId) => {
 // Get update by key result ID
 export const useKrUpdatesDirect = (krId) => {
   return useQuery(
-    ['updates', krId],
+    ['updates', 'kr', Number(krId)],
     async () => updates.data.filter(update => update.parentKrId === Number(krId)),
     {
       staleTime: config.staleTime
@@ -48,7 +48,7 @@ export const useKrUpdatesDirect = (krId) => {
 // Get all updates for only a given team
 export const useTeamUpdates = (team) => {
   return useQuery(
-    ['updates', team],
+    ['updates', 'team', team],
     async () => updates.data.filter(update => update.team === team),
     {
       staleTime: config.staleTime

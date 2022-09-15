@@ -1,7 +1,7 @@
-# Future Dev
+# Future Development
 This document contains ideas on future development work for ROKR. The current developer direction is to implement ROKR as a series of graphs.
 
-![](../docs/network-graph.jpg)
+![](../docs/images/network-graph.jpg)
 
 Following the introduction of the network graph as the new `Directory`, we note that OKRs can be much better displayed as a series of interconnected nodes. This type of visual provides a more holistic overview of the efforts of the entire outfit, while providing the option for users to zoom in on the specific OKRs that they want to view.
 

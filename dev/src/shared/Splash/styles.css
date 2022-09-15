@@ -1,0 +1,93 @@
+.intro {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  /* background-color: #0007188a; */
+  /* background-color: #0F1330; */
+  background: linear-gradient(0deg, #172334, #0F1330);
+  transition: 1s;
+}
+
+.intro--header {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.intro--brand {
+  font-size: 7.0rem;
+  position: relative;
+  display: inline-block;
+  bottom: -20px;
+  opacity: 0;
+  z-index: 10;
+}
+
+.intro--brand.active {
+  bottom: 0;
+  opacity: 1;
+  transition: ease-in-out 1.2s;
+}
+
+.intro--brand.fade {
+  bottom: 200px;
+  opacity: 0;
+  transition: ease-in-out 0.5s;
+}
+
+.intro--subtitle {
+  /* font-family: 'Courier New', 'Segoe UI Light', sans-serif; */
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', sans-serif;
+  font-weight: lighter;
+  font-size: 1.7rem;
+  color: #8497b0;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  letter-spacing: 7px;
+  bottom: 0;
+  opacity: 1;
+  transition: ease-in-out 1s;
+  z-index: 2;
+}
+
+.intro--subtitle.fade {
+  bottom: 200px;
+  opacity: 0;
+  transition: ease-in-out 0.5s;
+}
+
+.animation-text-wipe {
+  opacity: 0;
+  -webkit-mask-image: linear-gradient(to left, #0000 25%, #000 75%);
+  -webkit-mask-size: 400%;
+  mask-image: linear-gradient(to left, #0000 25%, #000 75%);
+  mask-size: 400%;
+}
+
+.animation-text-wipe.animate-in {
+  animation-name: text-wipe;
+  animation-duration: 2.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-delay: 1.5s;
+}
+
+@keyframes text-wipe {
+  0% {
+    opacity: 1;
+    -webkit-mask-position: 100%;
+    mask-position: 100%;
+  }
+  100% {
+    opacity: 1;
+    -webkit-mask-position: 0%;
+    mask-position: 0%;
+  }
+}

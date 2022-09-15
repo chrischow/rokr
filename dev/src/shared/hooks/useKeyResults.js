@@ -43,7 +43,7 @@ export const useKeyResult = (Id) => {
 // Get key results by objective frequency
 export const useKeyResultsByFreq = (freq) => {
   return useQuery(
-    ['keyResults', freq],
+    ['keyResults', 'freq', freq],
     async () => allKrs.filter(kr => kr.parentObjective.frequency === freq),
     {
       staleTime: config.staleTime
@@ -65,7 +65,7 @@ export const useTeamKeyResultsCache = (team) => {
 // Get key results by team
 export const useTeamKeyResults = (team) => {
   return useQuery(
-    [`keyResults-${slugify(team)}`],
+    ['keyResults', 'team', team],
     async () => allKrs.filter(kr => kr.parentObjective.team === team),
     {
       staleTime: config.staleTime

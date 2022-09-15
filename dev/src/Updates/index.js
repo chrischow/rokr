@@ -9,7 +9,7 @@ import UpdatesTable from "./UpdatesTable";
 import UpdateAdd from "./UpdateAdd";
 import UpdateEdit from "./UpdateEdit";
 import DeleteForm from "../shared/DeleteForm";
-
+import { config } from "../config";
 
 export default function Updates(props) {
 
@@ -18,8 +18,8 @@ export default function Updates(props) {
 
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
-    queryClient.invalidateQueries(['updates', krId], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+    queryClient.invalidateQueries(['updates', 'kr', Number(krId)], { refetchInactive: true });
+    team && queryClient.invalidateQueries(['updates', 'team', team], { refetchInactive: true });
   };
 
   // State
@@ -56,7 +56,8 @@ export default function Updates(props) {
   const navigate = useNavigate();
   const backToTeamPage = () => {
     if (team) {
-      navigate(`/${team}`);
+      const teamSlug = config.teams.find(elem => elem.teamName == team);
+      navigate(`/${teamSlug.slug}`);
     }
   }
   

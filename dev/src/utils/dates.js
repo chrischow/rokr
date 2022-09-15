@@ -40,7 +40,11 @@ export function getWorkYear(cleanDate) {
 
 // Get quarter
 export function getQuarter(cleanDate, year) {
-  return year + ' Q' + (Math.floor((cleanDate.getMonth() + 1) / 3));
+  let qtr = Math.floor((cleanDate.getMonth()) / 3);
+  if (qtr === 0) {
+    return year + ' Q4';  
+  }
+  return year + ' Q' + (Math.floor(cleanDate.getMonth() / 3));
 };
 
 export function getMonth(cleanDate, year) {

@@ -1,5 +1,4 @@
 import { useQueryClient } from "react-query";
-import slugify from "slugify";
 import ObjectiveForm from "../../../../../../shared/ObjectiveForm";
 
 export default function ObjectiveEdit(props) {
@@ -9,8 +8,7 @@ export default function ObjectiveEdit(props) {
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
     // queryClient.invalidateQueries('objectives', { refetchInactive: true });
-    queryClient.invalidateQueries([`objectives-${slugify(props.team)}`], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+    queryClient.invalidateQueries(['objectives', 'team', props.team], { refetchInactive: true });
   };
 
   // Objective form cleanup

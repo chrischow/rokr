@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
-import slugify from "slugify";
 import { useObjectives } from "../../../../../shared/hooks/useObjectives";
 import { getDate } from "../../../../../utils/dates";
 import Col from "react-bootstrap/esm/Col";
@@ -23,13 +22,11 @@ export default function KeyResultRow(props) {
   // Invalidate data
   const queryClient = useQueryClient();
   const invalidateKeyResults = () => {
-    queryClient.invalidateQueries([`keyResults-${slugify(props.team)}`], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+    queryClient.invalidateQueries(['keyResults', 'team', props.team], { refetchInactive: true });
   };
 
   const invalidateUpdates = () => {
-    queryClient.invalidateQueries(['updates', props.team], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+    queryClient.invalidateQueries(['updates', 'team', props.team], { refetchInactive: true });
   };
 
   // KR EDIT FORM
@@ -69,7 +66,7 @@ export default function KeyResultRow(props) {
   const objectiveOptions = objectives.isSuccess && objectives.data.map(obj => {
     return {
       value: obj.Id,
-      label: `[${obj.team} ${obj.frequency} - ${obj.objectiveEndDate}] ${obj.Title}`
+      label: `[${obj.team} ${obj.frequency} - ${getDate(obj.objectiveEndDate)}] ${obj.Title}`
     };
   })
 

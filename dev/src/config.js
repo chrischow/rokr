@@ -15,6 +15,7 @@ export const config = {
     { teamName: "R&D", slug: "research-devt" },
     { teamName: "IT", slug: "it" },
   ],
-  staleTime: 2 * 60 * 1000,
-  tokenRefreshTime: 10 * 60 * 1000
+  // staleTime: 2 * 60 * 1000,
+  staleTime: Infinity,
+  tokenRefreshTime: 25 * 60 * 1000
 };

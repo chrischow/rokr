@@ -27,7 +27,7 @@ export const useObjective = (Id) => {
 // Get objective by frequency
 export const useObjectivesByFreq = (freq) => {
   return useQuery(
-    ['objectives', freq],
+    ['objectives', 'freq', freq],
     async () => (objectives.data.filter(obj => obj.frequency === freq)),
     {
       staleTime: config.staleTime
@@ -49,7 +49,7 @@ export const useTeamObjectivesCache = (team) => {
 // Get objectives for team
 export const useTeamObjectives = (team) => {
   return useQuery(
-    [`objectives-${slugify(team)}`],
+    ['objectives', 'team', team],
     async () => (objectives.data.filter(obj => obj.team === team)),
     {
       staleTime: config.staleTime

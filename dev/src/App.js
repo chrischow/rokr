@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+// import { ReactQueryDevtools } from 'react-query/devtools'
 import Container from "react-bootstrap/Container";
 import NavBar from './shared/NavBar';
 import Home from './Home';
@@ -9,6 +10,7 @@ import Directory from './Directory';
 import Updates from './Updates';
 import { config } from './config';
 import './App.css';
+import ErrorBoundary from './shared/ErrorBoundary';
 
 function App() {
   // Load query client
@@ -16,6 +18,8 @@ function App() {
     defaultOptions: {
       queries: {
         staleTime: config.staleTime,
+        // refetchInterval: config.staleTime,
+        // refetchIntervalInBackground: true
       },
     },
   });
@@ -33,15 +37,18 @@ function App() {
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <NavBar teams={config.teams} />
-        <Container className="mt-5 app-container">
-          <Routes>
-            <Route path="/" element={<Home teams={config.teams} />} exact />
-            <Route path="/timeline" element={<Timeline />} />
-            <Route path="/directory" element={<Directory key="directory" />} />
-            <Route path="/updates/:krId" element={<Updates />} />
-            {teamRoutes}
-          </Routes>
-        </Container>
+        {/* <ErrorBoundary> */}
+          <Container className="mt-5 app-container">
+            <Routes>
+              <Route path="/" element={<Home teams={config.teams} />} exact />
+              <Route path="/timeline" element={<Timeline />} />
+              <Route path="/directory" element={<Directory key="directory" />} />
+              <Route path="/updates/:krId" element={<Updates />} />
+              {teamRoutes}
+            </Routes>
+          </Container>
+        {/* </ErrorBoundary> */}
+        {/* <ReactQueryDevtools initialIsOpen={false}/> */}
       </QueryClientProvider>
     </HashRouter>
   );

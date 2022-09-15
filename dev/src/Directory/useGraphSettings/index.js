@@ -33,11 +33,11 @@ export const useGraphSettings = () => {
   ];
 
   const defaultEdges = [
-    { from: 'org-0', to: 'org-1' },
-    { from: 'org-0', to: 'org-2' },
-    { from: 'org-0', to: 'org-3' },
-    { from: 'org-0', to: 'org-4' },
-    { from: 'org-0', to: 'org-5' },
+    { from: 'org-0', to: 'org-1', dashes: true },
+    { from: 'org-0', to: 'org-2', dashes: true },
+    { from: 'org-0', to: 'org-3', dashes: true },
+    { from: 'org-0', to: 'org-4', dashes: true },
+    { from: 'org-0', to: 'org-5', dashes: true },
   ];
 
   // Styles

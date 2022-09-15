@@ -24,6 +24,7 @@
 }
 
 .kr-info--description {
+  white-space: pre-line;
   color: #8497B0;
 }
 

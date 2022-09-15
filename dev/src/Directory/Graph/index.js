@@ -48,9 +48,9 @@ export default function Graph(props) {
       });
 
       // Scroll to bottom
-      network.on('selectNode', params => {
-        setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 100);
-      });
+      // network.on('selectNode', params => {
+      //   setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 100);
+      // });
 
       // Save network
       // props.setGraph({network, exists: true});

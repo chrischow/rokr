@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useObjectives } from "../shared/hooks/useObjectives";
 import { useKeyResults } from "../shared/hooks/useKeyResults";
@@ -6,7 +6,8 @@ import updateCircleProgress from "../utils/circleProgress";
 import {
   computeMetrics, computeTeamsMetrics
 } from "../utils/stats";
-import { Brand } from "../shared/NavBarBrand";
+import Splash from '../shared/Splash';
+import { Brand } from "../shared/Brand";
 import ProgressCard from "../shared/ProgressCard";
 import HomeTeamCards from "./HomeTeamCards";
 import { config } from "../config";

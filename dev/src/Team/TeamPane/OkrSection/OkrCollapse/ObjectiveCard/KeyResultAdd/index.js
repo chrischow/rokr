@@ -1,5 +1,4 @@
 import { useQueryClient } from "react-query";
-import slugify from 'slugify';
 import KeyResultForm from "../../../../../../shared/KeyResultForm";
 
 export default function KeyResultAdd(props) {
@@ -8,9 +7,7 @@ export default function KeyResultAdd(props) {
 
   // Invalidate and refetch
   const invalidateAndRefetch = () => {
-    // queryClient.invalidateQueries('keyResults', { refetchInactive: true });
-    queryClient.invalidateQueries([`keyResults-${slugify(props.team)}`], { refetchInactive: true });
-    queryClient.refetchQueries({ stale: true, active: true, inactive: true });
+    queryClient.invalidateQueries(['keyResults', 'team', props.team], { refetchInactive: true });
   };
 
   // Form cleanup

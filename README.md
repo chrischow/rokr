@@ -10,49 +10,75 @@ RDO's solution for OKR management in RAiD.
 ## Value Proposition
 OKRs are tough to manage without tools, especially on the internal IT environment. We designed an approach (Stack 2.0) to fully leverage internal tools and designed **ROKR** as the first app built on Stack 2.0 to enable RAiD to implement OKRs.
 
-## Entity-Relationship Diagram
+## Installation
+First, you'll need RavenPoint, a SharePoint REST API emulator that ROKR uses as its backend. See the [RavenPoint repo](https://github.com/chrischow/ravenpoint) for instructions on installation. For the creation of fake data, modify the `rokr_data_demo.py` script provided in the RavenPoint repo. Be sure to take note of the team names you used when generating the fake data.
 
-```mermaid
-erDiagram
-  Objectives ||--|{ KeyResults : has
-  KeyResults ||--|{ Updates : has
-  Objectives {
-    int Id PK
-    string Title
-    string objectiveDescription
-    date objectiveStartDate
-    date objectiveEndDate
-    string team
-    string owner
-    enum frequency "annual/quarterly/monthly"
-  }
-  KeyResults {
-    int Id PK
-    string Title
-    string krDescription
-    date krStartDate
-    date krEndDate
-    int minValue
-    int maxValue
-    int currentValue
-    int parentObjective FK "Objectives"
-  }
-  Updates {
-    int Id PK
-    string Title "Unused"
-    string updateText
-    date updateDate
-    string team
-    int parentKrId FK "Key Results"
-  }
+Second, in a separate terminal window, clone this repo (ROKR) to a local directory, `cd` into the `dev` folder, and install the required packages:
+
+```bash
+git clone https://github.com/chrischow/rokr.git
+cd rokr
+npm install
 ```
 
-## Upcoming Features
-- [ ] Delete Objective
-- [ ] Delete KR
+Next, configure ROKR to retrieve data from the right tables. Proper configuration requires that you amend several entries in `src/config.js`:
 
-## Notes
-- For [`vis.js`](https://visjs.org/) network graphs, simply creating a graph on a given route will produce an error when you navigate to a different route and then return to that route. The error states that a given node with a duplicate ID already exists, even though you're creating a new Network Object. This is because React Router modifies the DOM when navigation occurs **without dismounting components in the current route**. A graph that has not been destroyed is still registered with `vis.js`, but its DOM element has disappeared. React Router v6.3.0 provides no way to force-dismount components, which means the useEffect return function is not feasible for destroying the graph before navigation occurs. The workaround is to:
-    1. Create a Context that holds state at the App level, which is above all routes.
-    2. In the Directory (or route that contains the graph), set the context (i.e. App.js state) to the `vis.js` Network object after the object is created. Since state is held at the App level, navigation managed by React Router cannot remove this object, and you can still access it via Context.
-    3. In the Directory, **before** creating a fresh Network object, retrieve the **old Network object** and call the destroy method to get rid of it. The effect: after navigating away and back to the Directory, the old Network object is fully removed.
+1. List IDs: `objListId`, `krListId`, `updateListId`
+2. List Item Entity Type names: `objListItemEntityTypeFullName`, `krListItemEntityTypeFullName`, `updateListItemEntityTypeFullName`
+3. Teams
+
+After creating the Objectives, Key Results, and Updates tables, enter the RavenPoint admin panel to retrieve the relevant Table IDs:
+
+![](./docs/images/ravenpoint-tables.jpg)
+
+The List Item Entity Type names can be retrieved via the RavenPoint Swagger UI. You will need to feed each List ID into the `/_api/web/Lists(guid'<list id here>')` endpoint:
+
+![](./docs/images/ravenpoint-listitementitytypename.jpg)
+
+Retrieve the `ListItemEntityTypeFullName` in the API response.
+
+Finally, for configuration, input the team names and slugs that you used to generate the fake data. Your config file should look like this:
+
+```js
+// Config file
+export const config = {
+  apiUrl: 'http://127.0.0.1:5000/ravenpoint/_api/',
+  objListId: '521d43a8e00c53c76ab48197784c5e41',
+  krListId: 'f3ef36940ef93890c3f9d9e25fc12acc',
+  updateListId: 'df7c2bf0cf2b0fda32b2998cbf8a07dc',
+  objListItemEntityTypeFullName: 'SP.Data.RokrObjectivesListItem',
+  krListItemEntityTypeFullName: 'SP.Data.RokrKeyResultsListItem',
+  updateListItemEntityTypeFullName: 'SP.Data.RokrUpdatesListItem',
+  teams: [
+    { teamName: "HQ", slug: "hq" },
+    { teamName: "Marketing", slug: "marketing" },
+    { teamName: "HR", slug: "hr" },
+    { teamName: "Finance", slug: "finance" },
+    { teamName: "R&D", slug: "research-devt" },
+    { teamName: "IT", slug: "it" },
+  ],
+  staleTime: 2 * 60 * 1000,
+  tokenRefreshTime: 10 * 60 * 1000
+};
+```
+
+Once all the above steps are completed, while still in the `dev` folder, launch ROKR in development mode:
+
+```bash
+npm start
+```
+
+ROKR should now be running on `http://localhost:3000/`.
+
+## Gallery
+Home page:
+
+![](./docs/images/home-page.jpg)
+
+Team page:
+
+![](./docs/images/team-page.jpg)
+
+Directory:
+
+![](./docs/images/directory.jpg)

@@ -1,12 +1,21 @@
+import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import { NavBarBrand } from '../NavBarBrand';
+import Splash from '../Splash';
+import { NavBarBrand } from '../Brand';
 
 import './styles.css';
 
 export default function NavBar(props) {
+  // State for displaying splash
+  const [loading, setLoading] = useState(true);
+
+  useEffect(function () {
+    setTimeout(() => setLoading(false), 6000);
+  }, []);
+
   // Create link elements
   const linkElements = props.teams.map(item => {
     return (
@@ -20,6 +29,7 @@ export default function NavBar(props) {
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      {loading && <Splash loading={loading} />}
       <Container>
         <Link className="navbar-brand" to="/">
           <NavBarBrand />
