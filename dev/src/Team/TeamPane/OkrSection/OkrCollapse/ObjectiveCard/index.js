@@ -3,10 +3,13 @@ import { useQueryClient } from 'react-query';
 import slugify from 'slugify';
 import { useTeamObjectives } from "../../../../../shared/hooks/useObjectives";
 import { getDate } from '../../../../../utils/dates';
+import { IconContext } from 'react-icons';
+import { RiAddFill } from 'react-icons/ri';
+import { FaEdit } from 'react-icons/fa';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { CaretIcon, EditIconText, AddIconText } from '../../../../../shared/Icons';
+import { CaretIcon } from '../../../../../shared/Icons';
 import SharedModal from '../../../../../shared/SharedModal';
 import ProgressBar from '../../../../../shared/ProgressBar';
 import ObjectiveEdit from './ObjectiveEdit';
@@ -194,14 +197,18 @@ export default function ObjectiveCard(props) {
                 <span className="objective-card--edit-text mr-1">
                   Edit
                 </span>
-                <EditIconText className="objective-card--edit-icon" />
+                <IconContext.Provider value={{ className: "objective-card--edit-icon" }}>
+                  <FaEdit />
+                </IconContext.Provider>
               </button>
               <button
                 className="btn objective-card--add-kr-button"
                 onClick={() => setShowKrAddModal(true)}
               >
                 <span className="objective-card--add-kr-text mr-1">Add KR</span>
-                <AddIconText className="objective-card--edit-icon" />
+                <IconContext.Provider value={{ className: "objective-card--edit-icon" }}>
+                  <RiAddFill />
+                </IconContext.Provider>
               </button>
             </>
           )}

@@ -4,7 +4,8 @@ import $ from 'jquery';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { formatDate, getDate } from '../../../../../../utils/dates';
-import { EditIconText } from '../../../../../../shared/Icons';
+import { IconContext } from 'react-icons';
+import { FaEdit } from 'react-icons/fa';
 import { useTeamUpdates } from '../../../../../../shared/hooks/useUpdates';
 import QuickAddUpdate from '../QuickAddUpdate';
 
@@ -137,7 +138,9 @@ export default function KeyResultInfo(props) {
           <span className="me-4">Updates</span>
           <button className="btn kr-info--edit-button" onClick={editUpdates}>
             <span className="kr-info--edit-text me-1">Edit</span>
-            <EditIconText className="kr-info--edit-icon" />
+            <IconContext.Provider value={{ className: "kr-info--edit-icon" }}>
+              <FaEdit />
+            </IconContext.Provider>
           </button>
         </h3>
         {updates.isSuccess &&

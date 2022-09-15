@@ -3,7 +3,8 @@ import $ from 'jquery';
 import { useTeamUpdates } from '../../../shared/hooks/useUpdates';
 import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../utils/dates';
 import { sortByTitle } from '../../../utils/dataProcessing';
-import { AddIconText } from "../../../shared/Icons";
+import { IconContext } from 'react-icons';
+import { RiAddFill } from 'react-icons/ri';
 import SharedModal from '../../../shared/SharedModal';
 import OkrCollapse from "./OkrCollapse";
 import ObjectiveAdd from './ObjectiveAdd';
@@ -95,8 +96,12 @@ export default function OkrSection(props) {
         </button>
         <div className="float-end">
           <button className="btn btn-green" onClick={() => setShowObjectiveModal(true)}>
-            <span className="me-1">Add Objective</span>
-            <AddIconText className="btn-okr-toggle-icon" />
+            <div className="d-flex align-items-center">
+              <span className="me-1">Add Objective</span>
+              <IconContext.Provider value={{ className: "btn-okr-toggle-icon" }}>
+                <RiAddFill />
+              </IconContext.Provider>
+            </div>
           </button>
         </div>
       </div>

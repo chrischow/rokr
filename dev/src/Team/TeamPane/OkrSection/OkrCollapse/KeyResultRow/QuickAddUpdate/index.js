@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import { useQueryClient } from 'react-query';
 import { getDate } from '../../../../../../utils/dates';
-import { AddIconText } from '../../../../../../shared/Icons';
+import { IconContext } from 'react-icons';
+import { RiAddFill } from 'react-icons/ri';
 import UpdateForm from '../../../../../../shared/UpdateForm';
 
 import './styles.css';
@@ -56,7 +57,9 @@ export default function QuickAddUpdate(props) {
             className="quick-add-update--header"
           >
             <div className="d-flex align-items-end">
-              <AddIconText className="btn-okr-toggle-icon" />
+              <IconContext.Provider value={{ className: "btn-okr-toggle-icon" }}>
+                <RiAddFill />
+              </IconContext.Provider>
               <span className="ms-1">Add Update</span>
             </div>
           </Accordion.Header>
