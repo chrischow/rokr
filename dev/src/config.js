@@ -15,6 +15,7 @@ export const config = {
     { teamName: "CyDef", slug: "cydef" },
     { teamName: "SES", slug: "ses" },
   ],
-  staleTime: 2 * 60 * 1000,
-  tokenRefreshTime: 10 * 60 * 1000
+  // staleTime: 2 * 60 * 1000,
+  staleTime: Infinity,
+  tokenRefreshTime: 25 * 60 * 1000
 };

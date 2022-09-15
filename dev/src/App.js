@@ -18,8 +18,8 @@ function App() {
     defaultOptions: {
       queries: {
         staleTime: config.staleTime,
-        refetchInterval: config.staleTime,
-        refetchIntervalInBackground: true
+        // refetchInterval: config.staleTime,
+        // refetchIntervalInBackground: true
       },
     },
   });
