@@ -37,7 +37,7 @@ function App() {
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <NavBar teams={config.teams} />
-        <ErrorBoundary>
+        {/* <ErrorBoundary> */}
           <Container className="mt-5 app-container">
             <Routes>
               <Route path="/" element={<Home teams={config.teams} />} exact />
@@ -47,7 +47,7 @@ function App() {
               {teamRoutes}
             </Routes>
           </Container>
-        </ErrorBoundary>
+        {/* </ErrorBoundary> */}
         {/* <ReactQueryDevtools initialIsOpen={false}/> */}
       </QueryClientProvider>
     </HashRouter>
