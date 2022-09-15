@@ -7,7 +7,7 @@ import Row from "react-bootstrap/esm/Row";
 import ProgressBar from "../../../../../shared/ProgressBar";
 import SharedModal from "../../../../../shared/SharedModal";
 import KeyResultInfo from "./KeyResultInfo";
-import KeyResultEdit from "./KeyResultEdit";
+import KeyResultForm from "../../../../../shared/KeyResultForm";
 import DeleteForm from "../../../../../shared/DeleteForm";
 
 import './styles.css';
@@ -90,16 +90,21 @@ export default function KeyResultRow(props) {
   const viewKrInfo = () => <KeyResultInfo {...props} />;
 
   const editKr = () => {
-    return <KeyResultEdit
-      krFormValues={krFormValues}
-      setKrFormValues={setKrFormValues}
-      setShowKrEditModal={setShowKrEditModal}
+    return <KeyResultForm
+      formValues={krFormValues}
+      setFormValues={setKrFormValues}
       objectiveOptions={objectiveOptions}
+      selectDisabled={false}
+      formCleanup={() => {
+        // Invalidate and refetch data
+        invalidateKeyResults();
+        // Close modal
+        setShowKrEditModal(false);
+      }}
       closeModal={handleCloseKrEditModal}
       openDeleteModal={() => setShowKrDeleteModal(true)}
-      team={props.parentObjective.team}
-      {...props}
-    />
+      mode="edit"
+    />;
   }
 
   // DELETE KR FORM

@@ -6,9 +6,8 @@ import { useKrUpdatesDirect } from "../shared/hooks/useUpdates";
 import { getDate } from "../utils/dates";
 import SharedModal from "../shared/SharedModal";
 import UpdatesTable from "./UpdatesTable";
-import UpdateAdd from "./UpdateAdd";
-import UpdateEdit from "./UpdateEdit";
 import DeleteForm from "../shared/DeleteForm";
+import UpdateForm from "../shared/UpdateForm";
 import { config } from "../config";
 
 export default function Updates(props) {
@@ -64,13 +63,20 @@ export default function Updates(props) {
   // ADD FORM
   // Add Update Form
   const addUpdate = () => {
-    return <UpdateAdd
-      updateAddFormValues={updateAddFormValues}
-      setUpdateAddFormValues={setUpdateAddFormValues}
-      setShowUpdateAddModal={setShowUpdateAddModal}
-      defaultFormValues={defaultAddUpdateValues}
-      invalidateAndRefetch={invalidateAndRefetch}
-      krId={krId}
+    return <UpdateForm
+      formValues={updateAddFormValues}
+      setFormValues={setUpdateAddFormValues}
+      formCleanup={() => {
+        // Invalidate and refetch data
+        invalidateAndRefetch();
+
+        // Reset form
+        setUpdateAddFormValues({...defaultAddUpdateValues});
+
+        // Close modal
+        setShowUpdateAddModal(false);
+      }}
+      mode="new"
     />;
   }
 
@@ -99,15 +105,21 @@ export default function Updates(props) {
   };
 
   const editUpdate = () => {
-    return <UpdateEdit
-      updateEditFormValues={updateEditFormValues}
-      setUpdateEditFormValues={setUpdateEditFormValues}
-      setShowUpdateEditModal={setShowUpdateEditModal}
+    return <UpdateForm
+      setFormValues={setUpdateEditFormValues}
+      formValues={updateEditFormValues}
       invalidateAndRefetch={invalidateAndRefetch}
+      formCleanup={() => {
+        // Invalidate and refetch data
+        invalidateAndRefetch();
+
+        // Close modal
+        setShowUpdateEditModal(false);
+      }}
       closeModal={handleCloseUpdateEditModal}
       openDeleteModal={() => setShowUpdateDeleteModal(true)}
-      krId={krId}
-    />
+      mode="edit"
+    />;
   };
 
   // DELETE UPDATE FORM

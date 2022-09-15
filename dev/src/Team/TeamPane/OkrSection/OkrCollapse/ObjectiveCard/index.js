@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
-import slugify from 'slugify';
 import { useTeamObjectives } from "../../../../../shared/hooks/useObjectives";
 import { getDate } from '../../../../../utils/dates';
 import { IconContext } from 'react-icons';
@@ -12,9 +11,9 @@ import Button from 'react-bootstrap/Button';
 import { CaretIcon } from '../../../../../shared/Icons';
 import SharedModal from '../../../../../shared/SharedModal';
 import ProgressBar from '../../../../../shared/ProgressBar';
-import ObjectiveEdit from './ObjectiveEdit';
-import KeyResultAdd from './KeyResultAdd';
 import DeleteForm from '../../../../../shared/DeleteForm';
+import ObjectiveForm from '../../../../../shared/ObjectiveForm';
+import KeyResultForm from '../../../../../shared/KeyResultForm';
 
 import './styles.css';
 
@@ -32,14 +31,14 @@ export default function ObjectiveCard(props) {
   };
 
   const invalidateKeyResults = () => {
-    queryClient.invalidateQueries([`keyResults-${slugify(props.team)}`], { refetchInactive: true });
+    queryClient.invalidateQueries(['keyResults', 'team', props.team], { refetchInactive: true });
   };
 
   const invalidateUpdates = () => {
-    queryClient.invalidateQueries(['updates', props.team], { refetchInactive: true });
+    queryClient.invalidateQueries(['updates', 'team', props.team], { refetchInactive: true });
   };
 
-  // OBJECTIVE FORM
+  // EDIT OBJECTIVE FORM
   // Re-populate form
   const currentObjective = {
     Id: props.Id,
@@ -64,16 +63,19 @@ export default function ObjectiveCard(props) {
 
   // Render modal content
   const editObjective = () => {
-    return <ObjectiveEdit
-      objectiveFormValues={objectiveFormValues}
-      setObjectiveFormValues={setObjectiveFormValues}
-      setShowObjectiveEditModal={setShowObjectiveEditModal}
-      closeModal={handleCloseObjectiveModal}
-      openDeleteModal={() => setShowObjectiveDeleteModal(true)}
+    return <ObjectiveForm
+      formValues={objectiveFormValues}
+      setFormValues={setObjectiveFormValues}
       team={props.team}
       freq={props.frequency}
-      {...props}
-    />;
+      formCleanup={() => {
+        invalidateObjectives();
+        setShowObjectiveEditModal(false);
+      }}
+      closeModal={handleCloseObjectiveModal}
+      openDeleteModal={() => setShowObjectiveDeleteModal(true)}
+      mode='edit'
+    />
   }
   
   // DELETE OBJECTIVE FORM
@@ -96,7 +98,7 @@ export default function ObjectiveCard(props) {
     />
   };
 
-  // KEY RESULT FORM
+  // ADD KEY RESULT FORM
   // Get objectives
   const objectives = useTeamObjectives(props.team);
   const objectiveOptions = objectives.isSuccess && objectives.data.map(obj => {
@@ -151,13 +153,22 @@ export default function ObjectiveCard(props) {
 
   // KR Form
   const addKr = () => {
-    return <KeyResultAdd
-      krFormValues={krFormValues}
-      setKrFormValues={setKrFormValues}
+    return <KeyResultForm
+      formValues={krFormValues}
+      setFormValues={setKrFormValues}
       objectiveOptions={objectiveOptions}
-      setShowKrAddModal={setShowKrAddModal}
-      defaultKrValues={defaultKrValues}
-      team={props.team}
+      selectDisabled={true}
+      formCleanup={() => {
+        // Invalidate and refetch data
+        invalidateKeyResults();
+
+        // Reset form
+        setKrFormValues({...defaultKrValues});
+
+        // Close modal
+        setShowKrAddModal(false);
+      }}
+      mode="new"
     />
   };
 
