@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useKeyResultsByFreq } from '../shared/hooks/useKeyResults';
-import { useObjectivesByFreq } from '../shared/hooks/useObjectives';
+import { useKeyResults, useKeyResultsByFreq } from '../shared/hooks/useKeyResults';
+import { useObjectives, useObjectivesByFreq } from '../shared/hooks/useObjectives';
 import { useUpdates } from '../shared/hooks/useUpdates';
 import { getDate } from '../utils/dates';
 import $ from 'jquery';
@@ -9,8 +9,8 @@ import './styles.css';
 
 export default function Timeline(props) {
   // Get data
-  const objectives = useObjectivesByFreq('annual');
-  const keyResults = useKeyResultsByFreq('annual');
+  const objectives = useObjectives();
+  const keyResults = useKeyResults();
   const updates = useUpdates();
 
   // Prepare table data
@@ -26,6 +26,8 @@ export default function Timeline(props) {
             ...update,
             krTitle: kr.Title,
             objectiveTitle: obj.Title,
+            team: obj.team,
+            frequency: obj.frequency,
             updateDate: getDate(update.updateDate),
             hasParent: true
           };
@@ -34,7 +36,11 @@ export default function Timeline(props) {
         return {...update, hasParent: false};
       }
     }).filter(update => {
-      return update.hasParent;
+      return update.hasParent && 
+        (
+          (update.team === 'RAiD' && update.frequency !== 'monthly') ||
+          (update.team !== 'RAiD' && update.frequency === 'annual')
+        );
     }) : null;
 
   useEffect(() => {
