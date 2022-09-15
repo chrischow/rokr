@@ -1,5 +1,4 @@
 import { useQueryClient } from 'react-query';
-import slugify from 'slugify';
 import KeyResultForm from '../../../../../../shared/KeyResultForm';
 
 export default function KeyResultEdit(props) {

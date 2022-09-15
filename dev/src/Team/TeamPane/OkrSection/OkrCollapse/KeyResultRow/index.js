@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
-import slugify from "slugify";
 import { useObjectives } from "../../../../../shared/hooks/useObjectives";
 import { getDate } from "../../../../../utils/dates";
 import Col from "react-bootstrap/esm/Col";
