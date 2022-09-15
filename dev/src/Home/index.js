@@ -6,9 +6,10 @@ import updateCircleProgress from "../utils/circleProgress";
 import {
   computeMetrics, computeTeamsMetrics
 } from "../utils/stats";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { Brand } from "../shared/Brand";
 import ProgressCard from "../shared/ProgressCard";
-import HomeTeamCards from "./HomeTeamCards";
 import { config } from "../config";
 
 import './styles.css';
@@ -57,6 +58,23 @@ export default function Home(props) {
     },
     [props.teams, overallProgressData, allTeamsProgressData]
   )
+  
+  // Card component
+  function Card(props) {
+    const navigate = useNavigate();
+    const goToTeamPage = () => {
+      return navigate('/' + props.slug);
+    }
+  
+    return (
+      <Col xs={6} className="card--outer" onClick={goToTeamPage}>
+        <div className="card--inner">
+          <h4 className="card--header text-center mb-3">{props.teamName}</h4>
+          <ProgressCard progressId={props.slug} data={props.data} isTeam={true} />
+        </div>
+      </Col>
+    );
+  }
 
   // Link to RAiD page
   const navigate = useNavigate();
@@ -90,10 +108,22 @@ export default function Home(props) {
         Teams
       </h2>
       {allTeamsProgressData &&
-        <HomeTeamCards
-          teams={props.teams}
-          allTeamsProgressData={allTeamsProgressData}
-        />
+        <Row className="align-items-center mt-3 mx-auto">
+          {
+            props.teams.map(team => {
+              if (team.teamName !== config.teams[0].teamName) {
+                return (
+                  <Card
+                    teamName={team.teamName}
+                    key={`card-${team.slug}`}
+                    slug={team.slug}
+                    data={allTeamsProgressData[team.teamName]}
+                  />
+                );
+              }
+            })
+          }
+        </Row>
       }
 
       {!allTeamsProgressData && 
