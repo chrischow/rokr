@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useKeyResults } from '../shared/hooks/useKeyResults';
-import { useObjectives } from '../shared/hooks/useObjectives';
+import { useKeyResultsByFreq } from '../shared/hooks/useKeyResults';
+import { useObjectivesByFreq } from '../shared/hooks/useObjectives';
 import { useUpdates } from '../shared/hooks/useUpdates';
 import { getDate } from '../utils/dates';
 import $ from 'jquery';
@@ -9,8 +9,8 @@ import './styles.css';
 
 export default function Timeline(props) {
   // Get data
-  const objectives = useObjectives();
-  const keyResults = useKeyResults();
+  const objectives = useObjectivesByFreq('annual');
+  const keyResults = useKeyResultsByFreq('annual');
   const updates = useUpdates();
 
   // Prepare table data
@@ -18,16 +18,23 @@ export default function Timeline(props) {
     updates.data.map(update => {
       // Get key result
       const kr = keyResults.data.find(keyResult => keyResult.Id === update.parentKrId);
-
-      // Get objective
-      const obj = objectives.data.find(objective => objective.Id === kr.parentObjective.Id);
-
-      return {
-        ...update,
-        krTitle: kr.Title,
-        objectiveTitle: obj.Title,
-        updateDate: getDate(update.updateDate)
-      };
+      if (kr) {
+        // Get objective
+        const obj = objectives.data.find(objective => objective.Id === kr.parentObjective.Id);
+        if (obj) {
+          return {
+            ...update,
+            krTitle: kr.Title,
+            objectiveTitle: obj.Title,
+            updateDate: getDate(update.updateDate),
+            hasParent: true
+          };
+        }
+      } else {
+        return {...update, hasParent: false};
+      }
+    }).filter(update => {
+      return update.hasParent;
     }) : null;
 
   useEffect(() => {
