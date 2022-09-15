@@ -1,5 +1,27 @@
 # ROKR Developer Guide
-This README contains details on how ROKR was built.
+This README contains details ROKR's current implementation. For ideas on future development, see [Future Development](../docs/future-dev.md).
+
+### Table of Contents
+<!-- no toc -->
+- [Data](#data)
+- [Architecture](#architecture)
+  - [Top-Level Components](#top-level-components)
+    - [1. `Home`](#1-home)
+    - [2. `Team`](#2-team)
+    - [3. `Updates`](#3-updates)
+    - [4. `Timeline`](#4-timeline)
+    - [5. `Directory`](#5-directory)
+  - [`shared` Entities](#shared-entities)
+    - [Components](#components)
+    - [Hooks](#hooks)
+      - [1. `useObjectives`](#1-useobjectives)
+      - [2. `useKeyResults`](#2-usekeyresults)
+      - [3. `useUpdates`](#3-useupdates)
+      - [4. `useToken`](#4-usetoken)
+      - [Other Information](#other-information)
+  - [Supporting Elements](#supporting-elements)
+    - [`assets`](#assets)
+    - [`utils`](#utils)
 
 ## Data
 ROKR has three main entities: (1) Objectives, (2) Key Results, and (3) Updates (on Key Results). They are stored in three separate Lists on SharePoint. See the Entity-relationship Diagram below for an overview.
