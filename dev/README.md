@@ -4,6 +4,7 @@ This README contains details ROKR's current implementation. For ideas on future 
 ### Table of Contents
 <!-- no toc -->
 - [Data](#data)
+- [Main Libraries](#main-libraries)
 - [Architecture](#architecture)
   - [Top-Level Components](#top-level-components)
     - [1. `Home`](#1-home)
@@ -61,6 +62,30 @@ erDiagram
   }
 ```
 
+You may have noticed that `parentKrId` in the Updates table is not a foreign key. This is because there is no advantage from having this as a lookup table in SharePoint. The reasons are:
+
+- Queries cannot be nested i.e. no Objectives LEFT JOIN Key Results LEFT JOIN Updates.
+- Since context (team, frequency) exists primarily in Objectives, and that duplicating these fields in Key Results would affect data integrity, there is no way we can access the context anyway.
+
+## Main Libraries
+
+| Library | Purpose |
+| :------ | :------ |
+| react | Frontend library |
+| react-router-dom | For routing as an SPA |
+| react-query | State management and querying |
+| axios | HTTP requests |
+| jquery | DOM manipulation |
+| vis-network | Network graph in Directory |
+| validator | Form validation |
+| slugify | Shortening text to safe form |
+| bootstrap | Style framework |
+| datatables.net + datatables-bootstrap | Interactive tables |
+| bootstrap-datepicker | Date selection |
+| jquery-circle-progress | Animated progress circles |
+| react-icons | Icons |
+| craco | Custom build to single bundle |
+
 ## Architecture
 The `src` directory is set up to mimic the component dependency tree as closely as possible. Top-level components are in folders in TitleCase, while folders for all other supporting elements are in lowercase.
 
@@ -81,9 +106,7 @@ graph LR
   Directory --> UGS["useGraphSettings<br>(hook)"]
 
   %% Home
-  Home --> HomeTeamCards
   Home --> PC([ProgressCard])
-  HomeTeamCards --> PC
 
   %% Team
   Team --> TeamPane
@@ -95,39 +118,31 @@ graph LR
 
   OkrSection --> ObjectiveAdd
   OkrSection --> OkrCollapse
-  OkrSection --> SM([SharedModal])
   ObjectiveAdd --> OF([ObjectiveForm])
+  OkrSection --> SM([SharedModal])
 
   OkrCollapse --> KeyResultRow
   OkrCollapse --> ObjectiveCard
 
   ObjectiveCard --> SM
   ObjectiveCard --> PB([ProgressBar])
-  ObjectiveCard --> ObjectiveEdit
-  ObjectiveCard --> KeyResultAdd
+  ObjectiveCard --> OF
+  ObjectiveCard --> KRF([KeyResultForm])
   ObjectiveCard --> DF([DeleteForm])
-
-  ObjectiveEdit --> OF
-  KeyResultAdd --> KRF([KeyResultForm])
 
   KeyResultRow --> PB
   KeyResultRow --> SM
   KeyResultRow --> KeyResultInfo
-  KeyResultRow --> KeyResultEdit
+  KeyResultRow --> KRF
   KeyResultRow --> DF
 
-  KeyResultEdit --> KRF
   KeyResultInfo --> QuickAddUpdate
   QuickAddUpdate --> UF([UpdateForm])
 
   Updates --> SM
   Updates --> UpdatesTable
-  Updates --> UpdatesAdd
-  Updates --> UpdatesEdit
+  Updates --> UF
   Updates --> DF
-
-  UpdatesAdd --> UF
-  UpdatesEdit --> UF
 
   classDef shared fill:#7b73f0,color:white
   class PC,SM,DF,UF,OF,KRF,PB shared
@@ -141,9 +156,7 @@ This component contains the progress cards for the main organisational entity an
 ```mermaid
 graph LR
   %% Home
-  Home --> HomeTeamCards
   Home --> PC([ProgressCard])
-  HomeTeamCards --> PC
 
   classDef shared fill:#7b73f0,color:white
   class PC,SM,DF,UF,OF,KRF,PB shared
@@ -165,42 +178,38 @@ This is the main component containing the bulk of components in ROKR. For ease o
 | `FreqDropdown` | Dynamic dropdown menu for monthly, quarterly, or annual time periods in the dataset. |
 | `TeamProgress` | Basically a `ProgressCard` shared component, the same one on the top of the `Home` page. |
 | `OkrSection` | Joins the data to create `OkrCollapse` components. Handles the creation of Objectives through a `SharedModal` shared component. Auto-populates new Objective forms with the currently selected team, frequency, time period, and staff (if applicable). |
-| `ObjectiveAdd` | Wrapper for `ObjectiveForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `ObjectiveAdd` | Wrapper for `ObjectiveForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. This holds controlled form state instead of `OkrSection` to prevent expensive renders of all `OkrSection` components. |
 
 ```mermaid
 graph LR
   %% Team
   Team --> TeamPane
-  TeamPane --> FreqDropdown
   TeamPane --> TeamProgress
   TeamPane --> OkrSection
+  TeamPane --> FreqDropdown
 
   TeamProgress --> PC([ProgressCard])
 
   OkrSection --> ObjectiveAdd
   OkrSection --> OkrCollapse
-  OkrSection --> SM([SharedModal])
   ObjectiveAdd --> OF([ObjectiveForm])
+  OkrSection --> SM([SharedModal])
 
   OkrCollapse --> KeyResultRow
   OkrCollapse --> ObjectiveCard
 
   ObjectiveCard --> SM
   ObjectiveCard --> PB([ProgressBar])
-  ObjectiveCard --> ObjectiveEdit
-  ObjectiveCard --> KeyResultAdd
+  ObjectiveCard --> OF
+  ObjectiveCard --> KRF([KeyResultForm])
   ObjectiveCard --> DF([DeleteForm])
-
-  ObjectiveEdit --> OF
-  KeyResultAdd --> KRF([KeyResultForm])
 
   KeyResultRow --> PB
   KeyResultRow --> SM
   KeyResultRow --> KeyResultInfo
-  KeyResultRow --> KeyResultEdit
+  KeyResultRow --> KRF
   KeyResultRow --> DF
 
-  KeyResultEdit --> KRF
   KeyResultInfo --> QuickAddUpdate
   QuickAddUpdate --> UF([UpdateForm])
 
@@ -211,11 +220,8 @@ graph LR
 | Component | Purpose |
 | :-------- | :------ |
 | `OkrCollapse` | Wraps one `ObjectiveCard` and several `KeyResultRow`s. |
-| `ObjectiveCard` | Displays Objective info through text and a `ProgressBar`. Handles the editing & deleting of Objectives and adding of KRs through `SharedModal`s. Auto-populates new KR forms with current Objective and selected time period. |
+| `ObjectiveCard` | Displays Objective info through text and a `ProgressBar`. Handles the editing & deleting of Objectives and adding of KRs through `SharedModal`s. Auto-populates new KR forms with the relevant info from the current Objective and selected time period. |
 | `KeyResultRow` | Displays KR info through text and a `ProgressBar`. Handles the viewing, editing, and deleting of KRs through `SharedModal`s. |
-| `ObjectiveEdit` | Wrapper for `ObjectiveForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `KeyResultAdd` | Wrapper for `KeyResultForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `KeyResultEdit` | Wrapper for `KeyResultForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `KeyResultInfo` | Displays detailed KR info and lists Updates in a DataTable. Also links to the associated `Updates` view (top-level component), and contains a form to quickly add updates. |
 | `QuickAddUpdate` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
@@ -224,13 +230,9 @@ graph LR
 ```mermaid
 graph TD
   Updates --> SM([SharedModal])
-  Updates --> UpdatesAdd
-  Updates --> UpdatesEdit
+  Updates --> UF([UpdateForm])
   Updates --> DF([DeleteForm])
   Updates --> UpdatesTable
-
-  UpdatesAdd --> UF([UpdateForm])
-  UpdatesEdit --> UF
 
   classDef shared fill:#7b73f0,color:white
   class PC,SM,DF,UF,OF,KRF,PB shared
@@ -239,8 +241,6 @@ graph TD
 | Component | Purpose |
 | :-------- | :------ |
 | `Updates` | Manages the data and holds the states for the add and edit forms for Updates of a given KR. |
-| `UpdateAdd` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `UpdateEdit` | Wrapper for `UpdateForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `UpdatesTable` | DataTable for displaying Updates. Contains buttons to edit each Update. |
 
 #### 4. `Timeline`
