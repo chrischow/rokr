@@ -16,6 +16,11 @@ graph LR
   Root --> Timeline
   Root --> Directory
   
+  %%Directory
+  Directory --> Graph
+  Directory --> Searchbar
+  Directory --> UGS["useGraphSettings<br>(hook)"]
+
   %% Home
   Home --> HomeTeamCards
   Home --> PC([ProgressCard])
@@ -82,7 +87,7 @@ Home
 The `HomeTeamCards` component creates a list of card elements. Each card wraps a [`ProgressCard` shared component](#components), which has a progress ring for average Objective progress, and the counts of completed/total Objectives and KRs.
 
 ### 2. `Team`
-This is the main component containing the bulk of components in ROKR. For ease of viewing, the explanations for the components are split into two tables, and described in a breadth-first manner.
+This is the main component containing the bulk of components in ROKR. For ease of viewing, the explanations for the components are split into two tables. Refer to the [`shared`](#components) section for more info on shared components (purple).
 
 | Component | Purpose |
 | :-------- | :------ |
@@ -93,25 +98,45 @@ This is the main component containing the bulk of components in ROKR. For ease o
 | `OkrSection` | Joins the data to create `OkrCollapse` components. Handles the creation of Objectives through a `SharedModal` shared component. Auto-populates new Objective forms with the currently selected team, frequency, time period, and staff (if applicable). |
 | `ObjectiveAdd` | Wrapper for `ObjectiveForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
-```
-Team
-└── TeamPane
-    ├── FreqDropdown
-    ├── TeamProgress
-    └── OkrSection
-        ├── ObjectiveAdd
-        ├── ObjectiveForm
-        └── OkrCollapse (See table below)
-            ├── ProgressBar
-            ├── ObjectiveCard
-            │   ├── ObjectiveEdit
-            │   └── KeyResultAdd
-            ├── KeyResultRow
-            │   ├── KeyResultInfo
-            │   ├── KeyResultEdit
-            │   └── QuickAddUpdate
-            └── KeyResultForm
- 
+```mermaid
+graph LR
+  %% Team
+  Team --> TeamPane
+  TeamPane --> FreqDropdown
+  TeamPane --> TeamProgress
+  TeamPane --> OkrSection
+
+  TeamProgress --> PC([ProgressCard])
+
+  OkrSection --> ObjectiveAdd
+  OkrSection --> OkrCollapse
+  OkrSection --> SM([SharedModal])
+  ObjectiveAdd --> OF([ObjectiveForm])
+
+  OkrCollapse --> KeyResultRow
+  OkrCollapse --> ObjectiveCard
+
+  ObjectiveCard --> SM
+  ObjectiveCard --> PB([ProgressBar])
+  ObjectiveCard --> ObjectiveEdit
+  ObjectiveCard --> KeyResultAdd
+  ObjectiveCard --> DF([DeleteForm])
+
+  ObjectiveEdit --> OF
+  KeyResultAdd --> KRF([KeyResultForm])
+
+  KeyResultRow --> PB
+  KeyResultRow --> SM
+  KeyResultRow --> KeyResultInfo
+  KeyResultRow --> KeyResultEdit
+  KeyResultRow --> DF
+
+  KeyResultEdit --> KRF
+  KeyResultInfo --> QuickAddUpdate
+  QuickAddUpdate --> UF([UpdateForm])
+
+  classDef shared fill:#7b73f0,color:white
+  class PC,SM,DF,UF,OF,KRF,PB shared
 ```
 
 | Component | Purpose |
@@ -121,24 +146,32 @@ Team
 | `KeyResultRow` | Displays KR info through text and a `ProgressBar`. Handles the viewing, editing, and deleting of KRs through `SharedModal`s. |
 | `ObjectiveEdit` | Wrapper for `ObjectiveForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `KeyResultAdd` | Wrapper for `KeyResultForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `KeyResultInfo` | Displays detailed KR info and lists Updates in a DataTable. Also links to the associated `Updates` view (top-level component), and contains a form to quickly add updates. |
 | `KeyResultEdit` | Wrapper for `KeyResultForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `KeyResultInfo` | Displays detailed KR info and lists Updates in a DataTable. Also links to the associated `Updates` view (top-level component), and contains a form to quickly add updates. |
 | `QuickAddUpdate` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
 ### 3. `Updates`
 The main `Updates` component manages the data and holds the states for the add and edit form for Updates of a given KR. It
 
-```
-Updates
-├── UpdateAdd
-├── UpdateEdit
-└── UpdatesTable
+```mermaid
+graph TD
+  Updates --> SM([SharedModal])
+  Updates --> UpdatesAdd
+  Updates --> UpdatesEdit
+  Updates --> DF([DeleteForm])
+  Updates --> UpdatesTable
+
+  UpdatesAdd --> UF([UpdateForm])
+  UpdatesEdit --> UF
+
+  classDef shared fill:#7b73f0,color:white
+  class PC,SM,DF,UF,OF,KRF,PB shared
 ```
 
 | Component | Purpose |
 | :-------- | :------ |
-| `KeyResultAdd` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
-| `ObjectiveEdit` | Wrapper for `UpdateForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `UpdateAdd` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
+| `UpdateEdit` | Wrapper for `UpdateForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `UpdatesTable` | DataTable for displaying Updates. Contains buttons to edit each Update. |
 
 ### 4. `Timeline`
@@ -147,11 +180,12 @@ Contains a single DataTable comprising all Updates. It pulls all Objectives, Key
 ### 5. `Directory`
 In addition to the components below, the main `Directory` component has a panel to display OKR information.
 
-```
-Directory
-├── SearchBar
-├── Graph
-└── useGraphSettings (hook)
+```mermaid
+graph TD
+  %%Directory
+  Directory --> Graph
+  Directory --> Searchbar
+  Directory --> UGS["useGraphSettings (hook)"]
 ```
 
 | Component | Purpose |
@@ -161,7 +195,7 @@ Directory
 | `useGraphSettings` | Hook to generate graph settings. |
 
 ## B. `shared`
-This folder comprises components that are shared across 2 or more top-level components.
+This folder comprises components that are shared across 2 or more components. Any reference to another component will always go to the `shared` folder`.
 
 ### Components
 
@@ -191,7 +225,7 @@ Data is retrieved and managed using [React Query](https://react-query-v3.tanstac
 #### 1. `useObjectives`
 For retrieving Objectives. There are multiple hooks:
 
-- `useObjectives()`: Retrieves **all** Objectives in the database. It has several dependent hooks:
+- `useObjectives()`: Retrieves **all** Objectives in the database. It has several dependant hooks:
     - `useObjective(Id)`: Retrieves Objective with a given Id using data from `useObjectives`.
     - `useTeamObjectivesCache(team)`: Retrieves Objectives under a given team using data from `useObjectives`.
 - `useObjectivesByFreq(freq)`: Retrieves Objectives with a given frequency only.
@@ -200,7 +234,7 @@ For retrieving Objectives. There are multiple hooks:
 #### 2. `useKeyResults`
 For retrieving KRs. There are multiple hooks:
 
-- `useKeyResults()`: Retrieves **all** KRs in the database. It has several dependent hooks:
+- `useKeyResults()`: Retrieves **all** KRs in the database. It has several dependant hooks:
     - `useKeyResult(Id)`: Retrieves KR with a given Id using data from `useKeyResults`.
     - `useTeamKeyResultsCache(team)`: Retrieves KRs under a given team using data from `useKeyResults`.
 - `useKeyResultsByFreq(freq)`: Retrieves KRs with a given frequency only.
@@ -209,7 +243,7 @@ For retrieving KRs. There are multiple hooks:
 #### 3. `useUpdates`
 For retrieving Updates. There are multiple hooks:
 
-- `useUpdates()`: Retrieves **all** Updates in the database. It has several dependent hooks:
+- `useUpdates()`: Retrieves **all** Updates in the database. It has several dependant hooks:
     - `useUpdate(Id)`: Retrieves Update with a given Id using data from `useUpdates`.
     - `useKrUpdate(krId)`: Retrieves Updates under a given KR using data from `useUpdates`.
 - `useKrUpdatesDirect(KrId)`: Retrieves Updates under a given KR only.
@@ -218,6 +252,16 @@ For retrieving Updates. There are multiple hooks:
 #### 4. `useToken`
 For getting X-RequestDigest for SharePoint POST requests. Has a single `useToken` hook.
 
+#### Other Information
+React Query is configured with the following settings in `config.js`:
+
+- `staleTime = Infinity`: Under this scheme, the data is always fresh, and *automatic* refetching is completely disabled. The data will only be refreshed when the user hits the refresh buttons or refreshes the page entirely. This is to prevent automatic refetching from disrupting edits in progress.
+- `tokenRefreshTime = 25 minutes`: This setting is the `staleTime` for the `useToken` hook, which queries SharePoint for a Request Digest (token) and caches it.
+  - With this setting, the token is cached for 25 minutes, which is just under the token validity of 30 minutes. This reduces an excessive queries to the server for tokens, while keeping within the validity period.
+  - Fetching of the token only occurs when a component with the `useToken` hook (`ObjectiveForm`, `KeyResultForm`, `UpdateForm`, or `QuickAddUpdate`) is rendered **AND** the old token has been around for 25 minutes and is therefore stale, **AND** when any of the default refetch criteria are met, as stated in the [React Query documentation](https://tanstack.com/query/v4/docs/guides/important-defaults) (see bullets below). Note that refetching the token **will not result in lost edits**.
+    - New instances of the query mount
+    - The window is refocused
+    - The network is reconnected
 
 ## C. Supporting Elements
 
