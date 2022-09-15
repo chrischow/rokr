@@ -1,11 +1,9 @@
 # ROKR Developer Guide
-Read this doc for details on the app structure.
+This README contains details on ROKR's architecture. The `src` directory is set up to mimic the component dependency tree as closely as possible.
 
-The folder structure reflects this dependency tree. Top-level component folders are in TitleCase. Folders for all other supporting elements are in lowercase.
+Top-level components are in folders in TitleCase. Folders for all other supporting elements are in lowercase.
 
-In the diagrams below, each folder contains `index.js`, and sometimes, also `styles.css`. We omit these files from the diagram for simplicity.
-
-In the diagram below, cells in purple are shared components.
+In the diagrams below, each folder contains `index.js`, and sometimes, also `styles.css`. We omit these files from the diagram for simplicity. Cells in purple are shared components.
 
 ```mermaid
 graph LR
@@ -79,19 +77,29 @@ graph LR
 ### 1. `Home`
 This component contains the progress cards for the main organisational entity and its sub-entities. The component tree:
 
-```
-Home
-└── HomeTeamCards
+```mermaid
+graph LR
+  %% Home
+  Home --> HomeTeamCards
+  Home --> PC([ProgressCard])
+  HomeTeamCards --> PC
+
+  classDef shared fill:#7b73f0,color:white
+  class PC,SM,DF,UF,OF,KRF,PB shared
 ```
 
-The `HomeTeamCards` component creates a list of card elements. Each card wraps a [`ProgressCard` shared component](#components), which has a progress ring for average Objective progress, and the counts of completed/total Objectives and KRs.
+| Component | Purpose |
+| :-------- | :------ |
+| `Home` | Contains an overall `ProgressCard` [shared component](#components), and a bunch of cards, one per non-HQ team. |
+| `HomeTeamCards` | Contains a list of card elements. Each card wraps has a team name and a `ProgressCard`. |
+
 
 ### 2. `Team`
 This is the main component containing the bulk of components in ROKR. For ease of viewing, the explanations for the components are split into two tables. Refer to the [`shared`](#components) section for more info on shared components (purple).
 
 | Component | Purpose |
 | :-------- | :------ |
-| `Team` | Contains three Tab panels, one for each frequency (monthly, quarterly, annual). Queries the team's Objectives, KRs, and Updates and passes it into each Tab panel. |
+| `Team` | Contains three Tab panels, one for each frequency (monthly, quarterly, annual). Each panel contains a `TeamPane`. Queries the team's Objectives, KRs, and Updates and passes it into each (Bootstrap) Tab panel. |
 | `TeamPane` | Contains the Tabs for staff (monthly frequency only), and a time period selector (`FreqDropdown`). Filters the data provided in props using the chosen staff and period, and passes the data down to the child components. |
 | `FreqDropdown` | Dynamic dropdown menu for monthly, quarterly, or annual time periods in the dataset. |
 | `TeamProgress` | Basically a `ProgressCard` shared component, the same one on the top of the `Home` page. |
@@ -151,7 +159,6 @@ graph LR
 | `QuickAddUpdate` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
 ### 3. `Updates`
-The main `Updates` component manages the data and holds the states for the add and edit form for Updates of a given KR. It
 
 ```mermaid
 graph TD
@@ -170,6 +177,7 @@ graph TD
 
 | Component | Purpose |
 | :-------- | :------ |
+| `Updates` | Manages the data and holds the states for the add and edit forms for Updates of a given KR. |
 | `UpdateAdd` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `UpdateEdit` | Wrapper for `UpdateForm` to render it in edit mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 | `UpdatesTable` | DataTable for displaying Updates. Contains buttons to edit each Update. |
@@ -195,7 +203,7 @@ graph TD
 | `useGraphSettings` | Hook to generate graph settings. |
 
 ## B. `shared`
-This folder comprises components that are shared across 2 or more components. Any reference to another component will always go to the `shared` folder`.
+This folder comprises components that are shared across 2 or more components. Any reference to another component will always go to the `shared` folder.
 
 ### Components
 
