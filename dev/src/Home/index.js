@@ -33,6 +33,8 @@ export default function Home(props) {
       if (allTeamsProgressData) {
         updateCircleProgress(
           "overall_progress",
+          // Switch second argument of updateCircleProgress to following line to use overall data
+          // overallProgressData.avgCompletion
           allTeamsProgressData[config.teams[0].teamName].avgCompletion,
           200,
           "50px",
@@ -43,6 +45,7 @@ export default function Home(props) {
       // Initialise team progress cards
       if (allTeamsProgressData) {
         props.teams.map(team => {
+          // Remove condition to update circle progress for all team cards
           if (team.teamName !== config.teams[0].teamName) {
             updateCircleProgress(
               team.slug,
@@ -94,6 +97,7 @@ export default function Home(props) {
         <div className="overall-panel card--inner mt-4" onClick={goToTeamPage}>
           <ProgressCard
             progressId="overall_progress"
+            // data={overallProgressData}
             data={allTeamsProgressData[config.teams[0].teamName]}
             isTeam={false}
           />
@@ -111,6 +115,7 @@ export default function Home(props) {
         <Row className="align-items-center mt-3 mx-auto">
           {
             props.teams.map(team => {
+              // Remove condition to render all team cards
               if (team.teamName !== config.teams[0].teamName) {
                 return (
                   <Card
