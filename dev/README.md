@@ -104,15 +104,16 @@ graph LR
   Directory --> Graph
   Directory --> Searchbar
   Directory --> UGS["useGraphSettings<br>(hook)"]
+  Graph --> UGS
 
   %% Home
   Home --> PC([ProgressCard])
 
   %% Team
   Team --> TeamPane
+  TeamPane --> FreqDropdown
   TeamPane --> TeamProgress
   TeamPane --> OkrSection
-  TeamPane --> FreqDropdown
 
   TeamProgress --> PC
 
@@ -164,8 +165,7 @@ graph LR
 
 | Component | Purpose |
 | :-------- | :------ |
-| `Home` | Contains an overall `ProgressCard` [shared component](#components), and a bunch of cards, one per non-HQ team. |
-| `HomeTeamCards` | Contains a list of card elements. Each card wraps has a team name and a `ProgressCard`. |
+| `Home` | Contains an overall `ProgressCard` [shared component](#components), and one small `ProgressCard` w ithin a card per non-HQ team. |
 
 
 #### 2. `Team`
@@ -184,9 +184,9 @@ This is the main component containing the bulk of components in ROKR. For ease o
 graph LR
   %% Team
   Team --> TeamPane
+  TeamPane --> FreqDropdown
   TeamPane --> TeamProgress
   TeamPane --> OkrSection
-  TeamPane --> FreqDropdown
 
   TeamProgress --> PC([ProgressCard])
 
@@ -255,6 +255,7 @@ graph TD
   Directory --> Graph
   Directory --> Searchbar
   Directory --> UGS["useGraphSettings (hook)"]
+  Graph --> UGS
 ```
 
 | Component | Purpose |
