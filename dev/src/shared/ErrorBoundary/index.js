@@ -1,41 +1,27 @@
 import { Component } from "react";
+import './styles.css';
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null, errorInfo: null };
+    this.state = { hasError: false, error: null, };
   }
 
   static getDerivedStateFromError(error) {
     // Update state
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        error: error,
-        errorInfo: errorInfo
-      }
-    });
+    return { hasError: true, error: error };
   }
 
   render() {
     if (this.state.hasError) {
       return (
         <div className="text-center">
-          <h2>Oops...something went wrong.</h2>
+          <h1>Oops...something went wrong.</h1>
           <p>Please let your friendly ROKR dev team know about the error:</p>
-          <div className="mt-3">
-            <code>
-              {JSON.stringify(this.state.error)}
-            </code>
-          </div>
-          <div className="mt-3">
-            <code>
-              {this.state.errorInfo}
-            </code>
+          <div className="mt-4 error-div text-start">
+            <pre className="text-red">
+              {JSON.parse(JSON.stringify(this.state.error.stack))}
+            </pre>
           </div>
         </div>
       );

@@ -37,17 +37,17 @@ function App() {
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <NavBar teams={config.teams} />
-        {/* <ErrorBoundary> */}
           <Container className="mt-5 app-container">
-            <Routes>
-              <Route path="/" element={<Home teams={config.teams} />} exact />
-              <Route path="/timeline" element={<Timeline />} />
-              <Route path="/directory" element={<Directory key="directory" />} />
-              <Route path="/updates/:krId" element={<Updates />} />
-              {teamRoutes}
-            </Routes>
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Home teams={config.teams} />} exact />
+                <Route path="/timeline" element={<Timeline />} />
+                <Route path="/directory" element={<Directory key="directory" />} />
+                <Route path="/updates/:krId" element={<Updates />} />
+                {teamRoutes}
+              </Routes>
+            </ErrorBoundary>
           </Container>
-        {/* </ErrorBoundary> */}
         {/* <ReactQueryDevtools initialIsOpen={false}/> */}
       </QueryClientProvider>
     </HashRouter>
