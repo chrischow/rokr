@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Brand } from '../Brand';
+import { Brand } from '../../shared/Brand';
 import $ from 'jquery';
 
 import './styles.css';

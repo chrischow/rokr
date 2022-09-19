@@ -2,7 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 // import { ReactQueryDevtools } from 'react-query/devtools'
 import Container from "react-bootstrap/Container";
-import NavBar from './shared/NavBar';
+import NavBar from './NavBar';
 import Home from './Home';
 import Team from './Team';
 import Timeline from './Timeline';
