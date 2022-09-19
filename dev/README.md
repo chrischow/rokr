@@ -22,7 +22,7 @@ This README contains details ROKR's current implementation. For ideas on future 
         - [3. `useUpdates`](#3-useupdates)
         - [4. `useToken`](#4-usetoken)
         - [Other Information](#other-information)
-      - [`utils`](#utils)
+      - [Utils](#utils)
     - [Supporting Elements](#supporting-elements)
       - [`assets`](#assets)
 
@@ -346,7 +346,7 @@ React Query is configured with the following settings in `config.js`:
     - The window is refocused
     - The network is reconnected
 
-#### `utils`
+#### Utils
 
 | Utility | Usage |
 | :------ | :---- |
