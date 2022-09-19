@@ -3,8 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import Splash from '../Splash';
-import { NavBarBrand } from '../Brand';
+import Splash from './Splash';
+import { NavBarBrand } from '../shared/Brand';
 
 import './styles.css';
 
