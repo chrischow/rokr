@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import { useTeamUpdates } from '../../../shared/hooks/useUpdates';
-import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../utils/dates';
-import { sortByTitle } from '../../../utils/dataProcessing';
+import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../shared/utils/dates';
+import { sortByTitle } from '../../../shared/utils/dataProcessing';
 import { AddIconText } from "../../../shared/Icons";
 import SharedModal from '../../../shared/SharedModal';
 import OkrCollapse from "./OkrCollapse";

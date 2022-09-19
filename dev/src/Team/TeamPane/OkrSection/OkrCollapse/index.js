@@ -3,7 +3,7 @@ import $ from 'jquery';
 import Collapse from 'react-bootstrap/Collapse';
 import ObjectiveCard from "./ObjectiveCard";
 import KeyResultRow from "./KeyResultRow";
-import { sortByTitle } from "../../../../utils/dataProcessing";
+import { sortByTitle } from "../../../../shared/utils/dataProcessing";
 
 export default function OkrCollapse(props) {
   // Expand state

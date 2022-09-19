@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useToken from '../hooks/useToken';
-import { deleteQuery } from '../../utils/query';
+import { deleteQuery } from '../../shared/utils/query';
 import { config } from '../../config';
 
 

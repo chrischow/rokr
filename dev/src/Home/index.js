@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useObjectives } from "../shared/hooks/useObjectives";
 import { useKeyResults } from "../shared/hooks/useKeyResults";
-import updateCircleProgress from "../utils/circleProgress";
+import updateCircleProgress from "../shared/utils/circleProgress";
 import {
   computeMetrics, computeTeamsMetrics
-} from "../utils/stats";
+} from "../shared/utils/stats";
 import { Brand } from "../shared/Brand";
 import ProgressCard from "../shared/ProgressCard";
 import HomeTeamCards from "./HomeTeamCards";

@@ -1,7 +1,7 @@
 import { useTeamObjectives } from "../shared/hooks/useObjectives";
 import { useTeamKeyResults } from "../shared/hooks/useKeyResults";
 import { useTeamUpdates } from '../shared/hooks/useUpdates';
-import { getSubGroupsFromObjectives } from "../utils/stats";
+import { getSubGroupsFromObjectives } from "../shared/utils/stats";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import TeamPane from "./TeamPane";

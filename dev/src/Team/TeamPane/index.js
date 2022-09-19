@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { computeMetrics } from "../../utils/stats";
-import { getMonth, getQuarter, getWorkYear, getYear, offsetDate, testPeriodEquality } from "../../utils/dates";
+import { computeMetrics } from "../../shared/utils/stats";
+import { getMonth, getQuarter, getWorkYear, getYear, offsetDate, testPeriodEquality } from "../../shared/utils/dates";
 import slugify from 'slugify';
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";

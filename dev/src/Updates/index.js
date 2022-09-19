@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import { useKeyResult } from "../shared/hooks/useKeyResults";
 import { useKrUpdatesDirect } from "../shared/hooks/useUpdates";
-import { getDate } from "../utils/dates";
+import { getDate } from "../shared/utils/dates";
 import SharedModal from "../shared/SharedModal";
 import UpdatesTable from "./UpdatesTable";
 import UpdateAdd from "./UpdateAdd";

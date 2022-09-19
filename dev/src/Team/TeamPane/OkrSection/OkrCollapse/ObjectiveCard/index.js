@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import slugify from 'slugify';
 import { useTeamObjectives } from "../../../../../shared/hooks/useObjectives";
-import { getDate } from '../../../../../utils/dates';
+import { getDate } from '../../../../../shared/utils/dates';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { CaretIcon, EditIconText, AddIconText } from '../../../../../shared/Icons';
 import SharedModal from '../../../../../shared/SharedModal';
 import ProgressBar from '../../../../../shared/ProgressBar';
+import DeleteForm from '../../../../../shared/DeleteForm';
 import ObjectiveEdit from './ObjectiveEdit';
 import KeyResultAdd from './KeyResultAdd';
-import DeleteForm from '../../../../../shared/DeleteForm';
 
 import './styles.css';
 

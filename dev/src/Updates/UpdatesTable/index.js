@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { useEffect } from 'react';
 import { editIconString } from '../../shared/Icons';
-import { getDate } from '../../utils/dates';
+import { getDate } from '../../shared/utils/dates';
 
 export default function UpdatesTable(props) {
 
