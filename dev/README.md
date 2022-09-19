@@ -20,9 +20,9 @@ This README contains details ROKR's current implementation. For ideas on future 
       - [3. `useUpdates`](#3-useupdates)
       - [4. `useToken`](#4-usetoken)
       - [Other Information](#other-information)
+    - [`utils`](#utils)
   - [Supporting Elements](#supporting-elements)
     - [`assets`](#assets)
-    - [`utils`](#utils)
 
 ## Data
 ROKR has three main entities: (1) Objectives, (2) Key Results, and (3) Updates (on Key Results). They are stored in three separate Lists on SharePoint. See the Entity-relationship Diagram below for an overview.
@@ -66,6 +66,8 @@ You may have noticed that `parentKrId` in the Updates table is not a foreign key
 
 - Queries cannot be nested i.e. no Objectives LEFT JOIN Key Results LEFT JOIN Updates.
 - Since context (team, frequency) exists primarily in Objectives, and that duplicating these fields in Key Results would affect data integrity, there is no way we can access the context anyway.
+
+The data schema can be improved further.
 
 ## Main Libraries
 
@@ -333,11 +335,6 @@ React Query is configured with the following settings in `config.js`:
     - The window is refocused
     - The network is reconnected
 
-### Supporting Elements
-
-#### `assets`
-For images, video, audio, and anything other non-code element used in the app.
-
 #### `utils`
 
 | Utility | Usage |
@@ -348,3 +345,8 @@ For images, video, audio, and anything other non-code element used in the app.
 | `query` | Query constructors that are used in React Query hooks. |
 | `stats` | For generating aggregate metrics. |
 | `validators` | Validators for `ObjectiveForm`, `KeyResultForm`, and `UpdateForm`. |
+
+### Supporting Elements
+
+#### `assets`
+For images, video, audio, and anything other non-code element used in the app.
