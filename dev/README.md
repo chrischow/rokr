@@ -2,27 +2,29 @@
 This README contains details ROKR's current implementation. For ideas on future development, see [Future Development](../docs/future-dev.md).
 
 ### Table of Contents
-<!-- no toc -->
-- [Data](#data)
-- [Main Libraries](#main-libraries)
-- [Architecture](#architecture)
-  - [Top-Level Components](#top-level-components)
-    - [1. `Home`](#1-home)
-    - [2. `Team`](#2-team)
-    - [3. `Updates`](#3-updates)
-    - [4. `Timeline`](#4-timeline)
-    - [5. `Directory`](#5-directory)
-  - [`shared` Entities](#shared-entities)
-    - [Components](#components)
-    - [Hooks](#hooks)
-      - [1. `useObjectives`](#1-useobjectives)
-      - [2. `useKeyResults`](#2-usekeyresults)
-      - [3. `useUpdates`](#3-useupdates)
-      - [4. `useToken`](#4-usetoken)
-      - [Other Information](#other-information)
-    - [`utils`](#utils)
-  - [Supporting Elements](#supporting-elements)
-    - [`assets`](#assets)
+- [ROKR Developer Guide](#rokr-developer-guide)
+    - [Table of Contents](#table-of-contents)
+  - [Data](#data)
+  - [Main Libraries](#main-libraries)
+  - [Architecture](#architecture)
+    - [Top-Level Components](#top-level-components)
+      - [1. `NavBar`](#1-navbar)
+      - [2. `Home`](#2-home)
+      - [3. `Team`](#3-team)
+      - [4. `Updates`](#4-updates)
+      - [5. `Timeline`](#5-timeline)
+      - [6. `Directory`](#6-directory)
+    - [`shared` Entities](#shared-entities)
+      - [Components](#components)
+      - [Hooks](#hooks)
+        - [1. `useObjectives`](#1-useobjectives)
+        - [2. `useKeyResults`](#2-usekeyresults)
+        - [3. `useUpdates`](#3-useupdates)
+        - [4. `useToken`](#4-usetoken)
+        - [Other Information](#other-information)
+      - [`utils`](#utils)
+    - [Supporting Elements](#supporting-elements)
+      - [`assets`](#assets)
 
 ## Data
 ROKR has three main entities: (1) Objectives, (2) Key Results, and (3) Updates (on Key Results). They are stored in three separate Lists on SharePoint. See the Entity-relationship Diagram below for an overview.
@@ -96,6 +98,7 @@ In the diagrams below, each folder contains `index.js`, and sometimes, also `sty
 ```mermaid
 graph LR
   %% Top-level components
+  Root --> NavBar
   Root --> Home
   Root --> Team
   Root --> Updates
@@ -153,7 +156,15 @@ graph LR
 
 ### Top-Level Components
 
-#### 1. `Home`
+#### 1. `NavBar`
+Navigation bar with the following links:
+
+- Home
+- Each team
+- Directory
+- Timeline
+
+#### 2. `Home`
 This component contains the progress cards for the main organisational entity and its sub-entities. The component tree:
 
 ```mermaid
@@ -170,7 +181,7 @@ graph LR
 | `Home` | Contains an overall `ProgressCard` [shared component](#components), and one small `ProgressCard` w ithin a card per non-HQ team. |
 
 
-#### 2. `Team`
+#### 3. `Team`
 This is the main component containing the bulk of components in ROKR. For ease of viewing, the explanations for the components are split into two tables. Refer to the [`shared`](#components) section for more info on shared components (purple).
 
 | Component | Purpose |
@@ -227,7 +238,7 @@ graph LR
 | `KeyResultInfo` | Displays detailed KR info and lists Updates in a DataTable. Also links to the associated `Updates` view (top-level component), and contains a form to quickly add updates. |
 | `QuickAddUpdate` | Wrapper for `UpdateForm` to render it in add mode. Defines functions to (1) invalidate and refetch data, and (2) clean up the form. |
 
-#### 3. `Updates`
+#### 4. `Updates`
 
 ```mermaid
 graph TD
@@ -245,10 +256,10 @@ graph TD
 | `Updates` | Manages the data and holds the states for the add and edit forms for Updates of a given KR. |
 | `UpdatesTable` | DataTable for displaying Updates. Contains buttons to edit each Update. |
 
-#### 4. `Timeline`
+#### 5. `Timeline`
 Contains a single DataTable comprising all Updates. It pulls all Objectives, Key Results, and Updates - this can be improved.
 
-#### 5. `Directory`
+#### 6. `Directory`
 In addition to the components below, the main `Directory` component has a panel to display OKR information.
 
 ```mermaid
