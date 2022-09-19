@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { constructCreateQueryFn } from "../../utils/query";
+import { constructCreateQueryFn } from "../../shared/utils/query";
 import { config } from "../../config";
 
 // Query token

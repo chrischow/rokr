@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useKeyResults } from '../shared/hooks/useKeyResults';
 import { useObjectives } from '../shared/hooks/useObjectives';
 import { useUpdates } from '../shared/hooks/useUpdates';
-import { getDate } from '../utils/dates';
+import { getDate } from '../shared/utils/dates';
 import $ from 'jquery';
 
 import './styles.css';

@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
-import { constructUrl, constructReadQueryFn } from "../../utils/query";
-import slugify from "slugify";
+import { constructUrl, constructReadQueryFn } from "../../shared/utils/query";
 import { config } from "../../config";
 
 // Get all objectives

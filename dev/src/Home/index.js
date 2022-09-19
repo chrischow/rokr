@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useObjectivesByFreq } from "../shared/hooks/useObjectives";
 import { useKeyResultsByFreq } from "../shared/hooks/useKeyResults";
-import updateCircleProgress from "../utils/circleProgress";
+import updateCircleProgress from "../shared/utils/circleProgress";
 import {
   computeMetrics, computeTeamsMetrics
-} from "../utils/stats";
+} from "../shared/utils/stats";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Brand } from "../shared/Brand";

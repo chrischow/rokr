@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useTeamObjectives } from "../../../../../shared/hooks/useObjectives";
-import { getDate } from '../../../../../utils/dates';
+import { getDate } from '../../../../../shared/utils/dates';
 import { IconContext } from 'react-icons';
 import { RiAddFill } from 'react-icons/ri';
 import { FaEdit } from 'react-icons/fa';

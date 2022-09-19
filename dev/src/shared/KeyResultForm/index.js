@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import useToken from '../hooks/useToken';
-import { getDate } from '../../utils/dates';
-import { createQuery, updateQuery } from '../../utils/query';
-import { validateKrForm } from '../../utils/validators';
+import { getDate } from '../../shared/utils/dates';
+import { createQuery, updateQuery } from '../../shared/utils/query';
+import { validateKrForm } from '../../shared/utils/validators';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';

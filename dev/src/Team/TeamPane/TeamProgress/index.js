@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import ProgressCard from "../../../shared/ProgressCard";
-import updateCircleProgress from "../../../utils/circleProgress";
+import updateCircleProgress from "../../../shared/utils/circleProgress";
 
 export default function TeamProgress(props) {
   useEffect(() => {

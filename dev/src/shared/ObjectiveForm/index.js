@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
-import { getDate } from '../../utils/dates';
-import { createQuery, updateQuery } from '../../utils/query';
-import { validateObjectiveForm } from '../../utils/validators';
+import { getDate } from '../../shared/utils/dates';
+import { createQuery, updateQuery } from '../../shared/utils/query';
+import { validateObjectiveForm } from '../../shared/utils/validators';
 import useToken from '../hooks/useToken';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

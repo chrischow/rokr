@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { formatDate, getDate } from '../../../../../../utils/dates';
+import { formatDate, getDate } from '../../../../../../shared/utils/dates';
 import { IconContext } from 'react-icons';
 import { FaEdit } from 'react-icons/fa';
 import { useTeamUpdates } from '../../../../../../shared/hooks/useUpdates';

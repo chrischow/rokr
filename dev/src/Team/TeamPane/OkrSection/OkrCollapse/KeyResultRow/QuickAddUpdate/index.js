@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import { useQueryClient } from 'react-query';
-import { getDate } from '../../../../../../utils/dates';
 import { IconContext } from 'react-icons';
 import { RiAddFill } from 'react-icons/ri';
+import { getDate } from '../../../../../../shared/utils/dates';
 import UpdateForm from '../../../../../../shared/UpdateForm';
 
 import './styles.css';

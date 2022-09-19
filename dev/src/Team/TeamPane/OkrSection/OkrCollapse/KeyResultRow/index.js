@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useObjectives } from "../../../../../shared/hooks/useObjectives";
-import { getDate } from "../../../../../utils/dates";
+import { getDate } from "../../../../../shared/utils/dates";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import ProgressBar from "../../../../../shared/ProgressBar";
