@@ -1,0 +1,36 @@
+/* Home Page */
+.overall-panel {
+  border-radius: 10px;
+  padding: 40px 20px;
+  background-color: #0D192A8a;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.card--header {
+  font-family: 'Bahnschrift Light';
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+}
+
+.card--outer {
+  padding: 10px 5px;
+}
+
+.card--inner {
+  background-color: #0D192A8a;
+  color: #EAEAEA;
+  border-radius: 5px;
+  transition: 0.3s;
+  padding: 25px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 98%;
+}
+
+.card--inner:hover {
+  background-color: #1723348a;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
