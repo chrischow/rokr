@@ -1,13 +1,380 @@
+/* Generic Styles */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Bahnschrift Light', 'Segoe UI', sans-serif;
+  color: #E9E9E9;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+  background-image: url(./assets/images/bg.png);
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body::-webkit-scrollbar {
+  display: none;
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
+
+.accent-blue {
+  color: #7B73F0;
+}
+
+.accent-green {
+  color: #27DDCB;
+}
+
+.btn-blue {
+  background-color: #7B73F0 !important;
+  color: white !important;
+  transition: 0.3s;
+  border: none !important;
+}
+
+.btn-blue:hover {
+  background-color: #625AD7 !important;
+  color: #fafafa !important;
+  transition: 0.3s;
+  border: none !important;
+}
+
+.btn-green {
+  background-color: #0EC4B2 !important;
+  color: white !important;
+  transition: 0.3s;
+  border: none;
+}
+
+.btn-green:hover {
+  background-color: #00AA98 !important;
+  color: #fafafa !important;
+  transition: 0.3s;
+}
+
+.btn-red {
+  background-color: #FF5364 !important;
+  color: white !important;
+  transition: 0.3s;
+  border: none !important;
+}
+
+.btn-red:hover {
+  background-color: #ff2c41 !important;
+  color: #fafafa !important;
+  transition: 0.3s;
+  border: none !important;
+}
+
+.btn-secondary {
+  background-color: #8497B0 !important;
+  color: white !important;
+}
+
+.btn-secondary:hover {
+  background-color: #6B7E97 !important;
+  color: #ddd !important;
+}
+
+h1 {
+  font-family: 'Bahnschrift', 'Segoe UI', 'Segoe UI', sans-serif;
+  font-size: 3.3rem;
+  font-weight: bold;
+}
+
+h4 {
+  font-family: 'Bahnschrift', 'Segoe UI', 'Segoe UI', sans-serif;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+hr {
+  background-color: #344051;
+  min-width: 150px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+::selection {
+  background: #0EC4B2;
+  color: white;
+}
+
+.bg-dark,
+.table>thead.thead-dark th {
+  /* background-color: #000415!important; */
+  background-color: #0007188a !important;
+}
+
+.no-data {
+  color: #8497B0;
+  font-size: 1.4rem;
+}
+
+.text-green {
+  color: #27DDCB;
+}
+
+.text-blue {
+  color: #7B73F0;
+}
+
+.text-red {
+  color: #FF5364;
+}
+
+.text-grey {
+  color: #9baabf;
+}
+
+/* Tables */
+.table-dark {
+  background-color: #2C3849;
+  border-color: #8497B0;
+}
+
+.table-dark thead,
+.table-dark th,
+.table-dark td {
+  border-color: #8497B0 !important;
+}
+
+td {
+  white-space: pre-line;
+}
+
+li.paginate_button.page-item.disabled>a.page-link,
+li.paginate_button.page-item.previous.disabled>a.page-link,
+li.paginate_button.page-item.next.disabled>a.page-link {
+  background-color: #172334;
+  color: #2C3849;
+}
+
+li.paginate_button.page-item>a,
+li.paginate_button.page-item.previous>a {
+  background-color: #172334;
+  color: #8497B0;
+  transition: 0.3s;
+}
+
+li.paginate_button.page-item>a:hover,
+li.paginate_button.page-item.previous>a:hover {
+  color: #D1E4FD;
+  transition: 0.3s;
+}
+
+li.paginate_button.page-item.active>a {
+  background-color: #8497B0;
+  color: white;
+  transition: 0.3s;
+}
+
+li.paginate_button.page-item.active>a:hover {
+  background-color: #9EB1CA;
+  transition: 0.3s;
+}
+
+li.paginate_button.page-item.active>a:focus,
+li.paginate_button.page-item.previous>a:focus,
+li.paginate_button.page-item.next>a:focus {
+  box-shadow: none;
+}
+
+ul.pagination>li>a {
+  border: none;
+}
+
+div.dataTables_length>label>select {
+  background-color: #ddd;
+  color: #172334;
+}
+
+div.dataTables_length>label>select option {
+  background-color: #ddd;
+  color: #172334;
+}
+
+input[type="search"],
+input[type="search"]:focus {
+  /* background-color: #ddd; */
+  /* color: #172334; */
+  background-color: #0D192A;
+  border: none;
+  color: #8497B0;
+}
+
+.table-dark thead tr th {
+  font-family: 'Bahnschrift', 'Segoe UI', sans-serif;
+  font-weight: normal;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+  background-color: transparent;
+}
+
+.table-striped>tbody>tr:nth-of-type(even)>* {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Forms */
+.form-dark,
+.form-dark:focus {
+  background-color: #000C1D8a;
+  font-size: 1.2rem;
+  color: #ddd;
+  border: 0;
+  box-shadow: none;
+  transition: 0.3s;
+  margin-bottom: 30px;
+}
+
+.form-dark:focus {
+  color: white;
+}
+
+.form-semi-dark,
+.form-semi-dark:focus {
+  background-color: #0D192A;
+  font-size: 1.2rem;
+  color: #ddd;
+  border: 0;
+  box-shadow: none;
+  transition: 0.3s;
+  margin-bottom: 30px;
+}
+
+.form-semi-dark:focus {
+  color: white;
+}
+
+.form--edit {
+  color: white;
+  padding: 10px 10px;
+  transition: 0.3s;
+}
+
+.form-dark:disabled {
+  background-color: #000C1D8a;
+  border: #2C3849;
+}
+
+.form--label {
+  font-size: 0.9rem;
+  font-family: 'Bahnschrift Light', 'Segoe UI Light', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #8497B0;
+  margin-bottom: 7px;
+}
+
+option.form-select-dropdown {
+  background-color: #000C1Dda !important;
+  color: #8497b0;
+  transition: 0.3s;
+}
+
+select:hover,
+select:focus,
+select:active {
+  background-color: #000C1Dca !important;
+  color: white;
+  transition: 0.3s;
+}
+
+div.dataTables_length>label>select,
+div.dataTables_length>label>select:focus,
+div.dataTables_length>label>select:hover,
+div.dataTables_length>label>select + div.dataTables_length>label>select option:hover{
+  background-color: #0D192A!important;
+  border: none!important;
+  color: #8497B0!important;
+}
+
+div.dataTables_length>label>select option {
+  background-color: #0D192A;
+  color: #8497B0;
+}
+
+.form-errors {
+  color: #FF5364;
+  background-color: #0D192A;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.form-errors-update {
+  color: #FF5364;
+  background-color: #1A2637;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Datepicker */
+.datepicker-days,
+.datepicker-months,
+.datepicker-years,
+.datepicker-decades,
+.datepicker-centuries {
+  background-color: #0D192A;
+  color: #eee;
+}
+
+.dropdown-menu {
+  background-color: #0D192A;
+}
+
+.datepicker .datepicker-switch:hover,
+.datepicker .next:hover,
+.datepicker .prev:hover,
+.datepicker tfoot tr th:hover {
+  background: #172334;
+}
+
+.datepicker table tr td.day.focused,
+.datepicker table tr td.day:hover {
+  background: #3D495A;
+}
+
+.datepicker table tr td.active,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active:hover,
+.datepicker table tr td span.active,
+.datepicker table tr td span.active.disabled,
+.datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active:hover {
+  background-color: #8497B0;
+  background-image: linear-gradient(to bottom, #9EB1CA, #8497B0);
+}
+
+.datepicker table tr td span.active.active,
+.datepicker table tr td span.active.disabled,
+.datepicker table tr td span.active.disabled.active,
+.datepicker table tr td span.active.disabled.disabled,
+.datepicker table tr td span.active.disabled:active,
+.datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active.disabled:hover.active,
+.datepicker table tr td span.active.disabled:hover.disabled,
+.datepicker table tr td span.active.disabled:hover:active,
+.datepicker table tr td span.active.disabled:hover:hover,
+.datepicker table tr td span.active.disabled:hover[disabled],
+.datepicker table tr td span.active.disabled[disabled],
+.datepicker table tr td span.active:active,
+.datepicker table tr td span.active:hover,
+.datepicker table tr td span.active:hover.active,
+.datepicker table tr td span.active:hover.disabled,
+.datepicker table tr td span.active:hover:active,
+.datepicker table tr td span.active:hover:hover,
+.datepicker table tr td span.active:hover[disabled],
+.datepicker table tr td span.active[disabled] {
+  background-color: #8497B0;
+}
+
+.datepicker table tr td span.focused,
+.datepicker table tr td span:hover {
+  background: #3D495A;
 }
