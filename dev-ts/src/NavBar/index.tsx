@@ -3,18 +3,14 @@ import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import { Team } from '../shared/types';
 import { Splash } from './Splash';
 import { NavBarBrand } from '../shared/Brand';
 
 import './styles.css';
 
-interface teamInfo {
-  teamName: string;
-  slug: string;
-}
-
 interface NavBarProps {
-  teams: teamInfo[]
+  teams: Team[]
 }
 
 export default function NavBar(props: NavBarProps) {
