@@ -4,15 +4,15 @@ import { deleteQuery } from '../../shared/utils/query';
 import { config } from '../../config';
 
 interface DeleteFormProps {
-  Id: number;
   Title: string;
   itemType: string;
-  invalidateUpdates: Function;
-  invalidateKeyResults: Function;
-  invalidateObjectives: Function;
   closeModal: Function;
+  Id?: number;
   keyResultIds?: number[];
   updateIds?: number[];
+  invalidateUpdates?: Function | null;
+  invalidateKeyResults?: Function | null;
+  invalidateObjectives?: Function | null;
 }
 
 export default function DeleteForm(props: DeleteFormProps) {
@@ -50,8 +50,8 @@ export default function DeleteForm(props: DeleteFormProps) {
       }
 
       // Delete objective and close modal
-      deleteQuery(objListId, props.Id, reqDigest, () => {
-        props.invalidateObjectives();
+      props.Id && deleteQuery(objListId, props.Id, reqDigest, () => {
+        props.invalidateObjectives && props.invalidateObjectives();
         props.closeModal();
       });
     } else if (props.itemType === 'Key Result' && props.updateIds) {
@@ -63,12 +63,12 @@ export default function DeleteForm(props: DeleteFormProps) {
       }
 
       // Delete key result
-      deleteQuery(krListId, props.Id, reqDigest, () => {
-        props.invalidateKeyResults();
+      props.Id && deleteQuery(krListId, props.Id, reqDigest, () => {
+        props.invalidateKeyResults && props.invalidateKeyResults();
         props.closeModal();
       });
     } else {
-      deleteQuery(updateListId, props.Id, reqDigest, props.invalidateUpdates);
+      props.Id && deleteQuery(updateListId, props.Id, reqDigest, props.invalidateUpdates);
       props.closeModal();
     }
   };
