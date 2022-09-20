@@ -6,8 +6,8 @@ import { config } from '../../config';
 export function constructUrl(
   listId: string,
   selectStr: string,
-  expandStr: string,
-  filterStr: string
+  expandStr?: string,
+  filterStr?: string
 ) {
   return `${config.apiUrl}web/Lists(guid'${listId}')/items?` + 
     `$select=${selectStr}` +
