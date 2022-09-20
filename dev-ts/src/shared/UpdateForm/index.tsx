@@ -15,12 +15,12 @@ interface UpdateFormValues extends Omit<Update, "Id"> {
 interface UpdateFormProps {
   formValues: UpdateFormValues;
   mode: string;
-  size: string;
   setFormValues: Function;
-  invalidateAndRefetch: Function;
   formCleanup: Function;
-  closeModal: Function;
-  openDeleteModal: Function;
+  size?: string;
+  invalidateAndRefetch?: Function;
+  closeModal?: Function;
+  openDeleteModal?: Function;
 }
 
 export default function UpdateForm(props: UpdateFormProps) {
@@ -118,38 +118,40 @@ export default function UpdateForm(props: UpdateFormProps) {
 
   return (
     <>
-      <Form onSubmit={(event) => event.preventDefault()}>
-        <Form.Group id="updateForm">
-          <Form.Label className="form--label">Date</Form.Label>
-          <Form.Control
-            type="text"
-            id="updateDate"
-            name="updateDate"
-            className="form-dark form--edit datepicker"
-            value={props.formValues.updateDate}
-            style={props.size === "sm" ? { fontSize: "1.0rem" }: {}}
-            onChange={handleChange}
-          />
-          <Form.Label className="form--label">Update</Form.Label>
-          <Form.Control
-            as="textarea"
-            type="input"
-            id="updateText"
-            name="updateText"
-            className="form-dark form--edit"
-            value={props.formValues.updateText}
-            style={props.size === "sm" ? { fontSize: "1.0rem" }: {}}
-            onChange={handleChange}
-          />
-        </Form.Group>
-      </Form>
+      {props.formValues && 
+        <Form onSubmit={(event) => event.preventDefault()}>
+          <Form.Group id="updateForm">
+            <Form.Label className="form--label">Date</Form.Label>
+            <Form.Control
+              type="text"
+              id="updateDate"
+              name="updateDate"
+              className="form-dark form--edit datepicker"
+              value={props.formValues.updateDate}
+              style={props.size === "sm" ? { fontSize: "1.0rem" } : {}}
+              onChange={handleChange}
+            />
+            <Form.Label className="form--label">Update</Form.Label>
+            <Form.Control
+              as="textarea"
+              type="input"
+              id="updateText"
+              name="updateText"
+              className="form-dark form--edit"
+              value={props.formValues.updateText}
+              style={props.size === "sm" ? { fontSize: "1.0rem" } : {}}
+              onChange={handleChange}
+            />
+          </Form.Group>
+        </Form>
+      }
       <div className={`mt-2 d-flex ${props.mode === 'edit' ? "justify-content-between" : "justify-content-end"}`}>
         {props.mode === 'edit' &&
           <button
             className="btn btn-red"
             onClick={() => {
-              props.closeModal();
-              props.openDeleteModal();
+              typeof props.closeModal !== 'undefined' && props.closeModal();
+              typeof props.openDeleteModal !== 'undefined' && props.openDeleteModal();
             }}
           >
             Delete Update
