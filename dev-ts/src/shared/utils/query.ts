@@ -63,7 +63,7 @@ export async function createQuery(
 
 export async function updateQuery(
   listId: string,
-  itemId: string,
+  itemId: number | undefined,
   data: PostObjective | PostKeyResult | PostUpdate,
   token: string,
   callback: Function
@@ -88,7 +88,7 @@ export async function updateQuery(
 
 export async function deleteQuery(
   listId: string,
-  itemId: string,
+  itemId: number,
   token: string,
   callback: Function
 ) {
