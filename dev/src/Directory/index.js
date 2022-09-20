@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useKeyResultsByFreq } from '../shared/hooks/useKeyResults';
 import { useObjectivesByFreq } from '../shared/hooks/useObjectives';
 import { formatDate } from '../shared/utils/dates';
@@ -10,7 +11,6 @@ import Graph from './Graph';
 
 import './styles.css';
 import 'vis-network/dist/dist/vis-network.min.css';
-import { useLocation } from 'react-router-dom';
 
 export default function Directory(props) {
   // Force re-render
@@ -18,7 +18,7 @@ export default function Directory(props) {
   
   // State
   const [activeNode, setActiveNode] = useState(null);
-  const [activeNodeData, setActiveNodeData] = useState({});
+  const [activeNodeData, setActiveNodeData] = useState(null);
   const [graphData, setGraphData] = useState(null);
   const [queryString, setQueryString] = useState('');
   const [filteredNodes, setFilteredNodes] = useState([]);
@@ -107,7 +107,7 @@ export default function Directory(props) {
         }
       } else {
         setActiveNode(null);
-        setActiveNodeData({});
+        setActiveNodeData(null);
       }
     }
   }, [activeNode])
@@ -149,8 +149,6 @@ export default function Directory(props) {
                 setActiveNode={setActiveNode}
                 setQueryString={setQueryString}
                 queryString={queryString}
-                graph={props.graph}
-                setGraph={props.setGraph}
                 filteredNodes={filteredNodes}
               />
             }
@@ -172,7 +170,7 @@ export default function Directory(props) {
         </Col>}
         <Col xs={12} className="mt-5">
           <h2>Details</h2>
-          {Object.keys(activeNodeData).length > 0 &&
+          {activeNodeData && Object.keys(activeNodeData).length > 0 && 
             <>
               <div className="directory--info-panel mt-3">
                 <Row className="align-items-center">
@@ -217,7 +215,7 @@ export default function Directory(props) {
               </div>
             </>
           }
-          {Object.keys(activeNodeData).length === 0 &&
+          {!activeNodeData &&
             <div className="mt-3">
               <h5>Please select an <span className="text-blue">Objective</span> or <span className="text-green">Key Result</span>.</h5>
             </div>

@@ -42,7 +42,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home teams={config.teams} />} exact />
                 <Route path="/timeline" element={<Timeline />} />
-                <Route path="/directory" element={<Directory key="directory" />} />
+                <Route path="/directory" element={<Directory />} />
                 <Route path="/updates/:krId" element={<Updates />} />
                 {teamRoutes}
               </Routes>
