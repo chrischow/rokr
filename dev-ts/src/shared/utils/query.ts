@@ -43,7 +43,7 @@ export async function createQuery(
   listId: string,
   data: PostObjective | PostKeyResult | PostUpdate,
   token: string,
-  callback: Function
+  callback?: Function | null
 ) {
   const url = `${config.apiUrl}web/Lists(guid'${listId}')/items`
   try {
@@ -55,7 +55,7 @@ export async function createQuery(
       }
     });
     // const newId = response.data.value[0].ItemId;
-    callback();
+    callback && callback();
   } catch (error) {
     console.log('Error:', error);
   }
@@ -66,7 +66,7 @@ export async function updateQuery(
   itemId: number | undefined,
   data: PostObjective | PostKeyResult | PostUpdate,
   token: string,
-  callback: Function
+  callback?: Function | null
 ) {
   const url = `${config.apiUrl}web/Lists(guid'${listId}')/items(${itemId})`
   try {
@@ -80,7 +80,7 @@ export async function updateQuery(
       }
     });
     // console.log(response);
-    callback();
+    callback && callback();
   } catch (error) {
     console.log('Error:', error);
   }
@@ -90,7 +90,7 @@ export async function deleteQuery(
   listId: string,
   itemId: number,
   token: string,
-  callback: Function
+  callback?: Function | null
 ) {
   const url = `${config.apiUrl}web/Lists(guid'${listId}')/items(${itemId})`
   try {
@@ -104,7 +104,7 @@ export async function deleteQuery(
       }
     });
     // console.log(response);
-    callback();
+    callback && callback();
   } catch (error) {
     console.log('Error:', error);
   }
