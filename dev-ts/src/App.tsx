@@ -20,10 +20,16 @@ function App() {
       }
     }
   });
-  
+
   return (
-    <div>
-    </div>
+    <HashRouter>
+      <QueryClientProvider client={queryClient}>
+        <NavBar teams={config.teams} />
+        <Container className="mt-5 app-container">
+          
+        </Container>
+      </QueryClientProvider>
+    </HashRouter>
   );
 }
 
