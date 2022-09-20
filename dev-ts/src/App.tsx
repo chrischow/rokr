@@ -5,12 +5,9 @@ import NavBar from './NavBar';
 import ErrorBoundary from './ErrorBoundary';
 import Home from './Home';
 // import Team from './Team';
+import Updates from './Updates';
 import Timeline from './Timeline';
 import Directory from './Directory';
-// import Timeline from './Timeline';
-// import Directory from './Directory';
-// import Updates from './Updates';
-// import ErrorBoundary from './shared/ErrorBoundary';
 import { config } from './config';
 import './App.css';
 
@@ -34,7 +31,7 @@ function App() {
               <Route path="/" element={<Home teams={config.teams} />} />
               <Route path="/timeline" element={<Timeline />} />
               <Route path="/directory" element={<Directory />} />
-              {/* <Route path="/updates/:krId" element={<Updates />} /> */}
+              <Route path="/updates/:krId" element={<Updates />} />
             </Routes>
           </ErrorBoundary>
         </Container>
