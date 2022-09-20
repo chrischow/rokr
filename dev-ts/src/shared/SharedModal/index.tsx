@@ -4,7 +4,7 @@ import './styles.css';
 
 interface SharedModalProps {
   show: boolean;
-  onHide: () => {};
+  onHide: () => void;
   modalTitle: string;
   renderModalContent: Function;
   handleCloseModal: Function;
