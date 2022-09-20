@@ -1,0 +1,80 @@
+.map-container-wrapper {
+  position: relative;
+}
+.map-container {
+  height: 490px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: rgba(255,255,255, 0.03);
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.map-container--overlay {
+  position: absolute;
+  margin-top: 10px;
+  margin-right: 10px;
+  top: 0;
+  right: 0;
+  font-size: 0.8rem;
+}
+
+.legend {
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+
+.legend--org-entity {
+  background-color: #000C1D7a;
+  color: white;
+}
+
+.legend--obj {
+  background-color: #7B73F07a;
+  color: white;
+}
+
+.legend--kr-red {
+  background-color: #ff53647a;
+  color: white;
+}
+
+.legend--kr-yellow {
+  background-color: #ddcb277a;
+  color: white;
+}
+
+.legend--kr-green {
+  background-color: #27ddcb7a;
+  color: white;
+}
+
+.directory--info-panel {
+  border-radius: 8px;
+  padding: 30px 40px;
+  background-color: #1723348a;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.noborder {
+  border: none;
+}
+
+.vis-tooltip {
+  background-color: #172334ea!important;
+  border: none!important;
+  color: white!important;
+}
+
+.directory--info-header {
+  font-size: calc(1.2rem + .6vw);
+}
+
+.directory--tag {
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  font-size: 1.0rem;
+  color: #4a5b74;
+}
