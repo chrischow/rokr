@@ -2,7 +2,7 @@ import $ from 'jquery';
 import 'jquery-circle-progress';
 
 // UPDATE CIRCLE PROGRESS
-$.circleProgress.defaults.drawValue = function (v: number, fontSize: string) {
+(<any>$).circleProgress.defaults.drawValue = function (v: number, fontSize: string) {
   var ctx = this.ctx,
     s = this.size,
     sv = (100 * v).toFixed() + '%',
@@ -22,9 +22,9 @@ export default function updateCircleProgress(
   progress: number,
   size: number,
   fontSize: string,
-  emptyFill: string) {
-
-  var team_progress = $('#' + slug).circleProgress({
+  emptyFill: string
+) {
+  var team_progress = (<any>$('#' + slug)).circleProgress({
     value: progress,     // Completion here
     size: size,     // Team: 150, overall: 250
     startAngle: - Math.PI / 2,
@@ -38,6 +38,6 @@ export default function updateCircleProgress(
     stepValue: number
   ) {
     // $(this).data('circle-progress').drawValue(stepValue, fontSize);
-    $(this).find('.progress-circle-value').text((100 * stepValue).toFixed(0) + '%');
+    team_progress.find('.progress-circle-value').text((100 * stepValue).toFixed(0) + '%');
   });
 }
