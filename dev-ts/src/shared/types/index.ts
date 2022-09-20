@@ -55,3 +55,15 @@ export interface PostKeyResult extends Omit<KeyResult, "Id"> {
 export interface PostUpdate extends Omit<Update, "Id"> {
   '__metadata': Metadata
 }
+
+// For progress cards - Home and Team pages
+export interface ProgressCompletion {
+  completed: number;
+  total: number;
+}
+
+export interface ProgressCardData {
+  avgCompletion: number;
+  keyResultCompletion: ProgressCompletion;
+  objectiveCompletion: ProgressCompletion;
+}
