@@ -77,8 +77,6 @@ export default function ObjectiveCard(props: ObjectiveCardProps) {
     return <ObjectiveForm
       formValues={objectiveFormValues}
       setFormValues={setObjectiveFormValues}
-      team={props.team}
-      freq={props.frequency}
       formCleanup={() => {
         invalidateObjectives();
         setShowObjectiveEditModal(false);

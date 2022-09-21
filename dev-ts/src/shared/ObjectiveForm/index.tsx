@@ -12,9 +12,7 @@ import { config } from '../../config';
 
 interface ObjectiveFormProps {
   formValues: ObjectiveFormValues;
-  team: string;
   mode: string;
-  freq: string;
   setFormValues: Function;
   formCleanup: Function;
   closeModal?: Function;
