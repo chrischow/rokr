@@ -137,6 +137,7 @@ export default function Home(props: HomeProps) {
                   />
                 );
               }
+              return null;
             })
           }
         </Row>

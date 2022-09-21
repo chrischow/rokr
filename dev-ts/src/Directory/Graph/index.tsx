@@ -78,7 +78,7 @@ export default function Graph(props: GraphProps) {
         localGraph.unselectAll();
       }
     }
-  }, [props.queryString, props.filteredNodes, props.graphData.nodes])
+  }, [props.queryString, props.filteredNodes, props.graphData.nodes, localGraph])
 
   return (
     <div ref={mapContainer} className="map-container" />

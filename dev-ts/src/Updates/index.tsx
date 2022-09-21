@@ -54,13 +54,13 @@ export default function Updates() {
       setDefaultAddUpdateValues(data);
       setTeam(keyResult.data.parentObjective.team);
     }
-  }, [keyResult.isSuccess])
+  }, [keyResult.isSuccess, keyResult.data, krId])
 
   // Navigation
   const navigate = useNavigate();
   const backToTeamPage = () => {
     if (team) {
-      const teamSlug = config.teams.find(elem => elem.teamName == team);
+      const teamSlug = config.teams.find(elem => elem.teamName === team);
       teamSlug && navigate(`/${teamSlug.slug}`);
     }
   }

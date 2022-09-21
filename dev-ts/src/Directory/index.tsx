@@ -69,9 +69,7 @@ export default function Directory() {
   const { teamLookup, defaultNodes, defaultEdges } = useGraphSettings();
 
   useEffect(() => {
-
     if (objectives.isSuccess && keyResults.isSuccess) {
-
       // Initialise with org nodes
       const newGraphData: GraphData = {
         nodes: [],
@@ -111,7 +109,7 @@ export default function Directory() {
       newGraphData.edges.push(...defaultEdges);
       setGraphData(newGraphData);
     }
-  }, [objectives.isSuccess, keyResults.isSuccess]);
+  }, [objectives.isSuccess, keyResults.isSuccess, keyResults.data, objectives.data]);
 
   // Update active node for displaying info, standardising the info fields
   useEffect(() => {
@@ -148,7 +146,7 @@ export default function Directory() {
         setActiveNodeData(null);
       }
     }
-  }, [activeNode])
+  }, [activeNode, keyResults.isSuccess, keyResults.data, objectives.data, objectives.isSuccess])
 
   // Update search
   useEffect(() => {

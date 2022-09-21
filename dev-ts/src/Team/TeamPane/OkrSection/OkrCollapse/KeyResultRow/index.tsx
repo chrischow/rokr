@@ -12,7 +12,7 @@ import DeleteForm from "../../../../../shared/DeleteForm";
 import KeyResultInfo from "./KeyResultInfo";
 import './styles.css';
 
-interface KeyResultRow extends KeyResult {
+interface KeyResultRowProps extends KeyResult {
   team: string;
   startDate: string;
   endDate: string;
@@ -21,7 +21,7 @@ interface KeyResultRow extends KeyResult {
   progress: number;
 }
 
-export default function KeyResultRow(props: KeyResultRow) {
+export default function KeyResultRow(props: KeyResultRowProps) {
 
   // State
   const [showKrInfoModal, setShowKrInfoModal] = useState(false);

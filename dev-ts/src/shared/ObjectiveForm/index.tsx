@@ -7,7 +7,7 @@ import { getDate } from '../../shared/utils/dates';
 import { createQuery, updateQuery } from '../../shared/utils/query';
 import { validateObjectiveForm } from '../../shared/utils/validators';
 import useToken from '../hooks/useToken';
-import { Objective, ObjectiveFormValues } from '../types';
+import { ObjectiveFormValues } from '../types';
 import { config } from '../../config';
 
 interface ObjectiveFormProps {

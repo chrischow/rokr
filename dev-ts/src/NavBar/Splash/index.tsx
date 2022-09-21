@@ -35,7 +35,7 @@ export const Splash = (props: SplashProps) => {
         }, 3700);
       });
     }
-  }, []);
+  }, [props.loading]);
 
   return (
     <div className="intro text-center">

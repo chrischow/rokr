@@ -40,24 +40,24 @@ export function computeObjCompletion(
   var numKRs;
   var pctCompletion;
   var avgCompletion = 0;
-  for (var i = 0; i < objectives.length; i++) {
+  objectives.forEach(obj => {
     // Filter KRs for each objective and compute completion
-    filteredKRs = keyResults.filter(kr => kr.parentObjective.Id === objectives[i].Id);
+    filteredKRs = keyResults.filter(kr => kr.parentObjective.Id === obj.Id);
     numKRs = filteredKRs.length;
-    if (numKRs === 0) { continue; }
+    if (numKRs > 0) {
+      // Compute average completion
+      pctCompletion = filteredKRs.map(kr => {
+        return kr.currentValue / kr.maxValue;
+      });
+      avgCompletion +=
+        pctCompletion.reduce((a, b) => a + b, 0) / numKRs;
+      completedKRs = filteredKRs.filter(kr => kr.currentValue === kr.maxValue);
 
-    // Compute average completion
-    pctCompletion = filteredKRs.map(kr => {
-      return kr.currentValue / kr.maxValue;
-    });
-    avgCompletion +=
-      pctCompletion.reduce((a, b) => a + b, 0) / numKRs;
-    completedKRs = filteredKRs.filter(kr => kr.currentValue === kr.maxValue);
-
-    if (numKRs === completedKRs.length && numKRs > 0) {
-      completed++;
+      if (numKRs === completedKRs.length && numKRs > 0) {
+        completed++;
+      }
     }
-  }
+  });
 
   avgCompletion /= total;
 
@@ -102,13 +102,13 @@ export function computeTeamsMetrics(
 ) {
   var output: any = {};
   var tempObj, tempKR;
-  for (var i = 0; i < teams.length; i++) {
+  teams.forEach(team => {
     // Filter objectives
-    tempObj = objectives.filter(entry => entry.team === teams[i].teamName);
+    tempObj = objectives.filter(entry => entry.team === team.teamName);
     // Filter KRs
-    tempKR = keyResults.filter(entry => entry.parentObjective.team === teams[i].teamName);
-    output[teams[i].teamName] = computeMetrics(tempObj, tempKR, frequency);
-  }
+    tempKR = keyResults.filter(entry => entry.parentObjective.team === team.teamName);
+    output[team.teamName] = computeMetrics(tempObj, tempKR, frequency);
+  });
   return output;
 }
 
@@ -127,6 +127,8 @@ export function getStaffFromObjectives(objectives: Objective[]) {
   var staffList = objectives.map(item => {
     if (item.frequency === "monthly") {
       return item.owner;
+    } else {
+      return undefined;
     }
   });
   staffList = Array.from(new Set(staffList));

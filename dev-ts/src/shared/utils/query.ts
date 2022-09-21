@@ -47,7 +47,7 @@ export async function createQuery(
 ) {
   const url = `${config.apiUrl}web/Lists(guid'${listId}')/items`
   try {
-    const response = await axios.post(url, data, {
+    await axios.post(url, data, {
       headers: {
         'Accept': 'application/json; odata=verbose',
         'content-type': 'application/json; odata=verbose',
@@ -70,7 +70,7 @@ export async function updateQuery(
 ) {
   const url = `${config.apiUrl}web/Lists(guid'${listId}')/items(${itemId})`
   try {
-    const response = await axios.post(url, data, {
+    await axios.post(url, data, {
       headers: {
         'Accept': 'application/json; odata=verbose',
         'content-type': 'application/json; odata=verbose',
@@ -94,7 +94,7 @@ export async function deleteQuery(
 ) {
   const url = `${config.apiUrl}web/Lists(guid'${listId}')/items(${itemId})`
   try {
-    const response = await axios.post(url, undefined, {
+    await axios.post(url, undefined, {
       headers: {
         'Accept': 'application/json; odata=verbose',
         'content-type': 'application/json; odata=verbose',

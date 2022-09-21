@@ -36,7 +36,7 @@ export default function OkrSection(props: OkrSectionProps) {
     if (updates.isSuccess) {
       setUpdateData(updates.data);
     }
-  }, [props])
+  }, [props, updates.isSuccess, updates.data])
 
   // Event handlers
   const toggleOKRCards = () => {

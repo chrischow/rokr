@@ -39,6 +39,7 @@ export default function DeleteForm(props: DeleteFormProps) {
       if (props.updateIds.length > 0) {
         props.updateIds.map(updateId => {
           deleteQuery(updateListId, updateId, reqDigest, props.invalidateUpdates);
+          return null;
         });
       }
 
@@ -46,6 +47,7 @@ export default function DeleteForm(props: DeleteFormProps) {
       if (props.keyResultIds && props.keyResultIds.length > 0) {
         props.keyResultIds.map(krId => {
           deleteQuery(krListId, krId, reqDigest, props.invalidateKeyResults);
+          return null;
         });
       }
 
@@ -59,6 +61,7 @@ export default function DeleteForm(props: DeleteFormProps) {
       if (props.updateIds.length > 0) {
         props.updateIds.map(updateId => {
           deleteQuery(updateListId, updateId, reqDigest, props.invalidateUpdates);
+          return null;
         });
       }
 

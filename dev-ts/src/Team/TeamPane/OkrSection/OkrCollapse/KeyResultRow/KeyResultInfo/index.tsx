@@ -36,7 +36,7 @@ export default function KeyResultInfo(props: KeyResultInfoProps) {
       });;
       setInitialData(newUpdates);
     };
-  }, [updates.data]);
+  }, [updates.isSuccess, updates.data, props.Id]);
 
   // Get dates
   const startDate = formatDate(props.startDate);
@@ -48,12 +48,6 @@ export default function KeyResultInfo(props: KeyResultInfoProps) {
   useEffect(
     () => {
       if (updates.isSuccess && updates.data.length > 0) {
-        const updateData = updates.data.filter((update: Update) => {
-          return update.parentKrId === props.Id;
-        }).map((update: Update) => {
-          return {...update, updateDate: getDate(update.updateDate)};
-        });
-
         $(function () {
           if (!$.fn.dataTable.isDataTable("#kr-info-table")) {
             table.DataTable().destroy();
@@ -88,14 +82,8 @@ export default function KeyResultInfo(props: KeyResultInfoProps) {
           }
         });
       }
-    }, [updates, initialData]
+    }, [updates, initialData, table]
   );
-
-  // Revert to table page
-  function resetTableView() {
-    table.DataTable().page.len(5).draw(true);
-    table.DataTable().page(0);
-  };
   
   // Link to updates page
   const navigate = useNavigate();
