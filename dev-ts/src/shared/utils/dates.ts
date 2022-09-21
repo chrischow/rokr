@@ -67,7 +67,7 @@ export function testPeriodEquality(date: string, dateOption: string, period: str
 }
 
 // Convert date string into start/end dates
-export function quarterToIsoDate(dateStr: string, isStart: boolean) {
+export function quarterToIsoDate(dateStr: string, isStart: boolean): string {
   const [, year, qtr] = dateStr.split(' ');
   if (qtr === 'Q1') {
     if (isStart) return `${year}-04-01`;
@@ -78,7 +78,8 @@ export function quarterToIsoDate(dateStr: string, isStart: boolean) {
   } else if (qtr === 'Q3') {
     if (isStart) return `${year}-10-01`;
     return `${year}-12-31`;
-  } else if (qtr === 'Q4') {
+  } else {
+    // (qtr === 'Q4') 
     if (isStart) return `${Number(year) + 1}-01-01`;
     return `${Number(year) + 1}-03-31`;
   }
