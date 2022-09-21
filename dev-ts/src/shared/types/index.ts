@@ -41,6 +41,10 @@ export interface Update {
 }
 
 // Forms
+export interface ObjectiveFormValues extends Omit<Objective, "Id"> {
+  Id?: number;
+}
+
 export interface KeyResultFormValues extends Omit<KeyResult, "Id" | "parentObjective"> {
   Id?: number;
   parentObjective: number;
