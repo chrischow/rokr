@@ -82,3 +82,7 @@ Team page:
 Directory:
 
 ![](./docs/images/directory.jpg)
+
+## Plans
+- [ ] Test TypeScript version
+- [ ] Phase out JavaScript version
