@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import $ from 'jquery';
 import Collapse from 'react-bootstrap/Collapse';
-import { sortByTitle } from "../../../shared/utils/dataProcessing";
-import { KeyResult, Objective, Update } from "../../../shared/types";
+import { sortByTitle } from "../../../../shared/utils/dataProcessing";
+import { KeyResult, Objective, Update } from "../../../../shared/types";
 import ObjectiveCard from "./ObjectiveCard";
 import KeyResultRow from "./KeyResultRow";
 
