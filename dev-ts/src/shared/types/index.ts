@@ -1,4 +1,4 @@
-export interface Team {
+export interface TeamInfo {
   teamName: string;
   slug: string;
 }

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Team, ProgressCardData } from '../shared/types';
+import { TeamInfo, ProgressCardData } from '../shared/types';
 import { useObjectivesByFreq } from "../shared/hooks/useObjectives";
 import { useKeyResultsByFreq } from "../shared/hooks/useKeyResults";
 import updateCircleProgress from "../shared/utils/circleProgress";
@@ -16,7 +16,7 @@ import { config } from "../config";
 import './styles.css';
 
 interface HomeProps {
-  teams: Team[];
+  teams: TeamInfo[];
 }
 
 interface CardProps {

@@ -8,10 +8,10 @@ import { getStaffFromObjectives, getSubGroupsFromObjectives } from "../shared/ut
 import TeamPane from "./TeamPane";
 
 import './styles.css';
-import { Team } from "../shared/types";
+import { TeamInfo } from "../shared/types";
 
 interface TeamProps {
-  team: Team;
+  team: TeamInfo;
 }
 
 export default function Team(props: TeamProps){

@@ -1,4 +1,4 @@
-import { Team, Objective, KeyResult } from '../types';
+import { TeamInfo, Objective, KeyResult } from '../types';
 import {
   offsetDate,
   getYear,
@@ -95,7 +95,7 @@ export function computeMetrics(
 
 // Compute overall metrics for a given set of teams, at a given frequency
 export function computeTeamsMetrics(
-  teams: Team[],
+  teams: TeamInfo[],
   objectives: Objective[],
   keyResults: KeyResult[],
   frequency: string
