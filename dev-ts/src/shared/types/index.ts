@@ -41,8 +41,18 @@ export interface Update {
 }
 
 // Forms
+export interface KeyResultFormValues extends Omit<KeyResult, "Id" | "parentObjective"> {
+  Id?: number;
+  parentObjective: number;
+}
+
 export interface UpdateFormValues extends Omit<Update, "Id"> {
   Id?: number;
+}
+
+export interface ObjectiveOptions {
+  value: number;
+  label: string;
 }
 
 interface Metadata {
@@ -53,8 +63,9 @@ export interface PostObjective extends Omit<Objective, "Id"> {
   '__metadata': Metadata
 }
 
-export interface PostKeyResult extends Omit<KeyResult, "Id"> {
-  '__metadata': Metadata
+export interface PostKeyResult extends Omit<KeyResult, "Id"|"parentObjective"> {
+  '__metadata': Metadata,
+  parentObjectiveId?: number;
 }
 
 export interface PostUpdate extends Omit<Update, "Id"> {

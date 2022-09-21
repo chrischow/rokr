@@ -11,6 +11,7 @@
     "@types/node": "^16.11.59",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
+    "@types/react-select": "^5.0.1",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "bootstrap-datepicker": "^1.9.0",
