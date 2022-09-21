@@ -1,0 +1,19 @@
+.accordion-item,
+.accordion-header,
+.accordion-button,
+.accordion-button:active,
+.accordion-button:not(.collapsed)
+ {
+  border: none;
+  background-color: transparent;
+  color: #D1E4FD;
+  box-shadow: none!important;
+}
+
+.accordion-button::after {
+  background-image: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: none;
+}
