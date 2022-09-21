@@ -40,6 +40,11 @@ export interface Update {
   team: string;
 }
 
+// Forms
+export interface UpdateFormValues extends Omit<Update, "Id"> {
+  Id?: number;
+}
+
 interface Metadata {
   type: string
 }
