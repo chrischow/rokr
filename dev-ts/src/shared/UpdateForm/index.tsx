@@ -4,13 +4,9 @@ import $ from 'jquery';
 import { getDate } from '../../shared/utils/dates';
 import { createQuery, updateQuery } from '../../shared/utils/query';
 import { validateUpdateForm } from '../../shared/utils/validators';
-import { Update } from '../../shared/types';
+import { Update, UpdateFormValues } from '../../shared/types';
 import Form from 'react-bootstrap/Form';
 import { config } from '../../config';
-
-interface UpdateFormValues extends Omit<Update, "Id"> {
-  Id?: number;
-}
 
 interface UpdateFormProps {
   formValues: UpdateFormValues;
@@ -18,7 +14,6 @@ interface UpdateFormProps {
   setFormValues: Function;
   formCleanup: Function;
   size?: string;
-  invalidateAndRefetch?: Function;
   closeModal?: Function;
   openDeleteModal?: Function;
 }

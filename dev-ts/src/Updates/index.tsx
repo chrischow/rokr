@@ -122,7 +122,6 @@ export default function Updates() {
           <UpdateForm
             setFormValues={setUpdateEditFormValues}
             formValues={updateEditFormValues}
-            invalidateAndRefetch={invalidateAndRefetch}
             formCleanup={() => {
               // Invalidate and refetch data
               invalidateAndRefetch();
