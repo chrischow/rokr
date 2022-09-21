@@ -6,8 +6,7 @@ import './styles.css';
 
 interface FreqDropdownProps {
   freq: string;
-  subgroups: string[];
-  options: [];
+  options: string[];
   dateOption: string;
   setDateOption: Function;
 }

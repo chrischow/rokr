@@ -5,9 +5,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { IconContext } from 'react-icons';
 import { FaEdit } from 'react-icons/fa';
-import { formatDate, getDate } from '../../../../../shared/utils/dates';
-import { useTeamUpdates } from '../../../../../shared/hooks/useUpdates';
-import { Update, KeyResult } from '../../../../../shared/types';
+import { formatDate, getDate } from '../../../../../../shared/utils/dates';
+import { useTeamUpdates } from '../../../../../../shared/hooks/useUpdates';
+import { Update, KeyResult } from '../../../../../../shared/types';
 import QuickAddUpdate from '../QuickAddUpdate';
 
 

@@ -3,9 +3,9 @@ import Accordion from 'react-bootstrap/Accordion'
 import { useQueryClient } from 'react-query';
 import { IconContext } from 'react-icons';
 import { RiAddFill } from 'react-icons/ri';
-import { getDate } from '../../../../../shared/utils/dates';
-import { UpdateFormValues } from '../../../../../shared/types';
-import UpdateForm from '../../../../../shared/UpdateForm';
+import { getDate } from '../../../../../../shared/utils/dates';
+import { UpdateFormValues } from '../../../../../../shared/types';
+import UpdateForm from '../../../../../../shared/UpdateForm';
 import './styles.css';
 
 interface QuickAddUpdateProps {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { ProgressCardData } from '../../shared/types';
-import updateCircleProgress from "../../shared/utils/circleProgress";
-import ProgressCard from "../../shared/ProgressCard";
+import { ProgressCardData } from '../../../shared/types';
+import updateCircleProgress from "../../../shared/utils/circleProgress";
+import ProgressCard from "../../../shared/ProgressCard";
 
 interface TeamProgressProps {
   freq: string;

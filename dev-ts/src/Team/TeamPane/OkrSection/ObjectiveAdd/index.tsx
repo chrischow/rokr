@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "react-query";
-import ObjectiveForm from "../../../shared/ObjectiveForm";
+import ObjectiveForm from "../../../../shared/ObjectiveForm";
 
 interface ObjectiveAddProps {
   startDate: string;

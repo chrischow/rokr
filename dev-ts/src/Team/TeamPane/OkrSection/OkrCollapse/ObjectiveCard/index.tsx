@@ -6,15 +6,15 @@ import { FaEdit } from 'react-icons/fa';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { useTeamObjectives } from "../../../../shared/hooks/useObjectives";
-import { getDate } from '../../../../shared/utils/dates';
-import { Objective, ObjectiveFormValues } from '../../../../shared/types';
-import { CaretIcon } from '../../../../shared/Icons';
-import SharedModal from '../../../../shared/SharedModal';
-import ProgressBar from '../../../../shared/ProgressBar';
-import DeleteForm from '../../../../shared/DeleteForm';
-import ObjectiveForm from '../../../../shared/ObjectiveForm';
-import KeyResultForm from '../../../../shared/KeyResultForm';
+import { useTeamObjectives } from "../../../../../shared/hooks/useObjectives";
+import { getDate } from '../../../../../shared/utils/dates';
+import { Objective, ObjectiveFormValues } from '../../../../../shared/types';
+import { CaretIcon } from '../../../../../shared/Icons';
+import SharedModal from '../../../../../shared/SharedModal';
+import ProgressBar from '../../../../../shared/ProgressBar';
+import DeleteForm from '../../../../../shared/DeleteForm';
+import ObjectiveForm from '../../../../../shared/ObjectiveForm';
+import KeyResultForm from '../../../../../shared/KeyResultForm';
 
 import './styles.css';
 

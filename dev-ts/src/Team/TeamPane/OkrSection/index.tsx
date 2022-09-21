@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import { IconContext } from 'react-icons';
 import { RiAddFill } from 'react-icons/ri';
-import { useTeamUpdates } from '../../shared/hooks/useUpdates';
-import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../shared/utils/dates';
-import { sortByTitle } from '../../shared/utils/dataProcessing';
-import SharedModal from '../../shared/SharedModal';
+import { useTeamUpdates } from '../../../shared/hooks/useUpdates';
+import { quarterToIsoDate, monthToIsoDate, yearToIsoDate } from '../../../shared/utils/dates';
+import { sortByTitle } from '../../../shared/utils/dataProcessing';
+import { KeyResult, Objective } from '../../../shared/types';
+import SharedModal from '../../../shared/SharedModal';
 import OkrCollapse from "./OkrCollapse";
 import ObjectiveAdd from './ObjectiveAdd';
 
 import './styles.css';
-import { KeyResult, Objective } from '../../shared/types';
 
 interface OkrSectionProps {
   objectives: Objective[];
