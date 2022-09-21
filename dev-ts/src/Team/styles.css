@@ -1,0 +1,85 @@
+h1.teampage-title {
+  margin-bottom: -5px;
+}
+
+/* Frequency tabs */
+.frequency-tabs--link {
+  color: #6B7E97;
+  font-size: 1.0rem;
+  transition: 0.3s;
+  display: inline;
+}
+
+.frequency-tabs--link:hover,
+.nav-link .frequency-tabs--link:active,
+.nav-link .frequency-tabs--tab .active {
+  color: #27DDCB;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.nav-link {
+  border-radius: 0;
+  transition: 0.4s;
+  position: relative;
+}
+
+.nav-link.frequency-tabs--link::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #27DDCB;
+  transform: scaleX(0);
+  transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-link.frequency-tabs--link.active {
+  background-color: transparent;
+  border-bottom: 1px solid #27DDCB;
+  color: #27DDCB;
+  transition: 0.4s;
+}
+
+/* Individual tabs */
+.individual-tabs--link,
+.individual-tabs--link:focus {
+  color: #6B7E97;
+  font-size: 0.9rem;
+  transition: 0.3s;
+  display: inline;
+}
+
+.individual-tabs--link:hover {
+  color: #7B73F0;
+  transition: 0.3s;
+}
+
+.nav-link.individual-tabs--link::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #7B73F0;
+  transform: scaleX(0);
+  transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.nav-link.individual-tabs--link:hover::after, .nav-link.individual-tabs--link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-link.individual-tabs--link.active {
+  background-color: transparent;
+  border-bottom: 1px solid #7B73F0;
+  color: #7B73F0;
+  transition: 0.4s;
+}
