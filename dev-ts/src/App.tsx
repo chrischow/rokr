@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import NavBar from './NavBar';
 import ErrorBoundary from './ErrorBoundary';
 import Home from './Home';
-// import Team from './Team';
+import Team from './Team';
 import Updates from './Updates';
 import Timeline from './Timeline';
 import Directory from './Directory';
@@ -21,6 +21,15 @@ function App() {
     }
   });
 
+  //  Team routes
+  const teamRoutes = config.teams.map(team => {
+    return <Route
+      key={`route-${team.slug}`}
+      path={`/${team.slug}`}
+      element={<Team team={team} />}
+    />;
+  });
+
   return (
     <HashRouter>
       <QueryClientProvider client={queryClient}>
@@ -32,6 +41,7 @@ function App() {
               <Route path="/timeline" element={<Timeline />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/updates/:krId" element={<Updates />} />
+              {teamRoutes}
             </Routes>
           </ErrorBoundary>
         </Container>
