@@ -14,7 +14,7 @@ interface TeamPaneProps {
   keyResults: KeyResult[];
   teamName: string;
   freq: string;
-  staffList: string[];
+  staffList?: (string | undefined)[];
   subgroups: string[];
 }
 
@@ -31,7 +31,7 @@ export default function TeamPane(props: TeamPaneProps) {
 
   // Dropdown options - staff is for monthly only
   const [dateOption, setDateOption] = useState<string>('');
-  const [staffOption, setStaffOption] = useState<string>('');
+  const [staffOption, setStaffOption] = useState<string|undefined>('');
   const [currentObjectives, setCurrentObjectives] = useState<Objective[]>([]);
   const [currentKeyResults, setCurrentKeyResults] = useState<KeyResult[]>([]);
 
@@ -72,11 +72,11 @@ export default function TeamPane(props: TeamPaneProps) {
   }, [dateOption, props.freq, props.objectives, props.keyResults, props.staffList, staffOption])
 
   // Create staff tabs for monthly
-  const staffTabs = props.staffList && props.staffList.map((staff: string) => {
+  const staffTabs = props.staffList && props.staffList.map((staff) => {
     return (
       <Nav.Link 
-        key={`tab-${slugify(staff)}`}
-        eventKey={slugify(staff)}
+        key={`tab-${slugify(staff ? staff : '')}`}
+        eventKey={slugify(staff ? staff : '')}
         className="individual-tabs--link"
         onClick={() => setStaffOption(staff)}
       >
@@ -87,9 +87,12 @@ export default function TeamPane(props: TeamPaneProps) {
   
   return (
     <>
-      {props.freq === 'monthly' && props.staffList.length > 0 &&
+      {props.freq === 'monthly' && props.staffList && props.staffList.length > 0 &&
         <>
-          <Tab.Container id="individual-tabs" defaultActiveKey={slugify(props.staffList[0])}>
+          <Tab.Container
+            id="individual-tabs"
+            defaultActiveKey={slugify(props.staffList[0] ? props.staffList[0] : '')}
+          >
             <Nav className="justify-content-center">
               <Nav.Item>
                 {staffTabs}
@@ -110,7 +113,7 @@ export default function TeamPane(props: TeamPaneProps) {
       <OkrSection
         teamName={props.teamName}
         freq={props.freq}
-        staffOption={staffOption}
+        staffOption={staffOption ? staffOption: ''}
         dateOption={dateOption}
         objectives={currentObjectives}
         keyResults={currentKeyResults}
