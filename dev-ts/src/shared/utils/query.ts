@@ -54,7 +54,6 @@ export async function createQuery(
         'X-RequestDigest': token
       }
     });
-    // const newId = response.data.value[0].ItemId;
     callback && callback();
   } catch (error) {
     console.log('Error:', error);
@@ -79,7 +78,6 @@ export async function updateQuery(
         'X-HTTP-METHOD': 'MERGE'
       }
     });
-    // console.log(response);
     callback && callback();
   } catch (error) {
     console.log('Error:', error);
@@ -103,7 +101,6 @@ export async function deleteQuery(
         'X-HTTP-METHOD': 'DELETE'
       }
     });
-    // console.log(response);
     callback && callback();
   } catch (error) {
     console.log('Error:', error);

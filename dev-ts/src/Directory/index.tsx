@@ -79,9 +79,10 @@ export default function Directory() {
       // Add all KRs
       keyResults.data.forEach((kr: KeyResult) => {
         // Add to nodes
+        const description = kr.krDescription ? ` - ${kr.krDescription}`: "";
         newGraphData.nodes.push({
           id: `kr-${kr.Id}`,
-          title: `${kr.Title}${kr.krDescription ? ` - ${kr.krDescription}`: ""}`,
+          title: `${kr.Title}${description}`,
           group: 'keyResults',
           color: getColours(kr.currentValue, kr.maxValue),
         });
@@ -92,10 +93,11 @@ export default function Directory() {
       
       // Add all objectives
       objectives.data.forEach((obj: Objective) => {
+        const description = obj.objectiveDescription ? ` - ${obj.objectiveDescription}` : "";
         // Add to nodes
         newGraphData.nodes.push({
           id: `obj-${obj.Id}`,
-          title: `${obj.Title}${obj.objectiveDescription ? ` - ${obj.objectiveDescription}` : ""}`,
+          title: `${obj.Title}${description}`,
           group: 'objectives',
           size: 30
         });

@@ -22,6 +22,20 @@ export default function DeleteForm(props: DeleteFormProps) {
   // Submit button enabled state
   const [submitEnabled, setSubmitEnabled] = useState<boolean>(true);
 
+  // Delete functions
+  const deleteUpdates = (
+    updateIds: number[],
+    updateListId: string,
+    reqDigest: string,
+    callback: Function|null|undefined
+  ) => {
+    if (updateIds.length > 0) {
+      updateIds.forEach(updateId => {
+        deleteQuery(updateListId, updateId, reqDigest, callback)
+      });
+    }
+  };
+
   // Delete
   const confirmDelete = () => {
     // Disable button
@@ -36,18 +50,12 @@ export default function DeleteForm(props: DeleteFormProps) {
     // Delete data
     if (props.itemType === 'Objective' && props.updateIds) {
       // Delete updates first
-      if (props.updateIds.length > 0) {
-        props.updateIds.map(updateId => {
-          deleteQuery(updateListId, updateId, reqDigest, props.invalidateUpdates);
-          return null;
-        });
-      }
+      deleteUpdates(props.updateIds, updateListId, reqDigest, props.invalidateUpdates);
 
       // Delete key results first
       if (props.keyResultIds && props.keyResultIds.length > 0) {
-        props.keyResultIds.map(krId => {
+        props.keyResultIds.forEach(krId => {
           deleteQuery(krListId, krId, reqDigest, props.invalidateKeyResults);
-          return null;
         });
       }
 
@@ -58,12 +66,7 @@ export default function DeleteForm(props: DeleteFormProps) {
       });
     } else if (props.itemType === 'Key Result' && props.updateIds) {
       // Delete updates first
-      if (props.updateIds.length > 0) {
-        props.updateIds.map(updateId => {
-          deleteQuery(updateListId, updateId, reqDigest, props.invalidateUpdates);
-          return null;
-        });
-      }
+      deleteUpdates(props.updateIds, updateListId, reqDigest, props.invalidateUpdates);
 
       // Delete key result
       props.Id && deleteQuery(krListId, props.Id, reqDigest, () => {

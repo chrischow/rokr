@@ -23,7 +23,9 @@ export default function OkrCollapse(props: OkrCollapseProps) {
 
   // ID
   const objId = `obj-${props.objective.Id}`;
-  const krRows = props.keyResults.sort(sortByTitle).map(kr => {
+  const sortedKeyResults = props.keyResults;
+  sortedKeyResults.sort(sortByTitle)
+  const krRows = sortedKeyResults.map(kr => {
     const krUpdates = props.updateData.filter(update => {
       return update.parentKrId === kr.Id;
     });

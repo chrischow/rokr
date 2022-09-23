@@ -9,7 +9,7 @@ import {
 
 // Compute KR completion
 export function computeKrCompletion(data: KeyResult[]) {
-  var krCompleted = data
+  const krCompleted = data
     .map(entry => entry.currentValue === entry.maxValue ? 1 : 0)
     .reduce((prev: number, next: number) => prev + next, 0);
 
@@ -21,10 +21,10 @@ export function computeKrCompletion(data: KeyResult[]) {
 
 // Compute KR percentages
 export function computeKrPercentage(data: KeyResult[]) {
-  var total = 0.0;
-  for (var i = 0; i < data.length; i++) {
-    total += data[i].currentValue / data[i].maxValue;
-  }
+  let total = 0.0;
+  data.forEach(kr => {
+    total += kr.currentValue / kr.maxValue;
+  })
   return total / data.length;
 }
 
@@ -33,13 +33,13 @@ export function computeObjCompletion(
   objectives: Objective[],
   keyResults: KeyResult[]
 ) {
-  var total = objectives.length;
-  var completed = 0;
-  var filteredKRs;
-  var completedKRs;
-  var numKRs;
-  var pctCompletion;
-  var avgCompletion = 0;
+  const total = objectives.length;
+  let completed = 0;
+  let filteredKRs;
+  let completedKRs;
+  let numKRs;
+  let pctCompletion;
+  let avgCompletion = 0;
   objectives.forEach(obj => {
     // Filter KRs for each objective and compute completion
     filteredKRs = keyResults.filter(kr => kr.parentObjective.Id === obj.Id);
@@ -73,8 +73,6 @@ export function computeMetrics(
   const tempObjectives = objectives.filter(obj => obj.frequency === frequency);
 
   const tempKRs = keyResults.filter(kr => {
-    // const objs = tempObjectives.filter(obj => obj.Id === kr.parentObjective.Id);
-    // return objs.length > 0;
     return tempObjectives.map(obj => obj.Id).includes(kr.parentObjective.Id);
   });
 
@@ -100,8 +98,8 @@ export function computeTeamsMetrics(
   keyResults: KeyResult[],
   frequency: string
 ) {
-  var output: any = {};
-  var tempObj, tempKR;
+  const output: any = {};
+  let tempObj, tempKR;
   teams.forEach(team => {
     // Filter objectives
     tempObj = objectives.filter(entry => entry.team === team.teamName);
@@ -124,16 +122,14 @@ export function sortStringArray(a: any, b: any): number {
 
 // Get staff
 export function getStaffFromObjectives(objectives: Objective[]) {
-  var staffList = objectives.map(item => {
+  let staffList: any = objectives.forEach(item => {
     if (item.frequency === "monthly") {
       return item.owner;
-    } else {
-      return undefined;
     }
   });
   staffList = Array.from(new Set(staffList));
 
-  staffList = staffList.filter(item => {
+  staffList = staffList.filter((item: string) => {
     return item != null;
   });
 
@@ -149,13 +145,13 @@ interface SubGroups {
 }
 
 export function getSubGroupsFromObjectives(objectives: Objective[]) {
-  var output: SubGroups = {
+  const output: SubGroups = {
     annual: [],
     quarterly: [],
     monthly: [],
   };
 
-  var date, year, workyear, quarter, month;
+  let date, year, workyear, quarter, month;
   objectives.forEach((item) => {
     date = offsetDate(item.objectiveEndDate);
     year = getYear(date);
@@ -179,9 +175,12 @@ export function getSubGroupsFromObjectives(objectives: Objective[]) {
   });
 
   // Sort
-  output.annual.sort().reverse();
-  output.quarterly.sort().reverse();
-  output.monthly.sort().reverse();
+  output.annual.sort()
+  output.annual.reverse();
+  output.quarterly.sort()
+  output.quarterly.reverse();
+  output.monthly.sort()
+  output.monthly.reverse();
 
   return output;
 }

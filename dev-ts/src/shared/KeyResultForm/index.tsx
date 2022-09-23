@@ -37,7 +37,7 @@ export default function KeyResultForm(props: KeyResultFormProps) {
         this.style.height = this.scrollHeight + "px";
       });
 
-      var krStartDatePicker = $("#krStartDate");
+      const krStartDatePicker = $("#krStartDate");
       krStartDatePicker.datepicker({
         format: "yyyy-mm-dd"
       });
@@ -51,7 +51,7 @@ export default function KeyResultForm(props: KeyResultFormProps) {
         });
       });
 
-      var krEndDatePicker = $("#krEndDate");
+      const krEndDatePicker = $("#krEndDate");
       krEndDatePicker.datepicker({
         format: "yyyy-mm-dd"
       });

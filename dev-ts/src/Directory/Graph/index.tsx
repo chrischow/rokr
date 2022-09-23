@@ -54,14 +54,7 @@ export default function Graph(props: GraphProps) {
           network.fit();
         }
       });
-
-      // Scroll to bottom
-      // network.on('selectNode', params => {
-      //   setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 100);
-      // });
-
-      // Save network
-      // props.setGraph({network, exists: true});
+      
       setLocalGraph(network);
     }
   }, []);
@@ -70,7 +63,6 @@ export default function Graph(props: GraphProps) {
     if (
       props.graphData.nodes.length > 0 && props.queryString && 
       props.queryString.trim() !== '' && localGraph != null) {
-        // console.log(props.filteredNodes);
       localGraph.selectNodes(props.filteredNodes);
     }
     else {

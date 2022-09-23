@@ -12,10 +12,10 @@ export function getDate(date: string | Date) {
 // Format date in `%d %b %y` format
 export function formatDate(dateStr: string) {
   if (dateStr) {
-    var date = new Date(dateStr);
-    var y = new Intl.DateTimeFormat("en", { year: "numeric" }).format(date);
-    var m = new Intl.DateTimeFormat("en", { month: "short" }).format(date);
-    var d = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date);
+    const date = new Date(dateStr);
+    const y = new Intl.DateTimeFormat("en", { year: "numeric" }).format(date);
+    const m = new Intl.DateTimeFormat("en", { month: "short" }).format(date);
+    const d = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date);
     return d + " " + m + " " + y;
   }
 };

@@ -64,7 +64,6 @@ export default function OkrSection(props: OkrSectionProps) {
 
   // Handle closing of modal
   const handleCloseModal = () => {
-    // setObjectiveFormValues({...defaultObjectiveValues});
     setShowObjectiveModal(false);
   }
   
@@ -79,7 +78,9 @@ export default function OkrSection(props: OkrSectionProps) {
   />
 
   // Create OKR Collapse objects
-  const okrCollapses = props.objectives.sort(sortByTitle).map((obj: Objective) => {
+  const sortedObjectives = props.objectives;
+  sortedObjectives.sort(sortByTitle);
+  const okrCollapses = sortedObjectives.map((obj: Objective) => {
     const keyResults = props.keyResults.filter((kr: KeyResult) => kr.parentObjective.Id === obj.Id);
 
     return (

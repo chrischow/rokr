@@ -55,7 +55,7 @@ export default function Home(props: HomeProps) {
       
       // Initialise team progress cards
       if (allTeamsProgressData) {
-        props.teams.map(team => {
+        props.teams.forEach(team => {
           // Remove condition to update circle progress for all team cards
           if (team.teamName !== config.teams[0].teamName) {
             updateCircleProgress(
@@ -66,7 +66,6 @@ export default function Home(props: HomeProps) {
               "#010D1E"
             );
           }
-          return null;
         })
       }
     },

@@ -40,11 +40,15 @@ export default function TeamPane(props: TeamPaneProps) {
     const today = offsetDate(new Date());
     const year = getYear(today);
     const workyear = getWorkYear(today);
-    const initialFreq = props.freq === 'annual'
-      ? workyear
-      : props.freq === 'quarterly'
-        ? getQuarter(today, workyear)
-        : getMonth(today, year);
+    let initialFreq;
+    if (props.freq === 'annual') {
+      initialFreq = workyear;
+    } else if (props.freq === 'quarterly') {
+      initialFreq = getQuarter(today, workyear);
+    } else {
+      initialFreq = getMonth(today, year);
+    }
+    
     setDateOption(initialFreq);
 
     if (props.staffList) {

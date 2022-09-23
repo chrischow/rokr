@@ -33,7 +33,7 @@ export default function ObjectiveForm(props: ObjectiveFormProps) {
         this.style.height = this.scrollHeight + "px";
       });
 
-      var startDatePicker = $("#objectiveStartDate");
+      const startDatePicker = $("#objectiveStartDate");
       startDatePicker.datepicker({
         format: "yyyy-mm-dd",
       });
@@ -47,7 +47,7 @@ export default function ObjectiveForm(props: ObjectiveFormProps) {
         });
       });
 
-      var endDatePicker = $("#objectiveEndDate");
+      const endDatePicker = $("#objectiveEndDate");
       endDatePicker.datepicker({
         format: "yyyy-mm-dd",
       });
