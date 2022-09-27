@@ -122,7 +122,7 @@ export function sortStringArray(a: any, b: any): number {
 
 // Get staff
 export function getStaffFromObjectives(objectives: Objective[]) {
-  let staffList: any = objectives.forEach(item => {
+  let staffList: any = objectives.map(item => {
     if (item.frequency === "monthly") {
       return item.owner;
     }

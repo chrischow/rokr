@@ -84,14 +84,13 @@ export default function DeleteForm(props: DeleteFormProps) {
   const textKeyResults = props.keyResultIds && nKeyResults && `Key Result${nKeyResults > 1 ? "s " : " "}`
   const nUpdates = props.updateIds && props.updateIds.length;
   const textUpdates = props.updateIds && nUpdates && `Update${nUpdates > 1 ? "s " : " "}`
-  
   return (
     <div className="text-center mt-3 mb-3">
       <h5>You are about to delete the following {props.itemType}:</h5>
       <div className="mt-4 mb-4">
         <h3 className="text-grey">{props.Title}</h3>
       </div>
-      {((props.keyResultIds && nKeyResults && nKeyResults > 0) || (props.updateIds && nUpdates && nUpdates > 0)) &&
+      {((props.keyResultIds && nKeyResults != null && nKeyResults > 0) || (props.updateIds && nUpdates != null && nUpdates > 0)) &&
         <div className="mb-3 text-center">
           <div style={{ fontSize: '1.2rem', fontWeight: 'light' }}>
             <span className="text-red" style={{ fontWeight: 'bold' }}>Warning: </span>
