@@ -85,15 +85,18 @@ button.btn-collapse, button.btn-collapse:hover {
   margin-right: 10px;
 }
 
-.btn.objective-card--edit-button:active, .btn.objective-card--edit-button:focus {
-  color: #7B73F0;
-  border: 1px solid #7b73f0;
+.btn.objective-card--edit-button:active,
+.btn.objective-card--edit-button:focus
+ {
+  color: #7B73F0!important;
+  border: 1px solid #7b73f0!important;
 }
 
 .objective-card--edit-button:hover {
-  background-color: #7B73F033;
-  color: #7B73F0;
-  transition: 0.3s;
+  background-color: #7B73F033!important;
+  color: #7B73F0!important;
+  transition: 0.3s!important;
+  border: 1px solid #7b73f0!important;
 }
 
 .objective-card--edit-text {
@@ -120,8 +123,9 @@ button.btn-collapse, button.btn-collapse:hover {
 }
 
 .objective-card--add-kr-button:hover {
-  background-color: #0EC4B233;
-  color: #0EC4B2;
+  background-color: #0EC4B233!important;
+  color: #0EC4B2!important;
+  border: 1px solid #0EC4B2!important;
   transition: 0.3s;
 }
 

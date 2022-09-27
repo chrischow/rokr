@@ -6,9 +6,9 @@
 }
 
 .btn-okr-toggle:hover {
-  background-color: #8497B044;
-  color: #D1E4FD;
-  border: 1px solid #9EB1CA;
+  background-color: #8497B044!important;
+  color: #D1E4FD!important;
+  border: 1px solid #9EB1CA!important;
   transition: 0.3s;
 }
 
