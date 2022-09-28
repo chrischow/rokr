@@ -1,7 +1,8 @@
+import { useContext } from 'react';
 import slugify from 'slugify';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
+import { AppContext } from '../../../shared/contexts/AppContextProvider';
 import './styles.css';
 
 interface FreqDropdownProps {
@@ -13,9 +14,21 @@ interface FreqDropdownProps {
 
 export default function FreqDropdown(props: FreqDropdownProps) {
 
+  // Get context
+  const [appContext, setAppContext] = useContext(AppContext);
+
   // Handle updates
   const handleChange = (event: any) => {
     props.setDateOption(event.target.value);
+    setAppContext((prevData: any) => {
+      return {
+        ...prevData,
+        period: {
+          ...prevData.period,
+          [props.freq]: event.target.value
+        }
+      };
+    });
   }
 
   // Populate options

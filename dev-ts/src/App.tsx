@@ -9,9 +9,11 @@ import Updates from './Updates';
 import Timeline from './Timeline';
 import Directory from './Directory';
 import { config } from './config';
+import { AppContextProvider } from './shared/contexts/AppContextProvider';
 import './App.css';
 
 function App() {
+
   // Load query client
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -36,6 +38,7 @@ function App() {
         <NavBar teams={config.teams} />
         <Container className="mt-5 app-container">
           <ErrorBoundary>
+          <AppContextProvider>
             <Routes>
               <Route path="/" element={<Home teams={config.teams} />} />
               <Route path="/timeline" element={<Timeline />} />
@@ -43,6 +46,7 @@ function App() {
               <Route path="/updates/:krId" element={<Updates />} />
               {teamRoutes}
             </Routes>
+          </AppContextProvider>
           </ErrorBoundary>
         </Container>
       </QueryClientProvider>

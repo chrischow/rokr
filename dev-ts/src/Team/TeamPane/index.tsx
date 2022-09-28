@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import slugify from 'slugify';
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
@@ -8,6 +8,7 @@ import { KeyResult, Objective } from "../../shared/types";
 import FreqDropdown from "./FreqDropdown";
 import TeamProgress from "./TeamProgress";
 import OkrSection from "./OkrSection";
+import { AppContext } from "../../shared/contexts/AppContextProvider";
 
 interface TeamPaneProps {
   objectives: Objective[];
@@ -28,6 +29,7 @@ export default function TeamPane(props: TeamPaneProps) {
    * To ensure the correct (monthly/quarterly/annual) data is presented, it holds the following:
    *  - State for selected month / quarter / work year
    */
+  const [appContext, setAppContext] = useContext(AppContext);
 
   // Dropdown options - staff is for monthly only
   const [dateOption, setDateOption] = useState<string>('');
@@ -36,25 +38,46 @@ export default function TeamPane(props: TeamPaneProps) {
   const [currentKeyResults, setCurrentKeyResults] = useState<KeyResult[]>([]);
 
   useEffect(() => {
-    // Compute default date option
-    const today = offsetDate(new Date());
-    const year = getYear(today);
-    const workyear = getWorkYear(today);
-    let initialFreq;
-    if (props.freq === 'annual') {
-      initialFreq = workyear;
-    } else if (props.freq === 'quarterly') {
-      initialFreq = getQuarter(today, workyear);
+    // Check app state for date option first
+    if (appContext.period[props.freq]) {
+      // Set date option based on currently set period
+      setDateOption(appContext.period[props.freq]);
     } else {
-      initialFreq = getMonth(today, year);
+      // Compute default date option
+      const today = offsetDate(new Date());
+      const year = getYear(today);
+      const workyear = getWorkYear(today);
+      let initialFreq: string;
+      if (props.freq === 'annual') {
+        initialFreq = workyear;
+      } else if (props.freq === 'quarterly') {
+        initialFreq = getQuarter(today, workyear);
+      } else {
+        initialFreq = getMonth(today, year);
+      }
+      // Update current state and global state
+      console.log('Setting', initialFreq);
+      setDateOption(initialFreq);
+      setAppContext((prevData: any) => {
+        return {
+          ...prevData,
+          period: {
+            ...prevData.period,
+            [props.freq]: initialFreq
+          }
+        };
+      })
     }
-    
-    setDateOption(initialFreq);
 
     if (props.staffList) {
-      setStaffOption(props.staffList[0]);
+      if (props.staffList.includes(appContext.staff)) {
+        setStaffOption(appContext.staff);
+      } else {
+        setStaffOption(props.staffList[0]);
+        setAppContext({ ...appContext, staff: props.staffList[0]});
+      }
     }
-  }, [props.freq, props.staffList])
+  }, [props.freq, props.staffList, appContext.staff])
 
   useEffect(() => {
     let objectives = props.objectives.filter(obj => {
@@ -82,7 +105,10 @@ export default function TeamPane(props: TeamPaneProps) {
         key={`tab-${slugify(staff ? staff : '')}`}
         eventKey={slugify(staff ? staff : '')}
         className="individual-tabs--link"
-        onClick={() => setStaffOption(staff)}
+        onClick={() => {
+          setStaffOption(staff);
+          setAppContext({...appContext, staff: staff});
+        }}
       >
         {staff}
       </Nav.Link>
@@ -95,7 +121,8 @@ export default function TeamPane(props: TeamPaneProps) {
         <>
           <Tab.Container
             id="individual-tabs"
-            defaultActiveKey={slugify(props.staffList[0] ? props.staffList[0] : '')}
+            defaultActiveKey={slugify(staffOption ? staffOption : '')}
+            activeKey={staffOption ? slugify(staffOption): ''}
           >
             <Nav className="justify-content-center">
               <Nav.Item>
