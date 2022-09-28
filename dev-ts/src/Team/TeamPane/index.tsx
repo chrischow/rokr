@@ -8,7 +8,7 @@ import { KeyResult, Objective } from "../../shared/types";
 import FreqDropdown from "./FreqDropdown";
 import TeamProgress from "./TeamProgress";
 import OkrSection from "./OkrSection";
-import { AppContext } from "../../shared/contexts/AppContextProvider";
+import { AppContext } from "../../shared/context/AppContextProvider";
 
 interface TeamPaneProps {
   objectives: Objective[];

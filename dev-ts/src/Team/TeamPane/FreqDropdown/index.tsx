@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import slugify from 'slugify';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { AppContext } from '../../../shared/contexts/AppContextProvider';
+import { AppContext } from '../../../shared/context/AppContextProvider';
 import './styles.css';
 
 interface FreqDropdownProps {

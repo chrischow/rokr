@@ -9,7 +9,7 @@ import Updates from './Updates';
 import Timeline from './Timeline';
 import Directory from './Directory';
 import { config } from './config';
-import { AppContextProvider } from './shared/contexts/AppContextProvider';
+import { AppContextProvider } from './shared/context/AppContextProvider';
 import './App.css';
 
 function App() {
