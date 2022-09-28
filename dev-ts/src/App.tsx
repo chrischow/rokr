@@ -8,6 +8,7 @@ import Team from './Team';
 import Updates from './Updates';
 import Timeline from './Timeline';
 import Directory from './Directory';
+import Feedback from './Feedback';
 import { config } from './config';
 import { AppContextProvider } from './shared/context/AppContextProvider';
 import './App.css';
@@ -36,6 +37,7 @@ function App() {
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <NavBar teams={config.teams} />
+        <Feedback />
         <Container className="mt-5 app-container">
           <ErrorBoundary>
           <AppContextProvider>

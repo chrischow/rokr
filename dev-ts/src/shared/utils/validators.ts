@@ -190,3 +190,20 @@ export const validateUpdateForm = (
   
   return formOkay;
 }
+
+export const validateFeedbackForm = (
+  inputFeedback: string,
+  tokenStatus: boolean,
+  errorSetter: Function
+) => {
+  let formOkay = true;
+
+  if (!inputFeedback) {
+    errorSetter((prevData: ErrorList) => {
+      return [...prevData, "Input some feedback."];
+    });
+    formOkay = formOkay && false;
+  }
+  
+  return formOkay;
+}

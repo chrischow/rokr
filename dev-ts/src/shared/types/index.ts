@@ -40,6 +40,11 @@ export interface Update {
   team: string;
 }
 
+export interface Feedback {
+  Title: string;
+  feedback: string;
+}
+
 // Forms
 export interface ObjectiveFormValues extends Omit<Objective, "Id"> {
   Id?: number;
@@ -73,6 +78,10 @@ export interface PostKeyResult extends Omit<KeyResult, "Id"|"parentObjective"> {
 }
 
 export interface PostUpdate extends Omit<Update, "Id"> {
+  '__metadata': Metadata
+}
+
+export interface PostFeedback extends Feedback {
   '__metadata': Metadata
 }
 

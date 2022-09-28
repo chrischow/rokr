@@ -1,0 +1,32 @@
+.feedback-box {
+  padding: 5px 10px;
+  position: fixed;
+  bottom: 0px;
+  right: 30px;
+  background-color: #1ebfafcc;
+  color: white;
+  font-size: 0.9rem;
+  transition: 0.3s;
+  z-index: 900;
+}
+
+.feedback-box:hover {
+  background-color: #27DDCBcc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toast {
+  background-color: #000c1d;
+  border-radius: 5px;
+}
+
+.toast-header {
+  background-color: #000c1d;
+  border-bottom: none;
+}
+
+.toast-body {
+  background-color: #0d192a;
+  color: #8497b0
+}

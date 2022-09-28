@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PostObjective, PostKeyResult, PostUpdate } from '../types';
+import { PostObjective, PostKeyResult, PostUpdate, PostFeedback } from '../types';
 import { config } from '../../config';
 
 // Construct query URL
@@ -26,7 +26,7 @@ export function constructReadQueryFn(url: string) {
     });
     return data.value;
   };
-};
+}
 
 export function constructCreateQueryFn(url: string) {
   return async () => {
@@ -37,11 +37,11 @@ export function constructCreateQueryFn(url: string) {
     });
     return data;
   }
-};
+}
 
 export async function createQuery(
   listId: string,
-  data: PostObjective | PostKeyResult | PostUpdate,
+  data: PostObjective | PostKeyResult | PostUpdate | PostFeedback,
   token: string,
   callback?: Function | null
 ) {
@@ -58,7 +58,7 @@ export async function createQuery(
   } catch (error) {
     console.log('Error:', error);
   }
-};
+}
 
 export async function updateQuery(
   listId: string,
@@ -82,7 +82,7 @@ export async function updateQuery(
   } catch (error) {
     console.log('Error:', error);
   }
-};
+}
 
 export async function deleteQuery(
   listId: string,
@@ -105,4 +105,4 @@ export async function deleteQuery(
   } catch (error) {
     console.log('Error:', error);
   }
-};
+}
