@@ -18,7 +18,7 @@ export function formatDate(dateStr: string) {
     const d = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date);
     return d + " " + m + " " + y;
   }
-};
+}
 
 // Add 8 hours: Convert date from UTC (SP default) to SGT
 export function offsetDate(date: string | Date) {
@@ -26,17 +26,17 @@ export function offsetDate(date: string | Date) {
   const z = rawDate.getTimezoneOffset() * 60 * 1000;
   const localDate = new Date(rawDate.valueOf() - z.valueOf());
   return localDate;
-};
+}
 
 // Get year
 export function getYear(cleanDate: Date) {
   return cleanDate.getFullYear();
-};
+}
 
 export function getWorkYear(cleanDate: Date) {
   const year = cleanDate.getFullYear();
   return 'WY ' + (cleanDate.getMonth() <= 3 ? year - 1 : year);
-};
+}
 
 // Get quarter
 export function getQuarter(cleanDate: Date, year: string) {
@@ -45,11 +45,11 @@ export function getQuarter(cleanDate: Date, year: string) {
     return year + ' Q4';
   }
   return year + ' Q' + (Math.floor(cleanDate.getMonth() / 3));
-};
+}
 
 export function getMonth(cleanDate: Date, year: number | string) {
   return year + '-' + String(cleanDate.getMonth() + 1).padStart(2, '0');
-};
+}
 
 // Test period equality
 export function testPeriodEquality(date: string, dateOption: string, period: string) {
