@@ -56,7 +56,6 @@ export default function TeamPane(props: TeamPaneProps) {
         initialFreq = getMonth(today, year);
       }
       // Update current state and global state
-      console.log('Setting', initialFreq);
       setDateOption(initialFreq);
       setAppContext((prevData: any) => {
         return {

@@ -15,7 +15,7 @@ interface FreqDropdownProps {
 export default function FreqDropdown(props: FreqDropdownProps) {
 
   // Get context
-  const [appContext, setAppContext] = useContext(AppContext);
+  const [_, setAppContext] = useContext(AppContext);
 
   // Handle updates
   const handleChange = (event: any) => {
