@@ -1,0 +1,38 @@
+.timeline-card {
+  border-radius: 15px;
+  background-color: #0D192A8a;
+  padding: 15px 30px;
+  position: relative;
+  display: block;
+}
+
+.timeline-card--title {
+  font-size: 0.9rem;
+}
+
+.timeline-card--body {
+  font-size: 1rem;
+  color: #D1E4FD;
+  white-space: pre-line;
+}
+
+.timeline-card--obj {
+  color: #7b73f0;
+}
+
+.timeline-card--kr {
+  color: #27ddcb;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+.timeline-card--kr:hover {
+  color: #1ebfaf;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.timeline-card--subtitle {
+  color: #8497b0;
+  font-size: 0.85rem;
+}

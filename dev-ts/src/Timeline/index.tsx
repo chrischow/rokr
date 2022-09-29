@@ -8,11 +8,7 @@ import $ from 'jquery';
 
 import './styles.css';
 
-interface TimelineProps {
-
-}
-
-export default function Timeline(props: TimelineProps) {
+export default function Timeline() {
   // Get data
   const objectives = useObjectives();
   const keyResults = useKeyResults();

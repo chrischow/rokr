@@ -7,6 +7,7 @@ import Home from './Home';
 import Team from './Team';
 import Updates from './Updates';
 import Timeline from './Timeline';
+import Timeline2 from './Timeline2';
 import Directory from './Directory';
 import Feedback from './Feedback';
 import { config } from './config';
@@ -44,6 +45,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home teams={config.teams} />} />
               <Route path="/timeline" element={<Timeline />} />
+              <Route path="/timeline2" element={<Timeline2 />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/updates/:krId" element={<Updates />} />
               {teamRoutes}

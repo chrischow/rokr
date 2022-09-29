@@ -1,0 +1,29 @@
+.offcanvas {
+  background-color: #0D192A;
+}
+
+.btn-filter-button {
+  background-color: #8497b022;
+  color: #999;
+  margin: 5px;
+  transition: 0.3s;
+}
+
+.btn-filter-button:hover {
+  background-color: #8497b066!important;
+  color: #eee!important;
+  transition: 0.3s;
+}
+
+.btn-filter-button.filter-on,
+.btn-filter-button.filter-on:active,
+.btn-filter-button.filter-on.active
+{
+  background-color: #6a61ee!important;
+  color: #eee!important;
+  transition: 0.3s;
+}
+
+.btn-filter-button.filter-on:hover {
+  background-color: #7b73f0!important;
+}

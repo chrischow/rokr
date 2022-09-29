@@ -1,0 +1,26 @@
+/* Box surrounding table */
+.directory--container {
+  border-radius: 15px;
+  background-color: #0D192A8a;
+  padding: 25px;
+}
+
+/* Nothing? */
+.directory--text {
+  color: #D1E4FD;
+  font-size: 1.2rem;
+}
+
+.timeline-card--row {
+  -moz-column-width: 40em;
+  -webkit-column-width: 40em;
+  -moz-column-gap: 1em;
+  -webkit-column-gap:1em; 
+}
+
+.timeline-card--card-outer {
+  display: inline-block;
+  padding: 0.33rem;
+  width: 100%;
+  float: none;
+}
