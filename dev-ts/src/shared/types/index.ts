@@ -43,6 +43,7 @@ export interface Update {
 export interface Feedback {
   Title: string;
   feedback: string;
+  app: string;
 }
 
 // Forms

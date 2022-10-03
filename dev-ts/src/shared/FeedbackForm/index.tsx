@@ -17,7 +17,7 @@ export default function FeedbackForm(props: any) {
   
   // State
   const [formValues, setFormValues] = useState({
-    Title: '', feedback: ''
+    Title: '', feedback: '', app: 'ROKR'
   });
   const [formErrors, setFormErrors] = useState([]);
   const [submitEnabled ,setSubmitEnabled] = useState(true);
