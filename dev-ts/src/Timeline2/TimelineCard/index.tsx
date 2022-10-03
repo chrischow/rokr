@@ -19,7 +19,7 @@ export default function TimelineCard(props: ITimelineCard) {
     <div className="mt-1 mb-1 timeline-card">
       <div className="timeline-card--title align-items-center">
         <strong>{props.team}</strong>
-        <span className="text-grey ms-1 me-1">posted an update on</span>
+        <span className="text-grey ms-1 me-1">posted an update to</span>
         <span className="timeline-card--obj">
           {objectiveTitle}
         </span>
