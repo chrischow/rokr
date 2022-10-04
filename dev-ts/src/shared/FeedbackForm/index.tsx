@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import $ from 'jquery';
 import Form from "react-bootstrap/Form";
 import { BsHeartFill, BsFillStarFill } from 'react-icons/bs';
@@ -25,8 +25,13 @@ export default function FeedbackForm(props: any) {
   
   // Text area
   // Enable datepicker
-  useEffect(() => {
+  useLayoutEffect(() => {
     $(function () {
+      const textArea = document.getElementById('feedback');
+      if (textArea) {
+        textArea.style.height = "auto";
+        textArea.style.height = textArea.scrollHeight + "px";
+      }
       const feedbackTextArea = $("#feedback");
       feedbackTextArea.on("change input", function () {
         this.style.height = "auto";

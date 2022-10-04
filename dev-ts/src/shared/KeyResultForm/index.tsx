@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import $ from 'jquery';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -29,8 +29,13 @@ export default function KeyResultForm(props: KeyResultFormProps) {
   const token = useToken();
 
   // Enable datepicker
-  useEffect(() => {
+  useLayoutEffect(() => {
     $(function () {
+      const textArea = document.getElementById('krDescription');
+      if (textArea) {
+        textArea.style.height = "auto";
+        textArea.style.height = textArea.scrollHeight + "px";
+      }
       const krDescTextArea = $("#krDescription");
       krDescTextArea.on("change input", function () {
         this.style.height = "auto";

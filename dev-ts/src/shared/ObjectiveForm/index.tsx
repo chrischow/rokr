@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import $ from 'jquery';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -25,8 +25,14 @@ export default function ObjectiveForm(props: ObjectiveFormProps) {
   const token = useToken();
 
   // Datepicker
-  useEffect(() => {
+  useLayoutEffect(() => {
     $(function () {
+      const textArea = document.getElementById('objectiveDescription');
+      if (textArea) {
+        textArea.style.height = "auto";
+        textArea.style.height = textArea.scrollHeight + "px";
+      }
+
       const objDescTextArea = $("#objectiveDescription");
       objDescTextArea.on("change input", function () {
         this.style.height = "auto";

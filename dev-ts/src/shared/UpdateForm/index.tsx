@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import useToken from '../../shared/hooks/useToken';
 import $ from 'jquery';
 import { getDate } from '../../shared/utils/dates';
@@ -29,8 +29,13 @@ export default function UpdateForm(props: UpdateFormProps) {
   const formErrorsList = formErrors.map(item => <li key={item}>{item}</li>);
 
   // Enable datepicker
-  useEffect(() => {
+  useLayoutEffect(() => {
     $(function () {
+      const textArea = document.getElementById('updateText');
+      if (textArea) {
+        textArea.style.height = "auto";
+        textArea.style.height = textArea.scrollHeight + "px";
+      }
       const updateTextArea = $("#updateText");
       updateTextArea.on("change input", function () {
         this.style.height = "auto";
