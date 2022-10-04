@@ -12,8 +12,9 @@ h1.teampage-title {
 
 .frequency-tabs--link:hover,
 .nav-link .frequency-tabs--link:active,
+.frequency-tabs--link.nav-link:focus,
 .nav-link .frequency-tabs--tab .active {
-  color: #27DDCB;
+  color: #27DDCB!important;
   transition: 0.3s;
   cursor: pointer;
 }
