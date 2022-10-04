@@ -43,11 +43,12 @@ export async function createQuery(
   listId: string,
   data: PostObjective | PostKeyResult | PostUpdate | PostFeedback,
   token: string,
-  callback?: Function | null
+  callback?: Function | null,
+  url: string = `${config.apiUrl}`,
 ) {
-  const url = `${config.apiUrl}web/Lists(guid'${listId}')/items`
+  const queryUrl = `${url}web/Lists(guid'${listId}')/items`
   try {
-    await axios.post(url, data, {
+    await axios.post(queryUrl, data, {
       headers: {
         'Accept': 'application/json; odata=verbose',
         'content-type': 'application/json; odata=verbose',

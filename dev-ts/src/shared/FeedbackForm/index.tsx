@@ -68,7 +68,7 @@ export default function FeedbackForm(props: any) {
         },
         ...formValues
       }
-      createQuery(config.feedbackListId, data, reqDigest, props.formCleanup);
+      createQuery(config.feedbackListId, data, reqDigest, props.formCleanup, config.feedbackUrl);
     }
     
     // Re-enable submit button
