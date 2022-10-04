@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useLayoutEffect } from "react";
 import slugify from 'slugify';
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
@@ -20,15 +20,6 @@ interface TeamPaneProps {
 }
 
 export default function TeamPane(props: TeamPaneProps) {
-  /**
-   * The TeamPane component comprises everything below the Monthly | Quarterly | Annual tabs.
-   * This includes:
-   *  - Dropdown menu
-   *  - TeamProgress card to show objectives and key results progress
-   * 
-   * To ensure the correct (monthly/quarterly/annual) data is presented, it holds the following:
-   *  - State for selected month / quarter / work year
-   */
   const [appContext, setAppContext] = useContext(AppContext);
 
   // Dropdown options - staff is for monthly only
@@ -37,13 +28,14 @@ export default function TeamPane(props: TeamPaneProps) {
   const [currentObjectives, setCurrentObjectives] = useState<Objective[]>([]);
   const [currentKeyResults, setCurrentKeyResults] = useState<KeyResult[]>([]);
 
+  // Handler for date
   useEffect(() => {
-    // Check app state for date option first
+    // Check app state for last chosen date option first
     if (appContext.period[props.freq]) {
-      // Set date option based on currently set period
+      // Set date option based on that
       setDateOption(appContext.period[props.freq]);
     } else {
-      // Compute default date option
+      // Only if there is no last chosen date option, compute default date option
       const today = offsetDate(new Date());
       const year = getYear(today);
       const workyear = getWorkYear(today);
@@ -55,7 +47,7 @@ export default function TeamPane(props: TeamPaneProps) {
       } else {
         initialFreq = getMonth(today, year);
       }
-      // Update current state and global state
+      // Update local state and global state
       setDateOption(initialFreq);
       setAppContext((prevData: any) => {
         return {
@@ -67,25 +59,32 @@ export default function TeamPane(props: TeamPaneProps) {
         };
       })
     }
+  }, [props.freq])
 
+  // Handler for staff list
+  useEffect(() => {
     if (props.staffList) {
+      // Check app state for last chosen staff option
       if (props.staffList.includes(appContext.staff)) {
+        // Set staff option based on that
         setStaffOption(appContext.staff);
       } else {
+        // Update local state and global state
         setStaffOption(props.staffList[0]);
         setAppContext({ ...appContext, staff: props.staffList[0]});
       }
     }
-  }, [props.freq, props.staffList, appContext.staff])
+  }, [props.staffList, appContext.staff])
 
-  useEffect(() => {
+  // When the data changes, update the page based on the current options
+  useLayoutEffect(() => {
     let objectives = props.objectives.filter(obj => {
       return (obj.frequency === props.freq) && 
         testPeriodEquality(obj.objectiveEndDate, dateOption, props.freq)
     });
     
     // Monthly only
-    if (props.staffList) {
+    if (props.freq === 'monthly') {
       objectives = objectives.filter(obj => obj.owner === staffOption);
     }
 
@@ -95,7 +94,7 @@ export default function TeamPane(props: TeamPaneProps) {
 
     setCurrentObjectives(objectives);
     setCurrentKeyResults(keyResults);
-  }, [dateOption, props.freq, props.objectives, props.keyResults, props.staffList, staffOption])
+  }, [dateOption, props.freq, props.objectives, props.keyResults, staffOption])
 
   // Create staff tabs for monthly
   const staffTabs = props.staffList && props.staffList.map((staff) => {
