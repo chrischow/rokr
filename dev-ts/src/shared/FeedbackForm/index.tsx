@@ -11,12 +11,22 @@ import { config } from "../../config";
 
 import './styles.css';
 
-export default function FeedbackForm(props: any) {
+interface IFeedbackFormProps {
+  formCleanup: Function;
+}
+
+interface IFeedbackFormValues {
+  Title: string;
+  feedback: string;
+  app: string;
+}
+
+export default function FeedbackForm(props: IFeedbackFormProps) {
   // Get token
   const token = useToken();
   
   // State
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<IFeedbackFormValues>({
     Title: '', feedback: '', app: 'ROKR'
   });
   const [formErrors, setFormErrors] = useState([]);
