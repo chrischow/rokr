@@ -3,10 +3,10 @@ import $ from 'jquery';
 import Form from "react-bootstrap/Form";
 import { BsHeartFill, BsFillStarFill } from 'react-icons/bs';
 import { FaAngry } from 'react-icons/fa';
-import useToken from "../hooks/useToken";
-import { createQuery } from "../utils/query";
-import { validateFeedbackForm } from "../utils/validators";
-import { Feedback } from "../types";
+import useToken from "../../shared/hooks/useToken";
+import { createQuery } from "../../shared/utils/query";
+import { validateFeedbackForm } from "../../shared/utils/validators";
+import { Feedback } from "../../shared/types";
 import { config } from "../../config";
 
 import './styles.css';

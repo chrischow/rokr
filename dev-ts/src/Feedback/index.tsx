@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import Toast from 'react-bootstrap/Toast';
 import { BiConversation } from 'react-icons/bi';
-import FeedbackForm from '../shared/FeedbackForm';
+import FeedbackForm from './FeedbackForm';
 import SharedModal from '../shared/SharedModal';
 
 import './styles.css';
