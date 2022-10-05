@@ -1,0 +1,76 @@
+.survey-content {
+  height: 200px;
+  width: 70%;
+  margin: auto;
+}
+
+.survey-rating {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.0rem;
+}
+
+.survey-star {
+  color: #8497b0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.survey-star-on {
+  color: #F0C419;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.survey-star-off {
+  color: #8497B0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.survey-question {
+  font-size: 1.4rem;
+}
+
+.survey-check {
+  height: 400px;
+  width: 75%;
+  margin: auto;
+}
+
+.survey-check-title {
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.survey-check-title:hover {
+  color: #7b73f0;
+  transition: 0.3s;
+}
+
+.survey-check-text {
+  font-size: 0.8rem;
+}
+
+.survey-popover {
+  background-color: #000c1d;
+  border-radius: 5px;
+}
+
+.popover-header {
+  background-color: #000c1d;
+  font-size: 0.9rem;
+  border-bottom: none;
+  border-radius: 5px 5px 0px 0px ;
+  padding: 10px;
+}
+
+.popover-body {
+  background-color: #000c1d;
+  padding: 10px;
+  border-radius: 0px 0px 5px 5px;
+  color: #8497b0
+}

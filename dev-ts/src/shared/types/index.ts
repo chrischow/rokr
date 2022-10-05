@@ -97,3 +97,21 @@ export interface ProgressCardData {
   keyResultCompletion: ProgressCompletion;
   objectiveCompletion: ProgressCompletion;
 }
+
+// Survey form
+export interface ISurveyForm {
+  lookAndFeel: number;
+  easeOfUse: number;
+  meetNeeds: number;
+  likeMost: string;
+  likeLeast: string;
+  suggestions: string;
+  overall: number;
+}
+
+export interface IHoverState {
+  lookAndFeel: number;
+  easeOfUse: number;
+  meetNeeds: number;
+  overall: number;
+}
