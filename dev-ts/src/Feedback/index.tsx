@@ -13,8 +13,10 @@ export default function Feedback() {
   // State
   const [showFeedbackModal, setShowFeedbackModal] = useState<boolean>(false);
   const [showFeedbackToast, setShowFeedbackToast] = useState<boolean>(false);
+  const [showFeedbackWord, setShowFeedbackWord] = useState<boolean>(true);
   const [showSurveyModal, setShowSurveyModal] = useState<boolean>(false);
   const [showSurveyToast, setShowSurveyToast] = useState<boolean>(false);
+  const [showSurveyWord, setShowSurveyWord] = useState<boolean>(false);
 
   // Feedback
   const addFeedback = () => {
@@ -23,22 +25,47 @@ export default function Feedback() {
         setShowFeedbackModal(false);
         setShowFeedbackToast(true);
       }}
+      />;
+    }
+    
+    // Survey
+    const addSurvey = () => {
+      return <SurveyForm 
+      formCleanup={() => {
+        setShowSurveyModal(false);
+        setShowSurveyToast(true);
+      }}
     />;
-  }
-
-  // Survey
-  const addSurvey = () => {
-    return <SurveyForm />;
   }
 
   return (
     <>
       <div className="feedback-area">
-        <div className="feedback-box" onClick={() => setShowFeedbackModal(true)}>
-          <BiConversation style={{marginBottom: "3px"}} /> Feedback
+        <div
+          className="feedback-box"
+          onClick={() => setShowFeedbackModal(true)}
+          >
+          <BiConversation style={{marginBottom: "3px"}} />
+          <span className={showFeedbackWord ? 'feedback-word-show' : 'feedback-word-hide'}>
+            &nbsp;Feedback
+          </span>
         </div>
-        <div className="survey-box" onClick={() => setShowSurveyModal(true)}>
-          <AiFillStar style={{marginBottom: "3px"}} /> Survey
+        <div
+          className="survey-box"
+          onClick={() => setShowSurveyModal(true)}
+          onMouseOver={() => {
+            setShowFeedbackWord(false);
+            setShowSurveyWord(true);
+          }}
+          onMouseOut={() => {
+            setShowFeedbackWord(true);
+            setShowSurveyWord(false);
+          }}
+        >
+          <AiFillStar style={{marginBottom: "3px"}} />
+          <span className={showSurveyWord ? 'feedback-word-show' : 'feedback-word-hide'}>
+            &nbsp;Survey
+          </span>
         </div>
       </div>
       <ToastContainer position="top-end" className="p-3">

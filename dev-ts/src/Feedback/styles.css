@@ -20,6 +20,16 @@
   transition: 0.3s;
 }
 
+.feedback-word-show {
+  display: inline;
+  transition: 0.3s;
+}
+
+.feedback-word-hide {
+  display: none;
+  transition: 0.3s;
+}
+
 .survey-box {
   display: inline-block;
   padding: 5px 10px;
