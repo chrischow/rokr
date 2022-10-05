@@ -57,12 +57,13 @@ export default function SurveyForm(props: ISurveyFromProps) {
     overall: 0
   });
 
-  const errorMessages = {
-    lookAndFeel: "Choose a score from 1 to 5 on the app's look and feel.",
-    easeOfUse: "Choose a score from 1 to 5 on the app's ease of use.",
-    meetNeeds: "Choose a score from 1 to 5 on the app's ability to meet your needs.",
-    overall: "Choose a score from 1 to 5 on your overall satisfaction with the app."
-  }
+  // Error messages:
+  // const errorMessages = {
+  //   lookAndFeel: "Choose a score from 1 to 5 on the app's look and feel.",
+  //   easeOfUse: "Choose a score from 1 to 5 on the app's ease of use.",
+  //   meetNeeds: "Choose a score from 1 to 5 on the app's ability to meet your needs.",
+  //   overall: "Choose a score from 1 to 5 on your overall satisfaction with the app."
+  // }
 
   // Survey questions
   const questions = [
