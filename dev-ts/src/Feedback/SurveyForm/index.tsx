@@ -121,19 +121,19 @@ export default function SurveyForm() {
             if (['likeMost', 'likeLeast', 'suggestions'].includes(question.qnKey)) {
               return (
                 <Carousel.Item onKeyDown={handleTextDone}>
-                  <div className="survey-content">
-                    <div className="survey-question text-center mt-5">
+                  <div className="survey-content w-100 d-flex flex-column justify-content-center align-items-center">
+                    <div className="survey-question text-center">
                       {question.qnText}
                     </div>
                     <div className="text-grey text-center">
                       Once you're done putting in your feedback, hit <code>Ctrl + Enter</code> to continue.
                     </div>
-                    <div className="mt-3" style={{ width: '70%', margin: 'auto' }}>
+                    <div className="mt-3" style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto' }}>
                       <Form.Control
                         as="textarea"
                         id={question.qnKey}
                         name={question.qnKey}
-                        className="form-dark form--edit"
+                        className="form-dark form--edit text-small"
                         value={surveyFormValues[question.qnKey as keyof ISurveyForm]}
                         onChange={handleText}
                       />
@@ -144,8 +144,8 @@ export default function SurveyForm() {
             }
             return (
               <Carousel.Item>
-                <div className="survey-content">
-                  <div className="survey-question text-center mt-5">
+                <div className="survey-content w-100 d-flex flex-column justify-content-center align-items-center">
+                  <div className="survey-question text-center">
                     {question.qnText}
                   </div>
                   <div className="survey-rating text-center">
@@ -207,7 +207,7 @@ export default function SurveyForm() {
         <Carousel.Item>
           <div className="survey-check text-center">
             <div className="survey-question text-center mt-3">
-              Your Responses
+              Click on the question title to edit your response.
             </div>
             <Row className="justify-content-center">
               {
@@ -250,7 +250,7 @@ export default function SurveyForm() {
                           Nil
                         </span>
                       }
-                      {[3, 4, 5].includes(qnIndex) && responseValue &&
+                      {[3, 4, 5].includes(qnIndex) && Boolean(responseValue) &&
                         <OverlayTrigger
                           trigger={['hover', 'focus']}
                           placement="bottom"
@@ -260,7 +260,7 @@ export default function SurveyForm() {
                                 {textTitle}
                               </Popover.Header>
                               <Popover.Body>
-                                {responseValue} alslf hsdlkfsdkl sdl
+                                {responseValue}
                               </Popover.Body>
                             </Popover>}
                         >

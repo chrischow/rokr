@@ -1,5 +1,5 @@
 .survey-content {
-  height: 200px;
+  height: 400px;
   width: 70%;
   margin: auto;
 }
@@ -65,12 +65,18 @@
   font-size: 0.9rem;
   border-bottom: none;
   border-radius: 5px 5px 0px 0px ;
-  padding: 10px;
+  padding: 10px 10px 0px 10px;
+  margin-bottom: 0;
 }
 
 .popover-body {
   background-color: #000c1d;
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
   border-radius: 0px 0px 5px 5px;
-  color: #8497b0
+  color: #8497b0;
+  margin-top: 0;
+}
+
+textarea.text-small {
+  font-size: 1.0rem!important;
 }
