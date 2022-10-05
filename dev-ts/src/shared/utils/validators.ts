@@ -207,3 +207,53 @@ export const validateFeedbackForm = (
   
   return formOkay;
 }
+
+export const validateSurveyForm = (
+  lookAndFeel: number,
+  easeOfUse: number,
+  meetNeeds: number,
+  overall: number,
+  tokenStatus: boolean,
+  errorSetter: Function
+) => {
+  let formOkay = true;
+
+  if (lookAndFeel === 0) {
+    errorSetter((prevData: any) => {
+      return {
+        ...prevData,
+        lookAndFeel: false
+      };
+    });
+    formOkay = false;
+  }
+  if (easeOfUse === 0) {
+    errorSetter((prevData: any) => {
+      return {
+        ...prevData,
+        easeOfUse: false
+      };
+    });
+    formOkay = false;
+  }
+  if (meetNeeds === 0) {
+    errorSetter((prevData: any) => {
+      return {
+        ...prevData,
+        meetNeeds: false
+      };
+    });
+    formOkay = false;
+  }
+  if (overall === 0) {
+    errorSetter((prevData: any) => {
+      return {
+        ...prevData,
+        overall: false
+      };
+    });
+    formOkay = false;
+  }
+  
+  return formOkay;
+}

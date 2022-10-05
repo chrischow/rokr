@@ -42,13 +42,18 @@
 
 .survey-check-title {
   font-size: 0.9rem;
+  color: #e3e7ed;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .survey-check-title:hover {
-  color: #7b73f0;
+  color: white;
   transition: 0.3s;
+}
+
+.survey-check-error {
+  color: #FF5364!important;
 }
 
 .survey-check-text {

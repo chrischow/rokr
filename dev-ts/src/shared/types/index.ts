@@ -86,6 +86,10 @@ export interface PostFeedback extends Feedback {
   '__metadata': Metadata
 }
 
+export interface PostSurvey extends ISurveyForm {
+  '__metadata': Metadata
+}
+
 // For progress cards - Home and Team pages
 export interface ProgressCompletion {
   completed: number;
@@ -100,6 +104,8 @@ export interface ProgressCardData {
 
 // Survey form
 export interface ISurveyForm {
+  app: string;
+  Title: string;
   lookAndFeel: number;
   easeOfUse: number;
   meetNeeds: number;

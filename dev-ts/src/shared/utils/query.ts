@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PostObjective, PostKeyResult, PostUpdate, PostFeedback } from '../types';
+import { PostObjective, PostKeyResult, PostUpdate, PostFeedback, PostSurvey } from '../types';
 import { config } from '../../config';
 
 // Construct query URL
@@ -41,7 +41,7 @@ export function constructCreateQueryFn(url: string) {
 
 export async function createQuery(
   listId: string,
-  data: PostObjective | PostKeyResult | PostUpdate | PostFeedback,
+  data: PostObjective | PostKeyResult | PostUpdate | PostFeedback | PostSurvey,
   token: string,
   callback?: Function | null,
   url: string = `${config.apiUrl}`,

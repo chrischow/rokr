@@ -6,10 +6,12 @@ export const config = {
   krListId: 'f3ef36940ef93890c3f9d9e25fc12acc',
   updateListId: 'df7c2bf0cf2b0fda32b2998cbf8a07dc',
   feedbackListId: '42e48628a9bbac59a26ce0e1a8fc471e',
+  surveyListId: 'd6c7a808695b2391bec3dd8afd3145a3',
   objListItemEntityTypeFullName: 'SP.Data.RokrObjectivesListItem',
   krListItemEntityTypeFullName: 'SP.Data.RokrKeyResultsListItem',
   updateListItemEntityTypeFullName: 'SP.Data.RokrUpdatesListItem',
   feedbackListItemEntityTypeFullName: 'SP.Data.StackFeedbackListItem',
+  surveyListItemEntityTypeFullName: 'SP.Data.StackUserSatisfactionListItem',
   teams: [
     { teamName: "RAiD", slug: "raid" },
     { teamName: "PAB", slug: "pab" },
