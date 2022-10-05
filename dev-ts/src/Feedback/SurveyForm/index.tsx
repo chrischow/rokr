@@ -159,7 +159,7 @@ export default function SurveyForm(props: ISurveyFromProps) {
       }
       createQuery(config.surveyListId, data, reqDigest, props.formCleanup, config.feedbackUrl);
     }
-    console.log(formErrors);
+    
     // Re-enable submit button
     setSubmitEnabled(true);
   };
