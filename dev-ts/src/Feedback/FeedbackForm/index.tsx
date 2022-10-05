@@ -34,7 +34,6 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
   const formErrorsList = formErrors.map(item => <li key={item}>{item}</li>);
   
   // Text area
-  // Enable datepicker
   useLayoutEffect(() => {
     $(function () {
       const textArea = document.getElementById('feedback');
