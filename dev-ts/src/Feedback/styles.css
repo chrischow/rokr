@@ -45,6 +45,11 @@
   transition: 0.3s;
 }
 
+.toast-fixed {
+  position: fixed!important;
+  z-index: 900;
+}
+
 .toast {
   background-color: #000c1d;
   border-radius: 5px;

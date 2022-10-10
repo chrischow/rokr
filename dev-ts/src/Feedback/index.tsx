@@ -68,7 +68,7 @@ export default function Feedback() {
           </span>
         </div>
       </div>
-      <ToastContainer position="top-end" className="p-3">
+      <ToastContainer position="top-end" className="p-3 toast-fixed">
         {/* Toast for feedback */}
         <Toast
           onClose={() => setShowFeedbackToast(false)}
