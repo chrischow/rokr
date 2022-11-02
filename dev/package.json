@@ -7,7 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
-    "bootstrap": "^5.2.0",
+    "bootstrap": "^5.2.1",
     "bootstrap-datepicker": "^1.9.0",
     "datatables-bootstrap": "^0.0.1",
     "datatables.net": "^1.12.1",
