@@ -6,7 +6,7 @@ import { config } from "../../config";
 // Get all key results
 export const useKeyResults = () => {
   const url = constructUrl(
-    config.krListId,
+    config.krListTitle,
     `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team`,
     'parentObjective'
   );
@@ -29,7 +29,7 @@ export const useKeyResult = (Id: number) => {
 // Get key results by objective frequency
 export const useKeyResultsByFreq = (freq: string) => {
   const url = constructUrl(
-    config.krListId,
+    config.krListTitle,
     `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team,parentObjective/frequency`,
     'parentObjective',
     `parentObjective/frequency eq '${freq}'`
@@ -53,7 +53,7 @@ export const useTeamKeyResultsCache = (team: string) => {
 // Get key results by team
 export const useTeamKeyResults = (team: string) => {
   const url = constructUrl(
-    config.krListId,
+    config.krListTitle,
     `Id,Title,krDescription,krStartDate,krEndDate,minValue,maxValue,currentValue,parentObjective/Id,parentObjective/team`,
     'parentObjective',
     `parentObjective/team eq '${team}'`

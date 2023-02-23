@@ -6,7 +6,7 @@ import { config } from "../../config";
 // Get all objectives
 export const useObjectives = () => {
   const url = constructUrl(
-    config.objListId,
+    config.objListTitle,
     `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`
   );
 
@@ -29,7 +29,7 @@ export const useObjective = (Id: number) => {
 // Get objective by frequency
 export const useObjectivesByFreq = (freq: string) => {
   const url = constructUrl(
-    config.objListId,
+    config.objListTitle,
     `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`,
     undefined,
     `frequency eq '${freq}'`
@@ -54,7 +54,7 @@ export const useTeamObjectivesCache = (team: string) => {
 // Get objectives for team
 export const useTeamObjectives = (team: string) => {
   const url = constructUrl(
-    config.objListId,
+    config.objListTitle,
     `Id,Title,objectiveDescription,objectiveStartDate,objectiveEndDate,team,owner,frequency`,
     undefined,
     `team eq '${team}'`

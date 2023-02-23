@@ -4,12 +4,12 @@ import { config } from '../../config';
 
 // Construct query URL
 export function constructUrl(
-  listId: string,
+  listTitle: string,
   selectStr: string,
   expandStr?: string,
   filterStr?: string
 ) {
-  return `${config.apiUrl}web/Lists(guid'${listId}')/items?` + 
+  return `${config.apiUrl}web/lists/GetByTitle('${listTitle}')/items?` + 
     `$select=${selectStr}` +
     `${expandStr ? '&$expand=' + expandStr : ''}` +
     `${filterStr ? '&$filter=' + filterStr : ''}` +
@@ -40,13 +40,13 @@ export function constructCreateQueryFn(url: string) {
 }
 
 export async function createQuery(
-  listId: string,
+  listTitle: string,
   data: PostObjective | PostKeyResult | PostUpdate | PostFeedback | PostSurvey,
   token: string,
   callback?: Function | null,
   url: string = `${config.apiUrl}`,
 ) {
-  const queryUrl = `${url}web/Lists(guid'${listId}')/items`
+  const queryUrl = `${url}web/lists/GetByTitle('${listTitle}')/items`
   try {
     await axios.post(queryUrl, data, {
       headers: {
@@ -62,13 +62,13 @@ export async function createQuery(
 }
 
 export async function updateQuery(
-  listId: string,
+  listTitle: string,
   itemId: number | undefined,
   data: PostObjective | PostKeyResult | PostUpdate,
   token: string,
   callback?: Function | null
 ) {
-  const url = `${config.apiUrl}web/Lists(guid'${listId}')/items(${itemId})`
+  const url = `${config.apiUrl}web/lists/GetByTitle('${listTitle}')/items(${itemId})`
   try {
     await axios.post(url, data, {
       headers: {
@@ -86,12 +86,12 @@ export async function updateQuery(
 }
 
 export async function deleteQuery(
-  listId: string,
+  listTitle: string,
   itemId: number,
   token: string,
   callback?: Function | null
 ) {
-  const url = `${config.apiUrl}web/Lists(guid'${listId}')/items(${itemId})`
+  const url = `${config.apiUrl}web/lists/GetByTitle('${listTitle}')/items(${itemId})`
   try {
     await axios.post(url, undefined, {
       headers: {

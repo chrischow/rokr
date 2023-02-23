@@ -157,7 +157,7 @@ export default function SurveyForm(props: ISurveyFromProps) {
         },
         ...formValues
       }
-      createQuery(config.surveyListId, data, reqDigest, props.formCleanup, config.feedbackUrl);
+      createQuery(config.surveyListTitle, data, reqDigest, props.formCleanup, config.feedbackUrl);
     }
     
     // Re-enable submit button

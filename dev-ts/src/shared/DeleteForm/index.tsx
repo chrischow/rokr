@@ -45,7 +45,7 @@ export default function DeleteForm(props: DeleteFormProps) {
     const reqDigest = token.isSuccess && token.data.FormDigestValue;
 
     // Get list IDs
-    const { objListId, krListId, updateListId } = config;
+    const { objListTitle: objListId, krListTitle: krListId, updateListTitle: updateListId } = config;
 
     // Delete data
     if (props.itemType === 'Objective' && props.updateIds) {

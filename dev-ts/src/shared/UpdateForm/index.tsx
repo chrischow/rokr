@@ -99,7 +99,7 @@ export default function UpdateForm(props: UpdateFormProps) {
           },
           ...newData
         }
-        updateQuery(config.updateListId, Id, data, reqDigest, props.formCleanup);
+        updateQuery(config.updateListTitle, Id, data, reqDigest, props.formCleanup);
       } else {
         console.log('New data');
         const data = {
@@ -108,7 +108,7 @@ export default function UpdateForm(props: UpdateFormProps) {
           },
           ...props.formValues
         };
-        createQuery(config.updateListId, data, reqDigest, props.formCleanup);
+        createQuery(config.updateListTitle, data, reqDigest, props.formCleanup);
       }
     }
 

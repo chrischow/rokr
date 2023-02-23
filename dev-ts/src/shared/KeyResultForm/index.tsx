@@ -116,7 +116,7 @@ export default function KeyResultForm(props: KeyResultFormProps) {
           parentObjectiveId: parentObjective
         };
         
-        updateQuery(config.krListId, Id, data, reqDigest, props.formCleanup);
+        updateQuery(config.krListTitle, Id, data, reqDigest, props.formCleanup);
       } else {
         console.log('New data');
         const data = {
@@ -126,7 +126,7 @@ export default function KeyResultForm(props: KeyResultFormProps) {
           ...newData,
           parentObjectiveId: parentObjective
         };
-        createQuery(config.krListId, data, reqDigest, props.formCleanup);
+        createQuery(config.krListTitle, data, reqDigest, props.formCleanup);
       }
     }
 

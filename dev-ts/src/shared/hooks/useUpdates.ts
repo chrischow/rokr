@@ -6,7 +6,7 @@ import { config } from "../../config";
 // Get all updates
 export const useUpdates = () => {
   const url = constructUrl(
-    config.updateListId,
+    config.updateListTitle,
     `Id,updateText,updateDate,parentKrId,team`
   );
   return useQuery(['updates'], constructReadQueryFn(url), {
@@ -39,7 +39,7 @@ export const useKrUpdates = (krId: number) => {
 // Get update by key result ID
 export const useKrUpdatesDirect = (krId: number) => {
   const url = constructUrl(
-    config.updateListId,
+    config.updateListTitle ,
     `Id,updateText,updateDate,parentKrId,team`,
     undefined,
     `parentKrId eq ${krId}`
@@ -63,7 +63,7 @@ export const useKrUpdatesDirect = (krId: number) => {
 // Get all updates for only a given team
 export const useTeamUpdates = (team: string) => {
   const url = constructUrl(
-    config.updateListId,
+    config.updateListTitle,
     `Id,updateText,updateDate,parentKrId,team`,
     undefined,
     `team eq '${team}'`

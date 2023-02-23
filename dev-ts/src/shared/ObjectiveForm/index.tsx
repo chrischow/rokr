@@ -106,7 +106,7 @@ export default function ObjectiveForm(props: ObjectiveFormProps) {
           },
           ...newData
         }
-        updateQuery(config.objListId, Id, data, reqDigest, props.formCleanup);
+        updateQuery(config.objListTitle, Id, data, reqDigest, props.formCleanup);
       } else {
         console.log('New data:');
         const data = {
@@ -115,7 +115,7 @@ export default function ObjectiveForm(props: ObjectiveFormProps) {
           },
           ...props.formValues
         };
-        createQuery(config.objListId, data, reqDigest, props.formCleanup);
+        createQuery(config.objListTitle, data, reqDigest, props.formCleanup);
       }
 
       // Re-enable submit button
