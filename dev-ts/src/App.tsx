@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Container from "react-bootstrap/Container";
+import { Row, Col } from 'react-bootstrap';
 import NavBar from './NavBar';
 import ErrorBoundary from './ErrorBoundary';
 import Home from './Home';
@@ -13,6 +14,7 @@ import Feedback from './Feedback';
 import { config } from './config';
 import { AppContextProvider } from './shared/context/AppContextProvider';
 import './App.css';
+import ConsoleFeed from './ConsoleFeed';
 
 function App() {
 
@@ -40,6 +42,7 @@ function App() {
         <NavBar teams={config.teams} />
         <Feedback />
         <Container className="mt-5 app-container">
+          <Row>
           <ErrorBoundary>
           <AppContextProvider>
             <Routes>
@@ -52,6 +55,10 @@ function App() {
             </Routes>
           </AppContextProvider>
           </ErrorBoundary>
+          </Row>
+          <Row>
+            <ConsoleFeed />
+          </Row>
         </Container>
       </QueryClientProvider>
     </HashRouter>

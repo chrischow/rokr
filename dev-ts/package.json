@@ -15,6 +15,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "bootstrap-datepicker": "^1.9.0",
+    "console-feed": "^3.4.3",
     "datatables-bootstrap": "^0.0.1",
     "datatables.net": "^1.12.1",
     "datatables.net-bs4": "^1.12.1",

@@ -97,7 +97,7 @@ export default function ObjectiveForm(props: ObjectiveFormProps) {
     if (formOkay) {
       const { Id, ...newData } = props.formValues;
       const reqDigest = token.isSuccess && token.data.FormDigestValue;
-
+      debugger;
       if (props.mode === "edit") {
         console.log('Edit form');
         const data = {

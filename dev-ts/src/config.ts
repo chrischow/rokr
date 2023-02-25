@@ -14,7 +14,7 @@ export const config = {
   surveyListItemEntityTypeFullName: 'SP.Data.StackUserSatisfactionListItem',
   teams: [
     { teamName: "PIXEL HQ", slug: "pixel" },
-    { teamName: "Training Tech & Science", slug: "tech" },
+    { teamName: "Tech and Science", slug: "tech" },
     { teamName: "Experiments", slug: "expr" },
     { teamName: "HPM", slug: "hpm" },
     { teamName: "Data", slug: "data" },
@@ -24,3 +24,4 @@ export const config = {
   staleTime: Infinity,
   tokenRefreshTime: 25 * 60 * 1000
 };
+
