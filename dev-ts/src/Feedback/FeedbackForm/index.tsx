@@ -27,7 +27,7 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
   
   // State
   const [formValues, setFormValues] = useState<IFeedbackFormValues>({
-    Title: '', feedback: '', app: 'ROKR'
+    Title: '', feedback: '', app: 'POKR'
   });
   const [formErrors, setFormErrors] = useState([]);
   const [submitEnabled ,setSubmitEnabled] = useState(true);

@@ -48,6 +48,7 @@ export async function createQuery(
 ) {
   const queryUrl = `${url}web/lists/GetByTitle('${listTitle}')/items`
   try {
+    console.log("createQuery", data);
     await axios.post(queryUrl, data, {
       headers: {
         'Accept': 'application/json; odata=verbose',
@@ -70,6 +71,7 @@ export async function updateQuery(
 ) {
   const url = `${config.apiUrl}web/lists/GetByTitle('${listTitle}')/items(${itemId})`
   try {
+    console.log("updateQuery", data);
     await axios.post(url, data, {
       headers: {
         'Accept': 'application/json; odata=verbose',
