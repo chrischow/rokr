@@ -7,7 +7,8 @@ import { config } from "../../config";
 export const useUpdates = () => {
   const url = constructUrl(
     config.updateListTitle,
-    `Id,updateText,updateDate,parentKrId,team`
+    `Id,updateText,updateDate,parentKrId,team,Last_x0020_Modified,Editor/Title`,
+    'Editor'
   );
   return useQuery(['updates'], constructReadQueryFn(url), {
     staleTime: config.staleTime
@@ -39,9 +40,9 @@ export const useKrUpdates = (krId: number) => {
 // Get update by key result ID
 export const useKrUpdatesDirect = (krId: number) => {
   const url = constructUrl(
-    config.updateListTitle ,
-    `Id,updateText,updateDate,parentKrId,team`,
-    undefined,
+    config.updateListTitle,
+    `Id,updateText,updateDate,parentKrId,team,Last_x0020_Modified,Editor/Title`,
+    'Editor',
     `parentKrId eq ${krId}`
   );
   return useQuery(['updates', 'kr', Number(krId)], constructReadQueryFn(url), {
