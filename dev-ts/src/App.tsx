@@ -56,9 +56,6 @@ function App() {
           </AppContextProvider>
           </ErrorBoundary>
           </Row>
-          <Row>
-            <ConsoleFeed />
-          </Row>
         </Container>
       </QueryClientProvider>
     </HashRouter>
