@@ -51,9 +51,18 @@ export function getMonth(cleanDate: Date, year: number | string) {
   return year + '-' + String(cleanDate.getMonth() + 1).padStart(2, '0');
 }
 
+export function dateOptionToDate(dateOption: string) {
+
+}
+
+export function isObjInDateOption(startDate: Date, endDate: Date, dateOption: string) {
+
+}
+
 // Test period equality
-export function testPeriodEquality(date: string, dateOption: string, period: string) {
-  const endDate = offsetDate(new Date(date));
+export function testPeriodEquality(dateStart: string, dateEnd: string, dateOption: string, period: string) {
+  const startDate = offsetDate(new Date(dateStart));
+  const endDate = offsetDate(new Date(dateEnd));
   const workyear = getWorkYear(endDate);
   const year = getYear(endDate);
 

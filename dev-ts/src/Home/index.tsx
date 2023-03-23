@@ -41,6 +41,7 @@ export default function Home(props: HomeProps) {
   useEffect(
     () => {
       // Initialise overall progress card
+      
       if (allTeamsProgressData) {
         updateCircleProgress(
           "overall_progress",

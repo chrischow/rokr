@@ -80,7 +80,7 @@ export default function TeamPane(props: TeamPaneProps) {
   useLayoutEffect(() => {
     let objectives = props.objectives.filter(obj => {
       return (obj.frequency === props.freq) && 
-        testPeriodEquality(obj.objectiveEndDate, dateOption, props.freq)
+        testPeriodEquality(obj.objectiveStartDate, obj.objectiveEndDate, dateOption, props.freq)
     });
     
     // Monthly only
