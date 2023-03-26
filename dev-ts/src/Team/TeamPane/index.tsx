@@ -33,7 +33,11 @@ export default function TeamPane(props: TeamPaneProps) {
     // Check app state for last chosen date option first
     if (appContext.period[props.freq]) {
       // Set date option based on that
-      setDateOption(appContext.period[props.freq]);
+      if (props.subgroups.includes(appContext.period[props.freq])) {
+        setDateOption(appContext.period[props.freq]);
+      } else if (props.subgroups.length > 0) {
+        setDateOption(props.subgroups[0]);
+      }
     } else {
       // Only if there is no last chosen date option, compute default date option
       const today = offsetDate(new Date());
@@ -48,18 +52,34 @@ export default function TeamPane(props: TeamPaneProps) {
         initialFreq = getMonth(today, year);
       }
       // Update local state and global state
-      setDateOption(initialFreq);
-      setAppContext((prevData: any) => {
-        return {
-          ...prevData,
-          period: {
-            ...prevData.period,
-            [props.freq]: initialFreq
-          }
-        };
-      })
+      // TODO: This was to fix a bug on not having the same selections, and
+      // not having a selection.
+      if (props.subgroups.includes(initialFreq)) {
+        setDateOption(initialFreq);
+        setAppContext((prevData: any) => {
+          return {
+            ...prevData,
+            period: {
+              ...prevData.period,
+              [props.freq]: initialFreq
+            }
+          };
+        })
+      } else if (props.subgroups.length > 0) {
+        initialFreq = props.subgroups[0];
+        setDateOption(initialFreq);
+        setAppContext((prevData: any) => {
+          return {
+            ...prevData,
+            period: {
+              ...prevData.period,
+              [props.freq]: initialFreq
+            }
+          };
+        })
+      }
     }
-  }, [props.freq])
+  }, [props.freq, props.subgroups])
 
   // Handler for staff list
   useEffect(() => {

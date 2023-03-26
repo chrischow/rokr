@@ -65,8 +65,8 @@ export const useKrUpdatesDirect = (krId: number) => {
 export const useTeamUpdates = (team: string) => {
   const url = constructUrl(
     config.updateListTitle,
-    `Id,updateText,updateDate,parentKrId,team`,
-    undefined,
+    `Id,updateText,updateDate,parentKrId,team,Editor/Title`,
+    'Editor',
     `team eq '${team}'`
   );
   return useQuery(['updates', 'team', team], constructReadQueryFn(url), {

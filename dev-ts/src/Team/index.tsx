@@ -37,7 +37,7 @@ export default function Team(props: TeamProps){
     <>
       <h1 className="teampage-title">{props.team.teamName}</h1>
       <div className="mt-2">
-        <Tab.Container id="frequency-tabs" defaultActiveKey="monthly">
+        <Tab.Container id="frequency-tabs" defaultActiveKey="annual">
           <Nav className="justify-content-center">
             <Nav.Item>
               {frequencyTabs}
