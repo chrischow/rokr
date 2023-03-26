@@ -1,6 +1,6 @@
 export const useGraphSettings = () => {
   const teamLookup = {
-    RAiD: 'org-0',
+    "PIXEL HQ": 'org-0',
     PAB: 'org-1',
     SWiFT: 'org-2',
     RDO: 'org-3',
@@ -31,7 +31,7 @@ export const useGraphSettings = () => {
   }
 
   const defaultNodes = [
-    { id: 'org-0', label: 'RAiD', title: 'RSAF Agility, Innovation, and Digital', group: 'king', level: 0, margin: 20, mass: 6, chosen: false },
+    { id: 'org-0', label: 'PiXel HQ', title: 'PiXEL', group: 'king', level: 0, margin: 20, mass: 6, chosen: false },
     { id: 'org-1', label: 'PAB', title: 'Plans & Architecting Branch', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
     { id: 'org-2', label: 'SWiFT', title: 'SWiFT', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },
     { id: 'org-3', label: 'RDO', title: 'RSAF Data Office', group: 'org', level: 1, margin: 20, mass: 3, chosen: false },

@@ -32,7 +32,11 @@ export default function KeyResultInfo(props: KeyResultInfoProps) {
       let newUpdates = updates.data.filter((update: Update) => {
         return update.parentKrId === props.Id;
       }).map((update: Update) => {
-        return {...update, updateDate: getDate(update.updateDate)};
+        return {
+            ...update, 
+            updateDate: getDate(update.updateDate), 
+            editorName: update.Editor ? update.Editor.Title : null
+          };
       });;
       setInitialData(newUpdates);
     };
@@ -67,10 +71,16 @@ export default function KeyResultInfo(props: KeyResultInfoProps) {
                   className: "text-center",
                 },
                 {
-                  width: "82%",
+                  width: "67%",
                   name: "updateText",
                   targets: 1,
                   data: "updateText",
+                },
+                {
+                  width: "15%",
+                  name: "editor",
+                  targets: 2,
+                  data: "editorName",
                 },
               ],
             });
@@ -146,6 +156,7 @@ export default function KeyResultInfo(props: KeyResultInfoProps) {
               <tr>
                 <th className="text-center">Date</th>
                 <th className="text-center">Update</th>
+                <th className="text-center">Editor</th>
               </tr>
             </thead>
             <tbody></tbody>

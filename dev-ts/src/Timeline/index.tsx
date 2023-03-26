@@ -27,7 +27,8 @@ export default function Timeline() {
         ...update,
         krTitle: kr.Title,
         objectiveTitle: obj.Title,
-        updateDate: getDate(update.updateDate)
+        updateDate: getDate(update.updateDate),
+        editorName: update.Editor ? update.Editor.Title : null,
       };
     }) : null;
 
@@ -43,18 +44,22 @@ export default function Timeline() {
           [0, 'desc'],
           [1, 'asc'],
           [2, 'asc'],
+          [4, 'asc']
         ],
         fixedColumns: true,
         columnDefs: [
-          { width: '15%', name: 'date', targets: 0, data: 'updateDate', className: "text-center" },
-          { width: '25%', name: 'date', targets: 1, data: 'objectiveTitle' },
-          { width: '25%', name: 'date', targets: 2, data: 'krTitle' },
+          { width: '10%', name: 'date', targets: 0, data: 'updateDate', className: "text-center" },
+          { width: '20%', name: 'date', targets: 1, data: 'objectiveTitle' },
+          { width: '20%', name: 'date', targets: 2, data: 'krTitle' },
           {
             width: '35%', name: 'text', targets: 3, data: 'updateText',
             className: "directory--table-text-sm", sortable: false
           },
-          { width: '0%', name: 'id', targets: 4, data: 'Id', visible: false },
-          { width: '0%', name: 'parentKrId', targets: 5, data: 'parentKrId', visible: false },
+          {
+            width: '15%', name: 'editor', targets: 4, data: 'editorName', className: "text-center"
+          },
+          { width: '0%', name: 'id', targets: 5, data: 'Id', visible: false },
+          { width: '0%', name: 'parentKrId', targets: 6, data: 'parentKrId', visible: false },
         ]
       };
 
@@ -90,6 +95,7 @@ export default function Timeline() {
                 <th className="text-center">Objective</th>
                 <th className="text-center">Key Result</th>
                 <th className="text-center">Description</th>
+                <th className="text-center">Editor</th>
               </tr>
             </thead>
             <tbody className="align-items-center">

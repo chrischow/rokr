@@ -25,12 +25,13 @@ export default function UpdatesTable(props: UpdatesTableProps) {
       columnDefs: [
         { width: '15%', name: 'date', targets: 0, data: 'updateDate', className: "text-center" },
         {
-          width: '75%', name: 'text', targets: 1, data: 'updateText',
+          width: '60%', name: 'text', targets: 1, data: 'updateText',
           className: "directory--table-text-sm", sortable: false
         },
-        { width: '10%', name: 'linkButton', targets: 2, data: 'linkButton', sortable: false, className: "text-center" },
-        { width: '0%', name: 'id', targets: 3, data: 'Id', visible: false },
-        { width: '0%', name: 'parentKrId', targets: 4, data: 'parentKrId', visible: false },
+        { width: '15%', name: 'editor', targets: 2, data: 'editorName', sortable: false, className: "text-center" },
+        { width: '10%', name: 'linkButton', targets: 3, data: 'linkButton', sortable: false, className: "text-center" },
+        { width: '0%', name: 'id', targets: 4, data: 'Id', visible: false },
+        { width: '0%', name: 'parentKrId', targets: 5, data: 'parentKrId', visible: false },
       ]
     };
 
@@ -39,6 +40,7 @@ export default function UpdatesTable(props: UpdatesTableProps) {
         return {
           ...item,
           updateDate: getDate(item.updateDate),
+          editorName: item.Editor ? item.Editor.Title : null,
           linkButton: '<span class="updates-table--link">' + editIconString + '</span>'
         };
       })
@@ -73,6 +75,7 @@ export default function UpdatesTable(props: UpdatesTableProps) {
         <tr>
           <th className="text-center">Date</th>
           <th className="text-center">Description</th>
+          <th className="text-center">Editor</th>
           <th className="text-center">Edit</th>
         </tr>
       </thead>

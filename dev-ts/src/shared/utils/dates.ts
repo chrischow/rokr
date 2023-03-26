@@ -1,3 +1,4 @@
+import { add, areIntervalsOverlapping } from "date-fns";
 // Date functions
 
 // Get date from bootstrap-datepicker
@@ -51,12 +52,40 @@ export function getMonth(cleanDate: Date, year: number | string) {
   return year + '-' + String(cleanDate.getMonth() + 1).padStart(2, '0');
 }
 
-export function dateOptionToDate(dateOption: string) {
-
+export function dateOptionToInterval(dateOption: string): Interval {
+  var startDate: Date, endDate: Date;
+  var result: Interval = {start: 0, end: 0};
+  if (/WY (\d{4}) Q([1-4]{1})/g.test(dateOption)) {
+    const regResult = /WY (\d{4}) Q([1-4]{1})/g.exec(dateOption);
+    if (regResult)
+    {
+      startDate = (regResult[2] === "4" ? new Date(parseInt(regResult[1], 10) + 1, 0, 1) : 
+                                       new Date(parseInt(regResult[1], 10), parseInt(regResult[2], 10) * 3, 1));
+      endDate = add(startDate, {months: 3, days: -1})
+      result = {start: startDate, end: endDate};
+    }
+  } else if (/WY (\d{4})/g.test(dateOption)) {
+    const regResult = /WY (\d{4})/g.exec(dateOption);
+    if (regResult)
+    {
+      startDate = new Date(parseInt(regResult[1], 10), 3, 1);
+      endDate = new Date(parseInt(regResult[1], 10) + 1, 2, 31);
+      result = {start: startDate, end: endDate};
+    }
+  } else if (/(\d{4})-(\d{2})/g.test(dateOption)) {
+    const regResult = /(\d{4})-(\d{2})/g.exec(dateOption);
+    if (regResult)
+    {
+      startDate = new Date(parseInt(regResult[1], 10), parseInt(regResult[2],10) - 1, 1);
+      endDate = add(startDate, {months: 1, days: -1})
+      result = {start: startDate, end: endDate};
+    }
+  }
+  return result;
 }
 
-export function isObjInDateOption(startDate: Date, endDate: Date, dateOption: string) {
-
+export function isStartEndDateInDateOption(startDate: Date, endDate: Date, dateOption: string): Boolean {
+  return areIntervalsOverlapping({start: startDate, end: endDate}, dateOptionToInterval(dateOption), {inclusive: true});
 }
 
 // Test period equality
@@ -69,7 +98,7 @@ export function testPeriodEquality(dateStart: string, dateEnd: string, dateOptio
   if (period === 'annual') {
     return getWorkYear(endDate) === dateOption;
   } else if (period === 'quarterly') {
-    return getQuarter(endDate, workyear) === dateOption;
+    return isStartEndDateInDateOption(startDate, endDate, dateOption);
   } else if (period === 'monthly') {
     return getMonth(endDate, year) === dateOption;
   }

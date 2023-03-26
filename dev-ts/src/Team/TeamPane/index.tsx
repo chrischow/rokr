@@ -3,7 +3,7 @@ import slugify from 'slugify';
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { computeMetrics } from "../../shared/utils/stats";
-import { getMonth, getQuarter, getWorkYear, getYear, offsetDate, testPeriodEquality } from "../../shared/utils/dates";
+import { getMonth, getQuarter, getWorkYear, getYear, offsetDate, testPeriodEquality, isStartEndDateInDateOption } from "../../shared/utils/dates";
 import { KeyResult, Objective } from "../../shared/types";
 import FreqDropdown from "./FreqDropdown";
 import TeamProgress from "./TeamProgress";
@@ -89,7 +89,8 @@ export default function TeamPane(props: TeamPaneProps) {
     }
 
     const keyResults = props.keyResults.filter(kr => {
-      return objectives.map(obj => obj.Id).includes(kr.parentObjective.Id);
+      return objectives.map(obj => obj.Id).includes(kr.parentObjective.Id) && 
+        isStartEndDateInDateOption(offsetDate(kr.krStartDate), offsetDate(kr.krEndDate), dateOption);
     });
 
     setCurrentObjectives(objectives);

@@ -7,7 +7,7 @@ import { config } from "../../config";
 export const useUpdates = () => {
   const url = constructUrl(
     config.updateListTitle,
-    `Id,updateText,updateDate,parentKrId,team,Last_x0020_Modified,Editor/Title`,
+    `Id,updateText,updateDate,parentKrId,team,Editor/Title`,
     'Editor'
   );
   return useQuery(['updates'], constructReadQueryFn(url), {
@@ -41,7 +41,7 @@ export const useKrUpdates = (krId: number) => {
 export const useKrUpdatesDirect = (krId: number) => {
   const url = constructUrl(
     config.updateListTitle,
-    `Id,updateText,updateDate,parentKrId,team,Last_x0020_Modified,Editor/Title`,
+    `Id,updateText,updateDate,parentKrId,team,Editor/Title`,
     'Editor',
     `parentKrId eq ${krId}`
   );

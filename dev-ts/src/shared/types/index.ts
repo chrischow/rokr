@@ -38,6 +38,7 @@ export interface Update {
   updateDate: string;
   parentKrId: number;
   team: string;
+  Editor?: {Title: string}
 }
 
 export interface Feedback {
