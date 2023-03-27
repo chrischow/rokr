@@ -48,7 +48,7 @@ export default function UpdateForm(props: UpdateFormProps) {
       });
 
       updateDatePicker.on("changeDate", function () {
-        props.setFormValues((prevData: Omit<Update, "Id">) => {
+        props.setFormValues((prevData: Omit<Update, "Id" | "Editor">) => {
           return {
             ...prevData,
             updateDate: getDate(updateDatePicker.datepicker("getDate")),
@@ -61,7 +61,7 @@ export default function UpdateForm(props: UpdateFormProps) {
 
   // Handle change
   const handleChange = (event: any) => {
-    props.setFormValues((prevData: Omit<Update, "Id">) => {
+    props.setFormValues((prevData: Omit<Update, "Id" | "Editor">) => {
       return {
         ...prevData,
         [event.target.name]: event.target.value
