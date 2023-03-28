@@ -36,7 +36,7 @@ export function getYear(cleanDate: Date) {
 
 export function getWorkYear(cleanDate: Date) {
   const year = cleanDate.getFullYear();
-  return 'WY ' + (cleanDate.getMonth() <= 3 ? year - 1 : year);
+  return 'WY ' + (cleanDate.getMonth() < 3 ? year - 1 : year);
 }
 
 // Get quarter

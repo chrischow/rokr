@@ -1,4 +1,4 @@
-import { dateOptionToInterval, isStartEndDateInDateOption } from "./dates";
+import { dateOptionToInterval, getWorkYear, isStartEndDateInDateOption } from "./dates";
 
 test('dateOptionToStartDate with QTR', () => {
     expect(dateOptionToInterval("WY 2023 Q1")).toEqual({start: new Date("01 Apr 23"), end: new Date("30 Jun 23")});
@@ -20,4 +20,10 @@ test('dateOptionToStartDate with WY', () => {
 
 test('dateOptionToStartDate with Year-Month', () => {
     expect(dateOptionToInterval("2023-03")).toEqual({start: new Date("01 Mar 23"), end: new Date("31 Mar 23")});
+})
+
+test('getWorkyear', () => {
+    expect(getWorkYear(new Date("01 Apr 22"))).toEqual("WY 2022");
+    expect(getWorkYear(new Date("31 Mar 22"))).toEqual("WY 2021");
+    expect(getWorkYear(new Date("01 Jan 22"))).toEqual("WY 2021");
 })

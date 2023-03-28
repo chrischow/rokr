@@ -1,3 +1,4 @@
+import { add } from 'date-fns';
 import { TeamInfo, Objective, KeyResult } from '../types';
 import {
   offsetDate,
@@ -164,8 +165,19 @@ export function getSubGroupsFromObjectives(objectives: Objective[]) {
         output.annual.push(workyear);
       }
     } else if (item.frequency === "quarterly") {
+      // Add the last quarter first
       if (!output.quarterly.includes(quarter)) {
         output.quarterly.push(quarter);
+      }
+      // Add the remaining from the start
+      var movingQtr = offsetDate(item.objectiveStartDate);
+      while (movingQtr < date) {
+        workyear = getWorkYear(movingQtr);
+        quarter = getQuarter(movingQtr, workyear);
+        if (!output.quarterly.includes(quarter)) {
+          output.quarterly.push(quarter);
+        }
+        movingQtr = add(movingQtr, {months: 3});
       }
     } else {
       if (!output.monthly.includes(month)) {

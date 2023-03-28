@@ -48,6 +48,17 @@ export const validateObjectiveForm = (
     }
   }
 
+  if (formOkay) {
+    const startDate = new Date(inputStartDate);
+    const endDate = new Date(inputEndDate);
+    if (startDate > endDate) {
+      errorSetter((prevData: ErrorList) => {
+        return [...prevData, "Start date cannot be later than end date."];
+      });
+      formOkay = formOkay && false;
+    }
+  }
+
   if (!tokenStatus) {
     errorSetter((prevData: ErrorList) => {
       return [...prevData, "Invalid token. Check your permissions."];
@@ -102,6 +113,17 @@ export const validateKrForm = (
     if (!validEndDate) {
       errorSetter((prevData: ErrorList) => {
         return [...prevData, "Please set a valid end date."];
+      });
+      formOkay = formOkay && false;
+    }
+  }
+
+  if (formOkay) {
+    const startDate = new Date(inputStartDate);
+    const endDate = new Date(inputEndDate);
+    if (startDate > endDate) {
+      errorSetter((prevData: ErrorList) => {
+        return [...prevData, "Start date cannot be later than end date."];
       });
       formOkay = formOkay && false;
     }
